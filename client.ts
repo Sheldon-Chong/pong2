@@ -2,11 +2,11 @@
 const ws = new WebSocket("ws://localhost:3000/ws");
 
 ws.onopen = () => {
-	console.log("✅ Connected to server");
+	console.log("CLIENT Connected to server");
 
 	// Listen for keyboard events
 	window.addEventListener("keydown", (e) => {
-		console.log("Key pressed:", e.key); // Add this line
+		// console.log("Key pressed:", e.key); // Add this line
 		if (
 			(e.key === "ArrowUp" || e.key === "ArrowDown") &&
 			ws.readyState === WebSocket.OPEN

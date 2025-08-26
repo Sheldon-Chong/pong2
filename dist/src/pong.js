@@ -293,7 +293,7 @@ export class PongGame {
         this.ball.velocity.x = this.gameSettings.ballSpeed;
         this.addObject(new Goal(this, Team.TEAM1));
         this.addObject(new Goal(this, Team.TEAM2));
-        let sprite = new Sprite({ imagePath: "Black.png", size: this.canvasSize });
+        let sprite = new Sprite({ size: this.canvasSize });
         sprite.blendMode = BlendMode.Color;
         sprite.glow = null;
         let image = new Image(this, new Point2D(0, 0), sprite);
@@ -342,4 +342,23 @@ window.onload = () => {
 //     this.ctx.fillStyle = color;
 //     this.ctx.fillRect(x, y, size.x, size.y);
 // }
+// client.ts (compile to client.js with `tsc client.ts`)
+const ws = new WebSocket("ws://localhost:3000/ws");
+ws.onopen = () => {
+    console.log("✅ Client Connected to server");
+    window.addEventListener("keydown", (e) => {
+        console.log("Key pressed:", e.key, "WebSocket readyState:", ws.readyState);
+        if ((e.key === "ArrowUp" || e.key === "ArrowDown") &&
+            ws.readyState === WebSocket.OPEN) {
+            ws.send(e.key);
+            console.log("Sent to server:", e.key);
+        }
+    });
+};
+ws.onmessage = (event) => {
+    console.log("Server says:", event.data);
+};
+ws.onclose = (event) => {
+    console.log('WebSocket closed:', event.code, event.reason);
+};
 //# sourceMappingURL=pong.js.map

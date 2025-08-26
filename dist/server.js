@@ -6,18 +6,22 @@ import { join } from "path";
 const fastify = Fastify();
 // Register WS
 await fastify.register(websocketPlugin);
-fastify.get("/ws", { websocket: true }, (connection, req) => {
-    console.log("Client connected");
-    // Listen for messages from frontend
-    connection.socket.on("message", (msg) => {
-        console.log("Received input:", msg);
-        // For testing, echo it back
-        connection.socket.send(`echo:${msg}`);
-    });
-    connection.socket.on("close", () => {
-        console.log("Client disconnected");
+console.log("Registering WebSocket route...");
+await fastify.register(async function (fastify) {
+    fastify.get("/ws", { websocket: true }, (socket, req) => {
+        console.log("!!! Client connected");
+        socket.on("message", (msg) => {
+            console.log("Received input:", msg.toString());
+            // For testing, echo it back
+            socket.send(`echo:${msg.toString()}`);
+        });
+        socket.on("close", () => {
+            console.log("Client disconnected");
+        });
     });
 });
+console.log("WebSocket route registered.");
+// <link rel="stylesheet" href="/src/pong.css" />
 // Serve static frontend
 fastify.get("/", async (_, reply) => {
     return reply.type("text/html").send(`
@@ -28,7 +32,6 @@ fastify.get("/", async (_, reply) => {
 			<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 			<title>Pong2 Game</title>
 			<link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.3/dist/tailwind.min.css" rel="stylesheet">
-			<link rel="stylesheet" href="/src/pong.css" />
 			<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 
 		</head>
@@ -42,8 +45,7 @@ fastify.get("/", async (_, reply) => {
 		<div class="h-20 bg-gray-500 rounded-2xl hover:bg-gray-400" style="width:450px; height:120px"></div>
 		</div>    </div>
 			</center>
-			<script type="module" src="/src/pong.js"></script>
-		</body>
+			<script type="module" src="/static/src/pong.js"></script>		</body>
 		</html>
 		
 	`);
@@ -56,8 +58,7 @@ fastify.get("/client.js", async (_, reply) => {
 // First registration (dist)
 await fastify.register(fastifyStatic, {
     root: join(process.cwd(), "dist"),
-    prefix: "/",
-    // decorateReply: true (default)
+    prefix: "/static/",
 });
 // Second registration (assets)
 await fastify.register(fastifyStatic, {
