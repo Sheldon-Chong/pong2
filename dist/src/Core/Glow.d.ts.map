@@ -1,1 +1,0 @@
-{"version":3,"file":"Glow.d.ts","sourceRoot":"","sources":["../../../src/Core/Glow.ts"],"names":[],"mappings":"AAGA,qBAAa,IAAI;IAEF,WAAW,EAAE,MAAM;IACnB,UAAU,EAAE,MAAM;IAClB,aAAa,EAAE,MAAM;IACrB,aAAa,EAAE,MAAM;IACrB,SAAS,EAAE,wBAAwB;gBAJnC,WAAW,GAAE,MAAc,EAC3B,UAAU,GAAE,MAAW,EACvB,aAAa,GAAE,MAAU,EACzB,aAAa,GAAE,MAAU,EACzB,SAAS,GAAE,wBAAwC;CAEjE"}

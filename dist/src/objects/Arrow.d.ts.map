@@ -1,1 +1,0 @@
-{"version":3,"file":"Arrow.d.ts","sourceRoot":"","sources":["../../../src/objects/Arrow.ts"],"names":[],"mappings":"AACA,OAAO,EAAE,QAAQ,EAAQ,KAAK,EAAE,MAAM,YAAY,CAAC;AACnD,OAAO,EAAE,UAAU,EAAS,MAAM,aAAa,CAAA;AAE/C,qBAAa,KAAM,SAAQ,UAAU;IACzB,MAAM,EAAE,KAAK,CAAC;gBAET,IAAI,EAAE,QAAQ;IAU3B,IAAI;CAeP"}

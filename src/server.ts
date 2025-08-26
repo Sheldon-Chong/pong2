@@ -1,32 +1,45 @@
 // server.ts
 import Fastify from "fastify";
 import websocketPlugin from "@fastify/websocket";
+
 import fastifyStatic from "@fastify/static";
 import { join } from "path";
+
+import type { WebSocket } from "@fastify/websocket";
+
 const fastify = Fastify();
+
 // Register WS
 await fastify.register(websocketPlugin);
+
 console.log("Registering WebSocket route...");
 await fastify.register(async function (fastify) {
-    fastify.get("/ws", { websocket: true }, (socket, req) => {
-        clients.add(socket);
-        console.log("!!! Client connected");
-        socket.on("message", (msg) => {
-            console.log(">>>> Received input:", msg.toString());
-            // For testing, echo it back
-            socket.send(`echo:${msg.toString()}`);
-        });
-        socket.on("close", () => {
-            console.log("Client disconnected");
-            clients.delete(socket);
-        });
-    });
+	fastify.get("/ws", { websocket: true }, (socket, req) => {
+		clients.add(socket);
+		console.log("!!! Client connected");
+
+		socket.on("message", (msg) => {
+			console.log(">>>> Received input:", msg.toString());
+			// For testing, echo it back
+			socket.send(`echo:${msg.toString()}`);
+		});
+
+		socket.on("close", () => {
+			console.log("Client disconnected");
+			clients.delete(socket);
+		});
+	});
 });
-const clients = new Set();
+
+const clients = new Set<WebSocket>();
+
+
+
 console.log("WebSocket route registered.");
+
 // Serve static frontend
 fastify.get("/", async (_, reply) => {
-    return reply.type("text/html").send(`
+	return reply.type("text/html").send(`
 		<!DOCTYPE html>
 		<html lang="en">
 		<head>
@@ -52,43 +65,70 @@ fastify.get("/", async (_, reply) => {
 		
 	`);
 });
+
 // Serve compiled client.js
 import { readFileSync } from "fs";
 fastify.get("/client.js", async (_, reply) => {
-    console.log("asdasdsd");
-    console.log(join(process.cwd(), "dist", "client.js"));
-    return reply.type("application/javascript").send(readFileSync(join(process.cwd(), "dist", "client.js"), "utf-8"));
+	console.log("asdasdsd");
+	console.log(join(process.cwd(), "dist", "client.js"));
+  return reply.type("application/javascript").send(
+    readFileSync(join(process.cwd(), "dist", "client.js"), "utf-8")
+  );
 });
+
 // First registration (dist)
 await fastify.register(fastifyStatic, {
-    root: join(process.cwd(), "dist"),
-    prefix: "/static/",
+  root: join(process.cwd(), "dist"),
+  prefix: "/static/",
 });
+
 // Second registration (assets)
 await fastify.register(fastifyStatic, {
-    root: join(process.cwd(), "assets"),
-    prefix: "/assets/",
-    decorateReply: false // Prevents duplicate decorator error
+  root: join(process.cwd(), "assets"),
+  prefix: "/assets/",
+  decorateReply: false // Prevents duplicate decorator error
 });
+
+
+
+
+
+
+
+
+
+
+
+
 import { PongGame3 } from "../dist/pong3.js";
 import { Socket } from "dgram";
 const pongGame = new PongGame3();
-const gameState = {};
+
+
+
+const gameState = {
+	
+};
+
+
+
+
 // Game loop function
 function updateGameObjects() {
-    const state = pongGame.exportState();
-    for (const client of clients) {
-        if (client.readyState === 1) { // 1 = OPEN
-            client.send(JSON.stringify({ type: "state", state }));
-        }
+  const state = pongGame.exportState();
+  for (const client of clients) {
+    if (client.readyState === 1) { // 1 = OPEN
+      client.send(JSON.stringify({ type: "state", state }));
     }
-    pongGame.update();
+  }
+  pongGame.update();
 }
+
 const TICK_RATE = 1000 / 60; // 60 FPS
 setInterval(updateGameObjects, TICK_RATE);
+
 fastify.listen({ port: 3000 }, (err, address) => {
-    if (err)
-        throw err;
-    console.log(`🚀 Server running at ${address}`);
+  if (err) throw err;
+  console.log(`🚀 Server running at ${address}`);
 });
-//# sourceMappingURL=server.js.map
+
