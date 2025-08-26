@@ -1,6 +1,7 @@
 
-import { Point2D, Vector2D, interpolate } from './Coordinates.js'
-import { GameObject } from './objects2/object.js'
+import { Point2D, Vector2D, interpolate } from './objects/Coordinates.js'
+import { GameObject } from './objects/GameObjects.js'
+import { Sprite, drawImg } from './objects/Sprite.js';
 // import { GameObject, Sprite, HitBox, Glow, Particle, Timer} from './Index.js'
 // import {  BlendMode } from './GameUtils.js'
 
@@ -148,16 +149,20 @@ export class PongGame3 {
     team2: GameTeam = new GameTeam(this, Team.TEAM2);
     // camera: Camera = this.addObject(new Camera(new Point2D(0,-100), this)) as Camera;
 
+    lastFrameTime: number = performance.now();
+    fps: number = 0;
+    delta: number;
+
     update () {
-        for (const object of this.gameObjects) {
+        for (const object of this.gameObjects) 
             object.update();
-        }
     }
 
     exportState() {
         return {
             gameObjects: this.gameObjects.map(obj => ({
                 position: obj.position,
+                Sprite: obj.sprite
             }))
         };
     }
@@ -165,9 +170,8 @@ export class PongGame3 {
     addObject(object: GameObject) {
         this.gameObjects.push(object);
         if (object.children && object.children.length > 0) {
-            for (const child of object.children) {
+            for (const child of object.children) 
                 this.addObject(child);
-            }
         }
         
         return object;
@@ -176,6 +180,10 @@ export class PongGame3 {
     constructor () {
         this.gameObjects.push(new GameObject({
             position: new Point2D(100,100),
+            sprite: new Sprite({
+                imagePath: "assets/arrow.png",
+                size: new Vector2D(50, 50)
+            }),
             onUpdate: function () {
                 this.position.x += 0.3;
             }

@@ -1,4 +1,4 @@
-import { Point2D, Vector2D } from '../Coordinates.js';
+import { Point2D, Vector2D } from '../objects/Coordinates.js';
 import type { PongGame3 } from '../pong3.js';
 export declare class GameObject {
     game: PongGame3;
@@ -15,4 +15,4 @@ export declare class GameObject {
     addChild(object: GameObject): void;
     update(): void;
 }
-//# sourceMappingURL=object.d.ts.map
+//# sourceMappingURL=GameObjects.d.ts.map

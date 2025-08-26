@@ -1,4 +1,5 @@
-import { Point2D, Vector2D } from '../Coordinates.js';
+import { Point2D, Vector2D } from './Coordinates.js';
+import { Sprite } from './Sprite.js';
 import type { PongGame3 } from '../pong3.js';
 export declare class GameObject {
     game: PongGame3;
@@ -9,10 +10,11 @@ export declare class GameObject {
     velocity: Vector2D;
     acceleration: Vector2D;
     maximumVelocity: Vector2D;
+    sprite?: Sprite;
     onCollide?: (other: GameObject) => void;
     onUpdate?: () => void;
     constructor(params: Partial<GameObject>);
     addChild(object: GameObject): void;
     update(): void;
 }
-//# sourceMappingURL=object.d.ts.map
+//# sourceMappingURL=GameObjects.d.ts.map

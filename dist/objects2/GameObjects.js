@@ -1,4 +1,4 @@
-import { Point2D, Vector2D } from '../Coordinates.js';
+import { Point2D, Vector2D } from '../objects/Coordinates.js';
 export class GameObject {
     game;
     // identification
@@ -25,4 +25,4 @@ export class GameObject {
     }
     update() { this.onUpdate(); }
 }
-//# sourceMappingURL=object.js.map
+//# sourceMappingURL=GameObjects.js.map

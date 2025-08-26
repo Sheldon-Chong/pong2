@@ -1,4 +1,5 @@
-import { Point2D, Vector2D } from '../Coordinates.js';
+import { Point2D, Vector2D } from './Coordinates.js';
+import { Sprite } from './Sprite.js';
 export class GameObject {
     game;
     // identification
@@ -11,7 +12,7 @@ export class GameObject {
     velocity = new Vector2D(0, 0);
     acceleration = new Vector2D(0, 0);
     maximumVelocity = new Vector2D(1000, 1000);
-    // public sprite?: Sprite;
+    sprite;
     // public hitbox?: HitBox | null;
     // events
     onCollide;
@@ -25,4 +26,4 @@ export class GameObject {
     }
     update() { this.onUpdate(); }
 }
-//# sourceMappingURL=object.js.map
+//# sourceMappingURL=GameObjects.js.map
