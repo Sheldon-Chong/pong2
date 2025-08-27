@@ -13,6 +13,8 @@ const fastify = Fastify();
 // Register WS
 await fastify.register(websocketPlugin);
 
+const clientData = {};
+
 console.log("Registering WebSocket route...");
 await fastify.register(async function (fastify) {
 	fastify.get("/ws", { websocket: true }, (socket, req) => {
@@ -21,8 +23,7 @@ await fastify.register(async function (fastify) {
 
 		socket.on("message", (msg) => {
 			console.log(">>>> Received input:", msg.toString());
-			// For testing, echo it back
-			socket.send(`echo:${msg.toString()}`);
+			clientData["keyInput"] = msg.toString();
 		});
 
 		socket.on("close", () => {
@@ -112,7 +113,7 @@ fastify.get("/:file", async (request, reply) => {
 
 import { PongGame3 } from "../dist/pong3.js";
 import { Socket } from "dgram";
-const pongGame = new PongGame3();
+const pongGame = new PongGame3(clientData);
 
 
 

@@ -27,6 +27,7 @@ class GameTeam {
     }
 }
 export class PongGame3 {
+    clientData;
     gameObjects = [];
     team1 = new GameTeam(this, Team.TEAM1);
     team2 = new GameTeam(this, Team.TEAM2);
@@ -55,7 +56,8 @@ export class PongGame3 {
         }
         return object;
     }
-    constructor() {
+    constructor(clientData) {
+        this.clientData = clientData;
         this.gameObjects.push(new GameObject({
             position: new Point2D(54, 54),
             sprite: new Sprite({
@@ -68,12 +70,23 @@ export class PongGame3 {
         }));
         this.gameObjects.push(new GameObject({
             position: new Point2D(300, 300),
+            game: this,
             sprite: new Sprite({
                 imagePath: "assets/arrow.png",
                 size: new Vector2D(50, 50)
             }),
             onUpdate: function () {
-                this.position.x += 0.3;
+                try {
+                    const input = JSON.parse(this.game.clientData["keyInput"]);
+                    if (input && input["key"] === "ArrowUp" && input["type"] === "keydown") {
+                        this.position.y -= 5; // Move up
+                    }
+                    if (input && input["key"] === "ArrowDown" && input["type"] === "keydown") {
+                        this.position.y += 5; // Move down
+                    }
+                }
+                catch {
+                }
             }
         }));
     }

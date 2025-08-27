@@ -12,6 +12,7 @@ declare class GameTeam {
     constructor(game: PongGame3, name: String);
 }
 export declare class PongGame3 {
+    clientData: any;
     gameObjects: GameObject[];
     team1: GameTeam;
     team2: GameTeam;
@@ -27,7 +28,7 @@ export declare class PongGame3 {
         }[];
     };
     addObject(object: GameObject): GameObject;
-    constructor();
+    constructor(clientData: any);
 }
 export {};
 //# sourceMappingURL=pong3.d.ts.map

@@ -11,12 +11,20 @@ ws.onopen = () => {
 
 	// Listen for keyboard events
 	window.addEventListener("keydown", (e) => {
-		// console.log("Key pressed:", e.key); // Add this line
 		if (
 			(e.key === "ArrowUp" || e.key === "ArrowDown") &&
 			ws.readyState === WebSocket.OPEN
 		) {
-			ws.send(e.key);
+			ws.send(JSON.stringify({ key: e.key, type: "keydown" }));
+		}
+	});
+
+	window.addEventListener("keyup", (e) => {
+		if (
+			(e.key === "ArrowUp" || e.key === "ArrowDown") &&
+			ws.readyState === WebSocket.OPEN
+		) {
+			ws.send(JSON.stringify({ key: e.key, type: "keyup" }));
 		}
 	});
 };
@@ -108,7 +116,7 @@ window.addEventListener("DOMContentLoaded", () => {
 				objects[object["id"]].updateFrom(object);
 			}
 		}
-		console.log(objects);
+		// console.log(objects);
 		draw();
 		requestAnimationFrame(loop);
 	}
