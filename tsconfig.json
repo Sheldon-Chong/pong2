@@ -53,4 +53,7 @@
       "./typings/**/*",
       "./dist/**/*" // This is what fixed it!
   ],
+  "include": [
+    "src/**/*.ts"
+  ]
 }

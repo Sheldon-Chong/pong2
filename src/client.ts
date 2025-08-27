@@ -1,6 +1,7 @@
 // client.ts (compile to client.js with `tsc client.ts`)
-import { Point2D, Vector2D, interpolate } from '/static/Coordinates.js'
-import { drawImg, Sprite } from '/static/objects/Sprite.js'
+import { Point2D, Vector2D, interpolate } from './objects/Coordinates.js'
+import type { GameObject } from './objects/GameObjects.js';
+import { drawImg, Sprite } from './objects/Sprite.js'
 
 
 const ws = new WebSocket("ws://localhost:3000/ws");
@@ -23,7 +24,7 @@ ws.onopen = () => {
 let data = {} 
 
 ws.onmessage = (event) => {
-	// console.log("Server says:", event.data);
+	console.log("Server says:", event.data);
 	data = JSON.parse(event.data);
 	// console.log(data);
 };
@@ -32,42 +33,87 @@ ws.onclose = () => {
 	console.log("❌ Disconnected");
 };
 
-const img = new Image();
-img.src = "./assets/arrow.png"; // Replace with your image URL
-const test = new Sprite({imagePath: "./assets/arrow.png", size: new Vector2D(100, 100)});
+
+
+
+
+
+const objects = new Map<string, ClientSprite>();
+
+
+
+class ClientSprite extends Sprite {
+    id: string;
+    cache = {};
+
+    static fromServer(object) {
+        return new ClientSprite({
+            imagePath: object["Sprite"]["imagePath"], 
+            size: new Vector2D(50, 50),
+            position: new Point2D(object["position"]["x"], object["position"]["y"]),
+            rotation: 0,
+            cache: object
+        });
+    }
+
+    updateFrom(params: Partial<ClientSprite>) {
+        for (const key in params) {
+            if (this.cache[key] !== params[key]) {
+                if (key === "position" && params.position) 
+                    this.position = new Point2D(params.position.x, params.position.y);
+				else if (key === "size" && params.size) 
+                    this.size = new Vector2D(params.size.x, params.size.y);
+				else 
+                    (this as any)[key] = params[key];
+                
+                this.cache[key] = params[key];
+            }
+        }
+    }
+
+    constructor(params: Partial<ClientSprite>) {
+        super(params);
+        if (params.cache) this.cache = { ...params.cache };
+    }
+}
+
+
+function getState() {
+	if (data["state"] && Array.isArray(data["state"]["gameObjects"])) {
+		return data["state"]["gameObjects"];
+	}
+	return [];
+}
 
 window.addEventListener("DOMContentLoaded", () => {
 	const canvas = document.getElementById("pong-canvas") as HTMLCanvasElement;
 	const ctx = canvas.getContext("2d");
 
-	const width = 100;
-	const height = 40;
-
 	function draw() {
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
-		if (data["state"] && Array.isArray(data["state"]["gameObjects"])) {
-			for (const object of data["state"]["gameObjects"] as Point2D[]) {
-				ctx.fillStyle = "white";
-				ctx.fillRect(Number(object.position.x), Number(object.position.y), width, height);
-				drawImg(test, ctx, new Point2D(30,30), new Vector2D(100, 100), 0);
-
-				// Draw image at x=50, y=50
-				ctx.drawImage(img, 20, 20);
-
-				// Optionally scale the image (width=100, height=100)
-				ctx.drawImage(img, 200, 50, 100, 100);
-
-				// Optionally crop and draw
-				ctx.drawImage(img, 0, 20, 50, 50, 50, 200, 100, 100);
-
-			}
+		for (const [id, sprite] of Object.entries(objects)) {
+			ctx.fillStyle = "white";
+			// ctx.fillRect(Number(sprite.position.x), Number(sprite.position.y), width, height);
+			drawImg(sprite, ctx, sprite.position, sprite.size, sprite.rotation);
 		}
 	}
 
 	function loop() {
+		let state = getState();
+		for ( const object of state ) {
+			if (!(object["id"] in objects)) {
+				objects[object["id"]] = ClientSprite.fromServer(object);
+			}
+			else {
+				objects[object["id"]].updateFrom(object);
+			}
+		}
+		console.log(objects);
 		draw();
 		requestAnimationFrame(loop);
 	}
 
 	loop();
 });
+
+// In that case, should I have a special class for frontend that extends sprite, which serves the prupsoe of being updated? I'm assumging the frontend won't need a lot of classes, mostly those that are supposed to be used for rendering right?

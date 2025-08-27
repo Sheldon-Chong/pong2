@@ -24,7 +24,7 @@ export class Sprite {
     opacity = 1.0;
     blendMode = "source-over";
     glow = null;
-    pos = new Point2D(0, 0);
+    position = new Point2D(0, 0);
     config(params) {
         Object.assign(this, params);
         return this;
@@ -83,12 +83,12 @@ export class Sprite {
         });
     }
 }
-export function drawImg(sprite, ctx, pos, size, angle) {
+export function drawImg(sprite, ctx, position, size, angle) {
     if (sprite.glow) {
         ctx.save();
         ctx.globalAlpha = sprite.opacity;
         ctx.globalCompositeOperation = sprite.glow.blendMode;
-        ctx.translate(pos.x + size.x / 2, pos.y + size.y / 2);
+        ctx.translate(position.x + size.x / 2, position.y + size.y / 2);
         ctx.rotate(angle);
         ctx.shadowColor = sprite.glow.shadowColor;
         ctx.shadowBlur = sprite.glow.shadowBlur;
@@ -102,7 +102,7 @@ export function drawImg(sprite, ctx, pos, size, angle) {
     ctx.save();
     ctx.globalAlpha = sprite.opacity;
     ctx.globalCompositeOperation = sprite.blendMode;
-    ctx.translate(pos.x + size.x / 2, pos.y + size.y / 2);
+    ctx.translate(position.x + size.x / 2, position.y + size.y / 2);
     ctx.rotate(angle);
     if (sprite.flippedHorizontal)
         ctx.scale(-1, 1);

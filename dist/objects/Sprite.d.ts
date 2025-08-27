@@ -18,10 +18,10 @@ export declare class Sprite {
     opacity: number;
     blendMode: GlobalCompositeOperation;
     glow: Glow | null;
-    pos: Point2D;
+    position: Point2D;
     config(params: Partial<Sprite>): Sprite;
     constructor(params?: Partial<Sprite>);
     clone(): Sprite;
 }
-export declare function drawImg(sprite: Sprite, ctx: CanvasRenderingContext2D, pos: Point2D, size: Vector2D, angle: number): void;
+export declare function drawImg(sprite: Sprite, ctx: CanvasRenderingContext2D, position: Point2D, size: Vector2D, angle: number): void;
 //# sourceMappingURL=Sprite.d.ts.map

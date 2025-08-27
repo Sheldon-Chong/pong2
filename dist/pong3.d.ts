@@ -9,8 +9,6 @@ declare class GameTeam {
     game: PongGame3;
     name: String;
     score: number;
-    static leftBoardControls: string[][];
-    static rightBoardControls: string[][];
     constructor(game: PongGame3, name: String);
 }
 export declare class PongGame3 {
@@ -25,6 +23,7 @@ export declare class PongGame3 {
         gameObjects: {
             position: Point2D;
             Sprite: Sprite;
+            id: number;
         }[];
     };
     addObject(object: GameObject): GameObject;

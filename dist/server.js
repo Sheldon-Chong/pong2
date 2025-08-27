@@ -53,7 +53,7 @@ fastify.get("/", async (_, reply) => {
 	`);
 });
 // Serve compiled client.js
-import { readFileSync } from "fs";
+import { readFileSync, existsSync } from "fs";
 fastify.get("/client.js", async (_, reply) => {
     console.log("asdasdsd");
     console.log(join(process.cwd(), "dist", "client.js"));
@@ -62,13 +62,26 @@ fastify.get("/client.js", async (_, reply) => {
 // First registration (dist)
 await fastify.register(fastifyStatic, {
     root: join(process.cwd(), "dist"),
-    prefix: "/static/",
+    //   prefix: "/static/",
 });
 // Second registration (assets)
 await fastify.register(fastifyStatic, {
     root: join(process.cwd(), "assets"),
     prefix: "/assets/",
     decorateReply: false // Prevents duplicate decorator error
+});
+fastify.get("/:file", async (request, reply) => {
+    const file = request.params.file;
+    if (file.endsWith(".js")) {
+        const filePath = join(process.cwd(), "dist", file);
+        if (existsSync(filePath)) {
+            return reply.type("application/javascript").send(readFileSync(filePath, "utf-8"));
+        }
+        else {
+            return reply.code(404).send("File not found");
+        }
+    }
+    return reply.code(404).send("Not found");
 });
 import { PongGame3 } from "../dist/pong3.js";
 import { Socket } from "dgram";

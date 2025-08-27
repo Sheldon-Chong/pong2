@@ -1,5 +1,4 @@
-import { Point2D, Vector2D } from './Coordinates.js';
-import { Sprite } from './Sprite.js';
+import { Vector2D } from './Coordinates.js';
 export class GameObject {
     game;
     id;
@@ -30,4 +29,3 @@ export class GameObject {
     }
     update() { this.onUpdate(); }
 }
-//# sourceMappingURL=GameObjects.js.map

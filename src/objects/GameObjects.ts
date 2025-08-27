@@ -4,6 +4,8 @@ import type { PongGame3 } from '../pong3.js';
 
 export class GameObject {
     public game: PongGame3;
+    public id: number;
+    static globalId = 0;
     
     // identification
     public name: string = "";
@@ -27,6 +29,8 @@ export class GameObject {
 
     constructor(params: Partial<GameObject>) {
         Object.assign(this, params);
+        this.id = GameObject.globalId;
+        GameObject.globalId ++;
     }
 
     addChild(object: GameObject) {

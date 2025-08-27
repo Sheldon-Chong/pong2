@@ -1,49 +1,47 @@
 import { Point2D, Vector2D } from './Coordinates.js';
-
 export class Glow {
-    constructor(
-        public shadowColor: string = "red",
-        public shadowBlur: number = 20,
-        public shadowOffsetX: number = 0,
-        public shadowOffsetY: number = 0,
-        public blendMode: GlobalCompositeOperation = "source-over"
-    ) {}
+    shadowColor;
+    shadowBlur;
+    shadowOffsetX;
+    shadowOffsetY;
+    blendMode;
+    constructor(shadowColor = "red", shadowBlur = 20, shadowOffsetX = 0, shadowOffsetY = 0, blendMode = "source-over") {
+        this.shadowColor = shadowColor;
+        this.shadowBlur = shadowBlur;
+        this.shadowOffsetX = shadowOffsetX;
+        this.shadowOffsetY = shadowOffsetY;
+        this.blendMode = blendMode;
+    }
 }
-
 export class Sprite {
-    image: HTMLImageElement;
-    imagePath: string | HTMLImageElement | null = null;
-    size: Vector2D = new Vector2D(0, 0);
-    rotation: number = 0;
-    flippedHorizontal: boolean = false;
-    crop: boolean = false;
-    outline: boolean = false;
-    opacity: number = 1.0;
-    blendMode: GlobalCompositeOperation = "source-over";
-    glow: Glow| null = null;
-    position: Point2D = new Point2D(0,0);
-
-    config(params: Partial<Sprite> ): Sprite {
+    image;
+    imagePath = null;
+    size = new Vector2D(0, 0);
+    rotation = 0;
+    flippedHorizontal = false;
+    crop = false;
+    outline = false;
+    opacity = 1.0;
+    blendMode = "source-over";
+    glow = null;
+    position = new Point2D(0, 0);
+    config(params) {
         Object.assign(this, params);
         return this;
     }
-    
-    constructor(params: Partial<Sprite> = {}) {
+    constructor(params = {}) {
         Object.assign(this, params);
         const diameter = Math.max(this.size.x, this.size.y);
-        
         if (typeof document === "undefined") {
-            return ;
+            return;
         }
         const canvas = document.createElement('canvas');
         canvas.width = diameter;
         canvas.height = diameter;
         const ctx = canvas.getContext('2d');
         this.image = new Image();
-
-        if (this.imagePath instanceof HTMLImageElement) 
+        if (this.imagePath instanceof HTMLImageElement)
             this.image = this.imagePath;
-        
         else if (ctx) {
             ctx.save();
             if (this.crop) {
@@ -53,28 +51,22 @@ export class Sprite {
                 ctx.clip();
             }
             let img = new Image();
-            if (this.imagePath) 
+            if (this.imagePath)
                 img.src = this.imagePath;
-            
-            else 
+            else
                 img.src = "#ffffff";
-            
             img.onload = () => {
                 ctx.drawImage(img, 0, 0, diameter, diameter);
                 this.image.src = canvas.toDataURL();
             };
             this.image.src = canvas.toDataURL();
         }
-
         this.opacity = this.opacity;
         if (this.size.x === 0 && this.size.y === 0) {
             this.size = new Vector2D(this.image.width, this.image.height);
         }
     }
-
-
-
-    clone(): Sprite {
+    clone() {
         const clonedImage = new Image();
         clonedImage.src = this.image.src;
         return new Sprite({
@@ -86,25 +78,12 @@ export class Sprite {
             outline: this.outline,
             opacity: this.opacity,
             blendMode: this.blendMode,
-            glow: this.glow ? new Glow(
-                this.glow.shadowColor,
-                this.glow.shadowBlur,
-                this.glow.shadowOffsetX,
-                this.glow.shadowOffsetY,
-                this.glow.blendMode
-            ) : null,
+            glow: this.glow ? new Glow(this.glow.shadowColor, this.glow.shadowBlur, this.glow.shadowOffsetX, this.glow.shadowOffsetY, this.glow.blendMode) : null,
             pos: this.pos
         });
     }
 }
-
-export function drawImg(
-    sprite:Sprite,
-    ctx: CanvasRenderingContext2D,
-    position: Point2D,
-    size: Vector2D,
-    angle: number,
-) {
+export function drawImg(sprite, ctx, position, size, angle) {
     if (sprite.glow) {
         ctx.save();
         ctx.globalAlpha = sprite.opacity;
@@ -115,7 +94,8 @@ export function drawImg(
         ctx.shadowBlur = sprite.glow.shadowBlur;
         ctx.shadowOffsetX = sprite.glow.shadowOffsetX;
         ctx.shadowOffsetY = sprite.glow.shadowOffsetY;
-        if (sprite.flippedHorizontal) ctx.scale(-1, 1);
+        if (sprite.flippedHorizontal)
+            ctx.scale(-1, 1);
         ctx.drawImage(sprite.image, -size.x / 2, -size.y / 2, size.x, size.y);
         ctx.restore();
     }
@@ -124,7 +104,8 @@ export function drawImg(
     ctx.globalCompositeOperation = sprite.blendMode;
     ctx.translate(position.x + size.x / 2, position.y + size.y / 2);
     ctx.rotate(angle);
-    if (sprite.flippedHorizontal) ctx.scale(-1, 1);
+    if (sprite.flippedHorizontal)
+        ctx.scale(-1, 1);
     if (sprite.outline) {
         ctx.beginPath();
         const diameter = Math.max(size.x, size.y);

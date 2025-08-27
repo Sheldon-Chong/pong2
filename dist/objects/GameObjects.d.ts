@@ -3,6 +3,8 @@ import { Sprite } from './Sprite.js';
 import type { PongGame3 } from '../pong3.js';
 export declare class GameObject {
     game: PongGame3;
+    id: number;
+    static globalId: number;
     name: string;
     parent: GameObject | null;
     children: GameObject[];
