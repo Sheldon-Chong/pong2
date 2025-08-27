@@ -1,0 +1,30 @@
+export var BlendMode;
+(function (BlendMode) {
+    BlendMode["SourceOver"] = "source-over";
+    BlendMode["SourceIn"] = "source-in";
+    BlendMode["SourceOut"] = "source-out";
+    BlendMode["SourceAtop"] = "source-atop";
+    BlendMode["DestinationOver"] = "destination-over";
+    BlendMode["DestinationIn"] = "destination-in";
+    BlendMode["DestinationOut"] = "destination-out";
+    BlendMode["DestinationAtop"] = "destination-atop";
+    BlendMode["Lighter"] = "lighter";
+    BlendMode["Copy"] = "copy";
+    BlendMode["Xor"] = "xor";
+    BlendMode["Multiply"] = "multiply";
+    BlendMode["Screen"] = "screen";
+    BlendMode["Overlay"] = "overlay";
+    BlendMode["Darken"] = "darken";
+    BlendMode["Lighten"] = "lighten";
+    BlendMode["ColorDodge"] = "color-dodge";
+    BlendMode["ColorBurn"] = "color-burn";
+    BlendMode["HardLight"] = "hard-light";
+    BlendMode["SoftLight"] = "soft-light";
+    BlendMode["Difference"] = "difference";
+    BlendMode["Exclusion"] = "exclusion";
+    BlendMode["Hue"] = "hue";
+    BlendMode["Saturation"] = "saturation";
+    BlendMode["Color"] = "color";
+    BlendMode["Luminosity"] = "luminosity";
+})(BlendMode || (BlendMode = {}));
+//# sourceMappingURL=Blendmodes.js.map

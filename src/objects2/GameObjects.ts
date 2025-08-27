@@ -33,6 +33,20 @@ export class GameObject {
         object.parent = this;
     }
 
+    // getWorldPosition(): Point2D {
+    //     if (!this.parent) {
+    //         return new Point2D(
+    //             this.position.x - this.game.camera.position.x,
+    //             this.position.y - this.game.camera.position.y
+    //         ).add(this.game.canvasSize.divide(new Vector2D(2,2)));
+    //     }
+    //     const parentPos = this.parent.getWorldPosition();
+    //     return new Point2D(
+    //         parentPos.x + this.position.x,
+    //         parentPos.y + this.position.y
+    //     );
+    // }
+
     update() { this.onUpdate(); }
 
 }

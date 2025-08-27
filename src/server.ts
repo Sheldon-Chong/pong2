@@ -13,7 +13,24 @@ const fastify = Fastify();
 // Register WS
 await fastify.register(websocketPlugin);
 
-const clientData = {};
+class Client {
+	keysPressed = new Map();
+	constructor() {
+
+	}
+		
+	update(input) {
+		if (input["type"] === "keydown") {
+            this.keysPressed.set(input["key"], true);
+        } 
+		else if (input["type"] === "keyup") {
+            this.keysPressed.delete(input["key"]);
+        }
+	}
+}
+
+const client = new Client();
+const clients = new Set<WebSocket>();
 
 console.log("Registering WebSocket route...");
 await fastify.register(async function (fastify) {
@@ -23,7 +40,7 @@ await fastify.register(async function (fastify) {
 
 		socket.on("message", (msg) => {
 			console.log(">>>> Received input:", msg.toString());
-			clientData["keyInput"] = msg.toString();
+			client.update(JSON.parse(msg.toString()));
 		});
 
 		socket.on("close", () => {
@@ -33,7 +50,6 @@ await fastify.register(async function (fastify) {
 	});
 });
 
-const clients = new Set<WebSocket>();
 
 
 
@@ -113,7 +129,7 @@ fastify.get("/:file", async (request, reply) => {
 
 import { PongGame3 } from "../dist/pong3.js";
 import { Socket } from "dgram";
-const pongGame = new PongGame3(clientData);
+const pongGame = new PongGame3(client);
 
 
 

@@ -27,7 +27,14 @@ export class GameObject {
     addChild(object) {
         this.children.push(object);
         object.parent = this;
+        object.game = this.game;
     }
-    update() { this.onUpdate(); }
+    update() {
+        if (this.onUpdate)
+            this.onUpdate();
+    }
+    getWorldPosition() {
+        return this.position;
+    }
 }
 //# sourceMappingURL=GameObjects.js.map

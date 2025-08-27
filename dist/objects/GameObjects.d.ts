@@ -18,5 +18,6 @@ export declare class GameObject {
     constructor(params: Partial<GameObject>);
     addChild(object: GameObject): void;
     update(): void;
+    getWorldPosition(): Point2D;
 }
 //# sourceMappingURL=GameObjects.d.ts.map

@@ -1,5 +1,6 @@
 // client.ts (compile to client.js with `tsc client.ts`)
 import { Point2D, Vector2D, interpolate } from './objects/Coordinates.js';
+import { Glow } from './objects/Glow.js';
 import { drawImg, Sprite } from './objects/Sprite.js';
 const ws = new WebSocket("ws://localhost:3000/ws");
 ws.onopen = () => {
@@ -20,8 +21,8 @@ ws.onopen = () => {
 };
 let data = {};
 ws.onmessage = (event) => {
-    console.log("Server says:", event.data);
     data = JSON.parse(event.data);
+    console.log(data);
     // console.log(data);
 };
 ws.onclose = () => {
@@ -37,7 +38,8 @@ class ClientSprite extends Sprite {
             size: new Vector2D(50, 50),
             position: new Point2D(object["position"]["x"], object["position"]["y"]),
             rotation: 0,
-            cache: object
+            cache: object,
+            glow: new Glow(object["Sprite"]["glow"])
         });
     }
     updateFrom(params) {
@@ -58,6 +60,9 @@ class ClientSprite extends Sprite {
         if (params.cache)
             this.cache = { ...params.cache };
     }
+    draw(ctx) {
+        drawImg(ctx, this);
+    }
 }
 function getState() {
     if (data["state"] && Array.isArray(data["state"]["gameObjects"])) {
@@ -71,14 +76,14 @@ window.addEventListener("DOMContentLoaded", () => {
     function draw() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         for (const [id, sprite] of Object.entries(objects)) {
-            ctx.fillStyle = "white";
-            // ctx.fillRect(Number(sprite.position.x), Number(sprite.position.y), width, height);
-            drawImg(sprite, ctx, sprite.position, sprite.size, sprite.rotation);
+            sprite.draw(ctx);
         }
     }
     function loop() {
         let state = getState();
         for (const object of state) {
+            if (!object["Sprite"])
+                continue; // Skip objects without Sprite
             if (!(object["id"] in objects)) {
                 objects[object["id"]] = ClientSprite.fromServer(object);
             }

@@ -1,18 +1,5 @@
 import { Point2D, Vector2D } from './Coordinates.js';
-export class Glow {
-    shadowColor;
-    shadowBlur;
-    shadowOffsetX;
-    shadowOffsetY;
-    blendMode;
-    constructor(shadowColor = "red", shadowBlur = 20, shadowOffsetX = 0, shadowOffsetY = 0, blendMode = "source-over") {
-        this.shadowColor = shadowColor;
-        this.shadowBlur = shadowBlur;
-        this.shadowOffsetX = shadowOffsetX;
-        this.shadowOffsetY = shadowOffsetY;
-        this.blendMode = blendMode;
-    }
-}
+import { Glow } from './Glow.js';
 export class Sprite {
     image;
     imagePath = null;
@@ -28,6 +15,20 @@ export class Sprite {
     config(params) {
         Object.assign(this, params);
         return this;
+    }
+    toJSON() {
+        return {
+            imagePath: this.imagePath,
+            size: this.size,
+            rotation: this.rotation,
+            flippedHorizontal: this.flippedHorizontal,
+            crop: this.crop,
+            outline: this.outline,
+            opacity: this.opacity,
+            blendMode: this.blendMode,
+            glow: this.glow ? this.glow : null,
+            position: this.position
+        };
     }
     constructor(params = {}) {
         Object.assign(this, params);
@@ -66,6 +67,9 @@ export class Sprite {
             this.size = new Vector2D(this.image.width, this.image.height);
         }
     }
+    draw(ctx) {
+        drawImg(ctx, this);
+    }
     clone() {
         const clonedImage = new Image();
         clonedImage.src = this.image.src;
@@ -78,35 +82,39 @@ export class Sprite {
             outline: this.outline,
             opacity: this.opacity,
             blendMode: this.blendMode,
-            glow: this.glow ? new Glow(this.glow.shadowColor, this.glow.shadowBlur, this.glow.shadowOffsetX, this.glow.shadowOffsetY, this.glow.blendMode) : null,
+            glow: this.glow ? new Glow(this.glow.Color, this.glow.Blur, this.glow.OffsetX, this.glow.OffsetY, this.glow.blendMode) : null,
             pos: this.pos
         });
     }
 }
-export function drawImg(sprite, ctx, position, size, angle) {
-    if (sprite.glow) {
+export function drawImg(ctx, sprite, params = {}) {
+    // Merge sprite properties with params (params override sprite)
+    const merged = Object.assign({}, sprite, params);
+    const { position, size, rotation, opacity, blendMode, glow, flippedHorizontal, outline, image } = merged;
+    const angle = rotation || 0;
+    if (glow) {
         ctx.save();
-        ctx.globalAlpha = sprite.opacity;
-        ctx.globalCompositeOperation = sprite.glow.blendMode;
+        ctx.globalAlpha = opacity;
+        ctx.globalCompositeOperation = glow.blendMode;
         ctx.translate(position.x + size.x / 2, position.y + size.y / 2);
         ctx.rotate(angle);
-        ctx.shadowColor = sprite.glow.shadowColor;
-        ctx.shadowBlur = sprite.glow.shadowBlur;
-        ctx.shadowOffsetX = sprite.glow.shadowOffsetX;
-        ctx.shadowOffsetY = sprite.glow.shadowOffsetY;
-        if (sprite.flippedHorizontal)
+        ctx.shadowColor = glow.Color;
+        ctx.shadowBlur = glow.Blur;
+        ctx.shadowOffsetX = glow.OffsetX;
+        ctx.shadowOffsetY = glow.OffsetY;
+        if (flippedHorizontal)
             ctx.scale(-1, 1);
-        ctx.drawImage(sprite.image, -size.x / 2, -size.y / 2, size.x, size.y);
+        ctx.drawImage(image, -size.x / 2, -size.y / 2, size.x, size.y);
         ctx.restore();
     }
     ctx.save();
-    ctx.globalAlpha = sprite.opacity;
-    ctx.globalCompositeOperation = sprite.blendMode;
+    ctx.globalAlpha = opacity;
+    ctx.globalCompositeOperation = blendMode;
     ctx.translate(position.x + size.x / 2, position.y + size.y / 2);
     ctx.rotate(angle);
-    if (sprite.flippedHorizontal)
+    if (flippedHorizontal)
         ctx.scale(-1, 1);
-    if (sprite.outline) {
+    if (outline) {
         ctx.beginPath();
         const diameter = Math.max(size.x, size.y);
         ctx.arc(0, 0, diameter / 2, 0, Math.PI * 2);
@@ -114,7 +122,7 @@ export function drawImg(sprite, ctx, position, size, angle) {
         ctx.lineWidth = 2;
         ctx.stroke();
     }
-    ctx.drawImage(sprite.image, -size.x / 2, -size.y / 2, size.x, size.y);
+    ctx.drawImage(image, -size.x / 2, -size.y / 2, size.x, size.y);
     ctx.restore();
 }
 //# sourceMappingURL=Sprite.js.map

@@ -1,6 +1,7 @@
 // client.ts (compile to client.js with `tsc client.ts`)
 import { Point2D, Vector2D, interpolate } from './objects/Coordinates.js'
 import type { GameObject } from './objects/GameObjects.js';
+import { Glow } from './objects/Glow.js';
 import { drawImg, Sprite } from './objects/Sprite.js'
 
 
@@ -32,8 +33,8 @@ ws.onopen = () => {
 let data = {} 
 
 ws.onmessage = (event) => {
-	console.log("Server says:", event.data);
 	data = JSON.parse(event.data);
+	console.log(data);
 	// console.log(data);
 };
 
@@ -48,7 +49,9 @@ ws.onclose = () => {
 
 const objects = new Map<string, ClientSprite>();
 
-
+interface Renderable {
+    draw(ctx: CanvasRenderingContext2D): void;
+}
 
 class ClientSprite extends Sprite {
     id: string;
@@ -60,7 +63,8 @@ class ClientSprite extends Sprite {
             size: new Vector2D(50, 50),
             position: new Point2D(object["position"]["x"], object["position"]["y"]),
             rotation: 0,
-            cache: object
+            cache: object,
+			glow: new Glow(object["Sprite"]["glow"])
         });
     }
 
@@ -83,6 +87,10 @@ class ClientSprite extends Sprite {
         super(params);
         if (params.cache) this.cache = { ...params.cache };
     }
+
+	draw(ctx) {
+		drawImg(ctx, this);
+	}
 }
 
 
@@ -100,18 +108,18 @@ window.addEventListener("DOMContentLoaded", () => {
 	function draw() {
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
 		for (const [id, sprite] of Object.entries(objects)) {
-			ctx.fillStyle = "white";
-			// ctx.fillRect(Number(sprite.position.x), Number(sprite.position.y), width, height);
-			drawImg(sprite, ctx, sprite.position, sprite.size, sprite.rotation);
+			sprite.draw(ctx);
 		}
 	}
 
 	function loop() {
 		let state = getState();
-		for ( const object of state ) {
+		for (const object of state) {
+			if (!object["Sprite"]) continue; // Skip objects without Sprite
 			if (!(object["id"] in objects)) {
 				objects[object["id"]] = ClientSprite.fromServer(object);
-			}
+			} 
+
 			else {
 				objects[object["id"]].updateFrom(object);
 			}

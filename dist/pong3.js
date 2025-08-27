@@ -1,6 +1,10 @@
 import { Point2D, Vector2D, interpolate } from './objects/Coordinates.js';
 import { GameObject } from './objects/GameObjects.js';
 import { Sprite, drawImg } from './objects/Sprite.js';
+import { Glow } from './objects/Glow.js';
+import { BlendMode } from './objects/Blendmodes.js';
+import { Camera } from './objects/Camera.js';
+import { Label } from './objects/Label.js';
 // import { GameObject, Sprite, HitBox, Glow, Particle, Timer} from './Index.js'
 // import {  BlendMode } from './GameUtils.js'
 // class GameSettings {
@@ -26,69 +30,188 @@ class GameTeam {
         this.name = name;
     }
 }
+// const keysPressed = {
+// }
+// class MovementInputs {
+//     keysPressed: string[] = [];
+//     constructor(input) {
+//         if (input && input["key"] === "ArrowUp" && input["type"] === "keydown") {
+//         }
+//         if (input && input["key"] === "ArrowDown" && input["type"] === "keydown") {
+//         }
+//     }
+// }
+export class Player {
+    name = "";
+    profileImage = "";
+    skin = null;
+    constructor(params = {}) {
+        Object.assign(this, params);
+    }
+}
+class GameSettings {
+    playerAcceleration = 1;
+    playerCount = 2;
+    ballSpeed = 10;
+}
+export class Padel extends GameObject {
+    team;
+    player;
+    moveDownKey = "ArrowDown";
+    moveUpKey = "ArrowUp";
+    isMoving = false;
+    sprite = new Sprite({ imagePath: "assets/skins/ghost_light.png", size: new Vector2D(60, 60) });
+    // hitbox: HitBox;
+    constructor(params) {
+        super({ position: params.position, game: params.game });
+        Object.assign(this, params);
+        this.addChild(new Label({
+            text: this.player.name,
+            position: new Point2D(0, -50),
+            font: "15px Century Gothic",
+            color: "#ffffff"
+        }));
+        this.maximumVelocity = new Vector2D(this.game.gameSettings.playerAcceleration, this.game.gameSettings.playerAcceleration).multiply(10);
+        this.sprite = this.player.skin ? this.player.skin : this.sprite;
+        // add shadow
+        this.sprite.glow = new Glow({
+            Color: "#3731FE",
+            Blur: 10,
+            OffsetX: 0,
+            OffsetY: 5,
+            blendMode: BlendMode.Multiply
+        });
+        // this.hitbox = new HitBox(this);
+        if (this.team === Team.TEAM1)
+            this.sprite.flippedHorizontal = true;
+        this.onUpdate = () => {
+            this.velocity.y *= 0.9;
+            if (Math.abs(this.velocity.y) < 0.1)
+                this.velocity.y = 0;
+            try {
+                if (this.game.clientData.keysPressed.has("ArrowUp"))
+                    this.position.y -= 5;
+                if (this.game.clientData.keysPressed.has("ArrowDown"))
+                    this.position.y += 5;
+            }
+            catch {
+            }
+            // let copied = this.sprite.clone();
+            // copied.opacity = 0.1;
+            // copied.blendMode = BlendMode.ColorDodge;
+            // copied.glow = null;
+            // this.game.particles.particles.push(new Particle(this.game, 120, copied, this.position.clone(), (instance) => {
+            //     instance.sprite.opacity *= 0.96;
+            // }));
+            // return true;
+        };
+        // this.addChild(new Arrow(this.game));
+        // const eyeOffset = this.team === Team.TEAM1 ? 3 : -3;
+        // const irisOffset = this.team === Team.TEAM1 ? 8 : -8;
+        // this.addChild(new TrailSprite(this.game, this, new Sprite({
+        //     imagePath: "./assets/skins/components/eyes.png",
+        //     size: new Vector2D(38, 24),
+        //     pos: new Point2D(eyeOffset, -3)
+        // }), 160));
+        // this.addChild(new TrailSprite(this.game, this, new Sprite({
+        //     imagePath: "./assets/skins/components/iris.png",
+        //     size: new Vector2D(30, 12),
+        //     pos: new Point2D(irisOffset, -3)
+        // }), 250));
+    }
+}
 export class PongGame3 {
     clientData;
     gameObjects = [];
     team1 = new GameTeam(this, Team.TEAM1);
     team2 = new GameTeam(this, Team.TEAM2);
-    // camera: Camera = this.addObject(new Camera(new Point2D(0,-100), this)) as Camera;
+    camera = this.addObject(new Camera({
+        position: new Point2D(0, -100)
+    }));
     lastFrameTime = performance.now();
     fps = 0;
     delta;
+    gameSettings = new GameSettings();
     update() {
         for (const object of this.gameObjects)
             object.update();
     }
     exportState() {
-        return {
-            gameObjects: this.gameObjects.map(obj => ({
+        const visited = new Set();
+        const flatObjects = [];
+        function flatten(obj) {
+            if (!obj || visited.has(obj.id))
+                return;
+            visited.add(obj.id);
+            // Serialize the object
+            flatObjects.push({
                 position: obj.position,
-                Sprite: obj.sprite,
-                id: obj.id
-            }))
-        };
+                Sprite: obj.sprite ? obj.sprite.toJSON() : null,
+                children: obj.children?.map(child => child.id),
+                id: obj.id,
+                name: obj.name
+            });
+            // Recursively flatten children
+            if (obj.children && obj.children.length > 0) {
+                for (const child of obj.children) {
+                    flatten(child);
+                }
+            }
+        }
+        for (const obj of this.gameObjects) {
+            flatten(obj);
+        }
+        return { gameObjects: flatObjects };
     }
+    //need to de-ne
     addObject(object) {
+        object.game = this;
         this.gameObjects.push(object);
         if (object.children && object.children.length > 0) {
-            for (const child of object.children)
+            for (const child of object.children) {
                 this.addObject(child);
+                child.game = this;
+            }
         }
         return object;
     }
     constructor(clientData) {
         this.clientData = clientData;
-        this.gameObjects.push(new GameObject({
-            position: new Point2D(54, 54),
-            sprite: new Sprite({
-                imagePath: "assets/arrow.png",
-                size: new Vector2D(50, 50)
-            }),
-            onUpdate: function () {
-                this.position.x += 0.3;
-            }
-        }));
-        this.gameObjects.push(new GameObject({
-            position: new Point2D(300, 300),
+        // this.gameObjects.push(new GameObject({
+        //     position: new Point2D(54,54),
+        //     sprite: new Sprite({
+        //         imagePath: "assets/arrow.png",
+        //         size: new Vector2D(50, 50)
+        //     }),
+        //     onUpdate: function () {
+        //         this.position.x += 0.3;
+        //     }
+        // }));
+        this.addObject(new Padel({
             game: this,
-            sprite: new Sprite({
-                imagePath: "assets/arrow.png",
-                size: new Vector2D(50, 50)
-            }),
-            onUpdate: function () {
-                try {
-                    const input = JSON.parse(this.game.clientData["keyInput"]);
-                    if (input && input["key"] === "ArrowUp" && input["type"] === "keydown") {
-                        this.position.y -= 5; // Move up
-                    }
-                    if (input && input["key"] === "ArrowDown" && input["type"] === "keydown") {
-                        this.position.y += 5; // Move down
-                    }
-                }
-                catch {
-                }
-            }
+            position: new Point2D(30, 30),
+            team: "test",
+            player: new Player({ name: "sheldz" })
         }));
+        // this.gameObjects.push(new GameObject({
+        //     position: new Point2D(300,300),
+        //     game: this,
+        //     sprite: new Sprite({
+        //         imagePath: "assets/arrow.png",
+        //         size: new Vector2D(50, 50)
+        //     }),
+        //     onUpdate: function () {
+        //         console.log("client", JSON.stringify(this.game.clientData));
+        //         try {
+        //             if (this.game.clientData.keysPressed.has("ArrowUp"))    
+        //                 this.position.y -= 5;
+        //             if (this.game.clientData.keysPressed.has("ArrowDown"))
+        //                 this.position.y += 5;
+        //         }
+        //         catch {
+        //         }
+        //     }
+        // }));
     }
 }
 //# sourceMappingURL=pong3.js.map
