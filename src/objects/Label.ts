@@ -1,21 +1,23 @@
 import { Point2D, Vector2D, interpolate,randomBetween } from './Coordinates.js';
 import { GameObject } from './GameObjects.js';
 import { PongGame3 } from '../pong3.js';
+import { type Renderable } from './Sprite.js';
 
-export class Label extends GameObject {
+export class Label extends GameObject implements Renderable {
     public text: string;
-    declare position: Point2D;
-    declare game: PongGame3;
+    size: Vector2D;
+    rotation: number;
     public font: string = "20px Avant ";
     public color: string = "black";
 
     constructor(params) {
-        super({position: params.position, game: params.game});
+        super({game: params.game});
         Object.assign(this, params);
-        this.name = "label";
+        this.name = "Label";
     }
 
-    Draw(ctx: CanvasRenderingContext2D) {
+    draw(ctx: CanvasRenderingContext2D) {
+        console.log("text drawn");
         ctx.font = this.font;
         ctx.fillStyle = this.color;
         const textWidth = ctx.measureText(this.text).width;

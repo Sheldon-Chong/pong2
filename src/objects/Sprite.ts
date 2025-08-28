@@ -3,6 +3,9 @@ import { Glow } from './Glow.js';
 
 
 export interface Renderable {
+    position: Point2D;
+    size: Vector2D;
+    rotation: number;
     draw(ctx: CanvasRenderingContext2D): void;
 }
 

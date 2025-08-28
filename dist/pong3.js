@@ -67,7 +67,7 @@ export class Padel extends GameObject {
         Object.assign(this, params);
         this.addChild(new Label({
             text: this.player.name,
-            position: new Point2D(0, -50),
+            position: new Point2D(0, 50),
             font: "15px Century Gothic",
             color: "#ffffff"
         }));
@@ -99,7 +99,7 @@ export class Padel extends GameObject {
             // let copied = this.sprite.clone();
             // copied.opacity = 0.1;
             // copied.blendMode = BlendMode.ColorDodge;
-            // copied.glow = null;
+            // copied.gselow = null;
             // this.game.particles.particles.push(new Particle(this.game, 120, copied, this.position.clone(), (instance) => {
             //     instance.sprite.opacity *= 0.96;
             // }));
@@ -120,6 +120,23 @@ export class Padel extends GameObject {
         // }), 250));
     }
 }
+/*
+IDEA!!!!!!
+
+use interface for renderables, all of which must provide:
+- draw method
+- position
+- rotation
+- scale
+- renderable type
+
+need to specify renderable type because
+client needs to know which object constructor to call
+e.g. cleintSprite, lable, sprite etc.
+
+
+
+*/
 export class PongGame3 {
     clientData;
     gameObjects = [];

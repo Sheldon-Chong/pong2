@@ -1,16 +1,20 @@
 import { Point2D, Vector2D, interpolate, randomBetween } from './Coordinates.js';
 import { GameObject } from './GameObjects.js';
 import { PongGame3 } from '../pong3.js';
+import {} from './Sprite.js';
 export class Label extends GameObject {
     text;
+    size;
+    rotation;
     font = "20px Avant ";
     color = "black";
     constructor(params) {
-        super({ position: params.position, game: params.game });
+        super({ game: params.game });
         Object.assign(this, params);
-        this.name = "label";
+        this.name = "Label";
     }
-    Draw(ctx) {
+    draw(ctx) {
+        console.log("text drawn");
         ctx.font = this.font;
         ctx.fillStyle = this.color;
         const textWidth = ctx.measureText(this.text).width;
