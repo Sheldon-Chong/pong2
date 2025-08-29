@@ -63,7 +63,7 @@ export class Padel extends GameObject {
     isMoving = false;
     sprite = this.addComponent(new Sprite({
         imagePath: "assets/skins/ghost_light.png",
-        parent: this
+        host: this
     }));
     constructor(params) {
         super({

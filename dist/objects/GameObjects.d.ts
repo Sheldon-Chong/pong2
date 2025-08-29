@@ -22,7 +22,7 @@ export declare class GameObject {
     addComponent(component: Component): Component;
     addChild(object: GameObject): void;
     update(): void;
-    getWorldPosition(): Point2D;
+    getWorldPosition(): any;
     draw(ctx: CanvasRenderingContext2D): void;
 }
 //# sourceMappingURL=GameObjects.d.ts.map

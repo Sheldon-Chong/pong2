@@ -73,20 +73,20 @@ export class GameObject {
 		GameObject.globalId ++;
 
 		for (const component of this.components) {
-			component.parent = this;
+			component.host = this;
 			component.init();
 		}
 
 		
 		this.test = new Sprite({
 			imagePath: "assets/arrow.png",
-			parent: this
+			host: this
 		}).init();
 	}
 
 	addComponent(component: Component) {
 		this.components.push(component);
-		component.parent = this;
+		component.host = this;
 		component.init();
 		return component;
 	}
@@ -103,7 +103,17 @@ export class GameObject {
 	}
 
 	getWorldPosition() {
-		return this.position;
+		if (!this.parent) {
+			return new Point2D(
+				this.position.x,
+				this.position.y
+			)
+		}
+		const parentPos = this.parent.getWorldPosition();
+		return new Point2D(
+			parentPos.x + this.position.x,
+			parentPos.y + this.position.y
+		);
 	}
 
 	draw(ctx: CanvasRenderingContext2D) {
@@ -120,13 +130,13 @@ export class GameObject {
 		}
 		// Recursively draw children
 		for (const child of this.children) {
-			console.log(JSON.stringify(this.children));
+			// console.log(JSON.stringify(this.children));
 			try {
 				child.draw(ctx);
-				console.log("child drawn", typeof child);
+				// console.log("child drawn", typeof child);
 			}
 			catch (error) {
-				console.log("error", error);
+				// console.log("error", error);
 			}
 		}
 	}

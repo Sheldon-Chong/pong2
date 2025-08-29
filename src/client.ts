@@ -9,6 +9,7 @@ import { HitBox } from './objects/Hitbox.js'
 
 const ws = new WebSocket("ws://localhost:3000/ws");
 
+
 ws.onopen = () => {
 	console.log("CLIENT Connected to server");
 
@@ -78,29 +79,29 @@ const objects = new Map<string, GameObject>();
 
 
 function genericUpdate(obj: any, params: any, cache: any) {
-		for (const key in params) {
-				const value = params[key];
-				if (typeof value === "object" && value !== null) {
-						if (Array.isArray(value)) {
-								obj[key] = obj[key] || [];
-								cache[key] = cache[key] || [];
-								for (let i = 0; i < value.length; i++) {
-										obj[key][i] = obj[key][i] || {};
-										cache[key][i] = cache[key][i] || {};
-										genericUpdate(obj[key][i], value[i], cache[key][i]);
-								}
-						} else {
-								obj[key] = obj[key] || {};
-								cache[key] = cache[key] || {};
-								genericUpdate(obj[key], value, cache[key]);
-						}
-				} else {
-						if (cache[key] !== value) {
-								obj[key] = value;
-								cache[key] = value;
-						}
+	for (const key in params) {
+		const value = params[key];
+		if (typeof value === "object" && value !== null) {
+			if (Array.isArray(value)) {
+				obj[key] = obj[key] || [];
+				cache[key] = cache[key] || [];
+				for (let i = 0; i < value.length; i++) {
+					obj[key][i] = obj[key][i] || {};
+					cache[key][i] = cache[key][i] || {};
+					genericUpdate(obj[key][i], value[i], cache[key][i]);
 				}
+			} else {
+				obj[key] = obj[key] || {};
+				cache[key] = cache[key] || {};
+				genericUpdate(obj[key], value, cache[key]);
+			}
+		} else {
+			if (cache[key] !== value) {
+				obj[key] = value;
+				cache[key] = value;
+			}
 		}
+	}
 }
 
 window.addEventListener("DOMContentLoaded", () => {
@@ -122,9 +123,9 @@ window.addEventListener("DOMContentLoaded", () => {
 			if (!clientObj) {
 
 				if (object.name === "hitbox") {
-						clientObj = new HitBox({...object, components: []});
+					clientObj = new HitBox({...object, components: []});
 				} else {
-						clientObj = new GameObject({...object, components: []});
+					clientObj = new GameObject({...object, components: []});
 				}
 				// console.log(clientObj)
 				objects.set(object["id"], clientObj);
@@ -136,31 +137,30 @@ window.addEventListener("DOMContentLoaded", () => {
 					if (currentcomponent.name === "sprite") {
 						clientObj.addComponent(new Sprite(currentcomponent as Sprite));
 					}
-
-
-					console.log(clientObj);
 				}
+
+
 			} 
-			
 			else {
+				// //assign children to parent
 				for (let i = 0; i < object.children?.length; i++) {
-            const childId = object.children[i];
-            const childObj = objects.get(childId);
-            if (childObj) {
-                clientObj.children[i] = childObj;
-            }
+					const childId = object.children[i];
+					const childObj = objects.get(childId);
+					if (childObj) {
+						childObj.parent = clientObj;
+						clientObj.children[i] = childObj;
+					}
         }
+
+				
+				// update properties
 				genericUpdate(clientObj, object, clientObj.cache);
 			}
 		}
-		// lmao this is undefined because objects haven't been created
-		console.log(objects);
+		// console.log(objects);
 		draw();
 		requestAnimationFrame(loop);
 	}
-
-	// Fix: use ClientLabel for Label objects
-
 
 	loop();
 });

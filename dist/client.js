@@ -101,26 +101,26 @@ window.addEventListener("DOMContentLoaded", () => {
                     if (currentcomponent.name === "sprite") {
                         clientObj.addComponent(new Sprite(currentcomponent));
                     }
-                    console.log(clientObj);
                 }
             }
             else {
+                // //assign children to parent
                 for (let i = 0; i < object.children?.length; i++) {
                     const childId = object.children[i];
                     const childObj = objects.get(childId);
                     if (childObj) {
+                        childObj.parent = clientObj;
                         clientObj.children[i] = childObj;
                     }
                 }
+                // update properties
                 genericUpdate(clientObj, object, clientObj.cache);
             }
         }
-        // lmao this is undefined because objects haven't been created
-        console.log(objects);
+        // console.log(objects);
         draw();
         requestAnimationFrame(loop);
     }
-    // Fix: use ClientLabel for Label objects
     loop();
 });
 // In that case, should I have a special class for frontend that extends sprite, which serves the prupsoe of being updated? I'm assumging the frontend won't need a lot of classes, mostly those that are supposed to be used for rendering right?

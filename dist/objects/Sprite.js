@@ -50,7 +50,7 @@ export class Sprite extends Component {
         Object.assign(this, params);
     }
     init() {
-        const diameter = Math.max(this.parent.scale.x, this.parent.scale.y);
+        const diameter = Math.max(this.host.scale.x, this.host.scale.y);
         if (typeof document === "undefined") {
             return;
         }
@@ -84,8 +84,8 @@ export class Sprite extends Component {
             this.image.src = img.src;
         }
         this.opacity = this.opacity;
-        if (this.parent.scale.x === 0 && this.parent.scale.y === 0) {
-            this.parent.scale = new Vector2D(this.image.width, this.image.height);
+        if (this.host.scale.x === 0 && this.host.scale.y === 0) {
+            this.host.scale = new Vector2D(this.image.width, this.image.height);
         }
         return this;
     }
@@ -96,10 +96,9 @@ export class Sprite extends Component {
 export function drawImg(ctx, sprite, params = {}) {
     const merged = Object.assign({}, sprite, params);
     const { opacity, blendMode, glow, flippedHorizontal, outline, image } = merged;
-    const parent = sprite.parent;
-    const position = parent?.position || { x: 0, y: 0 };
-    const rotation = parent?.rotation || 0;
-    const scale = parent?.scale || { x: 1, y: 1 };
+    const position = sprite.host?.getWorldPosition() || { x: 0, y: 0 };
+    const rotation = sprite.host?.rotation || 0;
+    const scale = sprite.host?.scale || { x: 1, y: 1 };
     const angle = rotation;
     // if (glow) {
     //     ctx.save();
@@ -125,7 +124,6 @@ export function drawImg(ctx, sprite, params = {}) {
     if (flippedHorizontal)
         ctx.scale(-1, 1);
     if (outline instanceof Outline) {
-        console.log("rect");
         ctx.beginPath();
         ctx.strokeStyle = "black";
         ctx.lineWidth = outline.thickness || 2;

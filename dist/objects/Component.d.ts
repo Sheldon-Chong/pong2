@@ -3,7 +3,7 @@ export declare class Component {
     name: string;
     renderable: boolean;
     enabled: boolean;
-    parent: GameObject | null;
+    host: GameObject | null;
     constructor(params: Partial<Component>);
     init(): Component;
 }

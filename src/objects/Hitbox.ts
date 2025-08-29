@@ -11,10 +11,10 @@ export class HitBox extends GameObject {
             imagePath: "assets/arrow.png",
             outline: new Outline({thickness: 0.2})
         }))
+        this.position = new Point2D(20, 20);
     }
 
     draw(ctx: CanvasRenderingContext2D) {
-        console.log("hitbox drawn");
         super.draw(ctx); // This will draw the hitbox's components and children
     }
 }

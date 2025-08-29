@@ -3,7 +3,7 @@ export class Component {
     name = "";
     renderable = false;
     enabled = true;
-    parent;
+    host;
     constructor(params) {
         Object.assign(this, params);
     }
