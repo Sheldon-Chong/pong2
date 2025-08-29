@@ -54,6 +54,7 @@ class GameSettings {
     playerCount = 2;
     ballSpeed = 10;
 }
+import { HitBox } from './objects/Hitbox.js';
 export class Padel extends GameObject {
     team;
     player;
@@ -76,6 +77,9 @@ export class Padel extends GameObject {
             position: new Point2D(0, 50),
             font: "15px Century Gothic",
             color: "#ffffff"
+        }));
+        this.addChild(new HitBox({
+            parent: this
         }));
         this.maximumVelocity = new Vector2D(this.game.gameSettings.playerAcceleration, this.game.gameSettings.playerAcceleration).multiply(10);
         this.sprite = this.player.skin ? this.player.skin : this.sprite;

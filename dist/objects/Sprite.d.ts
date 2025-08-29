@@ -8,13 +8,20 @@ export declare enum Tags {
     Updatable = "Updatable",
     Collidable = "Collidable"
 }
+export declare class Outline {
+    static CIRCLE: number;
+    static RECTANGLE: number;
+    thickness: number;
+    type: number;
+    constructor(params: Partial<Outline>);
+}
 export declare class Sprite extends Component implements Renderable {
     [Tags.Renderable]: boolean;
     image: HTMLImageElement;
     imagePath: string | HTMLImageElement | null;
     flippedHorizontal: boolean;
     crop: boolean;
-    outline: boolean;
+    outline: Outline | null;
     opacity: number;
     blendMode: GlobalCompositeOperation;
     glow: Glow | null;
@@ -24,7 +31,7 @@ export declare class Sprite extends Component implements Renderable {
         imagePath: string | HTMLImageElement;
         flippedHorizontal: boolean;
         crop: boolean;
-        outline: boolean;
+        outline: Outline;
         opacity: number;
         blendMode: GlobalCompositeOperation;
         glow: Glow;

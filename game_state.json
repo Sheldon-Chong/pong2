@@ -17,7 +17,7 @@
         "id": 1,
         "position": {
           "x": 50,
-          "y": 55
+          "y": 50
         },
         "components": [
           {
@@ -25,7 +25,7 @@
             "imagePath": "assets/skins/ghost_light.png",
             "flippedHorizontal": false,
             "crop": false,
-            "outline": false,
+            "outline": null,
             "opacity": 1,
             "blendMode": "source-over",
             "glow": {
@@ -38,7 +38,8 @@
           }
         ],
         "children": [
-          2
+          2,
+          3
         ]
       },
       {
@@ -49,6 +50,30 @@
           "y": 50
         },
         "components": [],
+        "children": []
+      },
+      {
+        "name": "hitbox",
+        "id": 3,
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "components": [
+          {
+            "name": "sprite",
+            "imagePath": "assets/arrow.png",
+            "flippedHorizontal": false,
+            "crop": false,
+            "outline": {
+              "thickness": 0.2,
+              "type": 1
+            },
+            "opacity": 1,
+            "blendMode": "source-over",
+            "glow": null
+          }
+        ],
         "children": []
       }
     ]

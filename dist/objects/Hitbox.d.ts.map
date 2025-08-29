@@ -1,0 +1,1 @@
+{"version":3,"file":"Hitbox.d.ts","sourceRoot":"","sources":["../../src/objects/Hitbox.ts"],"names":[],"mappings":"AACA,OAAO,EAAE,UAAU,EAAE,MAAM,kBAAkB,CAAC;AAG9C,qBAAa,MAAO,SAAQ,UAAU;gBAEtB,MAAM,EAAE,OAAO,CAAC,MAAM,CAAC;IASnC,IAAI,CAAC,GAAG,EAAE,wBAAwB;CAIrC"}

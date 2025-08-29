@@ -7,13 +7,22 @@ export var Tags;
     Tags["Updatable"] = "Updatable";
     Tags["Collidable"] = "Collidable";
 })(Tags || (Tags = {}));
+export class Outline {
+    static CIRCLE = 0;
+    static RECTANGLE = 1;
+    thickness;
+    type = Outline.RECTANGLE;
+    constructor(params) {
+        Object.assign(this, params);
+    }
+}
 export class Sprite extends Component {
     [Tags.Renderable] = true;
     image;
     imagePath = null;
     flippedHorizontal = false;
     crop = false;
-    outline = false;
+    outline = null;
     opacity = 1.0;
     blendMode = "source-over";
     glow = null;
@@ -115,14 +124,20 @@ export function drawImg(ctx, sprite, params = {}) {
     ctx.scale(scale.x, scale.y);
     if (flippedHorizontal)
         ctx.scale(-1, 1);
-    // if (outline) {
-    //     ctx.beginPath();
-    //     const diameter = Math.max(scale.x, scale.y);
-    //     ctx.arc(0, 0, diameter / 2, 0, Math.PI * 2);
-    //     ctx.strokeStyle = "black";
-    //     ctx.lineWidth = 2;
-    //     ctx.stroke();
-    // }
+    if (outline instanceof Outline) {
+        console.log("rect");
+        ctx.beginPath();
+        ctx.strokeStyle = "black";
+        ctx.lineWidth = outline.thickness || 2;
+        if (outline.type === Outline.CIRCLE) {
+            const diameter = Math.max(scale.x, scale.y);
+            ctx.arc(0, 0, diameter / 2, 0, Math.PI * 2);
+        }
+        else if (outline.type === Outline.RECTANGLE) {
+            ctx.rect(-scale.x / 2, -scale.y / 2, scale.x, scale.y);
+        }
+        ctx.stroke();
+    }
     ctx.drawImage(image, -scale.x / 2, -scale.y / 2, scale.x, scale.y);
     ctx.restore();
 }

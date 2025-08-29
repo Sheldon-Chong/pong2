@@ -71,6 +71,7 @@ class GameSettings {
 	ballSpeed: number = 10;
 }
 
+import { HitBox } from './objects/Hitbox.js';
 
 
 export class Padel extends GameObject {
@@ -100,7 +101,13 @@ export class Padel extends GameObject {
 			text: this.player.name, 
 			position : new Point2D(0, 50), 
 			font: "15px Century Gothic", 
-			color: "#ffffff"}));
+			color: "#ffffff"
+		}));
+
+		this.addChild(new HitBox({
+			parent: this
+		}))
+
 
 		this.maximumVelocity = new Vector2D(
 			this.game.gameSettings.playerAcceleration, 
@@ -261,7 +268,6 @@ export class PongGame3 {
 	}
 
 	constructor (clientData) {
-
 		this.clientData = clientData;
 
 		// this.gameObjects.push(new GameObject({

@@ -6,6 +6,20 @@ import { Component } from './Component.js';
 
 const RenderableMarker = Symbol("Renderable");
 
+// function genericUpdate(obj: any, params: any, cache: any) {
+// 		for (const key in params) {
+// 				if (cache[key] !== params[key]) {
+// 						if (key === "position" && params.position) 
+// 								obj.position = new Point2D(params.position.x, params.position.y);
+// 						else if (key === "size" && params.size) 
+// 								obj.size = new Vector2D(params.size.x, params.size.y);
+// 						else 
+// 								obj[key] = params[key];
+// 						cache[key] = params[key];
+// 				}
+// 		}
+// }
+
 
 
 export class GameObject {
@@ -37,9 +51,22 @@ export class GameObject {
 	// events
 	// public onCollide?: (other: GameObject) => void;
 	public onUpdate?: () => void;
+	cache: any = {};
 
 	test;
 	
+	// updateFrom(params: any) {
+	// 		genericUpdate(this, params, this.cache);
+	// 		// Optionally, update components as well:
+	// 		if (params.components && Array.isArray(params.components)) {
+	// 				for (let i = 0; i < params.components.length; i++) {
+	// 						if (this.components[i] && typeof this.components[i].updateFrom === "function") {
+	// 								this.components[i].updateFrom(params.components[i]);
+	// 						}
+	// 				}
+	// 		}
+	// }
+
 	constructor(params: Partial<GameObject>) {
 		Object.assign(this, params);
 		this.id = GameObject.globalId;
@@ -80,18 +107,27 @@ export class GameObject {
 	}
 
 	draw(ctx: CanvasRenderingContext2D) {
+		// Draw this object's components
 		for (const component of this.components) {
 			if (component.name === "sprite") {
 				try {
 					(component as Sprite).draw(ctx);
-					console.log("draw");
 				}
 				catch (error) {
 					console.log(typeof (component as Sprite).image);
-					// console.error("Error drawing component:", error);
 				}
 			}
-			// this.test.draw(ctx);
+		}
+		// Recursively draw children
+		for (const child of this.children) {
+			console.log(JSON.stringify(this.children));
+			try {
+				child.draw(ctx);
+				console.log("child drawn", typeof child);
+			}
+			catch (error) {
+				console.log("error", error);
+			}
 		}
 	}
 }

@@ -13,6 +13,20 @@ export enum Tags {
 }
 
 
+
+export class Outline {
+
+	static CIRCLE = 0;
+	static RECTANGLE = 1;
+
+	thickness: number;
+	type: number = Outline.RECTANGLE;
+
+	constructor(params: Partial<Outline>) {
+		Object.assign(this, params);
+	}
+}
+
 export class Sprite extends Component implements Renderable {
 	[Tags.Renderable] = true;
 	
@@ -20,7 +34,7 @@ export class Sprite extends Component implements Renderable {
 	imagePath: string | HTMLImageElement | null = null;
 	flippedHorizontal: boolean = false;
 	crop:boolean = false;
-	outline: boolean = false;
+	outline: Outline | null = null;
 	opacity: number = 1.0;
 	blendMode: GlobalCompositeOperation = "source-over";
 	glow: Glow| null = null;
@@ -163,14 +177,21 @@ export function drawImg(
 	ctx.rotate(angle);
 	ctx.scale(scale.x, scale.y);
 	if (flippedHorizontal) ctx.scale(-1, 1);
-	// if (outline) {
-	//     ctx.beginPath();
-	//     const diameter = Math.max(scale.x, scale.y);
-	//     ctx.arc(0, 0, diameter / 2, 0, Math.PI * 2);
-	//     ctx.strokeStyle = "black";
-	//     ctx.lineWidth = 2;
-	//     ctx.stroke();
-	// }
+	
+	if (outline instanceof Outline) {
+		console.log("rect");
+
+		ctx.beginPath();
+		ctx.strokeStyle = "black";
+		ctx.lineWidth = outline.thickness || 2;
+		if (outline.type === Outline.CIRCLE) {
+			const diameter = Math.max(scale.x, scale.y);
+			ctx.arc(0, 0, diameter / 2, 0, Math.PI * 2);
+		} else if (outline.type === Outline.RECTANGLE) {
+			ctx.rect(-scale.x / 2, -scale.y / 2, scale.x, scale.y);
+		}
+		ctx.stroke();
+	}
 	ctx.drawImage(image, -scale.x / 2, -scale.y / 2, scale.x, scale.y);
 	ctx.restore();
 }

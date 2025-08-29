@@ -16,6 +16,7 @@ export declare class GameObject {
     maximumVelocity: Vector2D;
     components: Component[];
     onUpdate?: () => void;
+    cache: any;
     test: any;
     constructor(params: Partial<GameObject>);
     addComponent(component: Component): Component;
