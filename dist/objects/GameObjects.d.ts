@@ -23,6 +23,7 @@ export declare class GameObject {
     addChild(object: GameObject): void;
     update(): void;
     getWorldPosition(): Point2D;
+    getWorldScale(): Vector2D;
     draw(ctx: CanvasRenderingContext2D): void;
 }
 //# sourceMappingURL=GameObjects.d.ts.map

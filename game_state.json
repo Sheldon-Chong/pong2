@@ -7,18 +7,57 @@
         "id": 0,
         "position": {
           "x": 0,
-          "y": 0
+          "y": 0,
+          "className": "Point2D"
         },
+        "scale": {
+          "x": 10,
+          "y": 10
+        },
+        "rotation": 0,
         "components": [],
         "children": []
       },
       {
-        "name": "padel",
+        "name": "background",
         "id": 1,
         "position": {
-          "x": 50,
-          "y": 160
+          "x": 300,
+          "y": 3,
+          "className": "Point2D"
         },
+        "scale": {
+          "x": 2700,
+          "y": 500
+        },
+        "rotation": 0,
+        "components": [
+          {
+            "name": "sprite",
+            "imagePath": "assets/maps/map1.png",
+            "flippedHorizontal": false,
+            "crop": false,
+            "outline": null,
+            "opacity": 1,
+            "blendMode": "source-over",
+            "glow": null
+          }
+        ],
+        "children": []
+      },
+      {
+        "name": "padel",
+        "id": 2,
+        "position": {
+          "x": 0,
+          "y": 0,
+          "className": "Point2D"
+        },
+        "scale": {
+          "x": 60,
+          "y": 60
+        },
+        "rotation": 0,
         "components": [
           {
             "name": "sprite",
@@ -38,27 +77,56 @@
           }
         ],
         "children": [
-          2,
-          3
+          3,
+          4,
+          5
         ]
       },
       {
         "name": "label",
-        "id": 2,
+        "id": 3,
         "position": {
           "x": 0,
-          "y": 50
+          "y": 50,
+          "className": "Point2D"
         },
+        "scale": {
+          "x": 10,
+          "y": 10
+        },
+        "rotation": 0,
         "components": [],
         "children": []
       },
       {
         "name": "hitbox",
-        "id": 3,
+        "id": 4,
         "position": {
           "x": 0,
-          "y": 0
+          "y": 0,
+          "className": "Point2D"
         },
+        "scale": {
+          "x": 1,
+          "y": 1
+        },
+        "rotation": 0,
+        "components": [],
+        "children": []
+      },
+      {
+        "name": "hitbox",
+        "id": 5,
+        "position": {
+          "x": 0,
+          "y": 0,
+          "className": "Point2D"
+        },
+        "scale": {
+          "x": 1,
+          "y": 1
+        },
+        "rotation": 0,
         "components": [],
         "children": []
       }

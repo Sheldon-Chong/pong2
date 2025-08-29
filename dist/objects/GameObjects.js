@@ -85,6 +85,13 @@ export class GameObject {
         const parentPos = this.parent.getWorldPosition();
         return new Point2D(parentPos.x + this.position.x, parentPos.y + this.position.y);
     }
+    getWorldScale() {
+        if (!this.parent) {
+            return new Vector2D(this.scale.x, this.scale.y);
+        }
+        const parentScale = this.parent.getWorldScale();
+        return new Vector2D(parentScale.x * this.scale.x, parentScale.y * this.scale.y);
+    }
     draw(ctx) {
         // Draw this object's components
         for (const component of this.components) {

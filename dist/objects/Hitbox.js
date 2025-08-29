@@ -5,16 +5,32 @@ export class HitBox extends GameObject {
     constructor(params) {
         super(params);
         this.name = "hitbox";
-        this.scale = new Vector2D(120, 130);
+        this.scale = new Vector2D(1, 1);
     }
     draw(ctx) {
         ctx.save();
         ctx.strokeStyle = 'red';
         ctx.lineWidth = 2;
         const center = this.getWorldPosition();
-        const halfScaleX = this.scale.x / 2;
-        const halfScaleY = this.scale.y / 2;
-        ctx.strokeRect(center.x - halfScaleX, center.y - halfScaleY, this.scale.x, this.scale.y);
+        const scale = this.getWorldScale();
+        const halfScaleX = scale.x / 2;
+        const halfScaleY = scale.y / 2;
+        // Draw hitbox rectangle
+        ctx.strokeRect(center.x - halfScaleX, center.y - halfScaleY, scale.x, scale.y);
+        // Draw circles at each corner
+        const radius = 3;
+        const corners = [
+            { x: center.x - halfScaleX, y: center.y - halfScaleY }, // top-left
+            { x: center.x + halfScaleX, y: center.y - halfScaleY }, // top-right
+            { x: center.x - halfScaleX, y: center.y + halfScaleY }, // bottom-left
+            { x: center.x + halfScaleX, y: center.y + halfScaleY }, // bottom-right
+        ];
+        ctx.fillStyle = 'red';
+        for (const corner of corners) {
+            ctx.beginPath();
+            ctx.arc(corner.x, corner.y, radius, 0, Math.PI * 2);
+            ctx.fill();
+        }
         ctx.restore();
     }
 }

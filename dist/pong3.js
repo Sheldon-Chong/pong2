@@ -69,9 +69,11 @@ export class Padel extends GameObject {
         super({
             position: params.position,
             game: params.game,
-            name: "padel"
+            name: "padel",
         });
         Object.assign(this, params);
+        this.scale = new Vector2D(60, 60);
+        // console.log("scale", this.scale);
         this.addChild(new Label({
             text: this.player.name,
             position: new Point2D(0, 50),
@@ -80,6 +82,9 @@ export class Padel extends GameObject {
         }));
         this.addChild(new HitBox({
             parent: this
+        }));
+        this.addChild(new HitBox({
+            parent: this,
         }));
         this.maximumVelocity = new Vector2D(this.game.gameSettings.playerAcceleration, this.game.gameSettings.playerAcceleration).multiply(10);
         this.sprite = this.player.skin ? this.player.skin : this.sprite;
@@ -175,6 +180,8 @@ export class PongGame3 {
                 name: obj.name,
                 id: obj.id,
                 position: obj.position,
+                scale: obj.scale,
+                rotation: obj.rotation,
                 components: obj.components,
                 children: obj.children?.map(child => child.id),
             });
@@ -214,9 +221,20 @@ export class PongGame3 {
         //         this.position.x += 0.3;
         //     }
         // }));
+        this.addObject(new GameObject({
+            game: this,
+            position: new Point2D(300, 3),
+            name: "background",
+            components: [
+                new Sprite({
+                    imagePath: "assets/maps/map1.png",
+                })
+            ],
+            scale: new Vector2D(2700, 500),
+        }));
         this.addObject(new Padel({
             game: this,
-            position: new Point2D(50, 50),
+            position: new Point2D(0, 0),
             team: "test",
             player: new Player({ name: "sheldz" })
         }));

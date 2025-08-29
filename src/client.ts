@@ -36,8 +36,8 @@ ws.onopen = () => {
 let data = {} 
 
 ws.onmessage = (event) => {
-	data = JSON.parse(event.data);
 	// console.log(data);
+	data = JSON.parse(event.data);
 	// console.log(data);
 };
 
@@ -76,11 +76,30 @@ const objects = new Map<string, GameObject>();
 // 		})
 // 	]
 // }));
-
+function reviveClass(obj: any) {
+	if (obj && typeof obj === "object" && obj.className) {
+		switch (obj.className) {
+			case "Point2D":
+				return new Point2D(obj.x, obj.y);
+			case "Vector2D":
+				return new Vector2D(obj.x, obj.y);
+			// Add more cases as needed
+			default:
+				return obj;
+		}
+	}
+	return obj;
+}
 
 function genericUpdate(obj: any, params: any, cache: any) {
 	for (const key in params) {
-		const value = params[key];
+		// Prevent infinite recursion on circular references
+		if (key === "parent" || key === "children") continue;
+		let value = params[key];
+
+		// Use reviveClass for object reconstruction
+		value = reviveClass(value);
+
 		if (typeof value === "object" && value !== null) {
 			if (Array.isArray(value)) {
 				obj[key] = obj[key] || [];

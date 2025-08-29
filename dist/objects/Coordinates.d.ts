@@ -1,6 +1,7 @@
 export declare class Point2D {
     x: number;
     y: number;
+    className: string;
     constructor(x: number, y: number);
     add(other: Vector2D): Point2D;
     subtract(other: Vector2D): Point2D;

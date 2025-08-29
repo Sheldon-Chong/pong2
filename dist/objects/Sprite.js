@@ -18,6 +18,7 @@ export class Outline {
 }
 export class Sprite extends Component {
     [Tags.Renderable] = true;
+    // className: string = "sprite";
     image;
     imagePath = null;
     flippedHorizontal = false;
@@ -115,12 +116,12 @@ export function drawImg(ctx, sprite, params = {}) {
     //     ctx.drawImage(image, -scale.x / 2, -scale.y / 2, scale.x, scale.y);
     //     ctx.restore();
     // }
+    // console.log("scale", scale);
     ctx.save();
     ctx.globalAlpha = opacity;
     ctx.globalCompositeOperation = blendMode;
-    ctx.translate(position.x + scale.x / 2, position.y + scale.y / 2);
+    ctx.translate(position.x, position.y);
     ctx.rotate(angle);
-    ctx.scale(scale.x, scale.y);
     if (flippedHorizontal)
         ctx.scale(-1, 1);
     if (outline instanceof Outline) {

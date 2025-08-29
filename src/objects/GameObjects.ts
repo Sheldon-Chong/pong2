@@ -116,6 +116,20 @@ export class GameObject {
 		);
 	}
 
+	getWorldScale(): Vector2D {
+		if (!this.parent) {
+			return new Vector2D(
+				this.scale.x,
+				this.scale.y
+			);
+		}
+		const parentScale = this.parent.getWorldScale();
+		return new Vector2D(
+			parentScale.x * this.scale.x,
+			parentScale.y * this.scale.y
+		);
+	}
+
 	draw(ctx: CanvasRenderingContext2D) {
 		// Draw this object's components
 		for (const component of this.components) {
