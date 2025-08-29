@@ -1,0 +1,56 @@
+{
+  "type": "state",
+  "state": {
+    "gameObjects": [
+      {
+        "name": "camera",
+        "id": 0,
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "components": [],
+        "children": []
+      },
+      {
+        "name": "padel",
+        "id": 1,
+        "position": {
+          "x": 50,
+          "y": 55
+        },
+        "components": [
+          {
+            "name": "sprite",
+            "imagePath": "assets/skins/ghost_light.png",
+            "flippedHorizontal": false,
+            "crop": false,
+            "outline": false,
+            "opacity": 1,
+            "blendMode": "source-over",
+            "glow": {
+              "Color": "#3731FE",
+              "Blur": 10,
+              "OffsetX": 0,
+              "OffsetY": 5,
+              "blendMode": "multiply"
+            }
+          }
+        ],
+        "children": [
+          2
+        ]
+      },
+      {
+        "name": "label",
+        "id": 2,
+        "position": {
+          "x": 0,
+          "y": 50
+        },
+        "components": [],
+        "children": []
+      }
+    ]
+  }
+}

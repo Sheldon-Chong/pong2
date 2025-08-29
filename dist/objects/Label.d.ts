@@ -1,10 +1,6 @@
-import { Vector2D } from './Coordinates.js';
 import { GameObject } from './GameObjects.js';
-import { type Renderable } from './Sprite.js';
-export declare class Label extends GameObject implements Renderable {
+export declare class Label extends GameObject {
     text: string;
-    size: Vector2D;
-    rotation: number;
     font: string;
     color: string;
     constructor(params: any);

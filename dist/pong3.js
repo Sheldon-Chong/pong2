@@ -60,10 +60,16 @@ export class Padel extends GameObject {
     moveDownKey = "ArrowDown";
     moveUpKey = "ArrowUp";
     isMoving = false;
-    sprite = new Sprite({ imagePath: "assets/skins/ghost_light.png", size: new Vector2D(60, 60) });
-    // hitbox: HitBox;
+    sprite = this.addComponent(new Sprite({
+        imagePath: "assets/skins/ghost_light.png",
+        parent: this
+    }));
     constructor(params) {
-        super({ position: params.position, game: params.game });
+        super({
+            position: params.position,
+            game: params.game,
+            name: "padel"
+        });
         Object.assign(this, params);
         this.addChild(new Label({
             text: this.player.name,
@@ -162,11 +168,11 @@ export class PongGame3 {
             visited.add(obj.id);
             // Serialize the object
             flatObjects.push({
-                position: obj.position,
-                Sprite: obj.sprite ? obj.sprite.toJSON() : null,
-                children: obj.children?.map(child => child.id),
+                name: obj.name,
                 id: obj.id,
-                name: obj.name
+                position: obj.position,
+                components: obj.components,
+                children: obj.children?.map(child => child.id),
             });
             // Recursively flatten children
             if (obj.children && obj.children.length > 0) {
@@ -206,7 +212,7 @@ export class PongGame3 {
         // }));
         this.addObject(new Padel({
             game: this,
-            position: new Point2D(30, 30),
+            position: new Point2D(50, 50),
             team: "test",
             player: new Player({ name: "sheldz" })
         }));

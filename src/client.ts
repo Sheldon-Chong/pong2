@@ -1,8 +1,8 @@
 // client.ts (compile to client.js with `tsc client.ts`)
 import { Point2D, Vector2D, interpolate } from './objects/Coordinates.js'
-import type { GameObject } from './objects/GameObjects.js';
+import { GameObject } from './objects/GameObjects.js';
 import { Glow } from './objects/Glow.js';
-import { drawImg, Sprite, type Renderable } from './objects/Sprite.js'
+import { drawImg, Sprite, Tags, type Renderable } from './objects/Sprite.js'
 import { Label } from './objects/Label.js'
 
 
@@ -35,7 +35,7 @@ let data = {}
 
 ws.onmessage = (event) => {
 	data = JSON.parse(event.data);
-	console.log(data);
+	// console.log(data);
 	// console.log(data);
 };
 
@@ -48,7 +48,6 @@ ws.onclose = () => {
 
 
 
-const objects = new Map<string, ClientRenderable>();
 
 function genericUpdate(obj: any, params: any, cache: any) {
     for (const key in params) {
@@ -71,28 +70,15 @@ class ClientSprite extends Sprite {
     static fromServer(object) {
         return new ClientSprite({
             imagePath: object["Sprite"]["imagePath"], 
-            size: new Vector2D(50, 50),
-            position: new Point2D(object["position"]["x"], object["position"]["y"]),
-            rotation: 0,
             cache: object,
 			glow: new Glow(object["Sprite"]["glow"])
         });
     }
-// c
     updateFrom(params: Partial<ClientSprite>) {
-        for (const key in params) {
-            if (this.cache[key] !== params[key]) {
-                if (key === "position" && params.position) 
-                    this.position = new Point2D(params.position.x, params.position.y);
-				else if (key === "size" && params.size) 
-                    this.size = new Vector2D(params.size.x, params.size.y);
-				else 
-                    (this as any)[key] = params[key];
-                
-                this.cache[key] = params[key];
-            }
-        }
-    }
+		for (const key in params) {
+			this.cache[key] = params[key];
+		}
+	}
 
     constructor(params: Partial<ClientSprite>) {
         super(params);
@@ -148,10 +134,10 @@ class ClientRenderable {
     renderable: Renderable;
 
     constructor(id: string, renderable: Renderable, initialData: any) {
-        this.id = id;
-        this.renderable = renderable;
-        this.cache = { ...initialData };
-        this.updateFrom(initialData);
+			this.id = id;
+			this.renderable = renderable;
+			this.cache = { ...initialData };
+			this.updateFrom(initialData);
     }
 
     updateFrom(params: any) {
@@ -170,6 +156,23 @@ function getState() {
 	return [];
 }
 
+
+
+const objects = new Map<string, GameObject>();
+
+
+
+/// todo TEST NEW OBJECT!!!!
+
+
+// objects.set("400", new GameObject({
+// 	components: [
+// 		new Sprite({
+// 			imagePath: "assets/skins/ghost_light.png",
+// 		})
+// 	]
+// }));
+
 window.addEventListener("DOMContentLoaded", () => {
 	const canvas = document.getElementById("pong-canvas") as HTMLCanvasElement;
 	const ctx = canvas.getContext("2d");
@@ -184,27 +187,31 @@ window.addEventListener("DOMContentLoaded", () => {
 	function loop() {
 		let state = getState();
 		for (const object of state) {
-			let clientObj = objects.get(object["id"]);
+			const id = object["id"];
+			let clientObj = objects.get(id);
 			if (!clientObj) {
-				if (object["Sprite"]) {
-					clientObj = new ClientRenderable(
-						object["id"],
-						ClientSprite.fromServer(object),
-						object
-					);
-				} 
-				else if (object["name"] && object["name"] === "Label") {
-					clientObj = new ClientRenderable(
-						object["id"],
-						ClientLabel.fromServer(object),
-						object
-					);
+
+				clientObj = new GameObject({...object, components: []})
+			
+				// console.log(clientObj)
+				objects.set(object["id"], clientObj);
+
+				for (let i = 0; i < object.components.length; i ++) {
+					const currentcomponent = object.components[i];
+					
+					if (currentcomponent.name === "sprite") {
+						clientObj.addComponent(new Sprite(currentcomponent as Sprite));
+					}
+
+					console.log(clientObj);
 				}
-				if (clientObj) objects.set(object["id"], clientObj);
-			} else {
-				clientObj.updateFrom(object);
+			} 
+			
+			else {
+				// clientObj.updateFrom(object);
 			}
 		}
+		// lmao this is undefined because objects haven't been created
 		// console.log(objects);
 		draw();
 		requestAnimationFrame(loop);

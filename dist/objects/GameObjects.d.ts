@@ -1,6 +1,6 @@
 import { Point2D, Vector2D } from './Coordinates.js';
-import { Sprite } from './Sprite.js';
 import type { PongGame3 } from '../pong3.js';
+import { Component } from './Component.js';
 export declare class GameObject {
     game: PongGame3;
     id: number;
@@ -9,15 +9,19 @@ export declare class GameObject {
     parent: GameObject | null;
     children: GameObject[];
     position: Point2D;
+    rotation: number;
+    scale: Vector2D;
     velocity: Vector2D;
     acceleration: Vector2D;
     maximumVelocity: Vector2D;
-    sprite?: Sprite;
-    onCollide?: (other: GameObject) => void;
+    components: Component[];
     onUpdate?: () => void;
+    test: any;
     constructor(params: Partial<GameObject>);
+    addComponent(component: Component): Component;
     addChild(object: GameObject): void;
     update(): void;
     getWorldPosition(): Point2D;
+    draw(ctx: CanvasRenderingContext2D): void;
 }
 //# sourceMappingURL=GameObjects.d.ts.map

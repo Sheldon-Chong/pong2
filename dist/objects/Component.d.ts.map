@@ -1,0 +1,1 @@
+{"version":3,"file":"Component.d.ts","sourceRoot":"","sources":["../../src/objects/Component.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,UAAU,EAAE,MAAM,kBAAkB,CAAC;AAE9C,qBAAa,SAAS;IAClB,IAAI,EAAE,MAAM,CAAM;IAClB,UAAU,EAAE,OAAO,CAAS;IAC5B,OAAO,EAAE,OAAO,CAAQ;IACxB,MAAM,EAAE,UAAU,GAAG,IAAI,CAAC;gBAEd,MAAM,EAAE,OAAO,CAAC,SAAS,CAAC;IAItC,IAAI,IAAI,SAAS;CAGpB"}

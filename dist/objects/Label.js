@@ -4,14 +4,12 @@ import { PongGame3 } from '../pong3.js';
 import {} from './Sprite.js';
 export class Label extends GameObject {
     text;
-    size;
-    rotation;
     font = "20px Avant ";
     color = "black";
     constructor(params) {
         super({ game: params.game });
         Object.assign(this, params);
-        this.name = "Label";
+        this.name = "label";
     }
     draw(ctx) {
         console.log("text drawn");

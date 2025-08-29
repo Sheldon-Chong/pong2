@@ -129,26 +129,25 @@ fastify.get("/:file", async (request, reply) => {
 
 import { PongGame3 } from "../dist/pong3.js";
 import { Socket } from "dgram";
+import { writeFileSync } from "fs";
 const pongGame = new PongGame3(client);
-
-
-
-const gameState = {
-	
-};
 
 
 
 
 // Game loop function
 function updateGameObjects() {
-  const state = pongGame.exportState();
-  for (const client of clients) {
-    if (client.readyState === 1) { // 1 = OPEN
-      client.send(JSON.stringify({ type: "state", state }));
-    }
-  }
-  pongGame.update();
+	const state = pongGame.exportState();
+	// Write state to a file
+	let output = JSON.stringify({ type: "state", state }, null, 2);
+	writeFileSync("game_state.json", output,"utf-8");
+
+	for (const client of clients) {
+		if (client.readyState === 1) { // 1 = OPEN
+			client.send(output);
+		}
+	}
+	pongGame.update();
 }
 
 const TICK_RATE = 1000 / 60; // 60 FPS
