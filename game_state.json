@@ -17,7 +17,7 @@
         "id": 1,
         "position": {
           "x": 50,
-          "y": 155
+          "y": 160
         },
         "components": [
           {
@@ -56,24 +56,10 @@
         "name": "hitbox",
         "id": 3,
         "position": {
-          "x": 20,
-          "y": 20
+          "x": 0,
+          "y": 0
         },
-        "components": [
-          {
-            "name": "sprite",
-            "imagePath": "assets/arrow.png",
-            "flippedHorizontal": false,
-            "crop": false,
-            "outline": {
-              "thickness": 0.2,
-              "type": 1
-            },
-            "opacity": 1,
-            "blendMode": "source-over",
-            "glow": null
-          }
-        ],
+        "components": [],
         "children": []
       }
     ]

@@ -102,7 +102,7 @@ export class GameObject {
 			this.onUpdate(); 
 	}
 
-	getWorldPosition() {
+	getWorldPosition(): Point2D {
 		if (!this.parent) {
 			return new Point2D(
 				this.position.x,
