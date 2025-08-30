@@ -1,5 +1,5 @@
 import { Point2D, Vector2D } from "./objects/Coordinates.js";
-import { GameObject } from "./objects/GameObjects.js";
+import { GameObject } from "./objects/GameObject.js";
 import { HitBox } from "./objects/Hitbox.js";
 import { Sprite } from "./objects/Sprite.js";
 import type { PongGame3 } from "./pong3.js";
@@ -16,7 +16,12 @@ export class Ball extends GameObject {
             imagePath: "assets/ball.png"
         }))
 
-        // this.addChild(new HitBox({}));
+        this.addComponent(new HitBox({
+            onCollide: (other: HitBox) => {
+                this.position.y += 5;
+                return () => {};
+            }
+        }));
     }
 
 

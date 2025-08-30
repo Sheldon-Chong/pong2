@@ -1,4 +1,4 @@
-import { GameObject } from './GameObjects.js';
+import { GameObject } from './GameObject.js';
 export class Component {
     name = "";
     renderable = false;

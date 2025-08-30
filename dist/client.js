@@ -1,6 +1,6 @@
 // client.ts (compile to client.js with `tsc client.ts`)
 import { Point2D, Vector2D, interpolate } from './objects/Coordinates.js';
-import { GameObject } from './objects/GameObjects.js';
+import { GameObject } from './objects/GameObject.js';
 import { Glow } from './objects/Glow.js';
 import { drawImg, Sprite, Tags } from './objects/Sprite.js';
 import { HitBox } from './objects/Hitbox.js';

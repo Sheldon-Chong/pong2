@@ -1,5 +1,5 @@
 import { Point2D, Vector2D } from './Coordinates.js';
-import { GameObject } from './GameObjects.js';
+import { GameObject } from './GameObject.js';
 export declare class Camera extends GameObject {
     shakeValue: Vector2D;
     target: GameObject;

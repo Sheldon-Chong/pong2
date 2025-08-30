@@ -1,7 +1,7 @@
 import { Point2D, Vector2D } from './Coordinates.js';
 import { type Renderable, Sprite } from './Sprite.js';
 import type { PongGame3 } from '../pong3.js';
-import type { Viewport } from './Viewport.js';import { Component } from './Component.js';
+import type { Viewport } from './Viewport.js'; import { Component } from './Component.js';
 import type { HitBox } from './Hitbox.js';
 
 
@@ -28,16 +28,16 @@ export class GameObject {
 	public game: PongGame3;
 	public id: number;
 	static globalId = 0;
-	
+
 	// identification
 	public name: string = "";
-	
+
 	// hierarchy
 	public parent: GameObject | null = null;
 	public children: GameObject[] = [];
-	
+
 	// physics
-	public position: Point2D = new Point2D(0,0);
+	public position: Point2D = new Point2D(0, 0);
 	public rotation: number = 0;
 	public scale: Vector2D = new Vector2D(10, 10);
 	public velocity: Vector2D = new Vector2D(0, 0);
@@ -54,8 +54,6 @@ export class GameObject {
 	public onUpdate?: () => void;
 	cache: any = {};
 
-	test;
-	
 	// updateFrom(params: any) {
 	// 		genericUpdate(this, params, this.cache);
 	// 		// Optionally, update components as well:
@@ -71,18 +69,12 @@ export class GameObject {
 	constructor(params: Partial<GameObject>) {
 		Object.assign(this, params);
 		this.id = GameObject.globalId;
-		GameObject.globalId ++;
+		GameObject.globalId++;
 
 		for (const component of this.components) {
 			component.host = this;
 			component.init();
 		}
-
-		
-		this.test = new Sprite({
-			imagePath: "assets/arrow.png",
-			host: this
-		}).init();
 	}
 
 	addComponent(component: Component) {
@@ -99,11 +91,11 @@ export class GameObject {
 	}
 
 	update() {
-		if (this.onUpdate) 
+		if (this.onUpdate)
 			this.onUpdate();
 		for (const child of this.children) {
 			child.update();
-		} 
+		}
 	}
 
 	getWorldPosition(): Point2D {

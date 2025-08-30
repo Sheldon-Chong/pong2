@@ -1,5 +1,5 @@
 import { Point2D, Vector2D } from "./objects/Coordinates.js";
-import { GameObject } from "./objects/GameObjects.js";
+import { GameObject } from "./objects/GameObject.js";
 import { HitBox } from "./objects/Hitbox.js";
 import { Sprite } from "./objects/Sprite.js";
 export class Ball extends GameObject {
@@ -12,7 +12,12 @@ export class Ball extends GameObject {
         this.addComponent(new Sprite({
             imagePath: "assets/ball.png"
         }));
-        // this.addChild(new HitBox({}));
+        this.addComponent(new HitBox({
+            onCollide: (other) => {
+                this.position.y += 5;
+                return () => { };
+            }
+        }));
     }
 }
 //# sourceMappingURL=ball.js.map

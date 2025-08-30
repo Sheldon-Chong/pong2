@@ -1,4 +1,4 @@
-import { GameObject } from './objects/GameObjects.js';
+import { GameObject } from './objects/GameObject.js';
 import { Sprite } from './objects/Sprite.js';
 import { Camera } from './objects/Camera.js';
 export declare enum Team {
@@ -33,7 +33,7 @@ export declare class Padel extends GameObject {
 }
 export declare class PongGame3 {
     clientData: any;
-    gameObjects: GameObject[];
+    gameObjects: Map<number, GameObject>;
     team1: GameTeam;
     team2: GameTeam;
     camera: Camera;
@@ -41,6 +41,7 @@ export declare class PongGame3 {
     fps: number;
     delta: number;
     gameSettings: GameSettings;
+    checkCollisions(): void;
     update(): void;
     exportState(): {
         gameObjects: any[];

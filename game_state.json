@@ -53,7 +53,7 @@
         "id": 2,
         "position": {
           "x": 0,
-          "y": -55,
+          "y": 30,
           "className": "Point2D"
         },
         "scale": {
@@ -113,7 +113,7 @@
         "id": 4,
         "position": {
           "x": 0,
-          "y": 0,
+          "y": 230,
           "className": "Point2D"
         },
         "scale": {
@@ -134,6 +134,12 @@
             "opacity": 1,
             "blendMode": "source-over",
             "glow": null
+          },
+          {
+            "name": "hitbox",
+            "renderable": false,
+            "enabled": true,
+            "isColliding": false
           }
         ],
         "children": []

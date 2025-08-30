@@ -1,6 +1,6 @@
 
 import { Point2D, Vector2D, interpolate } from './objects/Coordinates.js'
-import { GameObject } from './objects/GameObjects.js'
+import { GameObject } from './objects/GameObject.js'
 import { Sprite, drawImg } from './objects/Sprite.js';
 import { Glow } from './objects/Glow.js';
 import { BlendMode } from './objects/Blendmodes.js';
@@ -111,10 +111,6 @@ export class Padel extends GameObject {
 		this.addComponent(new HitBox({
 		}))
 
-		// this.addComponent(new HitBox({
-		// }))
-
-
 		this.maximumVelocity = new Vector2D(
 			this.game.gameSettings.playerAcceleration, 
 			this.game.gameSettings.playerAcceleration
@@ -182,12 +178,10 @@ export class Padel extends GameObject {
 
 
 
-
-
 export class PongGame3 {
 
 	clientData;
-	gameObjects: GameObject[] = [];
+	gameObjects: Map<number, GameObject> = new Map();
 	team1: GameTeam = new GameTeam(this, Team.TEAM1);
 	team2: GameTeam = new GameTeam(this, Team.TEAM2);
 	camera: Camera = this.addObject(new Camera({
@@ -203,9 +197,35 @@ export class PongGame3 {
 
 	gameSettings: GameSettings = new GameSettings();
 
+	checkCollisions() {
+		const hitboxes: HitBox[] = [];
+		for (const obj of this.gameObjects.values()) {
+			for (const comp of obj.components) {
+				if (comp instanceof HitBox) {
+					hitboxes.push(comp);
+				}
+			}
+		}
+		for (let i = 0; i < hitboxes.length; i++) {
+			for (let j = i + 1; j < hitboxes.length; j++) {
+				const a = hitboxes[i];
+				const b = hitboxes[j];
+				if (a.isCollidingWith(b)) {
+					a.isColliding = b.isColliding = true;
+					a.onCollide?.(b);
+					b.onCollide?.(a);
+				} else {
+					a.isColliding = b.isColliding = false;
+				}
+			}
+		}
+	}
+
 	update () {
-		for (const object of this.gameObjects) 
+		for (const object of this.gameObjects.values()) {
 			object.update();
+		}
+		this.checkCollisions();
 	}
 
 	exportState() {
@@ -216,7 +236,6 @@ export class PongGame3 {
 			if (!obj || visited.has(obj.id)) return;
 			visited.add(obj.id);
 
-			// Serialize the object
 			flatObjects.push({
 				name: obj.name,
 				id: obj.id,
@@ -227,7 +246,6 @@ export class PongGame3 {
 				children: obj.children?.map(child => child.id),
 			});
 
-			// Recursively flatten children
 			if (obj.children && obj.children.length > 0) {
 				for (const child of obj.children) {
 					flatten(child);
@@ -235,7 +253,7 @@ export class PongGame3 {
 			}
 		}
 
-		for (const obj of this.gameObjects) {
+		for (const obj of this.gameObjects.values()) {
 			flatten(obj);
 		}
 
@@ -246,14 +264,13 @@ export class PongGame3 {
 
 	addObject(object: GameObject) {
 		object.game = this;
-		this.gameObjects.push(object);
+		this.gameObjects.set(object.id, object);
 		if (object.children && object.children.length > 0) {
 			for (const child of object.children) {
 				this.addObject(child);
 				child.game = this;
 			}
 		}
-		
 		return object;
 	}
 
@@ -279,42 +296,8 @@ export class PongGame3 {
 			player: new Player({name: "sheldz"})
 		}));
 
-
 		this.addObject(new Ball(this));
-
-		// this.gameObjects.push(new GameObject({
-		//     position: new Point2D(300,300),
-		//     game: this,
-		//     sprite: new Sprite({
-		//         imagePath: "assets/arrow.png",
-		//         size: new Vector2D(50, 50)
-		//     }),
-		//     onUpdate: function () {
-		//         console.log("client", JSON.stringify(this.game.clientData));
-		//         try {
-		//             if (this.game.clientData.keysPressed.has("ArrowUp"))    
-		//                 this.position.y -= 5;
-		//             if (this.game.clientData.keysPressed.has("ArrowDown"))
-		//                 this.position.y += 5;
-		//         }
-		//         catch {
-
-		//         }
-		//     }
-		// }));
 	}
 
 }
 
-
-
-		// this.gameObjects.push(new GameObject({
-		//     position: new Point2D(54,54),
-		//     sprite: new Sprite({
-		//         imagePath: "assets/arrow.png",
-		//         size: new Vector2D(50, 50)
-		//     }),
-		//     onUpdate: function () {
-		//         this.position.x += 0.3;
-		//     }
-		// }));

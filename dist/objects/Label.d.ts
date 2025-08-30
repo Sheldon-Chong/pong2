@@ -1,4 +1,4 @@
-import { GameObject } from './GameObjects.js';
+import { GameObject } from './GameObject.js';
 import { Viewport } from './Viewport.js';
 export declare class Label extends GameObject {
     text: string;

@@ -1,5 +1,5 @@
 import { Point2D, Vector2D, interpolate, randomBetween } from './Coordinates.js';
-import { GameObject } from './GameObjects.js';
+import { GameObject } from './GameObject.js';
 import { PongGame3 } from '../pong3.js';
 export class Camera extends GameObject {
     shakeValue = new Vector2D(0, 0);
