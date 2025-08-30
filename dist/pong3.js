@@ -81,12 +81,9 @@ export class Padel extends GameObject {
             font: "15px Century Gothic",
             color: "#ffffff"
         }));
-        this.addChild(new HitBox({
-            parent: this
-        }));
-        this.addChild(new HitBox({
-            parent: this,
-        }));
+        this.addComponent(new HitBox({}));
+        // this.addComponent(new HitBox({
+        // }))
         this.maximumVelocity = new Vector2D(this.game.gameSettings.playerAcceleration, this.game.gameSettings.playerAcceleration).multiply(10);
         this.sprite = this.player.skin ? this.player.skin : this.sprite;
         // add shadow
@@ -166,7 +163,7 @@ export class PongGame3 {
                 position: obj.position,
                 scale: obj.scale,
                 rotation: obj.rotation,
-                components: obj.components,
+                components: obj.componentToJSON(),
                 children: obj.children?.map(child => child.id),
             });
             // Recursively flatten children

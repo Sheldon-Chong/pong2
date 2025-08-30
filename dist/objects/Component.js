@@ -4,11 +4,16 @@ export class Component {
     renderable = false;
     enabled = true;
     host;
+    onUpdate;
     constructor(params) {
         Object.assign(this, params);
     }
     init() {
         return this;
+    }
+    update() {
+        if (this.onUpdate)
+            this.onUpdate();
     }
 }
 //# sourceMappingURL=Component.js.map

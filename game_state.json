@@ -34,6 +34,9 @@
         "components": [
           {
             "name": "sprite",
+            "renderable": true,
+            "enabled": true,
+            "Renderable": true,
             "imagePath": "assets/maps/map1.png",
             "flippedHorizontal": false,
             "crop": false,
@@ -50,7 +53,7 @@
         "id": 2,
         "position": {
           "x": 0,
-          "y": 0,
+          "y": -55,
           "className": "Point2D"
         },
         "scale": {
@@ -61,6 +64,9 @@
         "components": [
           {
             "name": "sprite",
+            "renderable": true,
+            "enabled": true,
+            "Renderable": true,
             "imagePath": "assets/skins/ghost_light.png",
             "flippedHorizontal": false,
             "crop": false,
@@ -74,12 +80,16 @@
               "OffsetY": 5,
               "blendMode": "multiply"
             }
+          },
+          {
+            "name": "hitbox",
+            "renderable": false,
+            "enabled": true,
+            "isColliding": false
           }
         ],
         "children": [
-          3,
-          4,
-          5
+          3
         ]
       },
       {
@@ -99,40 +109,8 @@
         "children": []
       },
       {
-        "name": "hitbox",
-        "id": 4,
-        "position": {
-          "x": 0,
-          "y": 0,
-          "className": "Point2D"
-        },
-        "scale": {
-          "x": 10.89999999999996,
-          "y": 10.89999999999996
-        },
-        "rotation": 0,
-        "components": [],
-        "children": []
-      },
-      {
-        "name": "hitbox",
-        "id": 5,
-        "position": {
-          "x": 0,
-          "y": 0,
-          "className": "Point2D"
-        },
-        "scale": {
-          "x": 10.89999999999996,
-          "y": 10.89999999999996
-        },
-        "rotation": 0,
-        "components": [],
-        "children": []
-      },
-      {
         "name": "",
-        "id": 6,
+        "id": 4,
         "position": {
           "x": 0,
           "y": 0,
@@ -146,6 +124,9 @@
         "components": [
           {
             "name": "sprite",
+            "renderable": true,
+            "enabled": true,
+            "Renderable": true,
             "imagePath": "assets/ball.png",
             "flippedHorizontal": false,
             "crop": false,
@@ -155,24 +136,6 @@
             "glow": null
           }
         ],
-        "children": [
-          7
-        ]
-      },
-      {
-        "name": "hitbox",
-        "id": 7,
-        "position": {
-          "x": 0,
-          "y": 0,
-          "className": "Point2D"
-        },
-        "scale": {
-          "x": 10.89999999999996,
-          "y": 10.89999999999996
-        },
-        "rotation": 0,
-        "components": [],
         "children": []
       }
     ]

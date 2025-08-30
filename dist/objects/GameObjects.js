@@ -95,15 +95,35 @@ export class GameObject {
         const parentScale = this.parent.getWorldScale();
         return parentScale.multiply(this.scale);
     }
+    componentToJSON() {
+        return this.components.map(component => {
+            const json = {};
+            for (const key in component) {
+                if (key !== "host" && Object.prototype.hasOwnProperty.call(component, key)) {
+                    json[key] = component[key];
+                }
+            }
+            return json;
+        });
+    }
     draw(viewport) {
         // Draw this object's components
         for (const component of this.components) {
+            console.log(component.name);
             if (component.name === "sprite") {
                 try {
                     component.draw(viewport);
                 }
                 catch (error) {
                     console.log(typeof component.image);
+                }
+            }
+            if (component.name === "hitbox") {
+                try {
+                    component.draw(viewport);
+                }
+                catch (error) {
+                    console.log("error", typeof component);
                 }
             }
         }

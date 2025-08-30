@@ -151,11 +151,12 @@ window.addEventListener("DOMContentLoaded", () => {
 			let clientObj = objects.get(id);
 			if (!clientObj) {
 
-				if (object.name === "hitbox") {
-					clientObj = new HitBox({...object, components: []});
-				} else {
+				// if (object.name === "hitbox") {
+				// 	clientObj = new HitBox({...object, components: []});
+				// } 
+				// else {
 					clientObj = new GameObject({...object, components: []});
-				}
+				// }
 				// console.log(clientObj)
 				objects.set(object["id"], clientObj);
 
@@ -165,6 +166,10 @@ window.addEventListener("DOMContentLoaded", () => {
 					
 					if (currentcomponent.name === "sprite") {
 						clientObj.addComponent(new Sprite(currentcomponent as Sprite));
+					}
+					if (currentcomponent.name === "hitbox") {
+						console.log("hibox added");
+						clientObj.addComponent(new HitBox(currentcomponent as HitBox));
 					}
 				}
 

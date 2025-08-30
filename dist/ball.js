@@ -12,7 +12,7 @@ export class Ball extends GameObject {
         this.addComponent(new Sprite({
             imagePath: "assets/ball.png"
         }));
-        this.addChild(new HitBox({}));
+        // this.addChild(new HitBox({}));
     }
 }
 //# sourceMappingURL=ball.js.map

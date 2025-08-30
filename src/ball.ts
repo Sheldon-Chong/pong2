@@ -16,7 +16,7 @@ export class Ball extends GameObject {
             imagePath: "assets/ball.png"
         }))
 
-        this.addChild(new HitBox({}));
+        // this.addChild(new HitBox({}));
     }
 
 

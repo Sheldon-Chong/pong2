@@ -25,6 +25,7 @@ export declare class GameObject {
     update(): void;
     getWorldPosition(): Point2D;
     getWorldScale(): Vector2D;
+    componentToJSON(): Record<string, any>[];
     draw(viewport: Viewport): void;
 }
 //# sourceMappingURL=GameObjects.d.ts.map

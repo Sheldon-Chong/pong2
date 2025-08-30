@@ -2,6 +2,7 @@ import { Point2D, Vector2D } from './Coordinates.js';
 import { type Renderable, Sprite } from './Sprite.js';
 import type { PongGame3 } from '../pong3.js';
 import type { Viewport } from './Viewport.js';import { Component } from './Component.js';
+import type { HitBox } from './Hitbox.js';
 
 
 const RenderableMarker = Symbol("Renderable");
@@ -130,16 +131,29 @@ export class GameObject {
 		return parentScale.multiply(this.scale);
 	}
 
+	componentToJSON() {
+		return this.components.map(component => {
+			const json: Record<string, any> = {};
+			for (const key in component) {
+				if (key !== "host" && Object.prototype.hasOwnProperty.call(component, key)) {
+					json[key] = (component as any)[key];
+				}
+			}
+			return json;
+		});
+	}
+
 	draw(viewport: Viewport) {
 		// Draw this object's components
 		for (const component of this.components) {
+			console.log(component.name)
 			if (component.name === "sprite") {
-				try {
-					(component as Sprite).draw(viewport);
-				}
-				catch (error) {
-					console.log(typeof (component as Sprite).image);
-				}
+				try { (component as Sprite).draw(viewport); }
+				catch (error) { console.log(typeof (component as Sprite).image); }
+			}
+			if (component.name === "hitbox") {
+				try { (component as HitBox).draw(viewport); }
+				catch (error) { console.log("error", typeof component); }
 			}
 		}
 		// Recursively draw children
