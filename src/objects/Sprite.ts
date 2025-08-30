@@ -1,6 +1,8 @@
 import { Point2D, Vector2D } from './Coordinates.js';
 import { Glow } from './Glow.js';
 import { Component } from './Component.js';
+import { Viewport } from './Viewport.js';
+
 
 export interface Renderable {
 	draw(ctx: CanvasRenderingContext2D): void;
@@ -27,7 +29,7 @@ export class Outline {
 	}
 }
 
-export class Sprite extends Component implements Renderable {
+export class Sprite extends Component {
 	[Tags.Renderable] = true;
 	// className: string = "sprite";
 
@@ -114,8 +116,8 @@ export class Sprite extends Component implements Renderable {
 		return this;
 	}
 
-	draw(ctx: CanvasRenderingContext2D): void {
-		drawImg(ctx, this);
+	draw(viewport: Viewport): void {
+		drawImg(viewport, this);
 	}
 
 	// clone(): Sprite {
@@ -143,55 +145,56 @@ export class Sprite extends Component implements Renderable {
 }
 
 export function drawImg(
-	ctx: CanvasRenderingContext2D,
+	viewport: Viewport,
 	sprite: Sprite,
 	params: Partial<Sprite> = {}
 ) {
 	const merged = Object.assign({}, sprite, params);
 	const { opacity, blendMode, glow, flippedHorizontal, outline, image } = merged;
-	const position = sprite.host?.getWorldPosition() || { x: 0, y: 0 };
+	const position = viewport.toScreenCoords(sprite.host.getWorldPosition());
+	
 	const rotation = sprite.host?.rotation || 0;
 	const scale = sprite.host?.scale || { x: 1, y: 1 };
 	const angle = rotation;
 
 	// if (glow) {
-	//     ctx.save();
-	//     ctx.globalAlpha = opacity;
-	//     ctx.globalCompositeOperation = glow.blendMode;
-	//     ctx.translate(position.x + scale.x / 2, position.y + scale.y / 2);
-	//     ctx.rotate(angle);
-	//     ctx.scale(scale.x, scale.y);
-	//     ctx.shadowColor = glow.Color;
-	//     ctx.shadowBlur = glow.Blur;
-	//     ctx.shadowOffsetX = glow.OffsetX;
-	//     ctx.shadowOffsetY = glow.OffsetY;
-	//     if (flippedHorizontal) ctx.scale(-1, 1);
-	//     ctx.drawImage(image, -scale.x / 2, -scale.y / 2, scale.x, scale.y);
-	//     ctx.restore();
+	//     viewport.ctx.save();
+	//     viewport.ctx.globalAlpha = opacity;
+	//     viewport.ctx.globalCompositeOperation = glow.blendMode;
+	//     viewport.ctx.translate(position.x + scale.x / 2, position.y + scale.y / 2);
+	//     viewport.ctx.rotate(angle);
+	//     viewport.ctx.scale(scale.x, scale.y);
+	//     viewport.ctx.shadowColor = glow.Color;
+	//     viewport.ctx.shadowBlur = glow.Blur;
+	//     viewport.ctx.shadowOffsetX = glow.OffsetX;
+	//     viewport.ctx.shadowOffsetY = glow.OffsetY;
+	//     if (flippedHorizontal) viewport.ctx.scale(-1, 1);
+	//     viewport.ctx.drawImage(image, -scale.x / 2, -scale.y / 2, scale.x, scale.y);
+	//     viewport.ctx.restore();
 	// }
 
 	// console.log("scale", scale);
 
-	ctx.save();
-	ctx.globalAlpha = opacity;
-	ctx.globalCompositeOperation = blendMode;
-	ctx.translate(position.x, position.y);
-	ctx.rotate(angle);
-	if (flippedHorizontal) ctx.scale(-1, 1);
+	viewport.ctx.save();
+	viewport.ctx.globalAlpha = opacity;
+	viewport.ctx.globalCompositeOperation = blendMode;
+	viewport.ctx.translate(position.x, position.y);
+	viewport.ctx.rotate(angle);
+	if (flippedHorizontal) viewport.ctx.scale(-1, 1);
 	
 	if (outline instanceof Outline) {
 
-		ctx.beginPath();
-		ctx.strokeStyle = "black";
-		ctx.lineWidth = outline.thickness || 2;
+		viewport.ctx.beginPath();
+		viewport.ctx.strokeStyle = "black";
+		viewport.ctx.lineWidth = outline.thickness || 2;
 		if (outline.type === Outline.CIRCLE) {
 			const diameter = Math.max(scale.x, scale.y);
-			ctx.arc(0, 0, diameter / 2, 0, Math.PI * 2);
+			viewport.ctx.arc(0, 0, diameter / 2, 0, Math.PI * 2);
 		} else if (outline.type === Outline.RECTANGLE) {
-			ctx.rect(-scale.x / 2, -scale.y / 2, scale.x, scale.y);
+			viewport.ctx.rect(-scale.x / 2, -scale.y / 2, scale.x, scale.y);
 		}
-		ctx.stroke();
+		viewport.ctx.stroke();
 	}
-	ctx.drawImage(image, -scale.x / 2, -scale.y / 2, scale.x, scale.y);
-	ctx.restore();
+	viewport.ctx.drawImage(image, -scale.x / 2, -scale.y / 2, scale.x, scale.y);
+	viewport.ctx.restore();
 }

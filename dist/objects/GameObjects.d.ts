@@ -1,5 +1,6 @@
 import { Point2D, Vector2D } from './Coordinates.js';
 import type { PongGame3 } from '../pong3.js';
+import type { Viewport } from './Viewport.js';
 import { Component } from './Component.js';
 export declare class GameObject {
     game: PongGame3;
@@ -24,6 +25,6 @@ export declare class GameObject {
     update(): void;
     getWorldPosition(): Point2D;
     getWorldScale(): Vector2D;
-    draw(ctx: CanvasRenderingContext2D): void;
+    draw(viewport: Viewport): void;
 }
 //# sourceMappingURL=GameObjects.d.ts.map

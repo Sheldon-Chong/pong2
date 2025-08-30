@@ -1,5 +1,6 @@
 import { Glow } from './Glow.js';
 import { Component } from './Component.js';
+import { Viewport } from './Viewport.js';
 export interface Renderable {
     draw(ctx: CanvasRenderingContext2D): void;
 }
@@ -15,7 +16,7 @@ export declare class Outline {
     type: number;
     constructor(params: Partial<Outline>);
 }
-export declare class Sprite extends Component implements Renderable {
+export declare class Sprite extends Component {
     [Tags.Renderable]: boolean;
     image: HTMLImageElement;
     imagePath: string | HTMLImageElement | null;
@@ -38,7 +39,7 @@ export declare class Sprite extends Component implements Renderable {
     };
     constructor(params?: Partial<Sprite>);
     init(): this;
-    draw(ctx: CanvasRenderingContext2D): void;
+    draw(viewport: Viewport): void;
 }
-export declare function drawImg(ctx: CanvasRenderingContext2D, sprite: Sprite, params?: Partial<Sprite>): void;
+export declare function drawImg(viewport: Viewport, sprite: Sprite, params?: Partial<Sprite>): void;
 //# sourceMappingURL=Sprite.d.ts.map

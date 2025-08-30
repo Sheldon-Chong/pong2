@@ -3,8 +3,8 @@ import { Point2D, Vector2D, interpolate } from './objects/Coordinates.js'
 import { GameObject } from './objects/GameObjects.js';
 import { Glow } from './objects/Glow.js';
 import { drawImg, Sprite, Tags, type Renderable } from './objects/Sprite.js'
-import { Label } from './objects/Label.js'
 import { HitBox } from './objects/Hitbox.js'
+import { Viewport } from './objects/Viewport.js'
 
 
 const ws = new WebSocket("ws://localhost:3000/ws");
@@ -116,6 +116,7 @@ function genericUpdate(obj: any, params: any, cache: any) {
 			}
 		} else {
 			if (cache[key] !== value) {
+				console.log(`Update: obj[${key}] changed from`, cache[key], "to", value);
 				obj[key] = value;
 				cache[key] = value;
 			}
@@ -123,14 +124,23 @@ function genericUpdate(obj: any, params: any, cache: any) {
 	}
 }
 
+
+
+
 window.addEventListener("DOMContentLoaded", () => {
 	const canvas = document.getElementById("pong-canvas") as HTMLCanvasElement;
 	const ctx = canvas.getContext("2d");
 
+	const viewport = new Viewport({
+		ctx: ctx,
+		width: canvas.width, 
+		height: canvas.height
+	});
+
 	function draw() {
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
 		for (const clientObj of objects.values()) {
-			clientObj.draw(ctx);
+			clientObj.draw(viewport);
 		}
 	}
 

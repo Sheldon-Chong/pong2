@@ -1,6 +1,8 @@
 import { GameObject } from './GameObjects.js';
+import type { Viewport } from './Viewport.js';
 export declare class HitBox extends GameObject {
+    isColliding: boolean;
     constructor(params: Partial<HitBox>);
-    draw(ctx: CanvasRenderingContext2D): void;
+    draw(viewport: Viewport): void;
 }
 //# sourceMappingURL=Hitbox.d.ts.map

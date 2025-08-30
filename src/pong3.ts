@@ -72,6 +72,7 @@ class GameSettings {
 }
 
 import { HitBox } from './objects/Hitbox.js';
+import { Ball } from './ball.js';
 
 
 export class Padel extends GameObject {
@@ -115,7 +116,6 @@ export class Padel extends GameObject {
 			parent: this,
 		}))
 
-		
 
 		this.maximumVelocity = new Vector2D(
 			this.game.gameSettings.playerAcceleration, 
@@ -181,27 +181,6 @@ export class Padel extends GameObject {
 }
 
 
-/*
-IDEA!!!!!!
-
-use interface for renderables, all of which must provide:
-- draw method
-- position
-- rotation
-- scale
-- renderable type
-
-need to specify renderable type because
-client needs to know which object constructor to call
-e.g. cleintSprite, lable, sprite etc.
-
-
-
-*/
-
-
-
-
 
 
 
@@ -216,6 +195,9 @@ export class PongGame3 {
 	camera: Camera = this.addObject(new Camera({
 		position: new Point2D(0,-100)
 	})) as Camera;
+
+
+
 
 	lastFrameTime: number = performance.now();
 	fps: number = 0;
@@ -280,20 +262,9 @@ export class PongGame3 {
 	constructor (clientData) {
 		this.clientData = clientData;
 
-		// this.gameObjects.push(new GameObject({
-		//     position: new Point2D(54,54),
-		//     sprite: new Sprite({
-		//         imagePath: "assets/arrow.png",
-		//         size: new Vector2D(50, 50)
-		//     }),
-		//     onUpdate: function () {
-		//         this.position.x += 0.3;
-		//     }
-		// }));
-
 		this.addObject(new GameObject({
 			game: this,
-			position: new Point2D(300,3),
+			position: new Point2D(0,0),
 			name: "background",
 			components: [
 				new Sprite({
@@ -309,6 +280,10 @@ export class PongGame3 {
 			team: "test",
 			player: new Player({name: "sheldz"})
 		}));
+
+
+		this.addObject(new Ball(this));
+
 		// this.gameObjects.push(new GameObject({
 		//     position: new Point2D(300,300),
 		//     game: this,
@@ -332,3 +307,16 @@ export class PongGame3 {
 	}
 
 }
+
+
+
+		// this.gameObjects.push(new GameObject({
+		//     position: new Point2D(54,54),
+		//     sprite: new Sprite({
+		//         imagePath: "assets/arrow.png",
+		//         size: new Vector2D(50, 50)
+		//     }),
+		//     onUpdate: function () {
+		//         this.position.x += 0.3;
+		//     }
+		// }));

@@ -1,7 +1,7 @@
 import { Point2D, Vector2D } from './Coordinates.js';
 import { type Renderable, Sprite } from './Sprite.js';
 import type { PongGame3 } from '../pong3.js';
-import { Component } from './Component.js';
+import type { Viewport } from './Viewport.js';import { Component } from './Component.js';
 
 
 const RenderableMarker = Symbol("Renderable");
@@ -99,7 +99,10 @@ export class GameObject {
 
 	update() {
 		if (this.onUpdate) 
-			this.onUpdate(); 
+			this.onUpdate();
+		for (const child of this.children) {
+			child.update();
+		} 
 	}
 
 	getWorldPosition(): Point2D {
@@ -124,18 +127,15 @@ export class GameObject {
 			);
 		}
 		const parentScale = this.parent.getWorldScale();
-		return new Vector2D(
-			parentScale.x * this.scale.x,
-			parentScale.y * this.scale.y
-		);
+		return parentScale.multiply(this.scale);
 	}
 
-	draw(ctx: CanvasRenderingContext2D) {
+	draw(viewport: Viewport) {
 		// Draw this object's components
 		for (const component of this.components) {
 			if (component.name === "sprite") {
 				try {
-					(component as Sprite).draw(ctx);
+					(component as Sprite).draw(viewport);
 				}
 				catch (error) {
 					console.log(typeof (component as Sprite).image);
@@ -146,7 +146,7 @@ export class GameObject {
 		for (const child of this.children) {
 			// console.log(JSON.stringify(this.children));
 			try {
-				child.draw(ctx);
+				child.draw(viewport);
 				// console.log("child drawn", typeof child);
 			}
 			catch (error) {

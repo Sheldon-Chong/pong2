@@ -22,8 +22,8 @@
         "name": "background",
         "id": 1,
         "position": {
-          "x": 300,
-          "y": 3,
+          "x": 0,
+          "y": 0,
           "className": "Point2D"
         },
         "scale": {
@@ -107,8 +107,8 @@
           "className": "Point2D"
         },
         "scale": {
-          "x": 1,
-          "y": 1
+          "x": 10.89999999999996,
+          "y": 10.89999999999996
         },
         "rotation": 0,
         "components": [],
@@ -123,8 +123,53 @@
           "className": "Point2D"
         },
         "scale": {
-          "x": 1,
-          "y": 1
+          "x": 10.89999999999996,
+          "y": 10.89999999999996
+        },
+        "rotation": 0,
+        "components": [],
+        "children": []
+      },
+      {
+        "name": "",
+        "id": 6,
+        "position": {
+          "x": 0,
+          "y": 0,
+          "className": "Point2D"
+        },
+        "scale": {
+          "x": 40,
+          "y": 40
+        },
+        "rotation": 0,
+        "components": [
+          {
+            "name": "sprite",
+            "imagePath": "assets/ball.png",
+            "flippedHorizontal": false,
+            "crop": false,
+            "outline": null,
+            "opacity": 1,
+            "blendMode": "source-over",
+            "glow": null
+          }
+        ],
+        "children": [
+          7
+        ]
+      },
+      {
+        "name": "hitbox",
+        "id": 7,
+        "position": {
+          "x": 0,
+          "y": 0,
+          "className": "Point2D"
+        },
+        "scale": {
+          "x": 10.89999999999996,
+          "y": 10.89999999999996
         },
         "rotation": 0,
         "components": [],

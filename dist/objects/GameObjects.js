@@ -77,6 +77,9 @@ export class GameObject {
     update() {
         if (this.onUpdate)
             this.onUpdate();
+        for (const child of this.children) {
+            child.update();
+        }
     }
     getWorldPosition() {
         if (!this.parent) {
@@ -90,14 +93,14 @@ export class GameObject {
             return new Vector2D(this.scale.x, this.scale.y);
         }
         const parentScale = this.parent.getWorldScale();
-        return new Vector2D(parentScale.x * this.scale.x, parentScale.y * this.scale.y);
+        return parentScale.multiply(this.scale);
     }
-    draw(ctx) {
+    draw(viewport) {
         // Draw this object's components
         for (const component of this.components) {
             if (component.name === "sprite") {
                 try {
-                    component.draw(ctx);
+                    component.draw(viewport);
                 }
                 catch (error) {
                     console.log(typeof component.image);
@@ -108,7 +111,7 @@ export class GameObject {
         for (const child of this.children) {
             // console.log(JSON.stringify(this.children));
             try {
-                child.draw(ctx);
+                child.draw(viewport);
                 // console.log("child drawn", typeof child);
             }
             catch (error) {

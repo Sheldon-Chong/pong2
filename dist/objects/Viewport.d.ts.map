@@ -1,0 +1,1 @@
+{"version":3,"file":"Viewport.d.ts","sourceRoot":"","sources":["../../src/objects/Viewport.ts"],"names":[],"mappings":"AAAA,qBAAa,QAAQ;IAEpB,GAAG,EAAE,wBAAwB,CAAA;IAE7B,KAAK,EAAE,MAAM,CAAC;IACd,MAAM,EAAE,MAAM,CAAC;gBAEH,MAAM,EAAE,OAAO,CAAC,QAAQ,CAAC;CAGrC"}
