@@ -22,7 +22,7 @@ class GameTeam {
     game;
     name;
     score = 0;
-    // players: Padel[] = [];
+    players = [];
     // static leftBoardControls = [["t", "g"], ["r", "f"], ["w", "s"]];
     // static rightBoardControls = [["y", "h"], ["o", "l"], ["ArrowUp", "ArrowDown"]];
     constructor(game, name) {
@@ -50,12 +50,15 @@ export class Player {
     }
 }
 class GameSettings {
-    playerAcceleration = 1;
+    playerAcceleration = 4300;
     playerCount = 2;
-    ballSpeed = 10;
+    ballSpeed = 200;
+    arrowDownKey = "ArrowDown";
+    arrowUpKey = "ArrowUp";
 }
 import { HitBox } from './objects/Hitbox.js';
 import { Ball } from './ball.js';
+import { Viewport } from './objects/Viewport.js';
 export class Padel extends GameObject {
     team;
     player;
@@ -95,15 +98,18 @@ export class Padel extends GameObject {
         // this.hitbox = new HitBox(this);
         if (this.team === Team.TEAM1)
             this.sprite.flippedHorizontal = true;
+        this.maximumVelocity = new Vector2D(this.game.gameSettings.playerAcceleration * 10, this.game.gameSettings.playerAcceleration * 10);
         this.onUpdate = () => {
             this.velocity.y *= 0.9;
             if (Math.abs(this.velocity.y) < 0.1)
                 this.velocity.y = 0;
             try {
                 if (this.game.clientData.keysPressed.has("ArrowUp"))
-                    this.position.y -= 5;
-                if (this.game.clientData.keysPressed.has("ArrowDown"))
-                    this.position.y += 5;
+                    this.acceleration.y = -this.game.gameSettings.playerAcceleration;
+                else if (this.game.clientData.keysPressed.has("ArrowDown"))
+                    this.acceleration.y = this.game.gameSettings.playerAcceleration;
+                else
+                    this.acceleration.y = 0;
             }
             catch {
             }
@@ -131,6 +137,14 @@ export class Padel extends GameObject {
         // }), 250));
     }
 }
+const players = [
+    new Player({ name: "player1asjdklasd", profileImage: "assets/profile1.webp" }),
+    new Player({ name: "player2", profileImage: "assets/profile2.webp" }),
+    new Player({ name: "player3" }),
+    new Player({ name: "player4" }),
+    new Player({ name: "player5" }),
+    new Player({ name: "player6" }),
+];
 export class PongGame3 {
     clientData;
     gameObjects = new Map();
@@ -142,6 +156,10 @@ export class PongGame3 {
     lastFrameTime = performance.now();
     fps = 0;
     delta;
+    viewport = new Viewport({
+        width: 800,
+        height: 400,
+    });
     gameSettings = new GameSettings();
     checkCollisions() {
         const hitboxes = [];
@@ -168,6 +186,9 @@ export class PongGame3 {
         }
     }
     update() {
+        const now = performance.now();
+        this.delta = (now - this.lastFrameTime) / 1000; // delta in seconds
+        this.lastFrameTime = now;
         for (const object of this.gameObjects.values()) {
             object.update();
         }
@@ -214,6 +235,7 @@ export class PongGame3 {
     }
     constructor(clientData) {
         this.clientData = clientData;
+        // -- add background
         this.addObject(new GameObject({
             game: this,
             position: new Point2D(0, 0),
@@ -225,13 +247,48 @@ export class PongGame3 {
             ],
             scale: new Vector2D(2700, 500),
         }));
-        this.addObject(new Padel({
+        // -- add players --
+        // this.addObject(new Padel({
+        // 	game: this,
+        // 	position: new Point2D(0, 0),
+        // 	team: "test",
+        // 	player: new Player({name: "sheldz"})
+        // }));
+        const offset = 250;
+        const distance = 20;
+        const leftBoardControls = [["s", "w"], ["r", "f"], ["t", "g"]];
+        const rightBoardControls = [["ArrowUp", "ArrowDown"], ["o", "l"], ["y", "h"]];
+        for (let i = 0; i < players.length; i++) {
+            if (i % 2 === 0) {
+                const padel = new Padel({
+                    position: new Point2D((i * distance * -1) - offset, 0),
+                    team: Team.TEAM1,
+                    player: players[i],
+                    game: this,
+                    moveUpKey: leftBoardControls[Math.floor(i / 2)][0],
+                    moveDownKey: leftBoardControls[Math.floor(i / 2)][1]
+                });
+                this.team1.players.push(padel);
+                this.addObject(padel);
+            }
+            else {
+                const padel = new Padel({
+                    position: new Point2D(((i - 1) * distance) + offset, 0),
+                    team: Team.TEAM2,
+                    player: players[i],
+                    game: this,
+                    moveUpKey: rightBoardControls[Math.floor((i - 1) / 2)][0],
+                    moveDownKey: rightBoardControls[Math.floor((i - 1) / 2)][1]
+                });
+                this.team2.players.push(padel);
+                this.addObject(padel);
+            }
+        }
+        // -- add ball --
+        this.addObject(new Ball({
             game: this,
-            position: new Point2D(0, 0),
-            team: "test",
-            player: new Player({ name: "sheldz" })
+            position: new Point2D(0, 0)
         }));
-        this.addObject(new Ball(this));
     }
 }
 //# sourceMappingURL=pong3.js.map

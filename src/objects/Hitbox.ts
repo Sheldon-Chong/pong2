@@ -38,8 +38,6 @@ export class HitBox extends Component {
 			scale.x,
 			scale.y
 		);
-		console.log("hitbox drawn at ", scale.x);
-
 		viewport.ctx.restore();
 	}
 

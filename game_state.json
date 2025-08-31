@@ -52,8 +52,8 @@
         "name": "padel",
         "id": 2,
         "position": {
-          "x": 0,
-          "y": 30,
+          "x": -250,
+          "y": -121.17070865568829,
           "className": "Point2D"
         },
         "scale": {
@@ -68,7 +68,7 @@
             "enabled": true,
             "Renderable": true,
             "imagePath": "assets/skins/ghost_light.png",
-            "flippedHorizontal": false,
+            "flippedHorizontal": true,
             "crop": false,
             "outline": null,
             "opacity": 1,
@@ -109,11 +109,311 @@
         "children": []
       },
       {
-        "name": "",
+        "name": "padel",
         "id": 4,
         "position": {
+          "x": 250,
+          "y": -121.17070865568829,
+          "className": "Point2D"
+        },
+        "scale": {
+          "x": 60,
+          "y": 60
+        },
+        "rotation": 0,
+        "components": [
+          {
+            "name": "sprite",
+            "renderable": true,
+            "enabled": true,
+            "Renderable": true,
+            "imagePath": "assets/skins/ghost_light.png",
+            "flippedHorizontal": false,
+            "crop": false,
+            "outline": null,
+            "opacity": 1,
+            "blendMode": "source-over",
+            "glow": {
+              "Color": "#3731FE",
+              "Blur": 10,
+              "OffsetX": 0,
+              "OffsetY": 5,
+              "blendMode": "multiply"
+            }
+          },
+          {
+            "name": "hitbox",
+            "renderable": false,
+            "enabled": true,
+            "isColliding": false
+          }
+        ],
+        "children": [
+          5
+        ]
+      },
+      {
+        "name": "label",
+        "id": 5,
+        "position": {
           "x": 0,
-          "y": 230,
+          "y": 50,
+          "className": "Point2D"
+        },
+        "scale": {
+          "x": 10,
+          "y": 10
+        },
+        "rotation": 0,
+        "components": [],
+        "children": []
+      },
+      {
+        "name": "padel",
+        "id": 6,
+        "position": {
+          "x": -290,
+          "y": -121.17070865568829,
+          "className": "Point2D"
+        },
+        "scale": {
+          "x": 60,
+          "y": 60
+        },
+        "rotation": 0,
+        "components": [
+          {
+            "name": "sprite",
+            "renderable": true,
+            "enabled": true,
+            "Renderable": true,
+            "imagePath": "assets/skins/ghost_light.png",
+            "flippedHorizontal": true,
+            "crop": false,
+            "outline": null,
+            "opacity": 1,
+            "blendMode": "source-over",
+            "glow": {
+              "Color": "#3731FE",
+              "Blur": 10,
+              "OffsetX": 0,
+              "OffsetY": 5,
+              "blendMode": "multiply"
+            }
+          },
+          {
+            "name": "hitbox",
+            "renderable": false,
+            "enabled": true,
+            "isColliding": false
+          }
+        ],
+        "children": [
+          7
+        ]
+      },
+      {
+        "name": "label",
+        "id": 7,
+        "position": {
+          "x": 0,
+          "y": 50,
+          "className": "Point2D"
+        },
+        "scale": {
+          "x": 10,
+          "y": 10
+        },
+        "rotation": 0,
+        "components": [],
+        "children": []
+      },
+      {
+        "name": "padel",
+        "id": 8,
+        "position": {
+          "x": 290,
+          "y": -121.17070865568829,
+          "className": "Point2D"
+        },
+        "scale": {
+          "x": 60,
+          "y": 60
+        },
+        "rotation": 0,
+        "components": [
+          {
+            "name": "sprite",
+            "renderable": true,
+            "enabled": true,
+            "Renderable": true,
+            "imagePath": "assets/skins/ghost_light.png",
+            "flippedHorizontal": false,
+            "crop": false,
+            "outline": null,
+            "opacity": 1,
+            "blendMode": "source-over",
+            "glow": {
+              "Color": "#3731FE",
+              "Blur": 10,
+              "OffsetX": 0,
+              "OffsetY": 5,
+              "blendMode": "multiply"
+            }
+          },
+          {
+            "name": "hitbox",
+            "renderable": false,
+            "enabled": true,
+            "isColliding": false
+          }
+        ],
+        "children": [
+          9
+        ]
+      },
+      {
+        "name": "label",
+        "id": 9,
+        "position": {
+          "x": 0,
+          "y": 50,
+          "className": "Point2D"
+        },
+        "scale": {
+          "x": 10,
+          "y": 10
+        },
+        "rotation": 0,
+        "components": [],
+        "children": []
+      },
+      {
+        "name": "padel",
+        "id": 10,
+        "position": {
+          "x": -330,
+          "y": -121.17070865568829,
+          "className": "Point2D"
+        },
+        "scale": {
+          "x": 60,
+          "y": 60
+        },
+        "rotation": 0,
+        "components": [
+          {
+            "name": "sprite",
+            "renderable": true,
+            "enabled": true,
+            "Renderable": true,
+            "imagePath": "assets/skins/ghost_light.png",
+            "flippedHorizontal": true,
+            "crop": false,
+            "outline": null,
+            "opacity": 1,
+            "blendMode": "source-over",
+            "glow": {
+              "Color": "#3731FE",
+              "Blur": 10,
+              "OffsetX": 0,
+              "OffsetY": 5,
+              "blendMode": "multiply"
+            }
+          },
+          {
+            "name": "hitbox",
+            "renderable": false,
+            "enabled": true,
+            "isColliding": false
+          }
+        ],
+        "children": [
+          11
+        ]
+      },
+      {
+        "name": "label",
+        "id": 11,
+        "position": {
+          "x": 0,
+          "y": 50,
+          "className": "Point2D"
+        },
+        "scale": {
+          "x": 10,
+          "y": 10
+        },
+        "rotation": 0,
+        "components": [],
+        "children": []
+      },
+      {
+        "name": "padel",
+        "id": 12,
+        "position": {
+          "x": 330,
+          "y": -121.17070865568829,
+          "className": "Point2D"
+        },
+        "scale": {
+          "x": 60,
+          "y": 60
+        },
+        "rotation": 0,
+        "components": [
+          {
+            "name": "sprite",
+            "renderable": true,
+            "enabled": true,
+            "Renderable": true,
+            "imagePath": "assets/skins/ghost_light.png",
+            "flippedHorizontal": false,
+            "crop": false,
+            "outline": null,
+            "opacity": 1,
+            "blendMode": "source-over",
+            "glow": {
+              "Color": "#3731FE",
+              "Blur": 10,
+              "OffsetX": 0,
+              "OffsetY": 5,
+              "blendMode": "multiply"
+            }
+          },
+          {
+            "name": "hitbox",
+            "renderable": false,
+            "enabled": true,
+            "isColliding": false
+          }
+        ],
+        "children": [
+          13
+        ]
+      },
+      {
+        "name": "label",
+        "id": 13,
+        "position": {
+          "x": 0,
+          "y": 50,
+          "className": "Point2D"
+        },
+        "scale": {
+          "x": 10,
+          "y": 10
+        },
+        "rotation": 0,
+        "components": [],
+        "children": []
+      },
+      {
+        "name": "ball",
+        "id": 14,
+        "position": {
+          "x": 671.5447232000002,
+          "y": -141.33962970875797,
           "className": "Point2D"
         },
         "scale": {
@@ -122,6 +422,12 @@
         },
         "rotation": 0,
         "components": [
+          {
+            "name": "hitbox",
+            "renderable": false,
+            "enabled": true,
+            "isColliding": false
+          },
           {
             "name": "sprite",
             "renderable": true,
@@ -134,16 +440,15 @@
             "opacity": 1,
             "blendMode": "source-over",
             "glow": null
-          },
-          {
-            "name": "hitbox",
-            "renderable": false,
-            "enabled": true,
-            "isColliding": false
           }
         ],
         "children": []
       }
     ]
+  },
+  "metadata": {
+    "timestamp": 1756651616054,
+    "delta": 0.016071415000000342,
+    "fps": 0
   }
 }

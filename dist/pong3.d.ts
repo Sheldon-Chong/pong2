@@ -9,6 +9,7 @@ declare class GameTeam {
     game: PongGame3;
     name: String;
     score: number;
+    players: Padel[];
     constructor(game: PongGame3, name: String);
 }
 export declare class Player {
@@ -21,7 +22,10 @@ declare class GameSettings {
     playerAcceleration: number;
     playerCount: number;
     ballSpeed: number;
+    arrowDownKey: string;
+    arrowUpKey: string;
 }
+import { Viewport } from './objects/Viewport.js';
 export declare class Padel extends GameObject {
     team: string;
     player: Player;
@@ -40,6 +44,7 @@ export declare class PongGame3 {
     lastFrameTime: number;
     fps: number;
     delta: number;
+    viewport: Viewport;
     gameSettings: GameSettings;
     checkCollisions(): void;
     update(): void;

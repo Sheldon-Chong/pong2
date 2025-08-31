@@ -25,7 +25,6 @@ export class HitBox extends Component {
         const halfScaleX = scale.x / 2;
         const halfScaleY = scale.y / 2;
         viewport.ctx.strokeRect(center.x - halfScaleX, center.y - halfScaleY, scale.x, scale.y);
-        console.log("hitbox drawn at ", scale.x);
         viewport.ctx.restore();
     }
     isCollidingWith(other) {

@@ -9,16 +9,15 @@ export class Point2D {
     add(other) { return new Point2D(this.x + other.x, this.y + other.y); }
     subtract(other) { return new Point2D(this.x - other.x, this.y - other.y); }
     divide(other) { return new Point2D(this.x / other.x, this.y / other.y); }
-    multiply(other) { return new Point2D(this.x * other.x, this.y * other.y); }
+    multiply(other) {
+        if (typeof other === "number") {
+            return new Point2D(this.x * other, this.y * other);
+        }
+        return new Point2D(this.x * other.x, this.y * other.y);
+    }
     getCenter(other) { return this.add(other.toVector2D()).divide(new Vector2D(2, 2)); }
     toVector2D() { return new Vector2D(this.x, this.y); }
     clone() { return new Point2D(this.x, this.y); }
-    /**
-     * Moves the point in a given direction (in radians) by a given distance.
-     * @param direction Angle in radians.
-     * @param distance Distance to move.
-     * @returns New Point2D after moving.
-     */
     move(direction, distance) {
         // Ensure direction is between 0 and 360 degrees, then convert to radians
         const normalizedDirection = ((direction % 360) + 360) % 360;

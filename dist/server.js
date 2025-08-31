@@ -104,7 +104,15 @@ const pongGame = new PongGame3(client);
 function updateGameObjects() {
     const state = pongGame.exportState();
     // Write state to a file
-    let output = JSON.stringify({ type: "state", state }, null, 2);
+    let output = JSON.stringify({
+        type: "state",
+        state,
+        metadata: {
+            timestamp: Date.now(),
+            delta: pongGame.delta,
+            fps: pongGame.fps,
+        }
+    }, null, 2);
     writeFileSync("game_state.json", output, "utf-8");
     for (const client of clients) {
         if (client.readyState === 1) { // 1 = OPEN

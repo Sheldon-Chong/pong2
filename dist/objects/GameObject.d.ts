@@ -18,6 +18,7 @@ export declare class GameObject {
     components: Component[];
     onUpdate?: () => void;
     cache: any;
+    init(): void;
     constructor(params: Partial<GameObject>);
     addComponent(component: Component): Component;
     addChild(object: GameObject): void;

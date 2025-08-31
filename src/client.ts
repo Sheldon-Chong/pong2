@@ -53,13 +53,20 @@ ws.onclose = () => {
 
 
 
-function getState() {
+function getObjects() {
 	if (data["state"] && Array.isArray(data["state"]["gameObjects"])) {
 		return data["state"]["gameObjects"];
 	}
 	return [];
 }
 
+
+function getState() {
+	if (data["state"]) {
+		return data["state"];
+	}
+	return [];
+}
 
 
 const objects = new Map<string, GameObject>();
@@ -116,7 +123,7 @@ function genericUpdate(obj: any, params: any, cache: any) {
 			}
 		} else {
 			if (cache[key] !== value) {
-				console.log(`Update: obj[${key}] changed from`, cache[key], "to", value);
+				// console.log(`Update: obj[${key}] changed from`, cache[key], "to", value);
 				obj[key] = value;
 				cache[key] = value;
 			}
@@ -137,16 +144,31 @@ window.addEventListener("DOMContentLoaded", () => {
 		height: canvas.height
 	});
 
+	
+
 	function draw() {
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
+
 		for (const clientObj of objects.values()) {
 			clientObj.draw(viewport);
 		}
+
+		if (data["metadata"]) {
+			const delta = data["metadata"]["delta"] ?? 0;
+			const fps = data["metadata"]["fps"] ?? 0;
+			ctx.save();
+			ctx.font = "16px monospace";
+			ctx.fillStyle = "#fff";
+			ctx.fillText(`Δ: ${delta.toFixed(2)} ms`, 10, 20);
+			ctx.fillText(`FPS: ${fps.toFixed(2)}`, 10, 40);
+			ctx.restore();
+		}
+
 	}
 
 	function loop() {
-		let state = getState();
-		for (const object of state) {
+		let client_objects = getObjects();
+		for (const object of client_objects) {
 			const id = object["id"];
 			let clientObj = objects.get(id);
 			if (!clientObj) {

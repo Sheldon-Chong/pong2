@@ -66,6 +66,10 @@ export class GameObject {
 	// 		}
 	// }
 
+	init() {
+
+	}
+
 	constructor(params: Partial<GameObject>) {
 		Object.assign(this, params);
 		this.id = GameObject.globalId;
@@ -91,6 +95,21 @@ export class GameObject {
 	}
 
 	update() {
+		this.velocity = this.velocity.add(this.acceleration.multiply(this.game.delta))
+
+		if (this.maximumVelocity) {
+			this.velocity.x = Math.max(
+				-Math.abs(this.maximumVelocity.x),
+				Math.min(this.velocity.x, Math.abs(this.maximumVelocity.x))
+			);
+			this.velocity.y = Math.max(
+				-Math.abs(this.maximumVelocity.y),
+				Math.min(this.velocity.y, Math.abs(this.maximumVelocity.y))
+			);
+		}
+
+		this.position = this.position.add(this.velocity.multiply(this.game.delta))
+
 		if (this.onUpdate)
 			this.onUpdate();
 		for (const child of this.children) {
@@ -138,7 +157,6 @@ export class GameObject {
 	draw(viewport: Viewport) {
 		// Draw this object's components
 		for (const component of this.components) {
-			console.log(component.name)
 			if (component.name === "sprite") {
 				try { (component as Sprite).draw(viewport); }
 				catch (error) { console.log(typeof (component as Sprite).image); }

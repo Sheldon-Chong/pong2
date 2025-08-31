@@ -108,7 +108,9 @@ await fastify.register(fastifyStatic, {
   decorateReply: false // Prevents duplicate decorator error
 });
 
-fastify.get("/:file", async (request, reply) => {
+import type { FastifyRequest } from "fastify";
+
+fastify.get("/:file", async (request: FastifyRequest<{ Params: { file: string } }>, reply) => {
   const file = request.params.file;
   if (file.endsWith(".js")) {
   const filePath = join(process.cwd(), "dist", file);
@@ -139,7 +141,15 @@ const pongGame = new PongGame3(client);
 function updateGameObjects() {
   const state = pongGame.exportState();
   // Write state to a file
-  let output = JSON.stringify({ type: "state", state }, null, 2);
+  let output = JSON.stringify({ 
+    type: "state", 
+    state,
+    metadata: {
+      timestamp: Date.now(),
+      delta: pongGame.delta,
+      fps: pongGame.fps,
+    }
+  }, null, 2);
   writeFileSync("game_state.json", output,"utf-8");
 
   for (const client of clients) {
