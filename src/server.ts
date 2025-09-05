@@ -7,6 +7,10 @@ import { join } from "path";
 
 import type { WebSocket } from "@fastify/websocket";
 
+import { PongGame } from "../dist/pong3.js";
+import { Socket } from "dgram";
+import { writeFileSync } from "fs";
+import type { FastifyRequest } from "fastify";
 
 const fastify = Fastify();
 
@@ -108,8 +112,6 @@ await fastify.register(fastifyStatic, {
   decorateReply: false // Prevents duplicate decorator error
 });
 
-import type { FastifyRequest } from "fastify";
-
 fastify.get("/:file", async (request: FastifyRequest<{ Params: { file: string } }>, reply) => {
   const file = request.params.file;
   if (file.endsWith(".js")) {
@@ -129,10 +131,7 @@ fastify.get("/:file", async (request: FastifyRequest<{ Params: { file: string } 
 
 
 
-import { PongGame3 } from "../dist/pong3.js";
-import { Socket } from "dgram";
-import { writeFileSync } from "fs";
-const pongGame = new PongGame3(client);
+const pongGame = new PongGame(client);
 
 
 

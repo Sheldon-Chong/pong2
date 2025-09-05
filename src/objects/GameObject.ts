@@ -1,6 +1,6 @@
 import { Point2D, Vector2D } from './Coordinates.js';
 import { type Renderable, Sprite } from './Sprite.js';
-import type { PongGame3 } from '../pong3.js';
+import type { PongGame } from '../pong3.js';
 import type { Viewport } from './Viewport.js'; import { Component } from './Component.js';
 import type { HitBox } from './Hitbox.js';
 
@@ -25,7 +25,7 @@ const RenderableMarker = Symbol("Renderable");
 
 export class GameObject {
 
-	public game: PongGame3;
+	public game: PongGame;
 	public id: number;
 	static globalId = 0;
 
@@ -45,6 +45,8 @@ export class GameObject {
 	public maximumVelocity: Vector2D = new Vector2D(1000, 1000);
 
 	public components: Component[] = []
+
+	public toUpdate: boolean = false;
 
 	// public sprite?: Sprite;
 	// public hitbox?: HitBox | null;
@@ -67,7 +69,10 @@ export class GameObject {
 	// }
 
 	init() {
+	}
 
+	updateToGame() {
+		this.game.exportBackLog.push(this);
 	}
 
 	constructor(params: Partial<GameObject>) {
@@ -117,18 +122,18 @@ export class GameObject {
 		}
 	}
 
-	getWorldPosition(): Point2D {
+	getWorldPosition(added:Vector2D = new Vector2D(0,0)): Point2D {
 		if (!this.parent) {
 			return new Point2D(
 				this.position.x,
 				this.position.y
-			)
+			).add(added);
 		}
-		const parentPos = this.parent.getWorldPosition();
+		const parentPos = this.parent.getWorldPosition(new Vector2D(0,0));
 		return new Point2D(
 			parentPos.x + this.position.x,
 			parentPos.y + this.position.y
-		);
+		).add(added);
 	}
 
 	getWorldScale(): Vector2D {
@@ -158,8 +163,8 @@ export class GameObject {
 		// Draw this object's components
 		for (const component of this.components) {
 			if (component.name === "sprite") {
-				try { (component as Sprite).draw(viewport); }
-				catch (error) { console.log(typeof (component as Sprite).image); }
+				try { (component as Sprite).draw(viewport,); } //todo!!! ISSUE HERE. Cannot simply pass a camera instance. This is the frontend we're talkin about
+				catch (error) { console.log("CAMERA", error); }
 			}
 			if (component.name === "hitbox") {
 				try { (component as HitBox).draw(viewport); }
@@ -176,6 +181,18 @@ export class GameObject {
 			catch (error) {
 				// console.log("error", error);
 			}
+		}
+	}
+
+	export (): any {
+		return {
+			name: this.name,
+			id: this.id,
+			position: this.position,
+			scale: this.scale,
+			rotation: this.rotation,
+			components: this.componentToJSON(),
+			children: this.children?.map(child => child.id),
 		}
 	}
 }

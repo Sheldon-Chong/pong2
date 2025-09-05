@@ -1,4 +1,4 @@
-import { Point2D } from './objects/Coordinates.js';
+import { Point2D, Vector2D } from './objects/Coordinates.js';
 import { GameObject } from './objects/GameObject.js';
 import { Sprite } from './objects/Sprite.js';
 import { HitBox } from './objects/Hitbox.js';
@@ -10,7 +10,15 @@ export declare class Ball extends GameObject {
     static MAX_BOUNCE_ANGLE: number;
     hitbox: HitBox;
     sprite: Sprite;
+    init(): void;
     calculateAngle(other: Padel): void;
+    export(): {
+        name: string;
+        id: number;
+        position: Point2D;
+        scale: Vector2D;
+        components: Record<string, any>[];
+    };
     constructor(params: {
         position: Point2D;
         game: any;

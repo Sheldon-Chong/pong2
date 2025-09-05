@@ -1,6 +1,6 @@
 import { Point2D, Vector2D, interpolate,randomBetween } from './Coordinates.js';
 import { GameObject } from './GameObject.js';
-import { PongGame3 } from '../pong3.js';
+import { PongGame } from '../pong3.js';
 import { type Renderable } from './Sprite.js';
 import { Viewport } from './Viewport.js';
 export class Label extends GameObject {

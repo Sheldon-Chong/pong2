@@ -3,6 +3,9 @@ import Fastify from "fastify";
 import websocketPlugin from "@fastify/websocket";
 import fastifyStatic from "@fastify/static";
 import { join } from "path";
+import { PongGame } from "../dist/pong3.js";
+import { Socket } from "dgram";
+import { writeFileSync } from "fs";
 const fastify = Fastify();
 // Register WS
 await fastify.register(websocketPlugin);
@@ -96,10 +99,7 @@ fastify.get("/:file", async (request, reply) => {
     }
     return reply.code(404).send("Not found");
 });
-import { PongGame3 } from "../dist/pong3.js";
-import { Socket } from "dgram";
-import { writeFileSync } from "fs";
-const pongGame = new PongGame3(client);
+const pongGame = new PongGame(client);
 // Game loop function
 function updateGameObjects() {
     const state = pongGame.exportState();

@@ -1,6 +1,7 @@
 import { Glow } from './Glow.js';
 import { Component } from './Component.js';
 import { Viewport } from './Viewport.js';
+import type { Camera } from './Camera.js';
 export interface Renderable {
     draw(ctx: CanvasRenderingContext2D): void;
 }
@@ -39,7 +40,7 @@ export declare class Sprite extends Component {
     };
     constructor(params?: Partial<Sprite>);
     init(): this;
-    draw(viewport: Viewport): void;
+    draw(viewport: Viewport, camera?: any): void;
 }
-export declare function drawImg(viewport: Viewport, sprite: Sprite, params?: Partial<Sprite>): void;
+export declare function drawImg(viewport: Viewport, sprite: Sprite, params?: Partial<Sprite>, camera?: Camera): void;
 //# sourceMappingURL=Sprite.d.ts.map

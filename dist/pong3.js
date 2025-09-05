@@ -5,6 +5,9 @@ import { Glow } from './objects/Glow.js';
 import { BlendMode } from './objects/Blendmodes.js';
 import { Camera } from './objects/Camera.js';
 import { Label } from './objects/Label.js';
+import { HitBox } from './objects/Hitbox.js';
+import { Ball } from './ball.js';
+import { Viewport } from './objects/Viewport.js';
 // import { GameObject, Sprite, HitBox, Glow, Particle, Timer} from './Index.js'
 // import {  BlendMode } from './GameUtils.js'
 // class GameSettings {
@@ -56,9 +59,6 @@ class GameSettings {
     arrowDownKey = "ArrowDown";
     arrowUpKey = "ArrowUp";
 }
-import { HitBox } from './objects/Hitbox.js';
-import { Ball } from './ball.js';
-import { Viewport } from './objects/Viewport.js';
 export class Padel extends GameObject {
     team;
     player;
@@ -145,14 +145,12 @@ const players = [
     new Player({ name: "player5" }),
     new Player({ name: "player6" }),
 ];
-export class PongGame3 {
+export class PongGame {
     clientData;
     gameObjects = new Map();
     team1 = new GameTeam(this, Team.TEAM1);
     team2 = new GameTeam(this, Team.TEAM2);
-    camera = this.addObject(new Camera({
-        position: new Point2D(0, -100)
-    }));
+    camera;
     lastFrameTime = performance.now();
     fps = 0;
     delta;
@@ -191,9 +189,11 @@ export class PongGame3 {
         this.lastFrameTime = now;
         for (const object of this.gameObjects.values()) {
             object.update();
+            object.toUpdate = true;
         }
         this.checkCollisions();
     }
+    exportBackLog = [];
     exportState() {
         const visited = new Set();
         const flatObjects = [];
@@ -201,34 +201,51 @@ export class PongGame3 {
             if (!obj || visited.has(obj.id))
                 return;
             visited.add(obj.id);
-            flatObjects.push({
-                name: obj.name,
-                id: obj.id,
-                position: obj.position,
-                scale: obj.scale,
-                rotation: obj.rotation,
-                components: obj.componentToJSON(),
-                children: obj.children?.map(child => child.id),
-            });
+            if (!obj.toUpdate)
+                return;
+            flatObjects.push(obj.export());
             if (obj.children && obj.children.length > 0) {
-                for (const child of obj.children) {
+                for (const child of obj.children)
                     flatten(child);
-                }
             }
+            obj.toUpdate = false;
         }
         for (const obj of this.gameObjects.values()) {
             flatten(obj);
         }
-        return { gameObjects: flatObjects };
+        // todo !!! desync issue
+        // idea: have a handshake system SPECIFICALLY for creating objects,
+        // idea STATIC OBJECTS
+        // however, object properties are streamed
+        // for (const obj of this.exportBackLog) {
+        // 	console.log("lol");
+        // 	flatObjects.push({
+        // 		name: "test",
+        // 		id: obj.id,
+        // 		position: obj.position,
+        // 		scale: obj.scale,
+        // 		rotation: obj.rotation,
+        // 		components: obj.componentToJSON(),
+        // 		children: [],
+        // 	});
+        // }
+        this.exportBackLog.length = 0;
+        return {
+            camera: {
+                position: this.camera.position
+            },
+            gameObjects: flatObjects,
+        };
     }
-    //need to de-ne
     addObject(object) {
         object.game = this;
         this.gameObjects.set(object.id, object);
+        object.init(); // <-- Add this line
         if (object.children && object.children.length > 0) {
             for (const child of object.children) {
                 this.addObject(child);
                 child.game = this;
+                child.init();
             }
         }
         return object;
@@ -285,10 +302,18 @@ export class PongGame3 {
             }
         }
         // -- add ball --
-        this.addObject(new Ball({
+        let ball = this.addObject(new Ball({
             game: this,
             position: new Point2D(0, 0)
         }));
+        this.camera = this.addObject(new Camera({
+            position: new Point2D(0, -100),
+            target: ball,
+            // onUpdate: () => {
+            // 	// this.position.x += 0.01;
+            // }
+        }));
+        this.viewport.camera = this.camera;
     }
 }
 //# sourceMappingURL=pong3.js.map

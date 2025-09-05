@@ -91,14 +91,14 @@ export class Sprite extends Component {
         }
         return this;
     }
-    draw(viewport) {
-        drawImg(viewport, this);
+    draw(viewport, camera = null) {
+        drawImg(viewport, this, camera);
     }
 }
-export function drawImg(viewport, sprite, params = {}) {
+export function drawImg(viewport, sprite, params = {}, camera = null) {
     const merged = Object.assign({}, sprite, params);
     const { opacity, blendMode, glow, flippedHorizontal, outline, image } = merged;
-    const position = viewport.toScreenCoords(sprite.host.getWorldPosition());
+    const position = viewport.toScreenCoords(sprite.host.getWorldPosition(), camera);
     const rotation = sprite.host?.rotation || 0;
     const scale = sprite.host?.scale || { x: 1, y: 1 };
     const angle = rotation;

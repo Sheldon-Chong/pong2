@@ -2,6 +2,7 @@ import { Point2D, Vector2D } from './Coordinates.js';
 import { Glow } from './Glow.js';
 import { Component } from './Component.js';
 import { Viewport } from './Viewport.js';
+import type { Camera } from './Camera.js';
 
 
 export interface Renderable {
@@ -116,8 +117,8 @@ export class Sprite extends Component {
 		return this;
 	}
 
-	draw(viewport: Viewport): void {
-		drawImg(viewport, this);
+	draw(viewport: Viewport, camera = null): void {
+		drawImg(viewport, this, camera);
 	}
 
 	// clone(): Sprite {
@@ -147,12 +148,13 @@ export class Sprite extends Component {
 export function drawImg(
 	viewport: Viewport,
 	sprite: Sprite,
-	params: Partial<Sprite> = {}
+	params: Partial<Sprite> = {},
+	camera: Camera = null
 ) {
 	const merged = Object.assign({}, sprite, params);
 	const { opacity, blendMode, glow, flippedHorizontal, outline, image } = merged;
-	const position = viewport.toScreenCoords(sprite.host.getWorldPosition());
-	
+	const position = viewport.toScreenCoords(sprite.host.getWorldPosition(), camera);
+
 	const rotation = sprite.host?.rotation || 0;
 	const scale = sprite.host?.scale || { x: 1, y: 1 };
 	const angle = rotation;

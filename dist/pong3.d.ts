@@ -1,16 +1,18 @@
+import { Point2D } from './objects/Coordinates.js';
 import { GameObject } from './objects/GameObject.js';
 import { Sprite } from './objects/Sprite.js';
 import { Camera } from './objects/Camera.js';
+import { Viewport } from './objects/Viewport.js';
 export declare enum Team {
     TEAM1 = "team1",
     TEAM2 = "team2"
 }
 declare class GameTeam {
-    game: PongGame3;
+    game: PongGame;
     name: String;
     score: number;
     players: Padel[];
-    constructor(game: PongGame3, name: String);
+    constructor(game: PongGame, name: String);
 }
 export declare class Player {
     name: string;
@@ -25,7 +27,6 @@ declare class GameSettings {
     arrowDownKey: string;
     arrowUpKey: string;
 }
-import { Viewport } from './objects/Viewport.js';
 export declare class Padel extends GameObject {
     team: string;
     player: Player;
@@ -35,7 +36,7 @@ export declare class Padel extends GameObject {
     sprite: Sprite;
     constructor(params: Partial<Padel>);
 }
-export declare class PongGame3 {
+export declare class PongGame {
     clientData: any;
     gameObjects: Map<number, GameObject>;
     team1: GameTeam;
@@ -48,7 +49,11 @@ export declare class PongGame3 {
     gameSettings: GameSettings;
     checkCollisions(): void;
     update(): void;
+    exportBackLog: GameObject[];
     exportState(): {
+        camera: {
+            position: Point2D;
+        };
         gameObjects: any[];
     };
     addObject(object: GameObject): GameObject;

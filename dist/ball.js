@@ -13,6 +13,9 @@ export class Ball extends GameObject {
     static MAX_BOUNCE_ANGLE = Math.PI / 3;
     hitbox;
     sprite;
+    init() {
+        this.updateToGame();
+    }
     calculateAngle(other) {
         // Center positions
         const paddleCenterY = other.position.y + other.scale.y / 2;
@@ -32,6 +35,17 @@ export class Ball extends GameObject {
         // Set Y velocity based on intersection
         this.velocity.y = clampedIntersectY * 200;
         this.rotationVelocity = 0.4;
+    }
+    export() {
+        return {
+            name: this.name,
+            id: this.id,
+            position: this.position,
+            scale: this.scale,
+            components: this.componentToJSON(),
+            // components: this.components.map
+            // children: this.children?.map(child => child.id),
+        };
     }
     constructor(params) {
         super({

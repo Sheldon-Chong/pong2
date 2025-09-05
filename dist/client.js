@@ -5,6 +5,8 @@ import { Glow } from './objects/Glow.js';
 import { drawImg, Sprite, Tags } from './objects/Sprite.js';
 import { HitBox } from './objects/Hitbox.js';
 import { Viewport } from './objects/Viewport.js';
+import { PongGame } from './pong3.js';
+import { Camera } from './objects/Camera.js';
 const ws = new WebSocket("ws://localhost:3000/ws");
 ws.onopen = () => {
     console.log("CLIENT Connected to server");
@@ -37,69 +39,63 @@ function getObjects() {
     }
     return [];
 }
-function getState() {
-    if (data["state"]) {
-        return data["state"];
-    }
-    return [];
-}
 const objects = new Map();
-/// todo TEST NEW OBJECT!!!!
-// objects.set("400", new GameObject({
-// 	components: [
-// 		new Sprite({
-// 			imagePath: "assets/skins/ghost_light.png",
-// 		})
-// 	]
-// }));
-function reviveClass(obj) {
-    if (obj && typeof obj === "object" && obj.className) {
-        switch (obj.className) {
-            case "Point2D":
-                return new Point2D(obj.x, obj.y);
-            case "Vector2D":
-                return new Vector2D(obj.x, obj.y);
-            // Add more cases as needed
-            default:
-                return obj;
-        }
-    }
-    return obj;
+function addObject() {
+    let i = 0;
+    while (objects.has(i.toString()))
+        i++;
+    const obj = new GameObject({
+        components: [
+            new Sprite({
+                imagePath: "assets/ghost.png"
+            })
+        ],
+        position: new Point2D(0, 0),
+        scale: new Vector2D(50, 50)
+    });
+    objects.set("client_" + i.toString(), obj);
+    // console.log(objects);
 }
+addObject();
+const componentMap = {
+    "Point2D": function (params) { return new Point2D(params.x, params.y); },
+    "Vector2D": function (params) { return new Vector2D(params.x, params.y); },
+    "sprite": Sprite,
+    "hitbox": HitBox,
+    "camera": Camera
+};
 function genericUpdate(obj, params, cache) {
+    function reviveClass(obj) {
+        if (obj && typeof obj === "object" && obj.className && componentMap[obj.className])
+            return new componentMap[obj.className](obj);
+        return obj;
+    }
     for (const key in params) {
-        // Prevent infinite recursion on circular references
         if (key === "parent" || key === "children")
             continue;
-        let value = params[key];
-        // Use reviveClass for object reconstruction
-        value = reviveClass(value);
-        if (typeof value === "object" && value !== null) {
-            if (Array.isArray(value)) {
-                obj[key] = obj[key] || [];
-                cache[key] = cache[key] || [];
-                for (let i = 0; i < value.length; i++) {
-                    obj[key][i] = obj[key][i] || {};
-                    cache[key][i] = cache[key][i] || {};
-                    genericUpdate(obj[key][i], value[i], cache[key][i]);
-                }
-            }
-            else {
-                obj[key] = obj[key] || {};
-                cache[key] = cache[key] || {};
-                genericUpdate(obj[key], value, cache[key]);
-            }
+        const value = reviveClass(params[key]);
+        if (Array.isArray(value)) {
+            obj[key] = obj[key] || [];
+            cache[key] = cache[key] || [];
+            value.forEach((item, index) => {
+                obj[key][index] = obj[key][index] || {};
+                cache[key][index] = cache[key][index] || {};
+                genericUpdate(obj[key][index], item, cache[key][index]);
+            });
         }
-        else {
-            if (cache[key] !== value) {
-                // console.log(`Update: obj[${key}] changed from`, cache[key], "to", value);
-                obj[key] = value;
-                cache[key] = value;
-            }
+        else if (typeof value === "object" && value !== null) {
+            obj[key] = obj[key] || {};
+            cache[key] = cache[key] || {};
+            genericUpdate(obj[key], value, cache[key]);
         }
+        else if (cache[key] !== value)
+            obj[key] = cache[key] = value;
     }
 }
+// todo add game
 window.addEventListener("DOMContentLoaded", () => {
+    const game = new PongGame(null);
+    game.camera = null;
     const canvas = document.getElementById("pong-canvas");
     const ctx = canvas.getContext("2d");
     const viewport = new Viewport({
@@ -108,10 +104,13 @@ window.addEventListener("DOMContentLoaded", () => {
         height: canvas.height
     });
     function draw() {
+        // -- CLEAR CANVAS --
         ctx.clearRect(0, 0, canvas.width, canvas.height);
+        // -- RENDER OBJECTS --
         for (const clientObj of objects.values()) {
             clientObj.draw(viewport);
         }
+        // - DEBUG VALUES --
         if (data["metadata"]) {
             const delta = data["metadata"]["delta"] ?? 0;
             const fps = data["metadata"]["fps"] ?? 0;
@@ -120,36 +119,29 @@ window.addEventListener("DOMContentLoaded", () => {
             ctx.fillStyle = "#fff";
             ctx.fillText(`Δ: ${delta.toFixed(2)} ms`, 10, 20);
             ctx.fillText(`FPS: ${fps.toFixed(2)}`, 10, 40);
+            ctx.fillText(`CAMERA: ${JSON.stringify(data["state"]["camera"]["position"])}`, 10, 60);
             ctx.restore();
         }
+    }
+    function createNewInstance(object) {
+        const clientObj = new GameObject({ ...object, components: [] });
+        objects.set(object["id"], clientObj);
+        for (const component of object.components) {
+            const ComponentClass = componentMap[component.name];
+            if (ComponentClass)
+                clientObj.addComponent(new ComponentClass(component));
+        }
+        return clientObj;
     }
     function loop() {
         let client_objects = getObjects();
         for (const object of client_objects) {
             const id = object["id"];
             let clientObj = objects.get(id);
-            if (!clientObj) {
-                // if (object.name === "hitbox") {
-                // 	clientObj = new HitBox({...object, components: []});
-                // } 
-                // else {
-                clientObj = new GameObject({ ...object, components: [] });
-                // }
-                // console.log(clientObj)
-                objects.set(object["id"], clientObj);
-                for (let i = 0; i < object.components.length; i++) {
-                    const currentcomponent = object.components[i];
-                    if (currentcomponent.name === "sprite") {
-                        clientObj.addComponent(new Sprite(currentcomponent));
-                    }
-                    if (currentcomponent.name === "hitbox") {
-                        console.log("hibox added");
-                        clientObj.addComponent(new HitBox(currentcomponent));
-                    }
-                }
-            }
+            if (!clientObj)
+                clientObj = createNewInstance(object);
             else {
-                // //assign children to parent
+                // assign children to parent
                 for (let i = 0; i < object.children?.length; i++) {
                     const childId = object.children[i];
                     const childObj = objects.get(childId);
@@ -160,9 +152,19 @@ window.addEventListener("DOMContentLoaded", () => {
                 }
                 // update properties
                 genericUpdate(clientObj, object, clientObj.cache);
+                // console.log(object["name"]);
+                if (object["name"] === "camera" && !game.camera) {
+                    // let camera = new Camera({...object});
+                    game.camera = object;
+                    viewport.camera = object;
+                    // console.log("new camera!");
+                }
+                // console.log(viewport.camera);
             }
         }
-        // console.log(objects);
+        // for (const object of objects) {
+        // 	console.log("name", Object.entries(object));
+        // }
         draw();
         requestAnimationFrame(loop);
     }

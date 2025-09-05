@@ -32,6 +32,7 @@ export class GameObject {
     acceleration = new Vector2D(0, 0);
     maximumVelocity = new Vector2D(1000, 1000);
     components = [];
+    toUpdate = false;
     // public sprite?: Sprite;
     // public hitbox?: HitBox | null;
     // events
@@ -50,6 +51,9 @@ export class GameObject {
     // 		}
     // }
     init() {
+    }
+    updateToGame() {
+        this.game.exportBackLog.push(this);
     }
     constructor(params) {
         Object.assign(this, params);
@@ -84,12 +88,12 @@ export class GameObject {
             child.update();
         }
     }
-    getWorldPosition() {
+    getWorldPosition(added = new Vector2D(0, 0)) {
         if (!this.parent) {
-            return new Point2D(this.position.x, this.position.y);
+            return new Point2D(this.position.x, this.position.y).add(added);
         }
-        const parentPos = this.parent.getWorldPosition();
-        return new Point2D(parentPos.x + this.position.x, parentPos.y + this.position.y);
+        const parentPos = this.parent.getWorldPosition(new Vector2D(0, 0));
+        return new Point2D(parentPos.x + this.position.x, parentPos.y + this.position.y).add(added);
     }
     getWorldScale() {
         if (!this.parent) {
@@ -115,9 +119,9 @@ export class GameObject {
             if (component.name === "sprite") {
                 try {
                     component.draw(viewport);
-                }
+                } //todo!!! ISSUE HERE. Cannot simply pass a camera instance. This is the frontend we're talkin about
                 catch (error) {
-                    console.log(typeof component.image);
+                    console.log("CAMERA", error);
                 }
             }
             if (component.name === "hitbox") {
@@ -140,6 +144,17 @@ export class GameObject {
                 // console.log("error", error);
             }
         }
+    }
+    export() {
+        return {
+            name: this.name,
+            id: this.id,
+            position: this.position,
+            scale: this.scale,
+            rotation: this.rotation,
+            components: this.componentToJSON(),
+            children: this.children?.map(child => child.id),
+        };
     }
 }
 //# sourceMappingURL=GameObject.js.map
