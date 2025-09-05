@@ -57,27 +57,27 @@ function getObjects() {
 	return [];
 }
 
-const objects = new Map<string, GameObject>();
+const currentGameObjects = new Map<string, GameObject>();
 
-function addObject() {
-	let i = 0;
-	while (objects.has(i.toString()))
-		i++;
+// function addObject() {
+// 	let i = 0;
+// 	while (currentGameObjects.has(i.toString()))
+// 		i++;
 
-	const obj = new GameObject({
-		components: [
-			new Sprite({
-				imagePath: "assets/ghost.png"
-			})
-		],
-		position: new Point2D(0, 0),
-		scale: new Vector2D(50, 50)
-	});
-	objects.set("client_" + i.toString(), obj);
-	// console.log(objects);
-}
+// 	const obj = new GameObject({
+// 		components: [
+// 			new Sprite({
+// 				imagePath: "assets/ghost.png"
+// 			})
+// 		],
+// 		position: new Point2D(0, 0),
+// 		scale: new Vector2D(50, 50)
+// 	});
+// 	currentGameObjects.set("client_" + i.toString(), obj);
+// 	// console.log(objects);
+// }
 
-addObject();
+// addObject();
 
 
 const componentMap: Record<string, new (params: any) => any> = {
@@ -88,20 +88,34 @@ const componentMap: Record<string, new (params: any) => any> = {
 	"camera": Camera
 };
 
-
-
-function genericUpdate(obj: any, params: any, cache: any) {
-
-	function reviveClass(obj: any) {
-		if (obj && typeof obj === "object" && obj.className && componentMap[obj.className])
-			return new componentMap[obj.className](obj);
-		return obj;
+function revive(obj: any): any {
+	if (Array.isArray(obj)) {
+		return obj.map(revive);
 	}
+	if (obj && typeof obj === "object") {
+		if (obj.className && componentMap[obj.className]) {
+			const revivedParams: any = {};
+			for (const key in obj) {
+				revivedParams[key] = revive(obj[key]);
+			}
+			return new componentMap[obj.className](revivedParams);
+		} else {
+			for (const key in obj) {
+				obj[key] = revive(obj[key]);
+			}
+		}
+	}
+	return obj;
+}
 
+function genericUpdate(
+	obj: Record<string, any>,
+	params: Record<string, any>,
+	cache: Record<string, any>
+) {
 	for (const key in params) {
 		if (key === "parent" || key === "children") continue;
-
-		const value = reviveClass(params[key]);
+		const value = params[key];
 
 		if (Array.isArray(value)) {
 			obj[key] = obj[key] || [];
@@ -111,17 +125,16 @@ function genericUpdate(obj: any, params: any, cache: any) {
 				cache[key][index] = cache[key][index] || {};
 				genericUpdate(obj[key][index], item, cache[key][index]);
 			});
-		} 
+		}
 		else if (typeof value === "object" && value !== null) {
 			obj[key] = obj[key] || {};
 			cache[key] = cache[key] || {};
 			genericUpdate(obj[key], value, cache[key]);
-		} 
-		else if (cache[key] !== value) 
+		}
+		else if (cache[key] !== value)
 			obj[key] = cache[key] = value;
 	}
 }
-
 
 
 
@@ -129,7 +142,7 @@ function genericUpdate(obj: any, params: any, cache: any) {
 
 window.addEventListener("DOMContentLoaded", () => {
 	const game = new PongGame(null);
-	game.camera=  null;
+	game.camera = null;
 
 	const canvas = document.getElementById("pong-canvas") as HTMLCanvasElement;
 	const ctx = canvas.getContext("2d");
@@ -141,14 +154,14 @@ window.addEventListener("DOMContentLoaded", () => {
 	});
 
 	function draw() {
-		
+
 
 		// -- CLEAR CANVAS --
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
 
 
 		// -- RENDER OBJECTS --
-		for (const clientObj of objects.values()) {
+		for (const clientObj of currentGameObjects.values()) {
 			clientObj.draw(viewport);
 		}
 
@@ -170,7 +183,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
 	function createNewInstance(object) {
 		const clientObj = new GameObject({ ...object, components: [] });
-		objects.set(object["id"], clientObj);
+		currentGameObjects.set(object["id"], clientObj);
 
 		for (const component of object.components) {
 			const ComponentClass = componentMap[component.name];
@@ -183,40 +196,35 @@ window.addEventListener("DOMContentLoaded", () => {
 	function loop() {
 		let client_objects = getObjects();
 		for (const object of client_objects) {
-			const id = object["id"];
-			let clientObj = objects.get(id);
-			if (!clientObj) 
-				clientObj = createNewInstance(object);
-			
+			const revivedObject = revive(object);
+			const id = revivedObject["id"];
+
+			// -- CHECK IF CLIENT OBJECT EXISTS --
+			let clientObj = currentGameObjects.get(id);
+			if (!clientObj) {
+				clientObj = createNewInstance(revivedObject);
+			}
+
 			else {
-				// assign children to parent
-				for (let i = 0; i < object.children?.length; i++) {
-					const childId = object.children[i];
-					const childObj = objects.get(childId);
+				// -- ASSIGN CHILDREN TO PARENT --
+				for (const [i, childId] of revivedObject.children?.entries() ?? []) {
+					const childObj = currentGameObjects.get(childId);
 					if (childObj) {
 						childObj.parent = clientObj;
 						clientObj.children[i] = childObj;
 					}
 				}
+				
+				// -- UPDATE PROPERTIES AND CHILDREN OF THE CLASS --
+				genericUpdate(clientObj, revivedObject, clientObj.cache);
 
-				// update properties
-				genericUpdate(clientObj, object, clientObj.cache);
-
-				// console.log(object["name"]);
-				if (object["name"] === "camera" && !game.camera) {
-					// let camera = new Camera({...object});
-					game.camera = object;
-					viewport.camera = object;
-					// console.log("new camera!");
+				// -- CAMERA --
+				if (revivedObject["name"] === "camera") {
+					game.camera = revivedObject;
+					viewport.camera = revivedObject;
 				}
-				// console.log(viewport.camera);
 			}
 		}
-
-		// for (const object of objects) {
-		// 	console.log("name", Object.entries(object));
-		// }
-
 		draw();
 		requestAnimationFrame(loop);
 	}

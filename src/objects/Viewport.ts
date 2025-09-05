@@ -16,7 +16,7 @@ export class Viewport {
 	toScreenCoords(position: Point2D, camera:Camera = null): Point2D {
 		const canvasCenter = new Vector2D(this.width / 2, this.height / 2);
 		if (this.camera !== null) {
-			return position.add(canvasCenter).subtract(this.camera.position);
+			return position.add(canvasCenter).subtract(this.camera.position.toVector2D());
 		}
 		return position.add(canvasCenter);
 	}

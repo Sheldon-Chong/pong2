@@ -308,8 +308,6 @@ export class PongGame {
 			},
 			gameObjects: flatObjects,
 		};
-		
-		
 	}
 
 	addObject(object: GameObject) {
@@ -356,7 +354,7 @@ export class PongGame {
 		// }));
 
 		const offset = 250;
-		const distance = 20;
+		const distance = 200;
 
 
 		const leftBoardControls = [["s", "w"], ["r", "f"], ["t", "g"]];
