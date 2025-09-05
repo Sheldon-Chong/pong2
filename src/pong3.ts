@@ -9,6 +9,7 @@ import { Label } from './objects/Label.js';
 import { HitBox } from './objects/Hitbox.js';
 import { Ball } from './ball.js';
 import { Viewport } from './objects/Viewport.js';
+import type { ScriptKind } from 'typescript';
 
 // import { GameObject, Sprite, HitBox, Glow, Particle, Timer} from './Index.js'
 // import {  BlendMode } from './GameUtils.js'
@@ -33,7 +34,7 @@ class GameTeam {
 	// static rightBoardControls = [["y", "h"], ["o", "l"], ["ArrowUp", "ArrowDown"]];
 
 	constructor(
-		public game: PongGame,
+		public game: GameWorld,
 		public name: String,
 	) {
 
@@ -55,12 +56,21 @@ class GameTeam {
 // }
 
 
-
+export const SKINS: Record<string, string> = {
+  "ghost_dark": "assets/skins/ghost_dark.png",
+  "ghost_light": "assets/skins/ghost_light.png",
+  "ghost_blue": "assets/skins/ghost_blue.png",
+  "ghost_green": "assets/skins/ghost_green.png",
+  "ghost_purple": "assets/skins/ghost_purple.png",
+  "ghost_red": "assets/skins/ghost_red.png",
+  "ghost_yellow": "assets/skins/ghost_yellow.png",
+  "ghost_42": "assets/skins/ghost_42.png"
+};
 
 export class Player {
 	name: string = "";
 	profileImage: string = "";
-	skin: Sprite | null = null;
+	skin: string = "ghost_dark";
 
 	constructor(params: Partial<Player> = {}) {
 		Object.assign(this, params);
@@ -88,22 +98,28 @@ export class Padel extends GameObject {
 
 	isMoving: boolean = false;
 
-	sprite: Sprite = this.addComponent(new Sprite({
-		imagePath: "assets/skins/ghost_light.png",
-		host: this
-	})) as Sprite;
+	sprite: Sprite;
+
 
 	constructor(params: Partial<Padel>) {
 		super({
 			position: params.position, 
 			game: params.game,
 			name: "padel",
+			scale: new Vector2D(60,60),
+			components: [
+				new HitBox({})
+			]
 		});
 
 		Object.assign(this, params);
 
-		this.scale = new Vector2D(60,60);
-		// console.log("scale", this.scale);
+
+		const skinPath = SKINS[params.player?.skin || "ghost_dark"];
+		this.sprite = this.addComponent(new Sprite({
+			imagePath: skinPath,
+			host: this
+		})) as Sprite;
 
 		this.addChild(new Label({
 			text: this.player.name, 
@@ -112,15 +128,10 @@ export class Padel extends GameObject {
 			color: "#ffffff"
 		}));
 
-		this.addComponent(new HitBox({
-		}))
-
 		this.maximumVelocity = new Vector2D(
 			this.game.gameSettings.playerAcceleration, 
 			this.game.gameSettings.playerAcceleration
 		).multiply(10);
-
-		this.sprite = this.player.skin ? this.player.skin : this.sprite; 
 
 		// add shadow
 		this.sprite.glow = new Glow({
@@ -196,7 +207,7 @@ const players: Player[] = [
 	new Player({name: "player6"}),
 ];
 
-export class PongGame {
+export class GameWorld {
 
 	clientData;
 	gameObjects: Map<number, GameObject> = new Map();
@@ -231,7 +242,9 @@ export class PongGame {
 					a.isColliding = b.isColliding = true;
 					a.onCollide?.(b);
 					b.onCollide?.(a);
-				} else {
+				} 
+				
+				else {
 					a.isColliding = b.isColliding = false;
 				}
 			}
@@ -400,6 +413,12 @@ export class PongGame {
 			// 	// this.position.x += 0.01;
 			// }
 		})) as Camera;
+
+		this.addObject(new GameObject({
+			components: [
+				new HitBox({})
+			]
+		}))
 
 		this.viewport.camera = this.camera;
 	}
