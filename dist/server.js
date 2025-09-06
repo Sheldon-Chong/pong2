@@ -71,7 +71,6 @@ fastify.get("/", async (_, reply) => {
 // Serve compiled client.js
 import { readFileSync, existsSync } from "fs";
 fastify.get("/client.js", async (_, reply) => {
-    console.log("asdasdsd");
     console.log(join(process.cwd(), "dist", "client.js"));
     return reply.type("application/javascript").send(readFileSync(join(process.cwd(), "dist", "client.js"), "utf-8"));
 });

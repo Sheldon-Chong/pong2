@@ -27,7 +27,7 @@ export enum Team {
 	TEAM2= "team2"
 }
 
-class GameTeam {
+export class GameTeam {
 	score: number = 0;
 	players: Padel[] = [];
 
@@ -82,7 +82,7 @@ export class Player {
 class GameSettings {
 	playerAcceleration: number = 4300;
 	playerCount: number = 2;
-	ballSpeed: number = 200;
+	ballSpeed: number = 400;
 	
 	arrowDownKey: string = "ArrowDown";
 	arrowUpKey: string = "ArrowUp";
@@ -200,7 +200,7 @@ export class Padel extends GameObject {
 
 
 const players: Player[] = [
-	new Player({name: "player1asjdklasd", profileImage: "assets/profile1.webp"}),
+	new Player({name: "player1asjdklasd", skin: "ghost_light"}),
 	new Player({name: "player2", profileImage: "assets/profile2.webp"}),
 	new Player({name: "player3"}),
 	new Player({name: "player4"}),
@@ -211,122 +211,40 @@ const players: Player[] = [
 export class PongGame {
 
 	clientData;
-	gameObjects: Map<number, GameObject> = new Map();
 	team1: GameTeam = new GameTeam(this, Team.TEAM1);
 	team2: GameTeam = new GameTeam(this, Team.TEAM2);
-	camera: Camera;
 
 	lastFrameTime: number = performance.now();
 	fps: number = 0;
 	delta: number;
-	viewport: Viewport = new Viewport({
-		width: 800,
-		height: 400,
-	});
 
 	world: GameWorld = new GameWorld();
 
 	gameSettings: GameSettings = new GameSettings();
 
-	checkCollisions() {
-		const hitboxes: HitBox[] = [];
-		for (const obj of this.gameObjects.values()) {
-			for (const comp of obj.components) {
-				if (comp instanceof HitBox) {
-					hitboxes.push(comp);
-				}
-			}
-		}
-		for (let i = 0; i < hitboxes.length; i++) {
-			for (let j = i + 1; j < hitboxes.length; j++) {
-				const a = hitboxes[i];
-				const b = hitboxes[j];
-				if (a.isCollidingWith(b)) {
-					a.isColliding = b.isColliding = true;
-					a.onCollide?.(b);
-					b.onCollide?.(a);
-				} 
-				
-				else {
-					a.isColliding = b.isColliding = false;
-				}
-			}
-		}
-	}
-
 	update() {
 		const now = performance.now();
 		this.delta = (now - this.lastFrameTime) / 1000; // delta in seconds
 		this.lastFrameTime = now;
-
-		for (const object of this.gameObjects.values()) {
-			object.update();
-			object.toUpdate = true;
-		}
-		this.checkCollisions();
-		
+		this.world.update();
 	}
-
-
-	exportBackLog: GameObject[] = [];
 
 	exportState() {
-		const visited = new Set();
-		const flatObjects: any[] = [];
-
-		function flatten(obj) {
-			if (!obj || visited.has(obj.id)) return;
-			visited.add(obj.id);
-
-			if (!obj.toUpdate)
-				return;
-			flatObjects.push(obj.export());
-
-			if (obj.children && obj.children.length > 0) {
-				for (const child of obj.children) 
-					flatten(child);
-			}
-			obj.toUpdate = false;
+		let state = this.world.exportState();
+		state["metadata"] = {
+			"delta": this.delta
 		}
-
-		for (const obj of this.gameObjects.values()) {
-			flatten(obj);
-		}
-
-
-
-
-		
-		this.exportBackLog.length = 0;
-		return { 
-			camera: {
-				position: this.camera.position
-			},
-			gameObjects: flatObjects,
-		};
-	}
-
-	addObject(object: GameObject) {
-		object.game = this;
-		this.gameObjects.set(object.id, object);
-		object.init(); // <-- Add this line
-		if (object.children && object.children.length > 0) {
-			for (const child of object.children) {
-				this.addObject(child);
-				child.game = this;
-				child.init();
-			}
-		}
-		return object;
+		return state;
 	}
 
 	constructor (clientData) {
 		this.clientData = clientData;
 
+		this.world.game = this;
 
 		// -- add background
 
-		this.addObject(new GameObject({
+		this.world.addObject(new GameObject({
 			game: this,
 			position: new Point2D(0,0),
 			name: "background",
@@ -360,8 +278,10 @@ export class PongGame {
 					moveDownKey: leftBoardControls[Math.floor(i / 2)][1]
 				});
 				this.team1.players.push(padel);
-				this.addObject(padel);
-			} else {
+				this.world.addObject(padel);
+			} 
+			
+			else {
 				const padel = new Padel({
 					position: new Point2D(((i - 1) * distance) + offset, 0),
 					team: Team.TEAM2,
@@ -371,29 +291,24 @@ export class PongGame {
 					moveDownKey: rightBoardControls[Math.floor((i - 1) / 2)][1]
 				});
 				this.team2.players.push(padel);
-				this.addObject(padel);
+				this.world.addObject(padel);
 			}
 		}
 
 		// -- add ball --
 
-		let ball = this.addObject(new Ball({
+		let ball = this.world.addObject(new Ball({
 			game: this,
 			position: new Point2D(0, 0)
 		}));
 
-		this.camera = this.addObject(new Camera({
+		this.world.camera = this.world.addObject(new Camera({
 			position: new Point2D(0,-100),
+			game: this,
 			target: ball,
 		})) as Camera;
 
-		this.addObject(new GameObject({
-			components: [
-				new HitBox({})
-			]
-		}))
-
-		this.viewport.camera = this.camera;
+		this.world.viewport.camera = this.world.camera;
 	}
 }
 

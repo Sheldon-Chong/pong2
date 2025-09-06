@@ -8,9 +8,11 @@ export class GameWorld {
   gameObjects: Map<number, GameObject> = new Map();
   camera: Camera | null = null;
   viewport: Viewport;
+  game: any;
 
   constructor(viewport?: Viewport) {
     this.viewport = viewport ?? new Viewport({ width: 800, height: 400 });
+    
   }
 
   addObject(object: GameObject) {

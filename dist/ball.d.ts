@@ -23,5 +23,6 @@ export declare class Ball extends GameObject {
         position: Point2D;
         game: any;
     });
+    onHitGoal(team: string): void;
 }
 //# sourceMappingURL=ball.d.ts.map

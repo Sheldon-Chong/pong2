@@ -6,6 +6,7 @@ export declare class GameWorld {
     gameObjects: Map<number, GameObject>;
     camera: Camera | null;
     viewport: Viewport;
+    game: any;
     constructor(viewport?: Viewport);
     addObject(object: GameObject): GameObject;
     checkCollisions(): void;

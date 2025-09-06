@@ -4,8 +4,12 @@ import { Sprite } from './objects/Sprite.js';
 import { HitBox } from './objects/Hitbox.js';
 import { Glow } from './objects/Glow.js';
 import { BlendMode } from './objects/Blendmodes.js';
-import { Padel } from './pong3.js'; // Adjust import as needed
+import { GameTeam, Padel } from './pong3.js'; // Adjust import as needed
 import { Team } from './pong3.js';   // Adjust import as needed
+
+function lastElem<T>(array: T[]): T {
+    return array[array.length - 1];
+}
 
 export class Ball extends GameObject {
 	rotationVelocity: number = 0;
@@ -109,18 +113,30 @@ export class Ball extends GameObject {
 			this.rotationVelocity *= 0.98;
 			// Add wall bounce and particle logic as needed
 
-			if (this.position.y < -this.game.viewport.height / 2) {
-				this.position.y = -this.game.viewport.height / 2;
+			if (this.position.y < -this.game.world.viewport.height / 2) {
+				this.position.y = -this.game.world.viewport.height / 2;
 				this.velocity.y *= -1;
 			}
-			if (this.position.y > this.game.viewport.height / 2) {
-				this.position.y = this.game.viewport.height / 2;
+			if (this.position.y > this.game.world.viewport.height / 2) {
+				this.position.y = this.game.world.viewport.height / 2;
 				this.velocity.y *= -1;
+			}
+
+			if (this.position.x < lastElem(this.game.team1.players).position.x) { 
+				this.onHitGoal(Team.TEAM1);
+			}
+			
+			if (this.position.x > lastElem(this.game.team2.players).position.x) { 
+				this.onHitGoal(Team.TEAM2);
 			}
 
 			return true;
 		};
 
 		this.velocity.x = this.game.gameSettings.ballSpeed;
+	}
+
+	onHitGoal(team:string) {
+		this.position.x = 0;
 	}
 }

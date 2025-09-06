@@ -53,7 +53,7 @@ export class GameObject {
     init() {
     }
     updateToGame() {
-        this.game.exportBackLog.push(this);
+        this.game.world.exportBackLog.push(this);
     }
     constructor(params) {
         Object.assign(this, params);

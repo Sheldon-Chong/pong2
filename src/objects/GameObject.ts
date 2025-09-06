@@ -72,7 +72,7 @@ export class GameObject {
 	}
 
 	updateToGame() {
-		this.game.exportBackLog.push(this);
+		this.game.world.exportBackLog.push(this);
 	}
 
 	constructor(params: Partial<GameObject>) {

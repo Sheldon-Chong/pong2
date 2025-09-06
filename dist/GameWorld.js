@@ -7,6 +7,7 @@ export class GameWorld {
     gameObjects = new Map();
     camera = null;
     viewport;
+    game;
     constructor(viewport) {
         this.viewport = viewport ?? new Viewport({ width: 800, height: 400 });
     }
