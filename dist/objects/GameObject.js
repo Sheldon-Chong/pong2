@@ -154,6 +154,7 @@ export class GameObject {
             rotation: this.rotation,
             components: this.componentToJSON(),
             children: this.children?.map(child => child.id),
+            // className: "className" in this ? (this as any).className : undefined
         };
     }
 }

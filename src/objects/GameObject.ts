@@ -1,6 +1,6 @@
 import { Point2D, Vector2D } from './Coordinates.js';
 import { type Renderable, Sprite } from './Sprite.js';
-import type { GameWorld } from '../pong3.js';
+import type { PongGame } from '../pong3.js';
 import type { Viewport } from './Viewport.js'; import { Component } from './Component.js';
 import type { HitBox } from './Hitbox.js';
 
@@ -25,7 +25,7 @@ const RenderableMarker = Symbol("Renderable");
 
 export class GameObject {
 
-	public game: GameWorld;
+	public game: PongGame;
 	public id: number;
 	static globalId = 0;
 

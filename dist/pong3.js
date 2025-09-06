@@ -8,6 +8,7 @@ import { Label } from './objects/Label.js';
 import { HitBox } from './objects/Hitbox.js';
 import { Ball } from './ball.js';
 import { Viewport } from './objects/Viewport.js';
+import { GameWorld } from './GameWorld.js';
 // import { GameObject, Sprite, HitBox, Glow, Particle, Timer} from './Index.js'
 // import {  BlendMode } from './GameUtils.js'
 // class GameSettings {
@@ -44,10 +45,20 @@ class GameTeam {
 //         }
 //     }
 // }
+export const SKINS = {
+    "ghost_dark": "assets/skins/ghost_dark.png",
+    "ghost_light": "assets/skins/ghost_light.png",
+    "ghost_blue": "assets/skins/ghost_blue.png",
+    "ghost_green": "assets/skins/ghost_green.png",
+    "ghost_purple": "assets/skins/ghost_purple.png",
+    "ghost_red": "assets/skins/ghost_red.png",
+    "ghost_yellow": "assets/skins/ghost_yellow.png",
+    "ghost_42": "assets/skins/ghost_42.png"
+};
 export class Player {
     name = "";
     profileImage = "";
-    skin = null;
+    skin = "ghost_dark";
     constructor(params = {}) {
         Object.assign(this, params);
     }
@@ -65,28 +76,30 @@ export class Padel extends GameObject {
     moveDownKey = "ArrowDown";
     moveUpKey = "ArrowUp";
     isMoving = false;
-    sprite = this.addComponent(new Sprite({
-        imagePath: "assets/skins/ghost_light.png",
-        host: this
-    }));
+    sprite;
     constructor(params) {
         super({
             position: params.position,
             game: params.game,
             name: "padel",
+            scale: new Vector2D(60, 60),
+            components: [
+                new HitBox({})
+            ]
         });
         Object.assign(this, params);
-        this.scale = new Vector2D(60, 60);
-        // console.log("scale", this.scale);
+        const skinPath = SKINS[params.player?.skin || "ghost_dark"];
+        this.sprite = this.addComponent(new Sprite({
+            imagePath: skinPath,
+            host: this
+        }));
         this.addChild(new Label({
             text: this.player.name,
             position: new Point2D(0, 50),
             font: "15px Century Gothic",
             color: "#ffffff"
         }));
-        this.addComponent(new HitBox({}));
         this.maximumVelocity = new Vector2D(this.game.gameSettings.playerAcceleration, this.game.gameSettings.playerAcceleration).multiply(10);
-        this.sprite = this.player.skin ? this.player.skin : this.sprite;
         // add shadow
         this.sprite.glow = new Glow({
             Color: "#3731FE",
@@ -158,6 +171,7 @@ export class PongGame {
         width: 800,
         height: 400,
     });
+    world = new GameWorld();
     gameSettings = new GameSettings();
     checkCollisions() {
         const hitboxes = [];
@@ -213,22 +227,6 @@ export class PongGame {
         for (const obj of this.gameObjects.values()) {
             flatten(obj);
         }
-        // todo !!! desync issue
-        // idea: have a handshake system SPECIFICALLY for creating objects,
-        // idea STATIC OBJECTS
-        // however, object properties are streamed
-        // for (const obj of this.exportBackLog) {
-        // 	console.log("lol");
-        // 	flatObjects.push({
-        // 		name: "test",
-        // 		id: obj.id,
-        // 		position: obj.position,
-        // 		scale: obj.scale,
-        // 		rotation: obj.rotation,
-        // 		components: obj.componentToJSON(),
-        // 		children: [],
-        // 	});
-        // }
         this.exportBackLog.length = 0;
         return {
             camera: {
@@ -265,14 +263,8 @@ export class PongGame {
             scale: new Vector2D(2700, 500),
         }));
         // -- add players --
-        // this.addObject(new Padel({
-        // 	game: this,
-        // 	position: new Point2D(0, 0),
-        // 	team: "test",
-        // 	player: new Player({name: "sheldz"})
-        // }));
         const offset = 250;
-        const distance = 20;
+        const distance = 200;
         const leftBoardControls = [["s", "w"], ["r", "f"], ["t", "g"]];
         const rightBoardControls = [["ArrowUp", "ArrowDown"], ["o", "l"], ["y", "h"]];
         for (let i = 0; i < players.length; i++) {
@@ -309,11 +301,29 @@ export class PongGame {
         this.camera = this.addObject(new Camera({
             position: new Point2D(0, -100),
             target: ball,
-            // onUpdate: () => {
-            // 	// this.position.x += 0.01;
-            // }
+        }));
+        this.addObject(new GameObject({
+            components: [
+                new HitBox({})
+            ]
         }));
         this.viewport.camera = this.camera;
     }
 }
+// todo !!! desync issue
+// idea: have a handshake system SPECIFICALLY for creating objects,
+// idea STATIC OBJECTS
+// however, object properties are streamed
+// for (const obj of this.exportBackLog) {
+// 	console.log("lol");
+// 	flatObjects.push({
+// 		name: "test",
+// 		id: obj.id,
+// 		position: obj.position,
+// 		scale: obj.scale,
+// 		rotation: obj.rotation,
+// 		components: obj.componentToJSON(),
+// 		children: [],
+// 	});
+// }
 //# sourceMappingURL=pong3.js.map

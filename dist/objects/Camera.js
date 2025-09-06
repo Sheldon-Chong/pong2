@@ -4,6 +4,7 @@ export class Camera extends GameObject {
     shakeValue = new Vector2D(0, 0);
     target;
     rawPosition;
+    className = "camera";
     constructor(params) {
         const startingPos = new Point2D(0, 0);
         super({
@@ -13,6 +14,7 @@ export class Camera extends GameObject {
         this.name = "camera";
         this.rawPosition = startingPos;
         this.position = startingPos;
+        console.log("constructed");
         this.onUpdate = () => {
             this.position.x += 0.01;
             // console.log(this.position.x);

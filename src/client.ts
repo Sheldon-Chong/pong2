@@ -5,7 +5,7 @@ import { Glow } from './objects/Glow.js';
 import { drawImg, Sprite, Tags, type Renderable } from './objects/Sprite.js'
 import { HitBox } from './objects/Hitbox.js'
 import { Viewport } from './objects/Viewport.js'
-import { GameWorld } from './pong3.js';
+import { PongGame } from './pong3.js';
 import { Camera } from './objects/Camera.js';
 
 
@@ -141,7 +141,7 @@ function genericUpdate(
 // todo add game
 
 window.addEventListener("DOMContentLoaded", () => {
-	const game = new GameWorld(null);
+	const game = new PongGame(null);
 	game.camera = null;
 
 	const canvas = document.getElementById("pong-canvas") as HTMLCanvasElement;

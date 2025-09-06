@@ -3,7 +3,7 @@
   "state": {
     "camera": {
       "position": {
-        "x": -1167.8630564307668,
+        "x": 432.9546532424875,
         "y": 0,
         "className": "Point2D"
       }
@@ -44,7 +44,7 @@
         "id": 1,
         "position": {
           "x": -250,
-          "y": -118.69295594052245,
+          "y": -111.52762395449281,
           "className": "Point2D"
         },
         "scale": {
@@ -54,11 +54,17 @@
         "rotation": 0,
         "components": [
           {
+            "name": "hitbox",
+            "renderable": false,
+            "enabled": true,
+            "isColliding": false
+          },
+          {
             "name": "sprite",
             "renderable": true,
             "enabled": true,
             "Renderable": true,
-            "imagePath": "assets/skins/ghost_light.png",
+            "imagePath": "assets/skins/ghost_dark.png",
             "flippedHorizontal": true,
             "crop": false,
             "outline": null,
@@ -71,12 +77,6 @@
               "OffsetY": 5,
               "blendMode": "multiply"
             }
-          },
-          {
-            "name": "hitbox",
-            "renderable": false,
-            "enabled": true,
-            "isColliding": false
           }
         ],
         "children": [
@@ -104,7 +104,7 @@
         "id": 3,
         "position": {
           "x": 250,
-          "y": -118.69295594052245,
+          "y": -111.52762395449281,
           "className": "Point2D"
         },
         "scale": {
@@ -114,11 +114,17 @@
         "rotation": 0,
         "components": [
           {
+            "name": "hitbox",
+            "renderable": false,
+            "enabled": true,
+            "isColliding": false
+          },
+          {
             "name": "sprite",
             "renderable": true,
             "enabled": true,
             "Renderable": true,
-            "imagePath": "assets/skins/ghost_light.png",
+            "imagePath": "assets/skins/ghost_dark.png",
             "flippedHorizontal": false,
             "crop": false,
             "outline": null,
@@ -131,12 +137,6 @@
               "OffsetY": 5,
               "blendMode": "multiply"
             }
-          },
-          {
-            "name": "hitbox",
-            "renderable": false,
-            "enabled": true,
-            "isColliding": false
           }
         ],
         "children": [
@@ -163,8 +163,8 @@
         "name": "padel",
         "id": 5,
         "position": {
-          "x": -290,
-          "y": -118.69295594052245,
+          "x": -650,
+          "y": -111.52762395449281,
           "className": "Point2D"
         },
         "scale": {
@@ -174,11 +174,17 @@
         "rotation": 0,
         "components": [
           {
+            "name": "hitbox",
+            "renderable": false,
+            "enabled": true,
+            "isColliding": false
+          },
+          {
             "name": "sprite",
             "renderable": true,
             "enabled": true,
             "Renderable": true,
-            "imagePath": "assets/skins/ghost_light.png",
+            "imagePath": "assets/skins/ghost_dark.png",
             "flippedHorizontal": true,
             "crop": false,
             "outline": null,
@@ -191,12 +197,6 @@
               "OffsetY": 5,
               "blendMode": "multiply"
             }
-          },
-          {
-            "name": "hitbox",
-            "renderable": false,
-            "enabled": true,
-            "isColliding": false
           }
         ],
         "children": [
@@ -223,8 +223,8 @@
         "name": "padel",
         "id": 7,
         "position": {
-          "x": 290,
-          "y": -118.69295594052245,
+          "x": 650,
+          "y": -111.52762395449281,
           "className": "Point2D"
         },
         "scale": {
@@ -234,11 +234,17 @@
         "rotation": 0,
         "components": [
           {
+            "name": "hitbox",
+            "renderable": false,
+            "enabled": true,
+            "isColliding": false
+          },
+          {
             "name": "sprite",
             "renderable": true,
             "enabled": true,
             "Renderable": true,
-            "imagePath": "assets/skins/ghost_light.png",
+            "imagePath": "assets/skins/ghost_dark.png",
             "flippedHorizontal": false,
             "crop": false,
             "outline": null,
@@ -251,12 +257,6 @@
               "OffsetY": 5,
               "blendMode": "multiply"
             }
-          },
-          {
-            "name": "hitbox",
-            "renderable": false,
-            "enabled": true,
-            "isColliding": false
           }
         ],
         "children": [
@@ -283,8 +283,8 @@
         "name": "padel",
         "id": 9,
         "position": {
-          "x": -330,
-          "y": -118.69295594052245,
+          "x": -1050,
+          "y": -111.52762395449281,
           "className": "Point2D"
         },
         "scale": {
@@ -294,11 +294,17 @@
         "rotation": 0,
         "components": [
           {
+            "name": "hitbox",
+            "renderable": false,
+            "enabled": true,
+            "isColliding": false
+          },
+          {
             "name": "sprite",
             "renderable": true,
             "enabled": true,
             "Renderable": true,
-            "imagePath": "assets/skins/ghost_light.png",
+            "imagePath": "assets/skins/ghost_dark.png",
             "flippedHorizontal": true,
             "crop": false,
             "outline": null,
@@ -311,12 +317,6 @@
               "OffsetY": 5,
               "blendMode": "multiply"
             }
-          },
-          {
-            "name": "hitbox",
-            "renderable": false,
-            "enabled": true,
-            "isColliding": false
           }
         ],
         "children": [
@@ -343,8 +343,8 @@
         "name": "padel",
         "id": 11,
         "position": {
-          "x": 330,
-          "y": -118.69295594052245,
+          "x": 1050,
+          "y": -111.52762395449281,
           "className": "Point2D"
         },
         "scale": {
@@ -354,11 +354,17 @@
         "rotation": 0,
         "components": [
           {
+            "name": "hitbox",
+            "renderable": false,
+            "enabled": true,
+            "isColliding": false
+          },
+          {
             "name": "sprite",
             "renderable": true,
             "enabled": true,
             "Renderable": true,
-            "imagePath": "assets/skins/ghost_light.png",
+            "imagePath": "assets/skins/ghost_dark.png",
             "flippedHorizontal": false,
             "crop": false,
             "outline": null,
@@ -371,12 +377,6 @@
               "OffsetY": 5,
               "blendMode": "multiply"
             }
-          },
-          {
-            "name": "hitbox",
-            "renderable": false,
-            "enabled": true,
-            "isColliding": false
           }
         ],
         "children": [
@@ -403,8 +403,8 @@
         "name": "ball",
         "id": 13,
         "position": {
-          "x": -1422.8404779999996,
-          "y": -172.16094059999963,
+          "x": 418.1948081999997,
+          "y": -79.87069040000019,
           "className": "Point2D"
         },
         "scale": {
@@ -437,7 +437,7 @@
         "name": "camera",
         "id": 14,
         "position": {
-          "x": -1167.8630564307668,
+          "x": 432.9546532424875,
           "y": 0,
           "className": "Point2D"
         },
@@ -448,12 +448,35 @@
         "rotation": 0,
         "components": [],
         "children": []
+      },
+      {
+        "name": "",
+        "id": 15,
+        "position": {
+          "x": 0,
+          "y": 0,
+          "className": "Point2D"
+        },
+        "scale": {
+          "x": 10,
+          "y": 10
+        },
+        "rotation": 0,
+        "components": [
+          {
+            "name": "hitbox",
+            "renderable": false,
+            "enabled": true,
+            "isColliding": false
+          }
+        ],
+        "children": []
       }
     ]
   },
   "metadata": {
-    "timestamp": 1757059225639,
-    "delta": 0.015716911999999864,
+    "timestamp": 1757122452000,
+    "delta": 0.016373066999998628,
     "fps": 0
   }
 }

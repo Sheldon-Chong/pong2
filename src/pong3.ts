@@ -10,6 +10,7 @@ import { HitBox } from './objects/Hitbox.js';
 import { Ball } from './ball.js';
 import { Viewport } from './objects/Viewport.js';
 import type { ScriptKind } from 'typescript';
+import { GameWorld } from './GameWorld.js';
 
 // import { GameObject, Sprite, HitBox, Glow, Particle, Timer} from './Index.js'
 // import {  BlendMode } from './GameUtils.js'
@@ -34,7 +35,7 @@ class GameTeam {
 	// static rightBoardControls = [["y", "h"], ["o", "l"], ["ArrowUp", "ArrowDown"]];
 
 	constructor(
-		public game: GameWorld,
+		public game: PongGame,
 		public name: String,
 	) {
 
@@ -207,7 +208,7 @@ const players: Player[] = [
 	new Player({name: "player6"}),
 ];
 
-export class GameWorld {
+export class PongGame {
 
 	clientData;
 	gameObjects: Map<number, GameObject> = new Map();
@@ -222,6 +223,8 @@ export class GameWorld {
 		width: 800,
 		height: 400,
 	});
+
+	world: GameWorld = new GameWorld();
 
 	gameSettings: GameSettings = new GameSettings();
 
@@ -291,26 +294,6 @@ export class GameWorld {
 		}
 
 
-		// todo !!! desync issue
-
-
-		// idea: have a handshake system SPECIFICALLY for creating objects,
-		
-		// idea STATIC OBJECTS
-		// however, object properties are streamed
-
-		// for (const obj of this.exportBackLog) {
-		// 	console.log("lol");
-		// 	flatObjects.push({
-		// 		name: "test",
-		// 		id: obj.id,
-		// 		position: obj.position,
-		// 		scale: obj.scale,
-		// 		rotation: obj.rotation,
-		// 		components: obj.componentToJSON(),
-		// 		children: [],
-		// 	});
-		// }
 
 
 		
@@ -359,13 +342,6 @@ export class GameWorld {
 
 		// -- add players --
 
-		// this.addObject(new Padel({
-		// 	game: this,
-		// 	position: new Point2D(0, 0),
-		// 	team: "test",
-		// 	player: new Player({name: "sheldz"})
-		// }));
-
 		const offset = 250;
 		const distance = 200;
 
@@ -409,9 +385,6 @@ export class GameWorld {
 		this.camera = this.addObject(new Camera({
 			position: new Point2D(0,-100),
 			target: ball,
-			// onUpdate: () => {
-			// 	// this.position.x += 0.01;
-			// }
 		})) as Camera;
 
 		this.addObject(new GameObject({
@@ -424,3 +397,23 @@ export class GameWorld {
 	}
 }
 
+		// todo !!! desync issue
+
+
+		// idea: have a handshake system SPECIFICALLY for creating objects,
+		
+		// idea STATIC OBJECTS
+		// however, object properties are streamed
+
+		// for (const obj of this.exportBackLog) {
+		// 	console.log("lol");
+		// 	flatObjects.push({
+		// 		name: "test",
+		// 		id: obj.id,
+		// 		position: obj.position,
+		// 		scale: obj.scale,
+		// 		rotation: obj.rotation,
+		// 		components: obj.componentToJSON(),
+		// 		children: [],
+		// 	});
+		// }

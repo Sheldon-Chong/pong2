@@ -7,7 +7,7 @@ import { join } from "path";
 
 import type { WebSocket } from "@fastify/websocket";
 
-import { GameWorld } from "../dist/pong3.js";
+import { PongGame } from "../dist/pong3.js";
 import { Socket } from "dgram";
 import { writeFileSync } from "fs";
 import type { FastifyRequest } from "fastify";
@@ -131,7 +131,7 @@ fastify.get("/:file", async (request: FastifyRequest<{ Params: { file: string } 
 
 
 
-const pongGame = new GameWorld(client);
+const pongGame = new PongGame(client);
 
 
 
