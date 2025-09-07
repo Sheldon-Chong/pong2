@@ -142,7 +142,7 @@ function updateGameObjects() {
   // Write state to a file
   let output = JSON.stringify({ 
     type: "state", 
-    state,
+    state: state,
     metadata: {
       timestamp: Date.now(),
       delta: pongGame.delta,

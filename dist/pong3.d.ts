@@ -34,6 +34,7 @@ export declare class Padel extends GameObject {
     moveUpKey: string;
     isMoving: boolean;
     sprite: Sprite;
+    teamWins(team: Team): void;
     constructor(params: Partial<Padel>);
 }
 export declare class PongGame {

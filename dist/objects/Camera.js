@@ -14,11 +14,10 @@ export class Camera extends GameObject {
         this.name = "camera";
         this.rawPosition = startingPos;
         this.position = startingPos;
-        console.log("constructed");
         this.onUpdate = () => {
             this.position.x += 0.01;
             // console.log(this.position.x);
-            this.rawPosition = interpolate(this.rawPosition, new Point2D(this.target.position.x, 0), 80);
+            this.rawPosition = interpolate(this.rawPosition, new Point2D(this.target.position.x, 0), 60);
             this.position = this.rawPosition.add(new Vector2D(randomBetween(-this.shakeValue.x, this.shakeValue.x), randomBetween(-this.shakeValue.y, this.shakeValue.y)));
             this.shakeValue = this.shakeValue.subtract((new Vector2D(170, 170)).multiply(this.game.delta));
             if (this.shakeValue.x < 0)

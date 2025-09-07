@@ -66,7 +66,7 @@ export class Player {
 class GameSettings {
     playerAcceleration = 4300;
     playerCount = 2;
-    ballSpeed = 400;
+    ballSpeed = 500;
     arrowDownKey = "ArrowDown";
     arrowUpKey = "ArrowUp";
 }
@@ -77,6 +77,8 @@ export class Padel extends GameObject {
     moveUpKey = "ArrowUp";
     isMoving = false;
     sprite;
+    teamWins(team) {
+    }
     constructor(params) {
         super({
             position: params.position,
@@ -95,7 +97,7 @@ export class Padel extends GameObject {
         }));
         this.addChild(new Label({
             text: this.player.name,
-            position: new Point2D(0, 50),
+            position: new Point2D(0, -40),
             font: "15px Century Gothic",
             color: "#ffffff"
         }));
@@ -194,6 +196,13 @@ export class PongGame {
                 })
             ],
             scale: new Vector2D(2700, 500),
+        }));
+        this.world.addObject(new Label({
+            game: this,
+            text: "test",
+            position: new Point2D(0, 0),
+            font: "15px Century Gothic",
+            color: "#ffffff"
         }));
         // -- add players --
         const offset = 250;

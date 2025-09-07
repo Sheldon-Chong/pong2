@@ -3,16 +3,22 @@ import { GameObject } from './objects/GameObject.js';
 import { Camera } from './objects/Camera.js';
 import { Viewport } from './objects/Viewport.js';
 import { HitBox } from './objects/Hitbox.js';
+import { Timer } from './objects/Timer.js';
 
 export class GameWorld {
   gameObjects: Map<number, GameObject> = new Map();
   camera: Camera | null = null;
   viewport: Viewport;
   game: any;
+  timers: Timer[] = [];
 
   constructor(viewport?: Viewport) {
     this.viewport = viewport ?? new Viewport({ width: 800, height: 400 });
     
+  }
+
+  addTimer(durationSeconds: number, callback: () => void) {
+    this.timers.push(new Timer(durationSeconds, callback));
   }
 
   addObject(object: GameObject) {
@@ -57,6 +63,10 @@ export class GameWorld {
       object.toUpdate = true;
     }
     this.checkCollisions();
+
+    for (const timer of this.timers) {
+      timer.update();
+    }
   }
 
   exportBackLog: GameObject[] = [];
@@ -85,6 +95,7 @@ export class GameWorld {
     }
 
     this.exportBackLog.length = 0;
+
     return {
       camera: {
         position: this.camera?.position

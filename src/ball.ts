@@ -6,6 +6,7 @@ import { Glow } from './objects/Glow.js';
 import { BlendMode } from './objects/Blendmodes.js';
 import { GameTeam, Padel } from './pong3.js'; // Adjust import as needed
 import { Team } from './pong3.js';   // Adjust import as needed
+import { Timer } from './objects/Timer.js';
 
 function lastElem<T>(array: T[]): T {
     return array[array.length - 1];
@@ -84,28 +85,33 @@ export class Ball extends GameObject {
 		this.hitbox = new HitBox({
 			host: this,
 			onCollide: (otherHitBox) => {
-				console.log("hit!");
 				const other = otherHitBox.host;
+
 				if (other instanceof Padel) {
-					console.log("hit!");
-					if (this.lastPadelHit &&
-						this.lastPadelHit.team === other.team &&
-						this.lastPadelHit !== other) {
-						// Reverse direction if hit by same team padel
+					
+					// ignores getting hit by the same padel twice
+					if (this.lastPadelHit === other)
+						return;
+					
+					// swap velocity when hitting teammate of the same team
+					if (
+						this.lastPadelHit &&
+						this.lastPadelHit.team === other.team
+					) {
 						this.velocity.x = -this.velocity.x;
 					}
+					
+					// inverse velocity when hit 
 					else {
 						this.calculateAngle(other);
 					}
 					this.lastPadelHit = other;
 					this.collided = true;
 				}
-				// Add goal logic if needed
 				return true;
 			}
 		});
 		this.addComponent(this.hitbox);
-
 		this.addComponent(this.sprite);
 
 		this.onUpdate = () => {
@@ -117,18 +123,17 @@ export class Ball extends GameObject {
 				this.position.y = -this.game.world.viewport.height / 2;
 				this.velocity.y *= -1;
 			}
-			if (this.position.y > this.game.world.viewport.height / 2) {
+			else if (this.position.y > this.game.world.viewport.height / 2) {
 				this.position.y = this.game.world.viewport.height / 2;
 				this.velocity.y *= -1;
 			}
 
-			if (this.position.x < lastElem(this.game.team1.players).position.x) { 
+
+			// -- CHECK IF HITTING GOAL --
+			if (this.position.x < lastElem(this.game.team1.players).position.x)  
 				this.onHitGoal(Team.TEAM1);
-			}
-			
-			if (this.position.x > lastElem(this.game.team2.players).position.x) { 
+			else if (this.position.x > lastElem(this.game.team2.players).position.x)  
 				this.onHitGoal(Team.TEAM2);
-			}
 
 			return true;
 		};
@@ -137,6 +142,15 @@ export class Ball extends GameObject {
 	}
 
 	onHitGoal(team:string) {
-		this.position.x = 0;
+		this.game.world.addTimer(1, () => {
+			this.position.x = 0;
+			this.velocity.x = 0;
+			this.game.world.addTimer(3, () => {
+				if (team === Team.TEAM1)
+					this.velocity.x = this.game.gameSettings.ballSpeed;
+				else if (team === Team.TEAM2)
+					this.velocity.x = -this.game.gameSettings.ballSpeed;
+			});
+		});
 	}
 }

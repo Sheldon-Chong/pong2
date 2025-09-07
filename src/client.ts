@@ -7,6 +7,7 @@ import { HitBox } from './objects/Hitbox.js'
 import { Viewport } from './objects/Viewport.js'
 import { PongGame } from './pong3.js';
 import { Camera } from './objects/Camera.js';
+import { Label } from './objects/Label.js';
 
 
 const ws = new WebSocket("ws://localhost:3000/ws");
@@ -85,7 +86,8 @@ const componentMap: Record<string, new (params: any) => any> = {
 	"Vector2D": function (params: any) { return new Vector2D(params.x, params.y); } as any,
 	"sprite": Sprite,
 	"hitbox": HitBox,
-	"camera": Camera
+	"camera": Camera,
+	"label": Label
 };
 
 function revive(obj: any): any {
@@ -182,13 +184,21 @@ window.addEventListener("DOMContentLoaded", () => {
 	}
 
 	function createNewInstance(object) {
-		const clientObj = new GameObject({ ...object, components: [] });
+
+
+		let clientObj;
+		
+		if (object.name === "label")
+			clientObj = new Label({ ...object, components: [] });
+		else
+			clientObj = new GameObject({ ...object, components: [] });
 		currentGameObjects.set(object["id"], clientObj);
 
 		for (const component of object.components) {
 			const ComponentClass = componentMap[component.name];
-			if (ComponentClass)
+			if (ComponentClass) {
 				clientObj.addComponent(new ComponentClass(component));
+			}
 		}
 		return clientObj;
 	}
@@ -217,7 +227,9 @@ window.addEventListener("DOMContentLoaded", () => {
 				
 				// -- UPDATE PROPERTIES AND CHILDREN OF THE CLASS --
 				genericUpdate(clientObj, revivedObject, clientObj.cache);
-
+				for (const [, obj] of currentGameObjects.entries()) {
+					
+				}
 				// -- CAMERA --
 				if (revivedObject["name"] === "camera") {
 					game.camera = revivedObject;

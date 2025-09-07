@@ -1,4 +1,4 @@
-import { Point2D, Vector2D, interpolate,randomBetween } from './Coordinates.js';
+import { Point2D, Vector2D, interpolate, randomBetween } from './Coordinates.js';
 import { GameObject } from './GameObject.js';
 import { PongGame } from '../pong3.js';
 import { type Renderable } from './Sprite.js';
@@ -7,23 +7,42 @@ export class Label extends GameObject {
     public text: string;
     public font: string = "20px Avant ";
     public color: string = "black";
+    classType: string = "label";
 
     constructor(params) {
-        super({game: params.game});
+        super({ game: params.game, name: "label"});
         Object.assign(this, params);
-        this.name = "label";
     }
 
     draw(viewport: Viewport) {
-        console.log("text drawn");
         viewport.ctx.font = this.font;
         viewport.ctx.fillStyle = this.color;
         const textWidth = viewport.ctx.measureText(this.text).width;
         const metrics = viewport.ctx.measureText(this.text);
         const textHeight = metrics.actualBoundingBoxAscent + metrics.actualBoundingBoxDescent;
-        const x = this.getWorldPosition().x - textWidth / 2;
-        const y = this.getWorldPosition().y + textHeight / 2;
+        const screenPos = viewport.toScreenCoords(this.getWorldPosition());
+        const x = screenPos.x - textWidth / 2;
+        const y = screenPos.y + textHeight / 2;
         viewport.ctx.fillText(this.text, x, y);
+        console.log("drawn");
+    }
+
+
+    export(): any {
+        console.log("exported label");
+        return {
+            className: this.classType,
+            id: this.id,
+            position: this.position,
+            scale: this.scale,
+            rotation: this.rotation,
+            components: this.componentToJSON(),
+            children: this.children?.map(child => child.id),
+            text: this.text,
+            font: this.font,
+            color: this.color
+            // className: "className" in this ? (this as any).className : undefined
+        }
     }
 }
 
