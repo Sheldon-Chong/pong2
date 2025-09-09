@@ -177,8 +177,8 @@ export class PongGame {
         this.lastFrameTime = now;
         this.world.update();
     }
-    exportState() {
-        let state = this.world.exportState();
+    exportState(includeSingleSync = false) {
+        let state = this.world.exportState(includeSingleSync);
         state["metadata"] = {
             "delta": this.delta
         };
@@ -192,6 +192,7 @@ export class PongGame {
             game: this,
             position: new Point2D(0, 0),
             name: "background",
+            constantSync: false,
             components: [
                 new Sprite({
                     imagePath: "assets/maps/map1.png",

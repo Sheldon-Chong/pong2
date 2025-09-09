@@ -3,42 +3,12 @@
   "state": {
     "camera": {
       "position": {
-        "x": -1063.470557728967,
+        "x": -172.01310611584327,
         "y": 0,
         "className": "Point2D"
       }
     },
     "gameObjects": [
-      {
-        "name": "background",
-        "id": 0,
-        "position": {
-          "x": 0,
-          "y": 0,
-          "className": "Point2D"
-        },
-        "scale": {
-          "x": 2700,
-          "y": 500
-        },
-        "rotation": 0,
-        "components": [
-          {
-            "name": "sprite",
-            "renderable": true,
-            "enabled": true,
-            "Renderable": true,
-            "imagePath": "assets/maps/map1.png",
-            "flippedHorizontal": false,
-            "crop": false,
-            "outline": null,
-            "opacity": 1,
-            "blendMode": "source-over",
-            "glow": null
-          }
-        ],
-        "children": []
-      },
       {
         "className": "label",
         "id": 1,
@@ -63,7 +33,7 @@
         "id": 2,
         "position": {
           "x": -250,
-          "y": -136.179867646301,
+          "y": 0,
           "className": "Point2D"
         },
         "scale": {
@@ -126,7 +96,7 @@
         "id": 4,
         "position": {
           "x": 250,
-          "y": -136.179867646301,
+          "y": 0,
           "className": "Point2D"
         },
         "scale": {
@@ -189,7 +159,7 @@
         "id": 6,
         "position": {
           "x": -650,
-          "y": -136.179867646301,
+          "y": 0,
           "className": "Point2D"
         },
         "scale": {
@@ -252,7 +222,7 @@
         "id": 8,
         "position": {
           "x": 650,
-          "y": -136.179867646301,
+          "y": 0,
           "className": "Point2D"
         },
         "scale": {
@@ -315,7 +285,7 @@
         "id": 10,
         "position": {
           "x": -1050,
-          "y": -136.179867646301,
+          "y": 0,
           "className": "Point2D"
         },
         "scale": {
@@ -378,7 +348,7 @@
         "id": 12,
         "position": {
           "x": 1050,
-          "y": -136.179867646301,
+          "y": 0,
           "className": "Point2D"
         },
         "scale": {
@@ -440,8 +410,8 @@
         "name": "ball",
         "id": 14,
         "position": {
-          "x": -1518.1274919999992,
-          "y": -175.37110639999952,
+          "x": 0,
+          "y": -47.76414606666661,
           "className": "Point2D"
         },
         "scale": {
@@ -474,7 +444,7 @@
         "name": "camera",
         "id": 15,
         "position": {
-          "x": -1063.470557728967,
+          "x": -172.01310611584327,
           "y": 0,
           "className": "Point2D"
         },
@@ -488,12 +458,12 @@
       }
     ],
     "metadata": {
-      "delta": 0.01583726999999999
+      "delta": 0.01583966700000019
     }
   },
   "metadata": {
-    "timestamp": 1757386162439,
-    "delta": 0.01583726999999999,
+    "timestamp": 1757388450348,
+    "delta": 0.01583966700000019,
     "fps": 0
   }
 }

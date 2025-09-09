@@ -71,7 +71,9 @@ export class GameWorld {
 
   exportBackLog: GameObject[] = [];
 
-  exportState() {
+  exportState(
+    includeSingleSync: boolean = false
+  ) {
     const visited = new Set();
     const flatObjects: any[] = [];
 
@@ -81,6 +83,10 @@ export class GameWorld {
 
       if (!obj.toUpdate)
         return;
+
+      if (obj.constantSync === false // if only exports once
+        && !includeSingleSync)
+        return
       flatObjects.push(obj.export());
 
       if (obj.children && obj.children.length > 0) {

@@ -40,7 +40,7 @@ class Client {
     }
 
     if (input.type === "request") {
-      //send data!!
+      this.socket.send(compile(true));
     }
   }
 
@@ -146,10 +146,8 @@ const pongGame = new PongGame(clients);
 
 
 
-
-// Game loop function
-function updateGameObjects() {
-  const state = pongGame.exportState();
+function compile(includeSingleSync: boolean) {
+  const state = pongGame.exportState(includeSingleSync);
 
   let output = JSON.stringify({ 
     type: "state", 
@@ -160,6 +158,13 @@ function updateGameObjects() {
       fps: pongGame.fps,
     }
   }, null, 2);
+  return output;
+}
+
+// Game loop function
+function updateGameObjects() {
+
+  let output = compile(false);
 
   writeFileSync("game_state.json", output,"utf-8");
 

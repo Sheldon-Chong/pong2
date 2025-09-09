@@ -27,7 +27,7 @@ class Client {
             }
         }
         if (input.type === "request") {
-            //send data!!
+            this.socket.send(compile(true));
         }
     }
 }
@@ -109,9 +109,8 @@ fastify.get("/:file", async (request, reply) => {
 });
 const pongGame = new PongGame(clients);
 // client.game = pongGame;
-// Game loop function
-function updateGameObjects() {
-    const state = pongGame.exportState();
+function compile(includeSingleSync) {
+    const state = pongGame.exportState(includeSingleSync);
     let output = JSON.stringify({
         type: "state",
         state: state,
@@ -121,6 +120,11 @@ function updateGameObjects() {
             fps: pongGame.fps,
         }
     }, null, 2);
+    return output;
+}
+// Game loop function
+function updateGameObjects() {
+    let output = compile(false);
     writeFileSync("game_state.json", output, "utf-8");
     for (const client of clients) {
         if (client.socket.readyState === 1) { // 1 = OPEN

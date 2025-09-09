@@ -22,6 +22,13 @@ function isArrowKey(e: KeyboardEvent): boolean {
 ws.onopen = () => {
 	console.log("CLIENT Connected to server");
 
+	ws.send(JSON.stringify({
+		type: "request",
+		payload: {
+
+		}
+	}));
+
 	
 	// Listen for keyboard events
 	window.addEventListener("keydown", (keyEvent) => {
@@ -42,7 +49,7 @@ ws.onopen = () => {
 			ws.send(JSON.stringify({
 				type: "request",
 				payload: {
-					
+
 				}
 			}));
 		}

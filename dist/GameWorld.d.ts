@@ -15,7 +15,7 @@ export declare class GameWorld {
     checkCollisions(): void;
     update(): void;
     exportBackLog: GameObject[];
-    exportState(): {
+    exportState(includeSingleSync?: boolean): {
         camera: {
             position: Point2D;
         };

@@ -33,23 +33,10 @@ export class GameObject {
     maximumVelocity = new Vector2D(1000, 1000);
     components = [];
     toUpdate = false;
-    // public sprite?: Sprite;
-    // public hitbox?: HitBox | null;
-    // events
-    // public onCollide?: (other: GameObject) => void;
     onUpdate;
+    // --webserver stuff--
     cache = {};
-    // updateFrom(params: any) {
-    // 		genericUpdate(this, params, this.cache);
-    // 		// Optionally, update components as well:
-    // 		if (params.components && Array.isArray(params.components)) {
-    // 				for (let i = 0; i < params.components.length; i++) {
-    // 						if (this.components[i] && typeof this.components[i].updateFrom === "function") {
-    // 								this.components[i].updateFrom(params.components[i]);
-    // 						}
-    // 				}
-    // 		}
-    // }
+    constantSync = true;
     init() {
     }
     updateToGame() {

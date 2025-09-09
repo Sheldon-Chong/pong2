@@ -19,6 +19,7 @@ export declare class GameObject {
     toUpdate: boolean;
     onUpdate?: () => void;
     cache: any;
+    constantSync: boolean;
     init(): void;
     updateToGame(): void;
     constructor(params: Partial<GameObject>);

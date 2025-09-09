@@ -9,7 +9,6 @@ import { Label } from './objects/Label.js';
 import { HitBox } from './objects/Hitbox.js';
 import { Ball } from './ball.js';
 import { Viewport } from './objects/Viewport.js';
-import type { ScriptKind } from 'typescript';
 import { GameWorld } from './GameWorld.js';
 
 // import { GameObject, Sprite, HitBox, Glow, Particle, Timer} from './Index.js'
@@ -233,8 +232,8 @@ export class PongGame {
 		this.world.update();
 	}
 
-	exportState() {
-		let state = this.world.exportState();
+	exportState(includeSingleSync: boolean = false) {
+		let state = this.world.exportState(includeSingleSync);
 		state["metadata"] = {
 			"delta": this.delta
 		}
@@ -253,6 +252,7 @@ export class PongGame {
 			game: this,
 			position: new Point2D(0,0),
 			name: "background",
+			constantSync: false,
 			components: [
 				new Sprite({
 					imagePath: "assets/maps/map1.png",

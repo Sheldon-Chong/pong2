@@ -14,6 +14,10 @@ function isArrowKey(e) {
 }
 ws.onopen = () => {
     console.log("CLIENT Connected to server");
+    ws.send(JSON.stringify({
+        type: "request",
+        payload: {}
+    }));
     // Listen for keyboard events
     window.addEventListener("keydown", (keyEvent) => {
         if ((isArrowKey(keyEvent)) &&

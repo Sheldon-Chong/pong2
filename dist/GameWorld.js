@@ -62,7 +62,7 @@ export class GameWorld {
         }
     }
     exportBackLog = [];
-    exportState() {
+    exportState(includeSingleSync = false) {
         const visited = new Set();
         const flatObjects = [];
         function flatten(obj) {
@@ -70,6 +70,9 @@ export class GameWorld {
                 return;
             visited.add(obj.id);
             if (!obj.toUpdate)
+                return;
+            if (obj.constantSync === false // if only exports once
+                && !includeSingleSync)
                 return;
             flatObjects.push(obj.export());
             if (obj.children && obj.children.length > 0) {
