@@ -146,8 +146,8 @@ const pongGame = new PongGame(clients);
 
 
 
-function compile(includeSingleSync: boolean) {
-  const state = pongGame.exportState(includeSingleSync);
+function compile(includeStaticObjects: boolean) {
+  const state = pongGame.exportState(includeStaticObjects);
 
   let output = JSON.stringify({ 
     type: "state", 

@@ -22,7 +22,6 @@ export class GameWorld {
         if (object.children && object.children.length > 0) {
             for (const child of object.children) {
                 this.addObject(child);
-                child.init();
             }
         }
         return object;
@@ -62,7 +61,7 @@ export class GameWorld {
         }
     }
     exportBackLog = [];
-    exportState(includeSingleSync = false) {
+    exportState(includeStaticObjects = false) {
         const visited = new Set();
         const flatObjects = [];
         function flatten(obj) {
@@ -71,8 +70,8 @@ export class GameWorld {
             visited.add(obj.id);
             if (!obj.toUpdate)
                 return;
-            if (obj.constantSync === false // if only exports once
-                && !includeSingleSync)
+            if (obj.isStatic === true // if only exports once
+                && !includeStaticObjects)
                 return;
             flatObjects.push(obj.export());
             if (obj.children && obj.children.length > 0) {

@@ -22,10 +22,10 @@ const RenderableMarker = Symbol("Renderable");
 // }
 
 
-
 export class GameObject {
 
 	public game: PongGame;
+
 	public id: number;
 	static globalId = 0;
 
@@ -50,9 +50,11 @@ export class GameObject {
 
 	public onUpdate?: () => void;
 
+	public zIndex: number = 0;
+
 	// --webserver stuff--
 	cache: any = {};
-	constantSync: boolean = true;
+	isStatic: boolean = false;
 
 	init() {
 	}
@@ -177,9 +179,11 @@ export class GameObject {
 			position: this.position,
 			scale: this.scale,	
 			rotation: this.rotation,
+			zIndex: this.zIndex,
 			components: this.componentToJSON(),
-			children: this.children?.map(child => child.id),
-			// className: "className" in this ? (this as any).className : undefined
+			...(this.children && this.children.length > 0
+				? { children: this.children.map(child => child.id) }
+				: {}), // className: "className" in this ? (this as any).className : undefined
 		}
 	}
 }

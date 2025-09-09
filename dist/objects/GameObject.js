@@ -34,9 +34,10 @@ export class GameObject {
     components = [];
     toUpdate = false;
     onUpdate;
+    zIndex = 0;
     // --webserver stuff--
     cache = {};
-    constantSync = true;
+    isStatic = false;
     init() {
     }
     updateToGame() {
@@ -139,9 +140,11 @@ export class GameObject {
             position: this.position,
             scale: this.scale,
             rotation: this.rotation,
+            zIndex: this.zIndex,
             components: this.componentToJSON(),
-            children: this.children?.map(child => child.id),
-            // className: "className" in this ? (this as any).className : undefined
+            ...(this.children && this.children.length > 0
+                ? { children: this.children.map(child => child.id) }
+                : {}), // className: "className" in this ? (this as any).className : undefined
         };
     }
 }

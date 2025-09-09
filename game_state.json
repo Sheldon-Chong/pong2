@@ -3,7 +3,7 @@
   "state": {
     "camera": {
       "position": {
-        "x": -172.01310611584327,
+        "x": 806.0344011510898,
         "y": 0,
         "className": "Point2D"
       }
@@ -33,7 +33,7 @@
         "id": 2,
         "position": {
           "x": -250,
-          "y": 0,
+          "y": -101.69107161847666,
           "className": "Point2D"
         },
         "scale": {
@@ -41,6 +41,7 @@
           "y": 60
         },
         "rotation": 0,
+        "zIndex": 0,
         "components": [
           {
             "name": "hitbox",
@@ -96,7 +97,7 @@
         "id": 4,
         "position": {
           "x": 250,
-          "y": 0,
+          "y": -101.69107161847666,
           "className": "Point2D"
         },
         "scale": {
@@ -104,6 +105,7 @@
           "y": 60
         },
         "rotation": 0,
+        "zIndex": 0,
         "components": [
           {
             "name": "hitbox",
@@ -159,7 +161,7 @@
         "id": 6,
         "position": {
           "x": -650,
-          "y": 0,
+          "y": -101.69107161847666,
           "className": "Point2D"
         },
         "scale": {
@@ -167,6 +169,7 @@
           "y": 60
         },
         "rotation": 0,
+        "zIndex": 0,
         "components": [
           {
             "name": "hitbox",
@@ -222,7 +225,7 @@
         "id": 8,
         "position": {
           "x": 650,
-          "y": 0,
+          "y": -101.69107161847666,
           "className": "Point2D"
         },
         "scale": {
@@ -230,6 +233,7 @@
           "y": 60
         },
         "rotation": 0,
+        "zIndex": 0,
         "components": [
           {
             "name": "hitbox",
@@ -285,7 +289,7 @@
         "id": 10,
         "position": {
           "x": -1050,
-          "y": 0,
+          "y": -101.69107161847666,
           "className": "Point2D"
         },
         "scale": {
@@ -293,6 +297,7 @@
           "y": 60
         },
         "rotation": 0,
+        "zIndex": 0,
         "components": [
           {
             "name": "hitbox",
@@ -348,7 +353,7 @@
         "id": 12,
         "position": {
           "x": 1050,
-          "y": 0,
+          "y": -101.69107161847666,
           "className": "Point2D"
         },
         "scale": {
@@ -356,6 +361,7 @@
           "y": 60
         },
         "rotation": 0,
+        "zIndex": 0,
         "components": [
           {
             "name": "hitbox",
@@ -410,8 +416,8 @@
         "name": "ball",
         "id": 14,
         "position": {
-          "x": 0,
-          "y": -47.76414606666661,
+          "x": 1067.3173255000002,
+          "y": -3.409876995975712,
           "className": "Point2D"
         },
         "scale": {
@@ -444,7 +450,7 @@
         "name": "camera",
         "id": 15,
         "position": {
-          "x": -172.01310611584327,
+          "x": 806.0344011510898,
           "y": 0,
           "className": "Point2D"
         },
@@ -453,17 +459,17 @@
           "y": 10
         },
         "rotation": 0,
-        "components": [],
-        "children": []
+        "zIndex": 0,
+        "components": []
       }
     ],
     "metadata": {
-      "delta": 0.01583966700000019
+      "delta": 0.017249174999999013
     }
   },
   "metadata": {
-    "timestamp": 1757388450348,
-    "delta": 0.01583966700000019,
+    "timestamp": 1757399046097,
+    "delta": 0.017249174999999013,
     "fps": 0
   }
 }

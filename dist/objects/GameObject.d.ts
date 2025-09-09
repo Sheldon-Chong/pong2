@@ -18,8 +18,9 @@ export declare class GameObject {
     components: Component[];
     toUpdate: boolean;
     onUpdate?: () => void;
+    zIndex: number;
     cache: any;
-    constantSync: boolean;
+    isStatic: boolean;
     init(): void;
     updateToGame(): void;
     constructor(params: Partial<GameObject>);

@@ -109,8 +109,8 @@ fastify.get("/:file", async (request, reply) => {
 });
 const pongGame = new PongGame(clients);
 // client.game = pongGame;
-function compile(includeSingleSync) {
-    const state = pongGame.exportState(includeSingleSync);
+function compile(includeStaticObjects) {
+    const state = pongGame.exportState(includeStaticObjects);
     let output = JSON.stringify({
         type: "state",
         state: state,

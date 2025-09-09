@@ -47,7 +47,7 @@ export declare class PongGame {
     world: GameWorld;
     gameSettings: GameSettings;
     update(): void;
-    exportState(includeSingleSync?: boolean): {
+    exportState(includeStaticObjects?: boolean): {
         camera: {
             position: Point2D;
         };

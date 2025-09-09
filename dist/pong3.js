@@ -99,7 +99,7 @@ export class Padel extends GameObject {
             text: this.player.name,
             position: new Point2D(0, -40),
             font: "15px Century Gothic",
-            color: "#ffffff"
+            color: "#ffffff",
         }));
         this.maximumVelocity = new Vector2D(this.game.gameSettings.playerAcceleration, this.game.gameSettings.playerAcceleration).multiply(10);
         // add shadow
@@ -177,8 +177,8 @@ export class PongGame {
         this.lastFrameTime = now;
         this.world.update();
     }
-    exportState(includeSingleSync = false) {
-        let state = this.world.exportState(includeSingleSync);
+    exportState(includeStaticObjects = false) {
+        let state = this.world.exportState(includeStaticObjects);
         state["metadata"] = {
             "delta": this.delta
         };
@@ -192,7 +192,8 @@ export class PongGame {
             game: this,
             position: new Point2D(0, 0),
             name: "background",
-            constantSync: false,
+            isStatic: true,
+            zIndex: -10,
             components: [
                 new Sprite({
                     imagePath: "assets/maps/map1.png",

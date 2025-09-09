@@ -95,26 +95,6 @@ function getObjects() {
 
 const currentGameObjects = new Map<string, GameObject>();
 
-// function addObject() {
-// 	let i = 0;
-// 	while (currentGameObjects.has(i.toString()))
-// 		i++;
-
-// 	const obj = new GameObject({
-// 		components: [
-// 			new Sprite({
-// 				imagePath: "assets/ghost.png"
-// 			})
-// 		],
-// 		position: new Point2D(0, 0),
-// 		scale: new Vector2D(50, 50)
-// 	});
-// 	currentGameObjects.set("client_" + i.toString(), obj);
-// 	// console.log(objects);
-// }
-
-// addObject();
-
 
 const componentMap: Record<string, new (params: any) => any> = {
 	"Point2D": function (params: any) { return new Point2D(params.x, params.y); } as any,
@@ -191,17 +171,17 @@ window.addEventListener("DOMContentLoaded", () => {
 	});
 
 	function draw() {
-
+		const renderList = Array.from(currentGameObjects.values())
+    .sort((a, b) => a.zIndex - b.zIndex);
 
 		// -- CLEAR CANVAS --
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
 
 
 		// -- RENDER OBJECTS --
-		for (const clientObj of currentGameObjects.values()) {
+		for (const clientObj of renderList) {
 			clientObj.draw(viewport);
 		}
-
 
 		// - DEBUG VALUES --
 		if (data["metadata"]) {
@@ -218,16 +198,22 @@ window.addEventListener("DOMContentLoaded", () => {
 
 	}
 
+	function getObject(id) {
+		return currentGameObjects.get(id);
+	}
+
+	function setObject(id, object) {
+		currentGameObjects.set(id, object);
+	}
+
 	function createNewInstance(object) {
-
-
 		let clientObj;
 		
 		if (object.name === "label")
 			clientObj = new Label({ ...object, components: [] });
 		else
 			clientObj = new GameObject({ ...object, components: [] });
-		currentGameObjects.set(object["id"], clientObj);
+		setObject(object["id"], clientObj);
 
 		for (const component of object.components) {
 			const ComponentClass = componentMap[component.name];
@@ -245,7 +231,7 @@ window.addEventListener("DOMContentLoaded", () => {
 			const id = revivedObject["id"];
 
 			// -- CHECK IF CLIENT OBJECT EXISTS --
-			let clientObj = currentGameObjects.get(id);
+			let clientObj = getObject(id);
 			if (!clientObj) {
 				clientObj = createNewInstance(revivedObject);
 			}
@@ -253,7 +239,7 @@ window.addEventListener("DOMContentLoaded", () => {
 			else {
 				// -- ASSIGN CHILDREN TO PARENT --
 				for (const [i, childId] of revivedObject.children?.entries() ?? []) {
-					const childObj = currentGameObjects.get(childId);
+					const childObj = getObject(childId);
 					if (childObj) {
 						childObj.parent = clientObj;
 						clientObj.children[i] = childObj;
@@ -281,3 +267,25 @@ window.addEventListener("DOMContentLoaded", () => {
 
 
 // In that case, should I have a special class for frontend that extends sprite, which serves the prupsoe of being updated? I'm assumging the frontend won't need a lot of classes, mostly those that are supposed to be used for rendering right?
+
+
+// function addObject() {
+// 	let i = 0;
+// 	while (currentGameObjects.has(i.toString()))
+// 		i++;
+
+// 	const obj = new GameObject({
+// 		components: [
+// 			new Sprite({
+// 				imagePath: "assets/ghost.png"
+// 			})
+// 		],
+// 		position: new Point2D(0, 0),
+// 		scale: new Vector2D(50, 50)
+// 	});
+// 	currentGameObjects.set("client_" + i.toString(), obj);
+// 	// console.log(objects);
+// }
+
+// addObject();
+

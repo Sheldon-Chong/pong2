@@ -127,7 +127,7 @@ export class Padel extends GameObject {
 			text: this.player.name, 
 			position : new Point2D(0, -40), 
 			font: "15px Century Gothic", 
-			color: "#ffffff"
+			color: "#ffffff",
 		}));
 
 		this.maximumVelocity = new Vector2D(
@@ -232,8 +232,8 @@ export class PongGame {
 		this.world.update();
 	}
 
-	exportState(includeSingleSync: boolean = false) {
-		let state = this.world.exportState(includeSingleSync);
+	exportState(includeStaticObjects: boolean = false) {
+		let state = this.world.exportState(includeStaticObjects);
 		state["metadata"] = {
 			"delta": this.delta
 		}
@@ -252,8 +252,10 @@ export class PongGame {
 			game: this,
 			position: new Point2D(0,0),
 			name: "background",
-			constantSync: false,
+			isStatic: true,
+			zIndex: -10,
 			components: [
+				
 				new Sprite({
 					imagePath: "assets/maps/map1.png",
 				})
