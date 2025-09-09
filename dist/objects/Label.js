@@ -22,10 +22,8 @@ export class Label extends GameObject {
         const x = screenPos.x - textWidth / 2;
         const y = screenPos.y + textHeight / 2;
         viewport.ctx.fillText(this.text, x, y);
-        console.log("drawn");
     }
     export() {
-        console.log("exported label");
         return {
             className: this.classType,
             id: this.id,

@@ -119,12 +119,14 @@ export class Padel extends GameObject {
             if (Math.abs(this.velocity.y) < 0.1)
                 this.velocity.y = 0;
             try {
-                if (this.game.clientData.keysPressed.has("ArrowUp"))
-                    this.acceleration.y = -this.game.gameSettings.playerAcceleration;
-                else if (this.game.clientData.keysPressed.has("ArrowDown"))
-                    this.acceleration.y = this.game.gameSettings.playerAcceleration;
-                else
-                    this.acceleration.y = 0;
+                for (const client of this.game.clientData) {
+                    if (client.keysPressed.has("ArrowUp"))
+                        this.acceleration.y = -this.game.gameSettings.playerAcceleration;
+                    else if (client.keysPressed.has("ArrowDown"))
+                        this.acceleration.y = this.game.gameSettings.playerAcceleration;
+                    else
+                        this.acceleration.y = 0;
+                }
             }
             catch {
             }

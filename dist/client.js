@@ -9,19 +9,40 @@ import { PongGame } from './pong3.js';
 import { Camera } from './objects/Camera.js';
 import { Label } from './objects/Label.js';
 const ws = new WebSocket("ws://localhost:3000/ws");
+function isArrowKey(e) {
+    return e.key === "ArrowUp" || e.key === "ArrowDown";
+}
 ws.onopen = () => {
     console.log("CLIENT Connected to server");
     // Listen for keyboard events
-    window.addEventListener("keydown", (e) => {
-        if ((e.key === "ArrowUp" || e.key === "ArrowDown") &&
+    window.addEventListener("keydown", (keyEvent) => {
+        if ((isArrowKey(keyEvent)) &&
             ws.readyState === WebSocket.OPEN) {
-            ws.send(JSON.stringify({ key: e.key, type: "keydown" }));
+            ws.send(JSON.stringify({
+                type: "input",
+                payload: {
+                    key: keyEvent.key,
+                    action: "keydown"
+                }
+            }));
+        }
+        if (keyEvent.key === "a") {
+            ws.send(JSON.stringify({
+                type: "request",
+                payload: {}
+            }));
         }
     });
     window.addEventListener("keyup", (e) => {
-        if ((e.key === "ArrowUp" || e.key === "ArrowDown") &&
+        if ((isArrowKey(e)) &&
             ws.readyState === WebSocket.OPEN) {
-            ws.send(JSON.stringify({ key: e.key, type: "keyup" }));
+            ws.send(JSON.stringify({
+                type: "input",
+                payload: {
+                    key: e.key,
+                    action: "keyup"
+                }
+            }));
         }
     });
 };

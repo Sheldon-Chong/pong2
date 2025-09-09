@@ -1,59 +1,74 @@
 // server.ts
 import Fastify from "fastify";
 import websocketPlugin from "@fastify/websocket";
-
 import fastifyStatic from "@fastify/static";
 import { join } from "path";
-
 import type { WebSocket } from "@fastify/websocket";
-
 import { PongGame } from "../dist/pong3.js";
 import { Socket } from "dgram";
 import { writeFileSync } from "fs";
 import type { FastifyRequest } from "fastify";
 
+
 const fastify = Fastify();
+
+
 
 // Register WS
 await fastify.register(websocketPlugin);
-
 class Client {
   keysPressed = new Map();
-  constructor() {
+  game: PongGame;
+  socket: WebSocket;
 
-  }
-    
+  constructor() {}
+
   update(input) {
-    if (input["type"] === "keydown") {
-      this.keysPressed.set(input["key"], true);
-    } 
-    else if (input["type"] === "keyup") {
-      this.keysPressed.delete(input["key"]);
+    if (!input.payload)
+      return;
+
+    if (input.type === "input") {
+      const { key, action } = input.payload;
+      
+      if (action === "keydown") {
+        this.keysPressed.set(key, true);
+      } 
+      
+      else if (action === "keyup") {
+        this.keysPressed.delete(key);
+      }
+    }
+
+    if (input.type === "request") {
+      //send data!!
     }
   }
+
 }
 
-const client = new Client();
-const clients = new Set<WebSocket>();
+
+
+const clients = new Set<Client>();
 
 console.log("Registering WebSocket route...");
-await fastify.register(async function (fastify) {
-  fastify.get("/ws", { websocket: true }, (socket, req) => {
-    clients.add(socket);
-    console.log("!!! Client connected");
+fastify.get("/ws", { websocket: true }, (socket, req) => {
+  const player = new Client();
+  player.game = pongGame; 
+  player.socket = socket;
 
-    socket.on("message", (msg) => {
-      console.log(">>>> Received input:", msg.toString());
-      client.update(JSON.parse(msg.toString()));
-    });
+  clients.add(player);
+  console.log("!!! Client connected");
 
-    socket.on("close", () => {
-      console.log("Client disconnected");
-      clients.delete(socket);
-    });
+  socket.on("message", (msg) => {
+    const data = JSON.parse(msg.toString());
+    player.update(data); // update this player's state only
+  });
+
+  socket.on("close", () => {
+    console.log("Client disconnected");
+    clients.delete(player);
   });
 });
-
 
 
 
@@ -93,7 +108,7 @@ import { readFileSync, existsSync } from "fs";
 fastify.get("/client.js", async (_, reply) => {
   console.log(join(process.cwd(), "dist", "client.js"));
   return reply.type("application/javascript").send(
-  readFileSync(join(process.cwd(), "dist", "client.js"), "utf-8")
+    readFileSync(join(process.cwd(), "dist", "client.js"), "utf-8")
   );
 });
 
@@ -114,24 +129,20 @@ await fastify.register(fastifyStatic, {
 fastify.get("/:file", async (request: FastifyRequest<{ Params: { file: string } }>, reply) => {
   const file = request.params.file;
   if (file.endsWith(".js")) {
-  const filePath = join(process.cwd(), "dist", file);
-  if (existsSync(filePath)) {
-    return reply.type("application/javascript").send(readFileSync(filePath, "utf-8"));
-  } else {
-    return reply.code(404).send("File not found");
-  }
+    const filePath = join(process.cwd(), "dist", file);
+    if (existsSync(filePath)) {
+      return reply.type("application/javascript").send(readFileSync(filePath, "utf-8"));
+    } else {
+      return reply.code(404).send("File not found");
+    }
   }
   return reply.code(404).send("Not found");
 });
 
 
 
-
-
-
-
-const pongGame = new PongGame(client);
-
+const pongGame = new PongGame(clients);  
+// client.game = pongGame;
 
 
 
@@ -139,7 +150,7 @@ const pongGame = new PongGame(client);
 // Game loop function
 function updateGameObjects() {
   const state = pongGame.exportState();
-  // Write state to a file
+
   let output = JSON.stringify({ 
     type: "state", 
     state: state,
@@ -149,13 +160,15 @@ function updateGameObjects() {
       fps: pongGame.fps,
     }
   }, null, 2);
+
   writeFileSync("game_state.json", output,"utf-8");
 
   for (const client of clients) {
-    if (client.readyState === 1) { // 1 = OPEN
-      client.send(output);
+    if (client.socket.readyState === 1) { // 1 = OPEN
+      client.socket.send(output);
     }
   }
+
   pongGame.update();
 }
 
