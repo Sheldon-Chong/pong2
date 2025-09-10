@@ -40,15 +40,13 @@ export class Ball extends GameObject {
         this.velocity.y = clampedIntersectY * 200;
         this.rotationVelocity = 0.4;
     }
-    export() {
+    export(exportStatic = false) {
         return {
             name: this.name,
             id: this.id,
             position: this.position,
             scale: this.scale,
-            components: this.componentToJSON(),
-            // components: this.components.map
-            // children: this.children?.map(child => child.id),
+            components: this.componentToJSON(exportStatic),
         };
     }
     constructor(params) {
@@ -60,13 +58,13 @@ export class Ball extends GameObject {
         });
         this.sprite = new Sprite({
             imagePath: "assets/ball.png",
-            // glow: new Glow({
-            //     Color: "#3C2000",
-            //     Blur: 10,
-            //     OffsetX: 0,
-            //     OffsetY: 0,
-            //     blendMode: BlendMode.Multiply
-            // })
+            glow: new Glow({
+                Color: "#3C2000",
+                Blur: 10,
+                OffsetX: 0,
+                OffsetY: 0,
+                blendMode: BlendMode.Multiply
+            })
         });
         this.hitbox = new HitBox({
             host: this,

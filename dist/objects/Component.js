@@ -15,5 +15,8 @@ export class Component {
         if (this.onUpdate)
             this.onUpdate();
     }
+    export() {
+        return this;
+    }
 }
 //# sourceMappingURL=Component.js.map

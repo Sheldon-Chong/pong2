@@ -3,6 +3,7 @@ import { Glow } from './Glow.js';
 import { Component } from './Component.js';
 import { Viewport } from './Viewport.js';
 import type { Camera } from './Camera.js';
+import { pruneEmpty } from './GameObject.js';
 
 
 export interface Renderable {
@@ -37,19 +38,19 @@ export class Sprite extends Component {
 	image: HTMLImageElement;
 	imagePath: string | HTMLImageElement | null = null;
 	flippedHorizontal: boolean = false;
-	crop:boolean = false;
+	crop: boolean = false;
 	outline: Outline | null = null;
 	opacity: number = 1.0;
 	blendMode: GlobalCompositeOperation = "source-over";
-	glow: Glow| null = null;
+	glow: Glow | null = null;
 
 	config(params: Partial<Sprite> ): Sprite {
 		Object.assign(this, params);
 		return this;
 	}
 
-	toJSON() {
-		return {
+	toJSON(exportStatic: boolean = false) {
+		return pruneEmpty({
 			name: this.name, // Add this line
 			imagePath: this.imagePath,
 			flippedHorizontal: this.flippedHorizontal,
@@ -57,8 +58,8 @@ export class Sprite extends Component {
 			outline: this.outline,
 			opacity: this.opacity,
 			blendMode: this.blendMode,
-			glow: this.glow ? this.glow : null,
-		};
+			glow: this.glow
+		}, exportStatic);
 	}
 	
 	constructor(params: Partial<Sprite> = {}) {
@@ -159,24 +160,6 @@ export function drawImg(
 	const scale = sprite.host?.scale || { x: 1, y: 1 };
 	const angle = rotation;
 
-	// if (glow) {
-	//     viewport.ctx.save();
-	//     viewport.ctx.globalAlpha = opacity;
-	//     viewport.ctx.globalCompositeOperation = glow.blendMode;
-	//     viewport.ctx.translate(position.x + scale.x / 2, position.y + scale.y / 2);
-	//     viewport.ctx.rotate(angle);
-	//     viewport.ctx.scale(scale.x, scale.y);
-	//     viewport.ctx.shadowColor = glow.Color;
-	//     viewport.ctx.shadowBlur = glow.Blur;
-	//     viewport.ctx.shadowOffsetX = glow.OffsetX;
-	//     viewport.ctx.shadowOffsetY = glow.OffsetY;
-	//     if (flippedHorizontal) viewport.ctx.scale(-1, 1);
-	//     viewport.ctx.drawImage(image, -scale.x / 2, -scale.y / 2, scale.x, scale.y);
-	//     viewport.ctx.restore();
-	// }
-
-	// console.log("scale", scale);
-
 	viewport.ctx.save();
 	viewport.ctx.globalAlpha = opacity;
 	viewport.ctx.globalCompositeOperation = blendMode;
@@ -184,6 +167,24 @@ export function drawImg(
 	viewport.ctx.rotate(angle);
 	if (flippedHorizontal) viewport.ctx.scale(-1, 1);
 	
+	if (glow) {
+		viewport.ctx.save();
+
+		// apply glow-specific blend mode
+		viewport.ctx.globalCompositeOperation = glow.blendMode;
+
+		viewport.ctx.shadowColor = glow.Color;
+		viewport.ctx.shadowBlur = glow.Blur;
+		viewport.ctx.shadowOffsetX = glow.OffsetX;
+		viewport.ctx.shadowOffsetY = glow.OffsetY;
+
+		// draw the image once with glow settings
+		viewport.ctx.drawImage(image, -scale.x / 2, -scale.y / 2, scale.x, scale.y);
+
+		viewport.ctx.restore();
+	}
+
+
 	if (outline instanceof Outline) {
 
 		viewport.ctx.beginPath();

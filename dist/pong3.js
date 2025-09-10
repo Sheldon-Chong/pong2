@@ -155,7 +155,7 @@ export class Padel extends GameObject {
     }
 }
 const players = [
-    new Player({ name: "player1asjdklasd", skin: "ghost_light" }),
+    new Player({ name: "test", skin: "ghost_light" }),
     new Player({ name: "player2", profileImage: "assets/profile2.webp" }),
     new Player({ name: "player3" }),
     new Player({ name: "player4" }),
@@ -256,16 +256,4 @@ export class PongGame {
 // idea: have a handshake system SPECIFICALLY for creating objects,
 // idea STATIC OBJECTS
 // however, object properties are streamed
-// for (const obj of this.exportBackLog) {
-// 	console.log("lol");
-// 	flatObjects.push({
-// 		name: "test",
-// 		id: obj.id,
-// 		position: obj.position,
-// 		scale: obj.scale,
-// 		rotation: obj.rotation,
-// 		components: obj.componentToJSON(),
-// 		children: [],
-// 	});
-// }
 //# sourceMappingURL=pong3.js.map

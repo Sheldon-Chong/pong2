@@ -21,13 +21,8 @@ function isArrowKey(e: KeyboardEvent): boolean {
 
 ws.onopen = () => {
 	console.log("CLIENT Connected to server");
+  ws.send(JSON.stringify({ type: "ready" }));
 
-	ws.send(JSON.stringify({
-		type: "request",
-		payload: {
-
-		}
-	}));
 
 	
 	// Listen for keyboard events
@@ -72,11 +67,27 @@ ws.onopen = () => {
 };
 
 let data = {}
+let test = false;
 
+// todo !!!!! HERE
 ws.onmessage = (event) => {
-	// console.log(data);
 	data = JSON.parse(event.data);
-	// console.log(data);
+
+	if (data["type"] === "ready") {
+		console.log("ready");
+		ws.send(JSON.stringify({
+			type: "request",
+			payload: {}
+		}));
+		test = true;
+	}
+
+	// for (const object of currentGameObjects.values()) {
+	// 	if (object.name === "background") {
+	// 		// console.log("bg");
+
+	// 	}
+	// }
 };
 
 ws.onclose = () => {
@@ -100,9 +111,10 @@ const componentMap: Record<string, new (params: any) => any> = {
 	"Point2D": function (params: any) { return new Point2D(params.x, params.y); } as any,
 	"Vector2D": function (params: any) { return new Vector2D(params.x, params.y); } as any,
 	"sprite": Sprite,
+	"glow": Glow,
 	"hitbox": HitBox,
-	"camera": Camera,
-	"label": Label
+	// "camera": Camera,
+	// "label": Label
 };
 
 function revive(obj: any): any {
@@ -132,6 +144,11 @@ function genericUpdate(
 ) {
 	for (const key in params) {
 		if (key === "parent" || key === "children") continue;
+
+		if (key === "OfssetX") {
+			console.log("vow");
+		}
+
 		const value = params[key];
 
 		if (Array.isArray(value)) {
@@ -209,12 +226,16 @@ window.addEventListener("DOMContentLoaded", () => {
 	function createNewInstance(object) {
 		let clientObj;
 		
-		if (object.name === "label")
+		if (object.className === "label") {
 			clientObj = new Label({ ...object, components: [] });
+		}
 		else
 			clientObj = new GameObject({ ...object, components: [] });
 		setObject(object["id"], clientObj);
 
+
+		if (!object.components)
+			return clientObj;
 		for (const component of object.components) {
 			const ComponentClass = componentMap[component.name];
 			if (ComponentClass) {

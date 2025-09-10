@@ -73,7 +73,7 @@ export class GameWorld {
             if (obj.isStatic === true // if only exports once
                 && !includeStaticObjects)
                 return;
-            flatObjects.push(obj.export());
+            flatObjects.push(obj.export(includeStaticObjects));
             if (obj.children && obj.children.length > 0) {
                 for (const child of obj.children)
                     flatten(child);

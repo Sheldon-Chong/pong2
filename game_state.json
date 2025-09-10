@@ -3,13 +3,14 @@
   "state": {
     "camera": {
       "position": {
-        "x": 806.0344011510898,
+        "x": -310.70678355011364,
         "y": 0,
         "className": "Point2D"
       }
     },
     "gameObjects": [
       {
+        "name": "label",
         "className": "label",
         "id": 1,
         "position": {
@@ -21,19 +22,14 @@
           "x": 10,
           "y": 10
         },
-        "rotation": 0,
-        "components": [],
-        "children": [],
-        "text": "test",
-        "font": "15px Century Gothic",
-        "color": "#ffffff"
+        "rotation": 0
       },
       {
         "name": "padel",
         "id": 2,
         "position": {
           "x": -250,
-          "y": -101.69107161847666,
+          "y": -137.67006337838293,
           "className": "Point2D"
         },
         "scale": {
@@ -42,6 +38,9 @@
         },
         "rotation": 0,
         "zIndex": 0,
+        "children": [
+          3
+        ],
         "components": [
           {
             "name": "hitbox",
@@ -51,13 +50,9 @@
           },
           {
             "name": "sprite",
-            "renderable": true,
-            "enabled": true,
-            "Renderable": true,
             "imagePath": "assets/skins/ghost_light.png",
             "flippedHorizontal": true,
             "crop": false,
-            "outline": null,
             "opacity": 1,
             "blendMode": "source-over",
             "glow": {
@@ -68,12 +63,10 @@
               "blendMode": "multiply"
             }
           }
-        ],
-        "children": [
-          3
         ]
       },
       {
+        "name": "label",
         "className": "label",
         "id": 3,
         "position": {
@@ -85,19 +78,14 @@
           "x": 10,
           "y": 10
         },
-        "rotation": 0,
-        "components": [],
-        "children": [],
-        "text": "player1asjdklasd",
-        "font": "15px Century Gothic",
-        "color": "#ffffff"
+        "rotation": 0
       },
       {
         "name": "padel",
         "id": 4,
         "position": {
           "x": 250,
-          "y": -101.69107161847666,
+          "y": -137.67006337838293,
           "className": "Point2D"
         },
         "scale": {
@@ -106,6 +94,9 @@
         },
         "rotation": 0,
         "zIndex": 0,
+        "children": [
+          5
+        ],
         "components": [
           {
             "name": "hitbox",
@@ -115,13 +106,9 @@
           },
           {
             "name": "sprite",
-            "renderable": true,
-            "enabled": true,
-            "Renderable": true,
             "imagePath": "assets/skins/ghost_dark.png",
             "flippedHorizontal": false,
             "crop": false,
-            "outline": null,
             "opacity": 1,
             "blendMode": "source-over",
             "glow": {
@@ -132,12 +119,10 @@
               "blendMode": "multiply"
             }
           }
-        ],
-        "children": [
-          5
         ]
       },
       {
+        "name": "label",
         "className": "label",
         "id": 5,
         "position": {
@@ -149,19 +134,14 @@
           "x": 10,
           "y": 10
         },
-        "rotation": 0,
-        "components": [],
-        "children": [],
-        "text": "player2",
-        "font": "15px Century Gothic",
-        "color": "#ffffff"
+        "rotation": 0
       },
       {
         "name": "padel",
         "id": 6,
         "position": {
           "x": -650,
-          "y": -101.69107161847666,
+          "y": -137.67006337838293,
           "className": "Point2D"
         },
         "scale": {
@@ -170,6 +150,9 @@
         },
         "rotation": 0,
         "zIndex": 0,
+        "children": [
+          7
+        ],
         "components": [
           {
             "name": "hitbox",
@@ -179,13 +162,9 @@
           },
           {
             "name": "sprite",
-            "renderable": true,
-            "enabled": true,
-            "Renderable": true,
             "imagePath": "assets/skins/ghost_dark.png",
             "flippedHorizontal": true,
             "crop": false,
-            "outline": null,
             "opacity": 1,
             "blendMode": "source-over",
             "glow": {
@@ -196,12 +175,10 @@
               "blendMode": "multiply"
             }
           }
-        ],
-        "children": [
-          7
         ]
       },
       {
+        "name": "label",
         "className": "label",
         "id": 7,
         "position": {
@@ -213,19 +190,14 @@
           "x": 10,
           "y": 10
         },
-        "rotation": 0,
-        "components": [],
-        "children": [],
-        "text": "player3",
-        "font": "15px Century Gothic",
-        "color": "#ffffff"
+        "rotation": 0
       },
       {
         "name": "padel",
         "id": 8,
         "position": {
           "x": 650,
-          "y": -101.69107161847666,
+          "y": -137.67006337838293,
           "className": "Point2D"
         },
         "scale": {
@@ -234,6 +206,9 @@
         },
         "rotation": 0,
         "zIndex": 0,
+        "children": [
+          9
+        ],
         "components": [
           {
             "name": "hitbox",
@@ -243,13 +218,9 @@
           },
           {
             "name": "sprite",
-            "renderable": true,
-            "enabled": true,
-            "Renderable": true,
             "imagePath": "assets/skins/ghost_dark.png",
             "flippedHorizontal": false,
             "crop": false,
-            "outline": null,
             "opacity": 1,
             "blendMode": "source-over",
             "glow": {
@@ -260,12 +231,10 @@
               "blendMode": "multiply"
             }
           }
-        ],
-        "children": [
-          9
         ]
       },
       {
+        "name": "label",
         "className": "label",
         "id": 9,
         "position": {
@@ -277,19 +246,14 @@
           "x": 10,
           "y": 10
         },
-        "rotation": 0,
-        "components": [],
-        "children": [],
-        "text": "player4",
-        "font": "15px Century Gothic",
-        "color": "#ffffff"
+        "rotation": 0
       },
       {
         "name": "padel",
         "id": 10,
         "position": {
           "x": -1050,
-          "y": -101.69107161847666,
+          "y": -137.67006337838293,
           "className": "Point2D"
         },
         "scale": {
@@ -298,6 +262,9 @@
         },
         "rotation": 0,
         "zIndex": 0,
+        "children": [
+          11
+        ],
         "components": [
           {
             "name": "hitbox",
@@ -307,13 +274,9 @@
           },
           {
             "name": "sprite",
-            "renderable": true,
-            "enabled": true,
-            "Renderable": true,
             "imagePath": "assets/skins/ghost_dark.png",
             "flippedHorizontal": true,
             "crop": false,
-            "outline": null,
             "opacity": 1,
             "blendMode": "source-over",
             "glow": {
@@ -324,12 +287,10 @@
               "blendMode": "multiply"
             }
           }
-        ],
-        "children": [
-          11
         ]
       },
       {
+        "name": "label",
         "className": "label",
         "id": 11,
         "position": {
@@ -341,19 +302,14 @@
           "x": 10,
           "y": 10
         },
-        "rotation": 0,
-        "components": [],
-        "children": [],
-        "text": "player5",
-        "font": "15px Century Gothic",
-        "color": "#ffffff"
+        "rotation": 0
       },
       {
         "name": "padel",
         "id": 12,
         "position": {
           "x": 1050,
-          "y": -101.69107161847666,
+          "y": -137.67006337838293,
           "className": "Point2D"
         },
         "scale": {
@@ -362,6 +318,9 @@
         },
         "rotation": 0,
         "zIndex": 0,
+        "children": [
+          13
+        ],
         "components": [
           {
             "name": "hitbox",
@@ -371,13 +330,9 @@
           },
           {
             "name": "sprite",
-            "renderable": true,
-            "enabled": true,
-            "Renderable": true,
             "imagePath": "assets/skins/ghost_dark.png",
             "flippedHorizontal": false,
             "crop": false,
-            "outline": null,
             "opacity": 1,
             "blendMode": "source-over",
             "glow": {
@@ -388,12 +343,10 @@
               "blendMode": "multiply"
             }
           }
-        ],
-        "children": [
-          13
         ]
       },
       {
+        "name": "label",
         "className": "label",
         "id": 13,
         "position": {
@@ -405,19 +358,14 @@
           "x": 10,
           "y": 10
         },
-        "rotation": 0,
-        "components": [],
-        "children": [],
-        "text": "player6",
-        "font": "15px Century Gothic",
-        "color": "#ffffff"
+        "rotation": 0
       },
       {
         "name": "ball",
         "id": 14,
         "position": {
-          "x": 1067.3173255000002,
-          "y": -3.409876995975712,
+          "x": -470.54455750000034,
+          "y": -77.59017754806908,
           "className": "Point2D"
         },
         "scale": {
@@ -433,16 +381,18 @@
           },
           {
             "name": "sprite",
-            "renderable": true,
-            "enabled": true,
-            "Renderable": true,
             "imagePath": "assets/ball.png",
             "flippedHorizontal": false,
             "crop": false,
-            "outline": null,
             "opacity": 1,
             "blendMode": "source-over",
-            "glow": null
+            "glow": {
+              "Color": "#3C2000",
+              "Blur": 10,
+              "OffsetX": 0,
+              "OffsetY": 0,
+              "blendMode": "multiply"
+            }
           }
         ]
       },
@@ -450,7 +400,7 @@
         "name": "camera",
         "id": 15,
         "position": {
-          "x": 806.0344011510898,
+          "x": -310.70678355011364,
           "y": 0,
           "className": "Point2D"
         },
@@ -459,17 +409,16 @@
           "y": 10
         },
         "rotation": 0,
-        "zIndex": 0,
-        "components": []
+        "zIndex": 0
       }
     ],
     "metadata": {
-      "delta": 0.017249174999999013
+      "delta": 0.014427115999999842
     }
   },
   "metadata": {
-    "timestamp": 1757399046097,
-    "delta": 0.017249174999999013,
+    "timestamp": 1757485100501,
+    "delta": 0.014427115999999842,
     "fps": 0
   }
 }

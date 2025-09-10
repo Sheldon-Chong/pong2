@@ -21,6 +21,37 @@ const RenderableMarker = Symbol("Renderable");
 // 		}
 // }
 
+function ownsProperty(obj: object, key: PropertyKey): boolean {
+  return Object.prototype.hasOwnProperty.call(obj, key);
+}
+
+export function pruneEmpty<T extends Record<string, any>>(
+	obj: T,
+	exportStatic: boolean = false
+): T {
+  const result: any = {};
+  for (const [key, value] of Object.entries(obj)) {
+    if (value === undefined || value === null) 
+			continue;
+    
+		if (Array.isArray(value) && value.length === 0) 
+			continue;
+    
+		if (typeof value === "object" && !Array.isArray(value) && Object.keys(value).length === 0) 
+			continue;
+
+		if (key.startsWith("STATIC_")) {
+			if (exportStatic) {
+				result[key.slice("STATIC_".length)] = value;
+				console.log("exported as", value);
+			} 
+		}
+		else {
+			result[key] = value;
+		}
+  }
+  return result;
+}
 
 export class GameObject {
 
@@ -135,15 +166,19 @@ export class GameObject {
 		return parentScale.multiply(this.scale);
 	}
 
-	componentToJSON() {
+	componentToJSON(exportStatic: boolean = false) {
 		return this.components.map(component => {
-			const json: Record<string, any> = {};
+			if (typeof (component as any).toJSON === "function") {
+				return (component as any).toJSON(exportStatic);
+			}
+
+			const componentJson: Record<string, any> = {};
 			for (const key in component) {
-				if (key !== "host" && Object.prototype.hasOwnProperty.call(component, key)) {
-					json[key] = (component as any)[key];
+				if (key !== "host" && ownsProperty(component, key)) {
+					componentJson[key] = (component as any)[key];
 				}
 			}
-			return json;
+			return componentJson;
 		});
 	}
 
@@ -172,18 +207,18 @@ export class GameObject {
 		}
 	}
 
-	export (): any {
-		return {
+	export(exportStatic: boolean = false): any {
+		const json: any = {
 			name: this.name,
 			id: this.id,
 			position: this.position,
-			scale: this.scale,	
+			scale: this.scale,
 			rotation: this.rotation,
 			zIndex: this.zIndex,
+			children: this.children.map(child => child.id),
 			components: this.componentToJSON(),
-			...(this.children && this.children.length > 0
-				? { children: this.children.map(child => child.id) }
-				: {}), // className: "className" in this ? (this as any).className : undefined
-		}
+		};
+
+		return pruneEmpty(json, exportStatic);
 	}
 }

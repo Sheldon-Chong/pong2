@@ -4,9 +4,9 @@ export declare class Label extends GameObject {
     text: string;
     font: string;
     color: string;
-    classType: string;
+    className: string;
     constructor(params: any);
     draw(viewport: Viewport): void;
-    export(): any;
+    export(exportStatic?: boolean): any;
 }
 //# sourceMappingURL=Label.d.ts.map

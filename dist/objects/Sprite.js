@@ -2,6 +2,7 @@ import { Point2D, Vector2D } from './Coordinates.js';
 import { Glow } from './Glow.js';
 import { Component } from './Component.js';
 import { Viewport } from './Viewport.js';
+import { pruneEmpty } from './GameObject.js';
 export var Tags;
 (function (Tags) {
     Tags["Renderable"] = "Renderable";
@@ -32,8 +33,8 @@ export class Sprite extends Component {
         Object.assign(this, params);
         return this;
     }
-    toJSON() {
-        return {
+    toJSON(exportStatic = false) {
+        return pruneEmpty({
             name: this.name, // Add this line
             imagePath: this.imagePath,
             flippedHorizontal: this.flippedHorizontal,
@@ -41,8 +42,8 @@ export class Sprite extends Component {
             outline: this.outline,
             opacity: this.opacity,
             blendMode: this.blendMode,
-            glow: this.glow ? this.glow : null,
-        };
+            glow: this.glow
+        }, exportStatic);
     }
     constructor(params = {}) {
         super({
@@ -102,22 +103,6 @@ export function drawImg(viewport, sprite, params = {}, camera = null) {
     const rotation = sprite.host?.rotation || 0;
     const scale = sprite.host?.scale || { x: 1, y: 1 };
     const angle = rotation;
-    // if (glow) {
-    //     viewport.ctx.save();
-    //     viewport.ctx.globalAlpha = opacity;
-    //     viewport.ctx.globalCompositeOperation = glow.blendMode;
-    //     viewport.ctx.translate(position.x + scale.x / 2, position.y + scale.y / 2);
-    //     viewport.ctx.rotate(angle);
-    //     viewport.ctx.scale(scale.x, scale.y);
-    //     viewport.ctx.shadowColor = glow.Color;
-    //     viewport.ctx.shadowBlur = glow.Blur;
-    //     viewport.ctx.shadowOffsetX = glow.OffsetX;
-    //     viewport.ctx.shadowOffsetY = glow.OffsetY;
-    //     if (flippedHorizontal) viewport.ctx.scale(-1, 1);
-    //     viewport.ctx.drawImage(image, -scale.x / 2, -scale.y / 2, scale.x, scale.y);
-    //     viewport.ctx.restore();
-    // }
-    // console.log("scale", scale);
     viewport.ctx.save();
     viewport.ctx.globalAlpha = opacity;
     viewport.ctx.globalCompositeOperation = blendMode;
@@ -125,6 +110,18 @@ export function drawImg(viewport, sprite, params = {}, camera = null) {
     viewport.ctx.rotate(angle);
     if (flippedHorizontal)
         viewport.ctx.scale(-1, 1);
+    if (glow) {
+        viewport.ctx.save();
+        // apply glow-specific blend mode
+        viewport.ctx.globalCompositeOperation = glow.blendMode;
+        viewport.ctx.shadowColor = glow.Color;
+        viewport.ctx.shadowBlur = glow.Blur;
+        viewport.ctx.shadowOffsetX = glow.OffsetX;
+        viewport.ctx.shadowOffsetY = glow.OffsetY;
+        // draw the image once with glow settings
+        viewport.ctx.drawImage(image, -scale.x / 2, -scale.y / 2, scale.x, scale.y);
+        viewport.ctx.restore();
+    }
     if (outline instanceof Outline) {
         viewport.ctx.beginPath();
         viewport.ctx.strokeStyle = "black";

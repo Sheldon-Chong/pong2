@@ -1,13 +1,15 @@
 import { Point2D, Vector2D, interpolate, randomBetween } from './Coordinates.js';
-import { GameObject } from './GameObject.js';
+import { GameObject, pruneEmpty } from './GameObject.js';
 import { PongGame } from '../pong3.js';
 import { type Renderable } from './Sprite.js';
 import { Viewport } from './Viewport.js';
+
+
 export class Label extends GameObject {
-    public text: string;
+    public text: string = "default";
     public font: string = "20px Avant ";
     public color: string = "black";
-    classType: string = "label";
+    className: string = "label";
 
     constructor(params) {
         super({ game: params.game, name: "label"});
@@ -27,20 +29,20 @@ export class Label extends GameObject {
     }
 
 
-    export(): any {
-        return {
-            className: this.classType,
+    export(exportStatic: boolean = false): any {
+        return pruneEmpty ({
+            name: this.name,
+            className: this.className,
             id: this.id,
             position: this.position,
             scale: this.scale,
             rotation: this.rotation,
-            components: this.componentToJSON(),
+            components: this.componentToJSON(exportStatic),
             children: this.children?.map(child => child.id),
-            text: this.text,
-            font: this.font,
-            color: this.color
-            // className: "className" in this ? (this as any).className : undefined
-        }
+            STATIC_text: this.text,
+            STATIC_font: this.font,
+            STATIC_color: this.color
+        }, exportStatic);
     }
 }
 

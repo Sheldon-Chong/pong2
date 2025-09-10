@@ -28,7 +28,7 @@ export declare class Sprite extends Component {
     blendMode: GlobalCompositeOperation;
     glow: Glow | null;
     config(params: Partial<Sprite>): Sprite;
-    toJSON(): {
+    toJSON(exportStatic?: boolean): {
         name: string;
         imagePath: string | HTMLImageElement;
         flippedHorizontal: boolean;

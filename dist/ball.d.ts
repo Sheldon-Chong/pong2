@@ -12,12 +12,12 @@ export declare class Ball extends GameObject {
     sprite: Sprite;
     init(): void;
     calculateAngle(other: Padel): void;
-    export(): {
+    export(exportStatic?: boolean): {
         name: string;
         id: number;
         position: Point2D;
         scale: Vector2D;
-        components: Record<string, any>[];
+        components: any[];
     };
     constructor(params: {
         position: Point2D;

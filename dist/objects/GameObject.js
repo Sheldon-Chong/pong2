@@ -15,6 +15,30 @@ const RenderableMarker = Symbol("Renderable");
 // 				}
 // 		}
 // }
+function ownsProperty(obj, key) {
+    return Object.prototype.hasOwnProperty.call(obj, key);
+}
+export function pruneEmpty(obj, exportStatic = false) {
+    const result = {};
+    for (const [key, value] of Object.entries(obj)) {
+        if (value === undefined || value === null)
+            continue;
+        if (Array.isArray(value) && value.length === 0)
+            continue;
+        if (typeof value === "object" && !Array.isArray(value) && Object.keys(value).length === 0)
+            continue;
+        if (key.startsWith("STATIC_")) {
+            if (exportStatic) {
+                result[key.slice("STATIC_".length)] = value;
+                console.log("exported as", value);
+            }
+        }
+        else {
+            result[key] = value;
+        }
+    }
+    return result;
+}
 export class GameObject {
     game;
     id;
@@ -90,15 +114,18 @@ export class GameObject {
         const parentScale = this.parent.getWorldScale();
         return parentScale.multiply(this.scale);
     }
-    componentToJSON() {
+    componentToJSON(exportStatic = false) {
         return this.components.map(component => {
-            const json = {};
+            if (typeof component.toJSON === "function") {
+                return component.toJSON(exportStatic);
+            }
+            const componentJson = {};
             for (const key in component) {
-                if (key !== "host" && Object.prototype.hasOwnProperty.call(component, key)) {
-                    json[key] = component[key];
+                if (key !== "host" && ownsProperty(component, key)) {
+                    componentJson[key] = component[key];
                 }
             }
-            return json;
+            return componentJson;
         });
     }
     draw(viewport) {
@@ -133,19 +160,18 @@ export class GameObject {
             }
         }
     }
-    export() {
-        return {
+    export(exportStatic = false) {
+        const json = {
             name: this.name,
             id: this.id,
             position: this.position,
             scale: this.scale,
             rotation: this.rotation,
             zIndex: this.zIndex,
+            children: this.children.map(child => child.id),
             components: this.componentToJSON(),
-            ...(this.children && this.children.length > 0
-                ? { children: this.children.map(child => child.id) }
-                : {}), // className: "className" in this ? (this as any).className : undefined
         };
+        return pruneEmpty(json, exportStatic);
     }
 }
 //# sourceMappingURL=GameObject.js.map

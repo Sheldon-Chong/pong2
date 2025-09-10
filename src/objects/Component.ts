@@ -6,18 +6,22 @@ export class Component {
     enabled: boolean = true;
     host: GameObject | null;
 
-	public onUpdate?: () => void;
+    public onUpdate?: () => void;
 
     constructor(params: Partial<Component>) {
         Object.assign(this, params);
     }
 
     init(): Component {
-        return this;   
+        return this;
     }
 
     update() {
         if (this.onUpdate)
             this.onUpdate();
+    }
+
+    export() {
+        return this;
     }
 }

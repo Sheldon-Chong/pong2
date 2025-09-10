@@ -12,6 +12,7 @@ import type { FastifyRequest } from "fastify";
 
 const fastify = Fastify();
 
+let outputList = [];
 
 
 // Register WS
@@ -40,7 +41,7 @@ class Client {
     }
 
     if (input.type === "request") {
-      this.socket.send(compile(true));
+      outputList.push(compile(true));
     }
   }
 
@@ -61,6 +62,13 @@ fastify.get("/ws", { websocket: true }, (socket, req) => {
 
   socket.on("message", (msg) => {
     const data = JSON.parse(msg.toString());
+    if (data["type"] === "ready") {
+      console.log("readdy");
+      player.socket.send(JSON.stringify({
+        type: "ready",
+        payload: {}
+      }))
+    }
     player.update(data); // update this player's state only
   });
 
@@ -158,8 +166,10 @@ function compile(includeStaticObjects: boolean) {
       fps: pongGame.fps,
     }
   }, null, 2);
+
   return output;
 }
+
 
 // Game loop function
 function updateGameObjects() {
@@ -171,6 +181,11 @@ function updateGameObjects() {
   for (const client of clients) {
     if (client.socket.readyState === 1) { // 1 = OPEN
       client.socket.send(output);
+      while (outputList.length > 0) {
+        console.log("sending");
+        client.socket.send(outputList[outputList.length - 1]);
+        outputList.pop();
+      }
     }
   }
 

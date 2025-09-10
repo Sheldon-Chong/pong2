@@ -8,5 +8,6 @@ export declare class Component {
     constructor(params: Partial<Component>);
     init(): Component;
     update(): void;
+    export(): this;
 }
 //# sourceMappingURL=Component.d.ts.map

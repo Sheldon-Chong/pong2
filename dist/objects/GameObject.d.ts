@@ -2,6 +2,7 @@ import { Point2D, Vector2D } from './Coordinates.js';
 import type { PongGame } from '../pong3.js';
 import type { Viewport } from './Viewport.js';
 import { Component } from './Component.js';
+export declare function pruneEmpty<T extends Record<string, any>>(obj: T, exportStatic?: boolean): T;
 export declare class GameObject {
     game: PongGame;
     id: number;
@@ -29,8 +30,8 @@ export declare class GameObject {
     update(): void;
     getWorldPosition(added?: Vector2D): Point2D;
     getWorldScale(): Vector2D;
-    componentToJSON(): Record<string, any>[];
+    componentToJSON(exportStatic?: boolean): any[];
     draw(viewport: Viewport): void;
-    export(): any;
+    export(exportStatic?: boolean): any;
 }
 //# sourceMappingURL=GameObject.d.ts.map
