@@ -126,12 +126,16 @@ export class GameObject {
     draw(viewport) {
         // Draw this object's components
         for (const component of this.getComponents()) {
+            if (component === null || component.host === null) {
+                continue;
+            }
             if (component.name === "sprite") {
                 try {
                     component.draw(viewport);
-                } //todo!!! ISSUE HERE. Cannot simply pass a camera instance. This is the frontend we're talkin about
+                }
                 catch (error) {
                     console.log("CAMERA", error);
+                    console.log("component", component);
                 }
             }
             if (component.name === "hitbox") {

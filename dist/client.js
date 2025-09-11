@@ -184,13 +184,19 @@ window.addEventListener("DOMContentLoaded", () => {
         setObject(object["id"], clientObj);
         if (!object.components)
             return clientObj;
-        for (const component of object.components) {
-            const ComponentClass = componentMap[component.name];
-            if (ComponentClass) {
-                const newComponent = new ComponentClass(component);
-                clientObj.addComponent(newComponent);
-            }
+        const new_components = new Map();
+        for (const number in object.components) {
+            new_components.set(Number(number), null);
         }
+        clientObj.components = new_components;
+        //todo HERERERERERER!!
+        // for (const component of object.components) {
+        // 	const ComponentClass = componentMap[component.name];
+        // 	if (ComponentClass) {
+        // 		const newComponent = new ComponentClass(component);
+        // 		clientObj.addComponent(newComponent);
+        // 	}
+        // }
         return clientObj;
     }
     const componentRegistry = new Map();
@@ -202,10 +208,10 @@ window.addEventListener("DOMContentLoaded", () => {
             }
             else {
                 const componentConstructor = classMap[component.name];
-                let instance;
-                if (componentConstructor)
-                    instance = new componentConstructor();
-                componentRegistry.set(component.id, new Component(instance));
+                if (componentConstructor) {
+                    const instance = new componentConstructor();
+                    componentRegistry.set(component.id, instance);
+                }
             }
         }
         for (const object of client_objects) {
@@ -229,6 +235,18 @@ window.addEventListener("DOMContentLoaded", () => {
                 genericUpdate(clientObj, revivedObject, clientObj.cache);
                 for (const [, obj] of currentGameObjects.entries()) {
                 }
+                clientObj.components.forEach((value, key) => {
+                    if (value === null) {
+                        console.log("vow");
+                        const component = componentRegistry.get(key);
+                        if (component) {
+                            clientObj.addComponent(component);
+                            // (clientObj.components as Map<number, Component>).set(key, component);
+                            // component.host = clientObj;
+                        }
+                    }
+                });
+                console.log(clientObj.components);
                 // -- CAMERA --
                 if (revivedObject["name"] === "camera") {
                     game.camera = revivedObject;
