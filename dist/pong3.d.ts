@@ -52,6 +52,7 @@ export declare class PongGame {
             position: Point2D;
         };
         gameObjects: any[];
+        components: any[];
     };
     constructor(clientData: any);
 }

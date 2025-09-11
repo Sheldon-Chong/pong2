@@ -19,3 +19,12 @@ every iteration, and has no bearing on the server
 
 
 create a request for game state function by client. ONCE client connects, it will request game state, so server isn't forced to send         only once.
+
+
+
+
+
+1. parse  objects in search of components. export components seperate from game objects. 
+2. Game objects now store ids to components
+3. 
+

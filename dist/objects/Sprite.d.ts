@@ -29,6 +29,7 @@ export declare class Sprite extends Component {
     glow: Glow | null;
     config(params: Partial<Sprite>): Sprite;
     toJSON(exportStatic?: boolean): {
+        id: number;
         name: string;
         imagePath: string | HTMLImageElement;
         flippedHorizontal: boolean;

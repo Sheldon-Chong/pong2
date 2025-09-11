@@ -8,6 +8,7 @@ import { Viewport } from './objects/Viewport.js';
 import { PongGame } from './pong3.js';
 import { Camera } from './objects/Camera.js';
 import { Label } from './objects/Label.js';
+import { Component } from './objects/Component.js';
 const ws = new WebSocket("ws://localhost:3000/ws");
 function isArrowKey(e) {
     return e.key === "ArrowUp" || e.key === "ArrowDown";
@@ -70,6 +71,12 @@ function getObjects() {
     }
     return [];
 }
+function getComponents() {
+    if (data["state"] && Array.isArray(data["state"]["components"])) {
+        return data["state"]["components"];
+    }
+    return [];
+}
 const currentGameObjects = new Map();
 const componentMap = {
     "Point2D": function (params) { return new Point2D(params.x, params.y); },
@@ -77,6 +84,11 @@ const componentMap = {
     "sprite": Sprite,
     "glow": Glow,
     "hitbox": HitBox,
+};
+const classMap = {
+    "sprite": Sprite,
+    "glow": Glow,
+    "hitbox": HitBox
 };
 function revive(obj) {
     if (Array.isArray(obj)) {
@@ -177,13 +189,25 @@ window.addEventListener("DOMContentLoaded", () => {
             if (ComponentClass) {
                 const newComponent = new ComponentClass(component);
                 clientObj.addComponent(newComponent);
-                console.log("componnet", typeof newComponent);
             }
         }
         return clientObj;
     }
+    const componentRegistry = new Map();
     function loop() {
         let client_objects = getObjects();
+        let components = getComponents();
+        for (const component of components) {
+            if (componentRegistry.has(component.id)) {
+            }
+            else {
+                const componentConstructor = classMap[component.name];
+                let instance;
+                if (componentConstructor)
+                    instance = new componentConstructor();
+                componentRegistry.set(component.id, new Component(instance));
+            }
+        }
         for (const object of client_objects) {
             const revivedObject = revive(object);
             const id = revivedObject["id"];

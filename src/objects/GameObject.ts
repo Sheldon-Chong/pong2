@@ -96,7 +96,7 @@ export class GameObject {
 	}
 
 	addComponent(component: Component) {
-		this.components.set(component.id, component);
+		(this.components as Map<number, Component>).set(component.id, component);
 		component.host = this;
 		component.init();
 		return component;
@@ -201,7 +201,7 @@ export class GameObject {
 		}
 	}
 
-	export(exportStatic: boolean = false): any {
+	export(exportStatic: boolean = false): Record<string, any> {
 		const json: any = {
 			name: this.name,
 			id: this.id,

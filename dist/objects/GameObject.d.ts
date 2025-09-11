@@ -32,6 +32,6 @@ export declare class GameObject {
     getWorldScale(): Vector2D;
     componentToJSON(exportStatic?: boolean): any[];
     draw(viewport: Viewport): void;
-    export(exportStatic?: boolean): any;
+    export(exportStatic?: boolean): Record<string, any>;
 }
 //# sourceMappingURL=GameObject.d.ts.map

@@ -35,6 +35,7 @@ export class Sprite extends Component {
     }
     toJSON(exportStatic = false) {
         return pruneEmpty({
+            id: this.id,
             name: this.name, // Add this line
             imagePath: this.imagePath,
             flippedHorizontal: this.flippedHorizontal,
@@ -50,6 +51,7 @@ export class Sprite extends Component {
             name: "sprite",
             renderable: true,
         });
+        console.log("sprite created");
         Object.assign(this, params);
     }
     init() {

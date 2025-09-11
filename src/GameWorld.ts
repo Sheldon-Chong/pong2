@@ -76,6 +76,9 @@ export class GameWorld {
     const visited = new Set();
     const flatObjects: any[] = [];
 
+    const components = [];
+    
+
     function flatten(obj) {
       if (!obj || visited.has(obj.id)) return;
       visited.add(obj.id);
@@ -86,7 +89,18 @@ export class GameWorld {
       if (obj.isStatic === true // if only exports once
         && !includeStaticObjects)
         return
-      flatObjects.push(obj.export(includeStaticObjects));
+      let staticObjects = obj.export(includeStaticObjects);
+      console.log(staticObjects);
+
+      let keysWithId = []
+      for (const [key, component] of obj.components) {
+        if (component.id) 
+          keysWithId.push(key);
+      }
+
+      staticObjects.components = keysWithId;
+      flatObjects.push(staticObjects);
+      components.push(...obj.componentToJSON());
 
       if (obj.children && obj.children.length > 0) {
         for (const child of obj.children)
@@ -101,11 +115,17 @@ export class GameWorld {
 
     this.exportBackLog.length = 0;
 
+
+    for (const component of components) {
+      console.log(component);
+    }
+
     return {
       camera: {
         position: this.camera?.position
       },
       gameObjects: flatObjects,
+      components: components
     };
   }
 }

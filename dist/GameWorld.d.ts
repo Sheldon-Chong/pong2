@@ -20,6 +20,7 @@ export declare class GameWorld {
             position: Point2D;
         };
         gameObjects: any[];
+        components: any[];
     };
 }
 //# sourceMappingURL=GameWorld.d.ts.map

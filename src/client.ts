@@ -8,6 +8,7 @@ import { Viewport } from './objects/Viewport.js'
 import { PongGame } from './pong3.js';
 import { Camera } from './objects/Camera.js';
 import { Label } from './objects/Label.js';
+import { Component } from './objects/Component.js';
 
 
 
@@ -97,6 +98,13 @@ function getObjects() {
 	return [];
 }
 
+function getComponents() {
+	if (data["state"] && Array.isArray(data["state"]["components"])) {
+		return data["state"]["components"];
+	}
+	return [];
+}
+
 const currentGameObjects = new Map<string, GameObject>();
 
 const componentMap: Record<string, new (params: any) => any> = {
@@ -106,6 +114,16 @@ const componentMap: Record<string, new (params: any) => any> = {
 	"glow": Glow,
 	"hitbox": HitBox,
 };
+
+
+const classMap: Record<string, T_Constructor<any>> = {
+	"sprite": Sprite,
+	"glow": Glow,
+	"hitbox": HitBox
+};
+
+type T_Constructor<T> = new (...args: any[]) => T;
+
 
 function revive(obj: any): any {
 	if (Array.isArray(obj)) {
@@ -128,6 +146,7 @@ function revive(obj: any): any {
 	}
 	return obj;
 }
+
 
 function genericUpdate(
 	obj: Record<string, any>,
@@ -228,14 +247,34 @@ window.addEventListener("DOMContentLoaded", () => {
 			if (ComponentClass) {
 				const newComponent = new ComponentClass(component);
 				clientObj.addComponent(newComponent);
-				console.log("componnet", typeof newComponent);
 			}
 		}
 		return clientObj;
 	}
 
+	const componentRegistry = new Map<string, Component>();
+
 	function loop() {
 		let client_objects = getObjects();
+		let components = getComponents();
+
+
+		for (const component of components) {
+
+			if (componentRegistry.has(component.id)) {
+				
+			}
+			else {
+				
+				const componentConstructor = classMap[component.name];
+				let instance;
+				if (componentConstructor)
+					instance = new componentConstructor();
+				componentRegistry.set(component.id, new Component(instance));
+			}
+
+		}
+
 		for (const object of client_objects) {
 			const revivedObject = revive(object);
 			const id = revivedObject["id"];
