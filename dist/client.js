@@ -60,11 +60,6 @@ ws.onmessage = (event) => {
         }));
         test = true;
     }
-    // for (const object of currentGameObjects.values()) {
-    // 	if (object.name === "background") {
-    // 		// console.log("bg");
-    // 	}
-    // }
 };
 ws.onclose = () => {
     console.log("❌ Disconnected");
@@ -82,8 +77,6 @@ const componentMap = {
     "sprite": Sprite,
     "glow": Glow,
     "hitbox": HitBox,
-    // "camera": Camera,
-    // "label": Label
 };
 function revive(obj) {
     if (Array.isArray(obj)) {
@@ -95,7 +88,8 @@ function revive(obj) {
             for (const key in obj) {
                 revivedParams[key] = revive(obj[key]);
             }
-            return new componentMap[obj.className](revivedParams);
+            const component = new componentMap[obj.className](revivedParams);
+            return component;
         }
         else {
             for (const key in obj) {
@@ -113,6 +107,7 @@ function genericUpdate(obj, params, cache) {
             console.log("vow");
         }
         const value = params[key];
+        // -- update array types --
         if (Array.isArray(value)) {
             obj[key] = obj[key] || [];
             cache[key] = cache[key] || [];
@@ -122,6 +117,7 @@ function genericUpdate(obj, params, cache) {
                 genericUpdate(obj[key][index], item, cache[key][index]);
             });
         }
+        // -- update nested object types -- 
         else if (typeof value === "object" && value !== null) {
             obj[key] = obj[key] || {};
             cache[key] = cache[key] || {};
@@ -131,7 +127,6 @@ function genericUpdate(obj, params, cache) {
             obj[key] = cache[key] = value;
     }
 }
-// todo add game
 window.addEventListener("DOMContentLoaded", () => {
     const game = new PongGame(null);
     game.camera = null;
@@ -183,7 +178,9 @@ window.addEventListener("DOMContentLoaded", () => {
         for (const component of object.components) {
             const ComponentClass = componentMap[component.name];
             if (ComponentClass) {
-                clientObj.addComponent(new ComponentClass(component));
+                const newComponent = new ComponentClass(component);
+                clientObj.addComponent(newComponent);
+                console.log("componnet", typeof newComponent);
             }
         }
         return clientObj;

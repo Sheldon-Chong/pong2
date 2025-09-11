@@ -1,4 +1,5 @@
 export declare class Glow {
+    className: string;
     Color: string;
     Blur: number;
     OffsetX: number;

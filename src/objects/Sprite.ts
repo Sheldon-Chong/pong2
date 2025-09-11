@@ -58,7 +58,7 @@ export class Sprite extends Component {
 			outline: this.outline,
 			opacity: this.opacity,
 			blendMode: this.blendMode,
-			glow: this.glow
+			STATIC_glow: this.glow // todo problem with having static glow. Need a new de-serialize system
 		}, exportStatic);
 	}
 	
