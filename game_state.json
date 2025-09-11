@@ -3,7 +3,7 @@
   "state": {
     "camera": {
       "position": {
-        "x": -322.2684929001981,
+        "x": -242.85294866922868,
         "y": 0,
         "className": "Point2D"
       }
@@ -30,7 +30,7 @@
         "id": 2,
         "position": {
           "x": -250,
-          "y": 147.62495753836797,
+          "y": 0,
           "className": "Point2D"
         },
         "scale": {
@@ -43,8 +43,8 @@
           3
         ],
         "components": [
-          1,
-          2
+          2,
+          3
         ]
       },
       {
@@ -68,7 +68,7 @@
         "id": 4,
         "position": {
           "x": 250,
-          "y": 147.62495753836797,
+          "y": 0,
           "className": "Point2D"
         },
         "scale": {
@@ -81,8 +81,8 @@
           5
         ],
         "components": [
-          3,
-          4
+          4,
+          5
         ]
       },
       {
@@ -106,7 +106,7 @@
         "id": 6,
         "position": {
           "x": -650,
-          "y": 147.62495753836797,
+          "y": 0,
           "className": "Point2D"
         },
         "scale": {
@@ -119,8 +119,8 @@
           7
         ],
         "components": [
-          5,
-          6
+          6,
+          7
         ]
       },
       {
@@ -144,7 +144,7 @@
         "id": 8,
         "position": {
           "x": 650,
-          "y": 147.62495753836797,
+          "y": 0,
           "className": "Point2D"
         },
         "scale": {
@@ -157,8 +157,8 @@
           9
         ],
         "components": [
-          7,
-          8
+          8,
+          9
         ]
       },
       {
@@ -182,7 +182,7 @@
         "id": 10,
         "position": {
           "x": -1050,
-          "y": 147.62495753836797,
+          "y": 0,
           "className": "Point2D"
         },
         "scale": {
@@ -195,8 +195,8 @@
           11
         ],
         "components": [
-          9,
-          10
+          10,
+          11
         ]
       },
       {
@@ -220,7 +220,7 @@
         "id": 12,
         "position": {
           "x": 1050,
-          "y": 147.62495753836797,
+          "y": 0,
           "className": "Point2D"
         },
         "scale": {
@@ -233,8 +233,8 @@
           13
         ],
         "components": [
-          11,
-          12
+          12,
+          13
         ]
       },
       {
@@ -257,8 +257,8 @@
         "name": "ball",
         "id": 14,
         "position": {
-          "x": -417.8138719999988,
-          "y": 8.581272199999882,
+          "x": -605.436556,
+          "y": -107.55371486666662,
           "className": "Point2D"
         },
         "scale": {
@@ -266,15 +266,15 @@
           "y": 40
         },
         "components": [
-          14,
-          13
+          15,
+          14
         ]
       },
       {
         "name": "camera",
         "id": 15,
         "position": {
-          "x": -322.2684929001981,
+          "x": -242.85294866922868,
           "y": 0,
           "className": "Point2D"
         },
@@ -289,14 +289,14 @@
     ],
     "components": [
       {
-        "id": 1,
+        "id": 2,
         "name": "hitbox",
         "renderable": false,
         "enabled": true,
         "isColliding": false
       },
       {
-        "id": 2,
+        "id": 3,
         "name": "sprite",
         "imagePath": "assets/skins/ghost_light.png",
         "flippedHorizontal": true,
@@ -313,86 +313,38 @@
         }
       },
       {
-        "id": 3,
+        "id": 4,
         "name": "hitbox",
         "renderable": false,
         "enabled": true,
         "isColliding": false
-      },
-      {
-        "id": 4,
-        "name": "sprite",
-        "imagePath": "assets/skins/ghost_dark.png",
-        "flippedHorizontal": false,
-        "crop": false,
-        "opacity": 1,
-        "blendMode": "source-over",
-        "glow": {
-          "className": "glow",
-          "Color": "#3731FE",
-          "Blur": 10,
-          "OffsetX": 0,
-          "OffsetY": 5,
-          "blendMode": "multiply"
-        }
       },
       {
         "id": 5,
-        "name": "hitbox",
-        "renderable": false,
-        "enabled": true,
-        "isColliding": false
+        "name": "sprite",
+        "imagePath": "assets/skins/ghost_dark.png",
+        "flippedHorizontal": false,
+        "crop": false,
+        "opacity": 1,
+        "blendMode": "source-over",
+        "glow": {
+          "className": "glow",
+          "Color": "#3731FE",
+          "Blur": 10,
+          "OffsetX": 0,
+          "OffsetY": 5,
+          "blendMode": "multiply"
+        }
       },
       {
         "id": 6,
-        "name": "sprite",
-        "imagePath": "assets/skins/ghost_dark.png",
-        "flippedHorizontal": true,
-        "crop": false,
-        "opacity": 1,
-        "blendMode": "source-over",
-        "glow": {
-          "className": "glow",
-          "Color": "#3731FE",
-          "Blur": 10,
-          "OffsetX": 0,
-          "OffsetY": 5,
-          "blendMode": "multiply"
-        }
+        "name": "hitbox",
+        "renderable": false,
+        "enabled": true,
+        "isColliding": false
       },
       {
         "id": 7,
-        "name": "hitbox",
-        "renderable": false,
-        "enabled": true,
-        "isColliding": false
-      },
-      {
-        "id": 8,
-        "name": "sprite",
-        "imagePath": "assets/skins/ghost_dark.png",
-        "flippedHorizontal": false,
-        "crop": false,
-        "opacity": 1,
-        "blendMode": "source-over",
-        "glow": {
-          "className": "glow",
-          "Color": "#3731FE",
-          "Blur": 10,
-          "OffsetX": 0,
-          "OffsetY": 5,
-          "blendMode": "multiply"
-        }
-      },
-      {
-        "id": 9,
-        "name": "hitbox",
-        "renderable": false,
-        "enabled": true,
-        "isColliding": false
-      },
-      {
-        "id": 10,
         "name": "sprite",
         "imagePath": "assets/skins/ghost_dark.png",
         "flippedHorizontal": true,
@@ -409,14 +361,14 @@
         }
       },
       {
-        "id": 11,
+        "id": 8,
         "name": "hitbox",
         "renderable": false,
         "enabled": true,
         "isColliding": false
       },
       {
-        "id": 12,
+        "id": 9,
         "name": "sprite",
         "imagePath": "assets/skins/ghost_dark.png",
         "flippedHorizontal": false,
@@ -433,7 +385,31 @@
         }
       },
       {
-        "id": 14,
+        "id": 10,
+        "name": "hitbox",
+        "renderable": false,
+        "enabled": true,
+        "isColliding": false
+      },
+      {
+        "id": 11,
+        "name": "sprite",
+        "imagePath": "assets/skins/ghost_dark.png",
+        "flippedHorizontal": true,
+        "crop": false,
+        "opacity": 1,
+        "blendMode": "source-over",
+        "glow": {
+          "className": "glow",
+          "Color": "#3731FE",
+          "Blur": 10,
+          "OffsetX": 0,
+          "OffsetY": 5,
+          "blendMode": "multiply"
+        }
+      },
+      {
+        "id": 12,
         "name": "hitbox",
         "renderable": false,
         "enabled": true,
@@ -441,6 +417,30 @@
       },
       {
         "id": 13,
+        "name": "sprite",
+        "imagePath": "assets/skins/ghost_dark.png",
+        "flippedHorizontal": false,
+        "crop": false,
+        "opacity": 1,
+        "blendMode": "source-over",
+        "glow": {
+          "className": "glow",
+          "Color": "#3731FE",
+          "Blur": 10,
+          "OffsetX": 0,
+          "OffsetY": 5,
+          "blendMode": "multiply"
+        }
+      },
+      {
+        "id": 15,
+        "name": "hitbox",
+        "renderable": false,
+        "enabled": true,
+        "isColliding": false
+      },
+      {
+        "id": 14,
         "name": "sprite",
         "imagePath": "assets/ball.png",
         "flippedHorizontal": false,
@@ -458,12 +458,12 @@
       }
     ],
     "metadata": {
-      "delta": 0.015314698999998655
+      "delta": 0.015964320000000042
     }
   },
   "metadata": {
-    "timestamp": 1757586434741,
-    "delta": 0.015314698999998655,
+    "timestamp": 1757597173137,
+    "delta": 0.015964320000000042,
     "fps": 0
   }
 }

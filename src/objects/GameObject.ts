@@ -96,13 +96,15 @@ export class GameObject {
 	}
 
 	addComponent(component: Component) {
+
+		console.log(`component ${component.name} ${component.id} added to ${this.name} ${this.id}`);
 		(this.components as Map<number, Component>).set(component.id, component);
 		component.host = this;
 		component.init();
 		return component;
 	}
 
-	getComponents() {
+	getComponents(): Component[] {
 		return this.components.values().toArray();
 	}
 

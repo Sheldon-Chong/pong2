@@ -2,7 +2,7 @@ import { GameObject } from './GameObject.js';
 
 export class Component {
 
-    static globalId: number = 0;
+    static globalId: number = 1;
 
     id: number = -1;
 

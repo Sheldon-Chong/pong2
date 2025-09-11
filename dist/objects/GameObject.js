@@ -69,6 +69,7 @@ export class GameObject {
         this.components = map;
     }
     addComponent(component) {
+        console.log(`component ${component.name} ${component.id} added to ${this.name} ${this.id}`);
         this.components.set(component.id, component);
         component.host = this;
         component.init();

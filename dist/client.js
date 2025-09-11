@@ -185,18 +185,10 @@ window.addEventListener("DOMContentLoaded", () => {
         if (!object.components)
             return clientObj;
         const new_components = new Map();
-        for (const number in object.components) {
+        for (const number of object.components) {
             new_components.set(Number(number), null);
         }
         clientObj.components = new_components;
-        //todo HERERERERERER!!
-        // for (const component of object.components) {
-        // 	const ComponentClass = componentMap[component.name];
-        // 	if (ComponentClass) {
-        // 		const newComponent = new ComponentClass(component);
-        // 		clientObj.addComponent(newComponent);
-        // 	}
-        // }
         return clientObj;
     }
     const componentRegistry = new Map();
@@ -205,6 +197,7 @@ window.addEventListener("DOMContentLoaded", () => {
         let components = getComponents();
         for (const component of components) {
             if (componentRegistry.has(component.id)) {
+                Object.assign(componentRegistry.get(component.id), component);
             }
             else {
                 const componentConstructor = classMap[component.name];
@@ -237,16 +230,12 @@ window.addEventListener("DOMContentLoaded", () => {
                 }
                 clientObj.components.forEach((value, key) => {
                     if (value === null) {
-                        console.log("vow");
                         const component = componentRegistry.get(key);
                         if (component) {
                             clientObj.addComponent(component);
-                            // (clientObj.components as Map<number, Component>).set(key, component);
-                            // component.host = clientObj;
                         }
                     }
                 });
-                console.log(clientObj.components);
                 // -- CAMERA --
                 if (revivedObject["name"] === "camera") {
                     game.camera = revivedObject;

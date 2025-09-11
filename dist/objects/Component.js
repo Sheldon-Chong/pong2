@@ -1,6 +1,6 @@
 import { GameObject } from './GameObject.js';
 export class Component {
-    static globalId = 0;
+    static globalId = 1;
     id = -1;
     name = "";
     renderable = false;
