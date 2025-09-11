@@ -36,7 +36,7 @@ export declare class Sprite extends Component {
         outline: Outline;
         opacity: number;
         blendMode: GlobalCompositeOperation;
-        STATIC_glow: Glow;
+        glow: Glow;
     };
     constructor(params?: Partial<Sprite>);
     init(): this;

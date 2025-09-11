@@ -42,7 +42,7 @@ export class Sprite extends Component {
             outline: this.outline,
             opacity: this.opacity,
             blendMode: this.blendMode,
-            STATIC_glow: this.glow // todo problem with having static glow. Need a new de-serialize system
+            glow: this.glow // todo problem with having static glow. Need a new de-serialize system
         }, exportStatic);
     }
     constructor(params = {}) {

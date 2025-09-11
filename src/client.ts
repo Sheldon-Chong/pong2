@@ -137,10 +137,6 @@ function genericUpdate(
 	for (const key in params) {
 		if (key === "parent" || key === "children") continue;
 
-		if (key === "OfssetX") {
-			console.log("vow");
-		}
-
 		const value = params[key];
 
 		// -- update array types --
@@ -223,7 +219,6 @@ window.addEventListener("DOMContentLoaded", () => {
 		else
 			clientObj = new GameObject({ ...object, components: [] });
 		setObject(object["id"], clientObj);
-
 
 		if (!object.components)
 			return clientObj;

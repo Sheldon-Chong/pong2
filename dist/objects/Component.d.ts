@@ -1,5 +1,7 @@
 import { GameObject } from './GameObject.js';
 export declare class Component {
+    static globalId: number;
+    id: number;
     name: string;
     renderable: boolean;
     enabled: boolean;

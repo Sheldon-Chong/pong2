@@ -29,7 +29,7 @@ export class GameWorld {
     checkCollisions() {
         const hitboxes = [];
         for (const obj of this.gameObjects.values()) {
-            for (const comp of obj.components) {
+            for (const comp of obj.getComponents()) {
                 if (comp instanceof HitBox) {
                     hitboxes.push(comp);
                 }

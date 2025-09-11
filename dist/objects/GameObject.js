@@ -2,19 +2,6 @@ import { Point2D, Vector2D } from './Coordinates.js';
 import { Sprite } from './Sprite.js';
 import { Component } from './Component.js';
 const RenderableMarker = Symbol("Renderable");
-// function genericUpdate(obj: any, params: any, cache: any) {
-// 		for (const key in params) {
-// 				if (cache[key] !== params[key]) {
-// 						if (key === "position" && params.position) 
-// 								obj.position = new Point2D(params.position.x, params.position.y);
-// 						else if (key === "size" && params.size) 
-// 								obj.size = new Vector2D(params.size.x, params.size.y);
-// 						else 
-// 								obj[key] = params[key];
-// 						cache[key] = params[key];
-// 				}
-// 		}
-// }
 function ownsProperty(obj, key) {
     return Object.prototype.hasOwnProperty.call(obj, key);
 }
@@ -55,8 +42,6 @@ export class GameObject {
     velocity = new Vector2D(0, 0);
     acceleration = new Vector2D(0, 0);
     maximumVelocity = new Vector2D(1000, 1000);
-    components = [];
-    toUpdate = false;
     onUpdate;
     zIndex = 0;
     // --webserver stuff--
@@ -67,20 +52,30 @@ export class GameObject {
     updateToGame() {
         this.game.world.exportBackLog.push(this);
     }
+    components = new Map();
     constructor(params) {
         Object.assign(this, params);
         this.id = GameObject.globalId;
         GameObject.globalId++;
-        for (const component of this.components) {
-            component.host = this;
-            component.init();
+        console.log(params.components);
+        const map = new Map();
+        if (Array.isArray(params.components)) {
+            for (const component of params.components) {
+                component.host = this;
+                component.init();
+                map.set(component.id, component);
+            }
         }
+        this.components = map;
     }
     addComponent(component) {
-        this.components.push(component);
+        this.components.set(component.id, component);
         component.host = this;
         component.init();
         return component;
+    }
+    getComponents() {
+        return this.components.values().toArray();
     }
     addChild(object) {
         this.children.push(object);
@@ -115,7 +110,7 @@ export class GameObject {
         return parentScale.multiply(this.scale);
     }
     componentToJSON(exportStatic = false) {
-        return this.components.map(component => {
+        return this.getComponents().map(component => {
             if (typeof component.toJSON === "function") {
                 return component.toJSON(exportStatic);
             }
@@ -130,7 +125,7 @@ export class GameObject {
     }
     draw(viewport) {
         // Draw this object's components
-        for (const component of this.components) {
+        for (const component of this.getComponents()) {
             if (component.name === "sprite") {
                 try {
                     component.draw(viewport);

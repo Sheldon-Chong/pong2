@@ -103,9 +103,6 @@ function genericUpdate(obj, params, cache) {
     for (const key in params) {
         if (key === "parent" || key === "children")
             continue;
-        if (key === "OfssetX") {
-            console.log("vow");
-        }
         const value = params[key];
         // -- update array types --
         if (Array.isArray(value)) {

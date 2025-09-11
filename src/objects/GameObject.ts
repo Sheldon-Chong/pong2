@@ -4,22 +4,7 @@ import type { PongGame } from '../pong3.js';
 import type { Viewport } from './Viewport.js'; import { Component } from './Component.js';
 import type { HitBox } from './Hitbox.js';
 
-
 const RenderableMarker = Symbol("Renderable");
-
-// function genericUpdate(obj: any, params: any, cache: any) {
-// 		for (const key in params) {
-// 				if (cache[key] !== params[key]) {
-// 						if (key === "position" && params.position) 
-// 								obj.position = new Point2D(params.position.x, params.position.y);
-// 						else if (key === "size" && params.size) 
-// 								obj.size = new Vector2D(params.size.x, params.size.y);
-// 						else 
-// 								obj[key] = params[key];
-// 						cache[key] = params[key];
-// 				}
-// 		}
-// }
 
 function ownsProperty(obj: object, key: PropertyKey): boolean {
   return Object.prototype.hasOwnProperty.call(obj, key);
@@ -75,9 +60,6 @@ export class GameObject {
 	public acceleration: Vector2D = new Vector2D(0, 0);
 	public maximumVelocity: Vector2D = new Vector2D(1000, 1000);
 
-	public components: Component[] = []
-
-	public toUpdate: boolean = false;
 
 	public onUpdate?: () => void;
 
@@ -93,23 +75,35 @@ export class GameObject {
 	updateToGame() {
 		this.game.world.exportBackLog.push(this);
 	}
+	
+	public components: Map<number, Component> | Component[] = new Map<number, Component>() ;
 
 	constructor(params: Partial<GameObject>) {
 		Object.assign(this, params);
 		this.id = GameObject.globalId;
 		GameObject.globalId++;
 
-		for (const component of this.components) {
-			component.host = this;
-			component.init();
+		console.log(params.components);
+		const map = new Map<number, Component>();
+		if (Array.isArray(params.components)) {
+			for (const component of params.components) {
+				component.host = this;
+				component.init();
+				map.set(component.id, component);
+			}
 		}
+		this.components = map;
 	}
 
 	addComponent(component: Component) {
-		this.components.push(component);
+		this.components.set(component.id, component);
 		component.host = this;
 		component.init();
 		return component;
+	}
+
+	getComponents() {
+		return this.components.values().toArray();
 	}
 
 	addChild(object: GameObject) {
@@ -167,7 +161,7 @@ export class GameObject {
 	}
 
 	componentToJSON(exportStatic: boolean = false) {
-		return this.components.map(component => {
+		return this.getComponents().map(component => {
 			if (typeof (component as any).toJSON === "function") {
 				return (component as any).toJSON(exportStatic);
 			}
@@ -184,7 +178,7 @@ export class GameObject {
 
 	draw(viewport: Viewport) {
 		// Draw this object's components
-		for (const component of this.components) {
+		for (const component of this.getComponents()) {
 			if (component.name === "sprite") {
 				try { (component as Sprite).draw(viewport,); } //todo!!! ISSUE HERE. Cannot simply pass a camera instance. This is the frontend we're talkin about
 				catch (error) { console.log("CAMERA", error); }

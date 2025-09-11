@@ -1,6 +1,12 @@
 import { GameObject } from './GameObject.js';
 
 export class Component {
+
+    static globalId: number = 0;
+
+    id: number = -1;
+
+
     name: string = "";
     renderable: boolean = false;
     enabled: boolean = true;
@@ -10,6 +16,8 @@ export class Component {
 
     constructor(params: Partial<Component>) {
         Object.assign(this, params);
+        this.id = Component.globalId;
+        Component.globalId ++;
     }
 
     init(): Component {

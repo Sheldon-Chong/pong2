@@ -16,16 +16,16 @@ export declare class GameObject {
     velocity: Vector2D;
     acceleration: Vector2D;
     maximumVelocity: Vector2D;
-    components: Component[];
-    toUpdate: boolean;
     onUpdate?: () => void;
     zIndex: number;
     cache: any;
     isStatic: boolean;
     init(): void;
     updateToGame(): void;
+    components: Map<number, Component> | Component[];
     constructor(params: Partial<GameObject>);
     addComponent(component: Component): Component;
+    getComponents(): Component[];
     addChild(object: GameObject): void;
     update(): void;
     getWorldPosition(added?: Vector2D): Point2D;
