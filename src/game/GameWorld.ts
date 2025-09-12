@@ -1,9 +1,9 @@
-import { Point2D, Vector2D } from './objects/Coordinates.js';
-import { GameObject } from './objects/GameObject.js';
-import { Camera } from './objects/Camera.js';
-import { Viewport } from './objects/Viewport.js';
-import { HitBox } from './objects/Hitbox.js';
-import { Timer } from './objects/Timer.js';
+import { Point2D, Vector2D } from '../objects/Coordinates.js';
+import { GameObject } from '../objects/GameObject.js';
+import { Camera } from '../objects/Camera.js';
+import { Viewport } from '../objects/Viewport.js';
+import { HitBox } from '../objects/Hitbox.js';
+import { Timer } from '../objects/Timer.js';
 
 export class GameWorld {
   gameObjects: Map<number, GameObject> = new Map();

@@ -1,6 +1,6 @@
 import { Point2D, Vector2D } from './Coordinates.js';
 import { type Renderable, Sprite } from './Sprite.js';
-import type { PongGame } from '../pong.js';
+import type { PongGame } from '../game/pong.js';
 import type { Viewport } from './Viewport.js'; import { Component } from './Component.js';
 import type { HitBox } from './Hitbox.js';
 

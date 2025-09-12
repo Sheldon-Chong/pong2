@@ -1,16 +1,16 @@
 
-import { Point2D, Vector2D, interpolate } from './objects/Coordinates.js'
-import { GameObject, exportCleanup } from './objects/GameObject.js'
-import { Sprite, drawImg } from './objects/Sprite.js';
-import { Glow } from './objects/Glow.js';
-import { BlendMode } from './objects/Blendmodes.js';
-import { Camera } from './objects/Camera.js';
-import { Label } from './objects/Label.js';
-import { HitBox } from './objects/Hitbox.js';
-import { Ball } from './game/ball.js';
-import { Viewport } from './objects/Viewport.js';
+import { Point2D, Vector2D, interpolate } from '../objects/Coordinates.js'
+import { GameObject, exportCleanup } from '../objects/GameObject.js'
+import { Sprite, drawImg } from '../objects/Sprite.js';
+import { Glow } from '../objects/Glow.js';
+import { BlendMode } from '../objects/Blendmodes.js';
+import { Camera } from '../objects/Camera.js';
+import { Label } from '../objects/Label.js';
+import { HitBox } from '../objects/Hitbox.js';
+import { Ball } from './ball.js';
+import { Viewport } from '../objects/Viewport.js';
 import { GameWorld } from './GameWorld.js';
-import { Player } from './game/Player.js';
+import { Player } from './Player.js';
 
 // import { GameObject, Sprite, HitBox, Glow, Particle, Timer} from './Index.js'
 // import {  BlendMode } from './GameUtils.js'

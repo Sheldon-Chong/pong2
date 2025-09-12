@@ -1,6 +1,6 @@
 import { Point2D, Vector2D, interpolate, randomBetween } from './Coordinates.js';
 import { GameObject, exportCleanup } from './GameObject.js';
-import { PongGame } from '../pong.js';
+import { PongGame } from '../game/pong.js';
 import { type Renderable } from './Sprite.js';
 import { Viewport } from './Viewport.js';
 

@@ -4,8 +4,7 @@ import websocketPlugin from "@fastify/websocket";
 import fastifyStatic from "@fastify/static";
 import { join } from "path";
 import type { WebSocket } from "@fastify/websocket";
-import { PongGame } from "../dist/pong.js";
-import { Socket } from "dgram";
+import { PongGame } from "../dist/game/pong.js";
 import { writeFileSync } from "fs";
 import type { FastifyRequest } from "fastify";
 

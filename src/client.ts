@@ -5,7 +5,7 @@ import { Glow } from './objects/Glow.js';
 import { drawImg, Sprite, Tags, type Renderable } from './objects/Sprite.js'
 import { HitBox } from './objects/Hitbox.js'
 import { Viewport } from './objects/Viewport.js'
-import { PongGame } from './pong.js';
+import { PongGame } from './game/pong.js';
 import { Camera } from './objects/Camera.js';
 import { Label } from './objects/Label.js';
 import { Component } from './objects/Component.js';

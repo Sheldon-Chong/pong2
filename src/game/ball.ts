@@ -4,8 +4,8 @@ import { Sprite } from '../objects/Sprite.js';
 import { HitBox } from '../objects/Hitbox.js';
 import { Glow } from '../objects/Glow.js';
 import { BlendMode } from '../objects/Blendmodes.js';
-import { GameTeam, Padel } from '../pong.js'; // Adjust import as needed
-import { Team } from '../pong.js';   // Adjust import as needed
+import { GameTeam, Padel } from './pong.js'; // Adjust import as needed
+import { Team } from './pong.js';   // Adjust import as needed
 import { Timer } from '../objects/Timer.js';
 
 function lastElem<T>(array: T[]): T {
