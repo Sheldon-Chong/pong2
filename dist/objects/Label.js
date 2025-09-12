@@ -25,7 +25,7 @@ export class Label extends GameObject {
     }
     export(exportStatic = false) {
         return exportCleanup({
-            name: this.name,
+            STATIC_name: this.name,
             className: this.className,
             id: this.id,
             position: this.position.export(),

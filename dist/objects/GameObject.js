@@ -1,6 +1,7 @@
 import { Point2D, Vector2D } from './Coordinates.js';
 import { Sprite } from './Sprite.js';
 import { Component } from './Component.js';
+import { HitBox } from './Hitbox.js';
 const RenderableMarker = Symbol("Renderable");
 function ownsProperty(obj, key) {
     return Object.prototype.hasOwnProperty.call(obj, key);
@@ -129,7 +130,7 @@ export class GameObject {
             if (component === null || component.host === null) {
                 continue;
             }
-            if (component.name === "sprite") {
+            if (component instanceof Sprite) {
                 try {
                     component.draw(viewport);
                 }
@@ -137,7 +138,7 @@ export class GameObject {
                     console.log("CAMERA", error);
                 }
             }
-            if (component.name === "hitbox") {
+            if (component instanceof HitBox) {
                 try {
                     component.draw(viewport);
                 }
@@ -160,12 +161,12 @@ export class GameObject {
     }
     export(exportStatic = false) {
         const json = {
-            name: this.name,
+            STATIC_name: this.name,
             id: this.id,
             position: this.position.export(),
-            scale: this.scale,
+            STATIC_scale: this.scale,
             rotation: this.rotation,
-            zIndex: this.zIndex,
+            STATIC_zIndex: this.zIndex,
             children: this.children.map(child => child.id),
             components: this.componentToJSON(),
         };

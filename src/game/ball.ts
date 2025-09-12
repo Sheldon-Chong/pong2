@@ -128,9 +128,9 @@ export class Ball extends GameObject {
 
 
 			// -- CHECK IF HITTING GOAL --
-			if (this.position.x < this.game.team1GoalPostEnd)  
+			if (this.position.x < this.game.team1.goalPostEnd)  
 				this.onHitGoal(Team.TEAM1);
-			else if (this.position.x > this.game.team2GoalPostEnd)  
+			else if (this.position.x > this.game.team2.goalPostEnd)  
 				this.onHitGoal(Team.TEAM2);
 
 			return true;

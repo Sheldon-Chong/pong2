@@ -242,7 +242,7 @@ window.addEventListener("DOMContentLoaded", () => {
                     }
                 });
                 // -- CAMERA --
-                if (revivedObject["name"] === "camera") {
+                if (revivedObject["className"] === "camera") {
                     game.camera = revivedObject;
                     viewport.camera = revivedObject;
                 }

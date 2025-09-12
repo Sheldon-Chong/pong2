@@ -25,5 +25,11 @@ export class Camera extends GameObject {
             return true;
         };
     }
+    export() {
+        return {
+            position: this.position,
+            className: this.className
+        };
+    }
 }
 //# sourceMappingURL=Camera.js.map

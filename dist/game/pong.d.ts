@@ -13,6 +13,7 @@ export declare class GameTeam {
     name: String;
     score: number;
     players: Padel[];
+    goalPostEnd: number;
     constructor(game: PongGame, name: String);
 }
 export declare const SKINS: Record<string, string>;
@@ -44,8 +45,6 @@ export declare class PongGame {
     world: GameWorld;
     gameSettings: GameSettings;
     camera: Camera;
-    team1GoalPostEnd: number;
-    team2GoalPostEnd: number;
     update(): void;
     exportState(includeStaticObjects?: boolean): {
         camera: {

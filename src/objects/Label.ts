@@ -31,7 +31,7 @@ export class Label extends GameObject {
 
     export(exportStatic: boolean = false): any {
         return exportCleanup ({
-            name: this.name,
+            STATIC_name: this.name,
             className: this.className,
             id: this.id,
             position: this.position.export(),

@@ -2,7 +2,7 @@ import { Point2D, Vector2D } from './Coordinates.js';
 import { type Renderable, Sprite } from './Sprite.js';
 import type { PongGame } from '../game/pong.js';
 import type { Viewport } from './Viewport.js'; import { Component } from './Component.js';
-import type { HitBox } from './Hitbox.js';
+import { HitBox } from './Hitbox.js';
 
 const RenderableMarker = Symbol("Renderable");
 
@@ -185,13 +185,13 @@ export class GameObject {
 				continue;
 			}
 
-			if (component.name === "sprite") {
+			if (component instanceof Sprite) {
 				try { (component as Sprite).draw(viewport,); }
 				catch (error) { 
 					console.log("CAMERA", error);
 				}
 			}
-			if (component.name === "hitbox") {
+			if (component instanceof HitBox) {
 				try { (component as HitBox).draw(viewport); }
 				catch (error) { console.log("error", typeof component); }
 			}
@@ -211,12 +211,12 @@ export class GameObject {
 
 	export(exportStatic: boolean = false): Record<string, any> {
 		const json: any = {
-			name: this.name,
+			STATIC_name: this.name,
 			id: this.id,
 			position: this.position.export(),
-			scale: this.scale,
+			STATIC_scale: this.scale,
 			rotation: this.rotation,
-			zIndex: this.zIndex,
+			STATIC_zIndex: this.zIndex,
 			children: this.children.map(child => child.id),
 			components: this.componentToJSON(),
 		};

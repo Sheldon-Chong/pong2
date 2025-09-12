@@ -31,6 +31,7 @@ export class GameTeam {
     name;
     score = 0;
     players = [];
+    goalPostEnd = 0;
     // static leftBoardControls = [["t", "g"], ["r", "f"], ["w", "s"]];
     // static rightBoardControls = [["y", "h"], ["o", "l"], ["ArrowUp", "ArrowDown"]];
     constructor(game, name) {
@@ -175,7 +176,7 @@ class PadelLabel extends Label {
     export(exportStatic = false) {
         return exportCleanup({
             id: this.id,
-            name: this.name,
+            STATIC_name: this.name,
             className: this.className,
             STATIC_position: this.position.export(),
             STATIC_scale: this.scale,
@@ -202,8 +203,6 @@ export class PongGame {
     world = new GameWorld();
     gameSettings = new GameSettings();
     camera;
-    team1GoalPostEnd;
-    team2GoalPostEnd;
     update() {
         const now = performance.now();
         this.delta = (now - this.lastFrameTime) / 1000; // delta in seconds
@@ -222,33 +221,20 @@ export class PongGame {
         this.clientData = clientData;
         this.world.game = this;
         // -- add background
-        // this.world.addObject(new GameObject({
-        // 	game: this,
-        // 	position: new Point2D(0, 0),
-        // 	name: "background",
-        // 	isStatic: true,
-        // 	zIndex: -10,
-        // 	components: [
-        // 		new Sprite({
-        // 			imagePath: "assets/maps/map1.png",
-        // 		})
-        // 	],
-        // 	scale: new Vector2D(2700, 500),
-        // }));
-        // this.world.addObject(new GameObject({
-        // 	game: this,
-        // 	position: new Point2D(0, 50),
-        // 	name: "background",
-        // 	isStatic: true,
-        // 	zIndex: -10,
-        // 	components: [
-        // 		new Sprite({
-        // 			imagePath: "assets/maps/map1/grid.png",
-        // 		})
-        // 	],
-        // 	scale: new Vector2D(2700, 430).multiply(1),
-        // }));
         this.world.addObject(new GameObject({ game: this }));
+        this.world.addObject(new GameObject({
+            game: this,
+            position: new Point2D(0, -280),
+            name: "glass",
+            isStatic: true,
+            zIndex: 300,
+            components: [
+                new Sprite({
+                    imagePath: "assets/maps/map1/glass.png",
+                })
+            ],
+            scale: new Vector2D(2700, 200).multiply(1),
+        }));
         this.world.addObject(new GameObject({
             game: this,
             position: new Point2D(0, 0),
@@ -257,7 +243,7 @@ export class PongGame {
             zIndex: -15,
             components: [
                 new Sprite({
-                    imagePath: "assets/maps/map1/grid3.png",
+                    imagePath: "assets/maps/map1/grid4.png",
                 })
             ],
             scale: new Vector2D(2700, 430).multiply(1),
@@ -292,6 +278,7 @@ export class PongGame {
         // -- add players --
         const offset = 250;
         const distance = 200;
+        const goalMargin = 200;
         const leftBoardControls = [["s", "w"], ["r", "f"], ["t", "g"]];
         const rightBoardControls = [["ArrowUp", "ArrowDown"], ["o", "l"], ["y", "h"]];
         for (let i = 0; i < players.length; i++) {
@@ -320,8 +307,8 @@ export class PongGame {
                 this.world.addObject(padel);
             }
         }
-        this.team1GoalPostEnd = lastElem(this.team1.players).position.x - 100;
-        this.team2GoalPostEnd = lastElem(this.team2.players).position.x + 100;
+        this.team1.goalPostEnd = lastElem(this.team1.players).position.x - goalMargin;
+        this.team2.goalPostEnd = lastElem(this.team2.players).position.x + goalMargin;
         // -- add ball --
         let ball = this.world.addObject(new Ball({
             game: this,
@@ -334,7 +321,7 @@ export class PongGame {
         }));
         this.world.addObject(new GameObject({
             scale: (new Vector2D(181, 471)).multiply(0.7),
-            position: new Point2D(this.team1GoalPostEnd, 0),
+            position: new Point2D(this.team1.goalPostEnd, 0),
             game: this,
             name: "goalpost",
             components: [

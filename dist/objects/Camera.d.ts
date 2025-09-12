@@ -7,5 +7,9 @@ export declare class Camera extends GameObject {
     className: string;
     position: Point2D;
     constructor(params: Partial<Camera>);
+    export(): {
+        position: Point2D;
+        className: string;
+    };
 }
 //# sourceMappingURL=Camera.d.ts.map
