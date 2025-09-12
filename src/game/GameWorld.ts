@@ -8,6 +8,7 @@ import { Timer } from '../objects/Timer.js';
 export class GameWorld {
   gameObjects: Map<number, GameObject> = new Map();
   camera: Camera | null = null;
+  bgColor: "#9FD044";
   viewport: Viewport;
   game: any;
   timers: Timer[] = [];
@@ -67,8 +68,6 @@ export class GameWorld {
     }
   }
 
-  exportBackLog: GameObject[] = [];
-
   exportState(
     includeStaticObjects: boolean = false
   ) {
@@ -86,7 +85,8 @@ export class GameWorld {
       if (obj.isStatic === true // if only exports once
         && !includeStaticObjects)
         return
-      let staticObjects = obj.export(includeStaticObjects);
+      
+      let exportedObject = obj.export(includeStaticObjects);
 
       let keysWithId = []
       for (const [key, component] of obj.components) {
@@ -94,8 +94,8 @@ export class GameWorld {
           keysWithId.push(key);
       }
 
-      staticObjects.components = keysWithId;
-      flatObjects.push(staticObjects);
+      exportedObject.components = keysWithId;
+      flatObjects.push(exportedObject);
       
       const componentJson = obj.componentToJSON(includeStaticObjects);
       components.push(...componentJson);
@@ -109,8 +109,6 @@ export class GameWorld {
     for (const obj of this.gameObjects.values()) {
       flatten(obj);
     }
-
-    this.exportBackLog.length = 0;
 
     return {
       camera: {

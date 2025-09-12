@@ -5,7 +5,7 @@ const RenderableMarker = Symbol("Renderable");
 function ownsProperty(obj, key) {
     return Object.prototype.hasOwnProperty.call(obj, key);
 }
-export function pruneEmpty(obj, exportStatic = false) {
+export function exportCleanup(obj, exportStatic = false) {
     const result = {};
     for (const [key, value] of Object.entries(obj)) {
         if (value === undefined || value === null)
@@ -15,9 +15,9 @@ export function pruneEmpty(obj, exportStatic = false) {
         if (typeof value === "object" && !Array.isArray(value) && Object.keys(value).length === 0)
             continue;
         if (key.startsWith("STATIC_")) {
+            const keyName = key.slice("STATIC_".length);
             if (exportStatic) {
-                result[key.slice("STATIC_".length)] = value;
-                console.log("exported as", value);
+                result[keyName] = value;
             }
         }
         else {
@@ -44,20 +44,19 @@ export class GameObject {
     maximumVelocity = new Vector2D(1000, 1000);
     onUpdate;
     zIndex = 0;
+    variables;
     // --webserver stuff--
     cache = {};
     isStatic = false;
     init() {
     }
     updateToGame() {
-        this.game.world.exportBackLog.push(this);
     }
     components = new Map();
     constructor(params) {
         Object.assign(this, params);
         this.id = GameObject.globalId;
         GameObject.globalId++;
-        console.log(params.components);
         const map = new Map();
         if (Array.isArray(params.components)) {
             for (const component of params.components) {
@@ -69,7 +68,7 @@ export class GameObject {
         this.components = map;
     }
     addComponent(component) {
-        console.log(`component ${component.name} ${component.id} added to ${this.name} ${this.id}`);
+        // console.log(`component ${component.name} ${component.id} added to ${this.name} ${this.id}`);
         this.components.set(component.id, component);
         component.host = this;
         component.init();
@@ -136,7 +135,6 @@ export class GameObject {
                 }
                 catch (error) {
                     console.log("CAMERA", error);
-                    console.log("component", component);
                 }
             }
             if (component.name === "hitbox") {
@@ -164,14 +162,14 @@ export class GameObject {
         const json = {
             name: this.name,
             id: this.id,
-            position: this.position,
+            position: this.position.export(),
             scale: this.scale,
             rotation: this.rotation,
             zIndex: this.zIndex,
             children: this.children.map(child => child.id),
             components: this.componentToJSON(),
         };
-        return pruneEmpty(json, exportStatic);
+        return exportCleanup(json, exportStatic);
     }
 }
 //# sourceMappingURL=GameObject.js.map

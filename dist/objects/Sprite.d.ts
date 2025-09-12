@@ -32,12 +32,12 @@ export declare class Sprite extends Component {
         id: number;
         name: string;
         imagePath: string | HTMLImageElement;
-        flippedHorizontal: boolean;
-        crop: boolean;
-        outline: Outline;
-        opacity: number;
-        blendMode: GlobalCompositeOperation;
-        glow: Glow;
+        STATIC_flippedHorizontal: boolean;
+        STATIC_crop: boolean;
+        STATIC_outline: Outline;
+        STATIC_opacity: number;
+        STATIC_blendMode: GlobalCompositeOperation;
+        STATIC_glow: Glow;
     };
     constructor(params?: Partial<Sprite>);
     init(): this;

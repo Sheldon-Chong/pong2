@@ -51,8 +51,6 @@ export class Sprite extends Component {
 
 	toJSON(exportStatic: boolean = false) {
 
-		console.log("---- tojson called ----", this.id);
-		console.log("export static?", exportStatic);
 		const output = exportCleanup({
 			id: this.id,
 			name: this.name, // Add this line
@@ -64,11 +62,6 @@ export class Sprite extends Component {
 			STATIC_blendMode: this.blendMode,
 			STATIC_glow: this.glow
 		}, exportStatic);
-
-		if (exportStatic) {
-			console.log("full");
-			console.log("exported", output);
-		}
 
 		return output;
 	}

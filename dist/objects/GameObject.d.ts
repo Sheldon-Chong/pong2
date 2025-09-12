@@ -1,8 +1,8 @@
 import { Point2D, Vector2D } from './Coordinates.js';
-import type { PongGame } from '../pong3.js';
+import type { PongGame } from '../game/pong.js';
 import type { Viewport } from './Viewport.js';
 import { Component } from './Component.js';
-export declare function pruneEmpty<T extends Record<string, any>>(obj: T, exportStatic?: boolean): T;
+export declare function exportCleanup<T extends Record<string, any>>(obj: T, exportStatic?: boolean): T;
 export declare class GameObject {
     game: PongGame;
     id: number;
@@ -18,6 +18,7 @@ export declare class GameObject {
     maximumVelocity: Vector2D;
     onUpdate?: () => void;
     zIndex: number;
+    variables: {};
     cache: any;
     isStatic: boolean;
     init(): void;

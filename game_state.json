@@ -3,280 +3,214 @@
   "state": {
     "camera": {
       "position": {
-        "x": -242.85294866922868,
+        "x": 200.10410653613093,
         "y": 0,
         "className": "Point2D"
       }
     },
     "gameObjects": [
       {
-        "name": "label",
-        "className": "label",
-        "id": 1,
+        "name": "",
+        "id": 0,
         "position": {
+          "className": "Point2D",
           "x": 0,
-          "y": 0,
-          "className": "Point2D"
+          "y": 0
         },
         "scale": {
           "x": 10,
           "y": 10
         },
         "rotation": 0,
+        "zIndex": 0,
         "components": []
       },
       {
-        "name": "padel",
+        "name": "crowd",
         "id": 2,
         "position": {
-          "x": -250,
-          "y": 0,
-          "className": "Point2D"
+          "className": "Point2D",
+          "x": 0,
+          "y": -236.65
         },
         "scale": {
-          "x": 60,
-          "y": 60
+          "x": 2100,
+          "y": 59
         },
         "rotation": 0,
-        "zIndex": 0,
-        "children": [
-          3
-        ],
+        "zIndex": -15,
         "components": [
-          2,
-          3
+          2
         ]
       },
       {
-        "name": "label",
-        "className": "label",
+        "name": "crowd",
         "id": 3,
         "position": {
+          "className": "Point2D",
           "x": 0,
-          "y": -40,
-          "className": "Point2D"
+          "y": -243.35
         },
         "scale": {
-          "x": 10,
-          "y": 10
+          "x": 2100,
+          "y": 59
         },
         "rotation": 0,
-        "components": []
+        "zIndex": -15,
+        "components": [
+          3
+        ]
       },
       {
-        "name": "padel",
+        "name": "crowd",
         "id": 4,
         "position": {
-          "x": 250,
-          "y": 0,
-          "className": "Point2D"
+          "className": "Point2D",
+          "x": 0,
+          "y": -236.65
         },
         "scale": {
-          "x": 60,
-          "y": 60
+          "x": 2100,
+          "y": 59
         },
         "rotation": 0,
-        "zIndex": 0,
-        "children": [
-          5
-        ],
+        "zIndex": -15,
         "components": [
-          4,
-          5
+          4
         ]
       },
       {
-        "name": "label",
-        "className": "label",
         "id": 5,
         "position": {
-          "x": 0,
-          "y": -40,
-          "className": "Point2D"
+          "className": "Point2D",
+          "x": -250,
+          "y": 70.56
         },
-        "scale": {
-          "x": 10,
-          "y": 10
-        },
-        "rotation": 0,
-        "components": []
-      },
-      {
-        "name": "padel",
-        "id": 6,
-        "position": {
-          "x": -650,
-          "y": 0,
-          "className": "Point2D"
-        },
-        "scale": {
-          "x": 60,
-          "y": 60
-        },
-        "rotation": 0,
-        "zIndex": 0,
-        "children": [
-          7
-        ],
         "components": [
-          6,
-          7
+          5,
+          6
         ]
       },
       {
+        "id": 6,
         "name": "label",
         "className": "label",
+        "components": []
+      },
+      {
         "id": 7,
         "position": {
-          "x": 0,
-          "y": -40,
-          "className": "Point2D"
+          "className": "Point2D",
+          "x": 250,
+          "y": 70.56
         },
-        "scale": {
-          "x": 10,
-          "y": 10
-        },
-        "rotation": 0,
-        "components": []
-      },
-      {
-        "name": "padel",
-        "id": 8,
-        "position": {
-          "x": 650,
-          "y": 0,
-          "className": "Point2D"
-        },
-        "scale": {
-          "x": 60,
-          "y": 60
-        },
-        "rotation": 0,
-        "zIndex": 0,
-        "children": [
-          9
-        ],
         "components": [
-          8,
-          9
+          7,
+          8
         ]
       },
       {
+        "id": 8,
         "name": "label",
         "className": "label",
+        "components": []
+      },
+      {
         "id": 9,
         "position": {
-          "x": 0,
-          "y": -40,
-          "className": "Point2D"
+          "className": "Point2D",
+          "x": -650,
+          "y": 70.56
         },
-        "scale": {
-          "x": 10,
-          "y": 10
-        },
-        "rotation": 0,
-        "components": []
-      },
-      {
-        "name": "padel",
-        "id": 10,
-        "position": {
-          "x": -1050,
-          "y": 0,
-          "className": "Point2D"
-        },
-        "scale": {
-          "x": 60,
-          "y": 60
-        },
-        "rotation": 0,
-        "zIndex": 0,
-        "children": [
-          11
-        ],
         "components": [
-          10,
-          11
+          9,
+          10
         ]
       },
       {
+        "id": 10,
         "name": "label",
         "className": "label",
+        "components": []
+      },
+      {
         "id": 11,
         "position": {
-          "x": 0,
-          "y": -40,
-          "className": "Point2D"
+          "className": "Point2D",
+          "x": 650,
+          "y": 70.56
         },
-        "scale": {
-          "x": 10,
-          "y": 10
-        },
-        "rotation": 0,
-        "components": []
-      },
-      {
-        "name": "padel",
-        "id": 12,
-        "position": {
-          "x": 1050,
-          "y": 0,
-          "className": "Point2D"
-        },
-        "scale": {
-          "x": 60,
-          "y": 60
-        },
-        "rotation": 0,
-        "zIndex": 0,
-        "children": [
-          13
-        ],
         "components": [
-          12,
-          13
+          11,
+          12
         ]
       },
       {
+        "id": 12,
         "name": "label",
         "className": "label",
+        "components": []
+      },
+      {
         "id": 13,
         "position": {
-          "x": 0,
-          "y": -40,
-          "className": "Point2D"
+          "className": "Point2D",
+          "x": -1050,
+          "y": 70.56
         },
-        "scale": {
-          "x": 10,
-          "y": 10
+        "components": [
+          13,
+          14
+        ]
+      },
+      {
+        "id": 14,
+        "name": "label",
+        "className": "label",
+        "components": []
+      },
+      {
+        "id": 15,
+        "position": {
+          "className": "Point2D",
+          "x": 1050,
+          "y": 70.56
         },
-        "rotation": 0,
+        "components": [
+          15,
+          16
+        ]
+      },
+      {
+        "id": 16,
+        "name": "label",
+        "className": "label",
         "components": []
       },
       {
         "name": "ball",
-        "id": 14,
+        "id": 17,
         "position": {
-          "x": -605.436556,
-          "y": -107.55371486666662,
-          "className": "Point2D"
+          "className": "Point2D",
+          "x": -139.05,
+          "y": -177.05
         },
         "scale": {
           "x": 40,
           "y": 40
         },
         "components": [
-          15,
-          14
+          18,
+          17
         ]
       },
       {
         "name": "camera",
-        "id": 15,
+        "id": 18,
         "position": {
-          "x": -242.85294866922868,
-          "y": 0,
-          "className": "Point2D"
+          "className": "Point2D",
+          "x": 200.1,
+          "y": 0
         },
         "scale": {
           "x": 10,
@@ -285,185 +219,31 @@
         "rotation": 0,
         "zIndex": 0,
         "components": []
+      },
+      {
+        "name": "goalpost",
+        "id": 19,
+        "position": {
+          "className": "Point2D",
+          "x": -1150,
+          "y": 0
+        },
+        "scale": {
+          "x": 126.69999999999999,
+          "y": 329.7
+        },
+        "rotation": 0,
+        "zIndex": 0,
+        "components": [
+          19
+        ]
       }
     ],
-    "components": [
-      {
-        "id": 2,
-        "name": "hitbox",
-        "renderable": false,
-        "enabled": true,
-        "isColliding": false
-      },
-      {
-        "id": 3,
-        "name": "sprite",
-        "imagePath": "assets/skins/ghost_light.png",
-        "flippedHorizontal": true,
-        "crop": false,
-        "opacity": 1,
-        "blendMode": "source-over",
-        "glow": {
-          "className": "glow",
-          "Color": "#3731FE",
-          "Blur": 10,
-          "OffsetX": 0,
-          "OffsetY": 5,
-          "blendMode": "multiply"
-        }
-      },
-      {
-        "id": 4,
-        "name": "hitbox",
-        "renderable": false,
-        "enabled": true,
-        "isColliding": false
-      },
-      {
-        "id": 5,
-        "name": "sprite",
-        "imagePath": "assets/skins/ghost_dark.png",
-        "flippedHorizontal": false,
-        "crop": false,
-        "opacity": 1,
-        "blendMode": "source-over",
-        "glow": {
-          "className": "glow",
-          "Color": "#3731FE",
-          "Blur": 10,
-          "OffsetX": 0,
-          "OffsetY": 5,
-          "blendMode": "multiply"
-        }
-      },
-      {
-        "id": 6,
-        "name": "hitbox",
-        "renderable": false,
-        "enabled": true,
-        "isColliding": false
-      },
-      {
-        "id": 7,
-        "name": "sprite",
-        "imagePath": "assets/skins/ghost_dark.png",
-        "flippedHorizontal": true,
-        "crop": false,
-        "opacity": 1,
-        "blendMode": "source-over",
-        "glow": {
-          "className": "glow",
-          "Color": "#3731FE",
-          "Blur": 10,
-          "OffsetX": 0,
-          "OffsetY": 5,
-          "blendMode": "multiply"
-        }
-      },
-      {
-        "id": 8,
-        "name": "hitbox",
-        "renderable": false,
-        "enabled": true,
-        "isColliding": false
-      },
-      {
-        "id": 9,
-        "name": "sprite",
-        "imagePath": "assets/skins/ghost_dark.png",
-        "flippedHorizontal": false,
-        "crop": false,
-        "opacity": 1,
-        "blendMode": "source-over",
-        "glow": {
-          "className": "glow",
-          "Color": "#3731FE",
-          "Blur": 10,
-          "OffsetX": 0,
-          "OffsetY": 5,
-          "blendMode": "multiply"
-        }
-      },
-      {
-        "id": 10,
-        "name": "hitbox",
-        "renderable": false,
-        "enabled": true,
-        "isColliding": false
-      },
-      {
-        "id": 11,
-        "name": "sprite",
-        "imagePath": "assets/skins/ghost_dark.png",
-        "flippedHorizontal": true,
-        "crop": false,
-        "opacity": 1,
-        "blendMode": "source-over",
-        "glow": {
-          "className": "glow",
-          "Color": "#3731FE",
-          "Blur": 10,
-          "OffsetX": 0,
-          "OffsetY": 5,
-          "blendMode": "multiply"
-        }
-      },
-      {
-        "id": 12,
-        "name": "hitbox",
-        "renderable": false,
-        "enabled": true,
-        "isColliding": false
-      },
-      {
-        "id": 13,
-        "name": "sprite",
-        "imagePath": "assets/skins/ghost_dark.png",
-        "flippedHorizontal": false,
-        "crop": false,
-        "opacity": 1,
-        "blendMode": "source-over",
-        "glow": {
-          "className": "glow",
-          "Color": "#3731FE",
-          "Blur": 10,
-          "OffsetX": 0,
-          "OffsetY": 5,
-          "blendMode": "multiply"
-        }
-      },
-      {
-        "id": 15,
-        "name": "hitbox",
-        "renderable": false,
-        "enabled": true,
-        "isColliding": false
-      },
-      {
-        "id": 14,
-        "name": "sprite",
-        "imagePath": "assets/ball.png",
-        "flippedHorizontal": false,
-        "crop": false,
-        "opacity": 1,
-        "blendMode": "source-over",
-        "glow": {
-          "className": "glow",
-          "Color": "#3C2000",
-          "Blur": 10,
-          "OffsetX": 0,
-          "OffsetY": 0,
-          "blendMode": "multiply"
-        }
-      }
-    ],
-    "metadata": {
-      "delta": 0.015964320000000042
-    }
+    "type": "partial"
   },
   "metadata": {
-    "timestamp": 1757597173137,
-    "delta": 0.015964320000000042,
+    "timestamp": 1757685087580,
+    "delta": 0.016234458999999334,
     "fps": 0
   }
 }

@@ -5,7 +5,7 @@ import { Glow } from './objects/Glow.js';
 import { drawImg, Sprite, Tags } from './objects/Sprite.js';
 import { HitBox } from './objects/Hitbox.js';
 import { Viewport } from './objects/Viewport.js';
-import { PongGame } from './pong3.js';
+import { PongGame } from './game/pong.js';
 import { Camera } from './objects/Camera.js';
 import { Label } from './objects/Label.js';
 import { Component } from './objects/Component.js';
@@ -49,7 +49,6 @@ ws.onopen = () => {
     });
 };
 let data = {};
-let test = false;
 // todo !!!!! HERE
 ws.onmessage = (event) => {
     data = JSON.parse(event.data);
@@ -59,7 +58,11 @@ ws.onmessage = (event) => {
             type: "request",
             payload: {}
         }));
-        test = true;
+    }
+    if (!data["state"])
+        return;
+    if (data["state"]["type"] === "full") {
+        console.log(data);
     }
 };
 ws.onclose = () => {
@@ -151,6 +154,8 @@ window.addEventListener("DOMContentLoaded", () => {
             .sort((a, b) => a.zIndex - b.zIndex);
         // -- CLEAR CANVAS --
         ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "#9FD044";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
         // -- RENDER OBJECTS --
         for (const clientObj of renderList) {
             clientObj.draw(viewport);

@@ -21,24 +21,24 @@ export class HitBox extends Component {
 	}
 
 	draw(viewport: Viewport) {
-		if (!this.host) return;
+		// if (!this.host) return;
 
-		viewport.ctx.save();
-		viewport.ctx.strokeStyle = this.isColliding ? 'green' : 'red';
-		viewport.ctx.lineWidth = 2;
+		// viewport.ctx.save();
+		// viewport.ctx.strokeStyle = this.isColliding ? 'green' : 'red';
+		// viewport.ctx.lineWidth = 2;
 
-		const center = viewport.toScreenCoords(this.host.getWorldPosition());
-		const scale = this.host.scale;
-		const halfScaleX = scale.x / 2;
-		const halfScaleY = scale.y / 2;
+		// const center = viewport.toScreenCoords(this.host.getWorldPosition());
+		// const scale = this.host.scale;
+		// const halfScaleX = scale.x / 2;
+		// const halfScaleY = scale.y / 2;
 
-		viewport.ctx.strokeRect(
-			center.x - halfScaleX,
-			center.y - halfScaleY,
-			scale.x,
-			scale.y
-		);
-		viewport.ctx.restore();
+		// viewport.ctx.strokeRect(
+		// 	center.x - halfScaleX,
+		// 	center.y - halfScaleY,
+		// 	scale.x,
+		// 	scale.y
+		// );
+		// viewport.ctx.restore();
 	}
 
 	isCollidingWith(other: HitBox): boolean {

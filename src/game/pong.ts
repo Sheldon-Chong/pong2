@@ -22,6 +22,11 @@ import { Player } from './Player.js';
 //     ballSpeed: number = 700;
 // }
 
+function lastElem<T>(array: T[]): T {
+    return array[array.length - 1];
+}
+
+
 export enum Team {
 	TEAM1= "team1",
 	TEAM2= "team2"
@@ -142,7 +147,7 @@ export class Padel extends GameObject {
 
 		// add shadow
 		this.sprite.glow = new Glow({
-			Color: "#3731FE", 
+			Color: "#6881a8", 
 			Blur: 10,
 			OffsetX: 0, 
 			OffsetY: 5, 
@@ -236,6 +241,16 @@ class PadelLabel extends Label {
 	}
 }
 
+function oscillateValue(
+  baseValue: number,
+  amplitude: number,
+  frequency: number,
+	offset: number = 0
+): number {
+  const t = (performance.now() / 1000) + offset; // seconds
+  return baseValue + amplitude * Math.sin(2 * Math.PI * frequency * t);
+}
+
 export class PongGame {
 
 	clientData;
@@ -244,12 +259,15 @@ export class PongGame {
 
 	lastFrameTime: number = performance.now();
 	fps: number = 0;
-	delta: number;
+	delta: number = 0;
 
 	world: GameWorld = new GameWorld();
 
 	gameSettings: GameSettings = new GameSettings();
 	camera: Camera;
+
+	team1GoalPostEnd: number;
+	team2GoalPostEnd: number;
 
 	update() {
 		const now = performance.now();
@@ -265,8 +283,6 @@ export class PongGame {
 			delete state["components"];
 		}
 
-		console.log(this.world.camera.id);
-
 		return state;
 	}
 
@@ -278,28 +294,80 @@ export class PongGame {
 
 		// -- add background
 
+		// this.world.addObject(new GameObject({
+		// 	game: this,
+		// 	position: new Point2D(0, 0),
+		// 	name: "background",
+		// 	isStatic: true,
+		// 	zIndex: -10,
+		// 	components: [
+		// 		new Sprite({
+		// 			imagePath: "assets/maps/map1.png",
+		// 		})
+		// 	],
+		// 	scale: new Vector2D(2700, 500),
+		// }));
+
+		// this.world.addObject(new GameObject({
+		// 	game: this,
+		// 	position: new Point2D(0, 50),
+		// 	name: "background",
+		// 	isStatic: true,
+		// 	zIndex: -10,
+		// 	components: [
+		// 		new Sprite({
+		// 			imagePath: "assets/maps/map1/grid.png",
+		// 		})
+		// 	],
+		// 	scale: new Vector2D(2700, 430).multiply(1),
+		// }));
+
+
+
+		this.world.addObject(new GameObject({game:this}));
+
 		this.world.addObject(new GameObject({
 			game: this,
 			position: new Point2D(0, 0),
 			name: "background",
 			isStatic: true,
-			zIndex: -10,
+			zIndex: -15,
 			components: [
 				new Sprite({
-					imagePath: "assets/maps/map1.png",
+					imagePath: "assets/maps/map1/grid3.png",
 				})
 			],
-			scale: new Vector2D(2700, 500),
+			scale: new Vector2D(2700, 430).multiply(1),
 		}));
-
-
-		this.world.addObject(new PadelLabel({
-			game:this,
-			text: "test", 
-			position : new Point2D(0, 0), 
-			font: "15px Century Gothic", 
-			color: "#ffffff"
-		}));
+		
+		for (let i = 0; i < 3; i ++) {
+			this.world.addObject(new GameObject({
+				game: this,
+				position: new Point2D(0, -230),
+				name: "crowd",
+				variables: {
+					offset: i * 15
+				},
+				zIndex: -15,
+				components: [
+					new Sprite({
+						imagePath: [
+							"assets/maps/map1/crowd.png",
+							"assets/maps/map1/crowd2.png"
+						][i%2],
+					})
+				],
+				scale: new Vector2D(4200, 118).multiply(0.5),
+				onUpdate: function () {
+					const amplitude = 5;  
+					const frequency = 0.5;
+					const baseY = -240;    
+	
+					// apply oscillation
+					this.position.y = oscillateValue(baseY, amplitude, frequency, this.variables["offset"]);
+				}
+			}));
+		}
 
 		// -- add players --
 
@@ -338,6 +406,9 @@ export class PongGame {
 			}
 		}
 
+		this.team1GoalPostEnd = lastElem(this.team1.players).position.x - 100;
+		this.team2GoalPostEnd = lastElem(this.team2.players).position.x + 100;
+
 		// -- add ball --
 
 		let ball = this.world.addObject(new Ball({
@@ -350,6 +421,20 @@ export class PongGame {
 			game: this,
 			target: ball,
 		})) as Camera;
+
+		this.world.addObject(new GameObject({
+			scale: (new Vector2D(181, 471)).multiply(0.7),
+			position: new Point2D(this.team1GoalPostEnd, 0),
+			game: this,
+			name: "goalpost",
+			components: [
+				new Sprite({
+					imagePath: "assets/goalpost.png",
+					flippedHorizontal: true
+				}),
+			],
+		}))
+
 
 		this.world.viewport.camera = this.world.camera;
 	}

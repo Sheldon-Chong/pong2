@@ -98,10 +98,8 @@ fastify.get("/", async (_, reply) => {
       <center>
       <div class="flex flex-col items-center justify-center h-screen w-screen overflow-auto">
       <h1 class="text-3xl font-bold mb-4">Barebones Pong Game</h1>
-      <canvas id="pong-canvas" width="800" height="400" class="rounded-lg shadow-lg border-4 border-cyan-400 bg-gray-800 max-w-full"></canvas>
+      <canvas id="pong-canvas" width="800" height="500" class="rounded-lg shadow-lg border-4 border-cyan-400 bg-gray-800 max-w-full"></canvas>
     <div class="mt-6 flex justify-between items-center" style="width:1000px; height:120px; border-radius:16px;">
-    <div class="h-20 bg-gray-500 rounded-2xl" style="width:450px; height:120px"></div>
-    <div class="h-20 bg-gray-500 rounded-2xl hover:bg-gray-400" style="width:450px; height:120px"></div>
     </div>    </div>
       </center>
       <script type="module" src="/client.js"></script>			</body>

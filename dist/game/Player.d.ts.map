@@ -1,0 +1,1 @@
+{"version":3,"file":"Player.d.ts","sourceRoot":"","sources":["../../src/game/Player.ts"],"names":[],"mappings":"AACA,qBAAa,MAAM;IAClB,IAAI,EAAE,MAAM,CAAM;IAClB,YAAY,EAAE,MAAM,CAAM;IAC1B,IAAI,EAAE,MAAM,CAAgB;gBAEhB,MAAM,GAAE,OAAO,CAAC,MAAM,CAAM;CAGxC"}

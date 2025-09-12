@@ -1,0 +1,414 @@
+{
+  "type": "state",
+  "state": {
+    "camera": {
+      "position": {
+        "x": -18.297467764987942,
+        "y": 0,
+        "className": "Point2D"
+      }
+    },
+    "gameObjects": [
+      {
+        "name": "label",
+        "className": "label",
+        "id": 1,
+        "position": {
+          "x": 0,
+          "y": 0,
+          "className": "Point2D"
+        },
+        "scale": {
+          "x": 10,
+          "y": 10
+        },
+        "rotation": 0,
+        "components": []
+      },
+      {
+        "name": "padel",
+        "id": 2,
+        "position": {
+          "x": -250,
+          "y": 0,
+          "className": "Point2D"
+        },
+        "scale": {
+          "x": 60,
+          "y": 60
+        },
+        "rotation": 0,
+        "zIndex": 0,
+        "children": [
+          3
+        ],
+        "components": [
+          2,
+          3
+        ]
+      },
+      {
+        "name": "label",
+        "className": "label",
+        "id": 3,
+        "position": {
+          "x": 0,
+          "y": -40,
+          "className": "Point2D"
+        },
+        "scale": {
+          "x": 10,
+          "y": 10
+        },
+        "rotation": 0,
+        "components": []
+      },
+      {
+        "name": "padel",
+        "id": 4,
+        "position": {
+          "x": 250,
+          "y": 0,
+          "className": "Point2D"
+        },
+        "scale": {
+          "x": 60,
+          "y": 60
+        },
+        "rotation": 0,
+        "zIndex": 0,
+        "children": [
+          5
+        ],
+        "components": [
+          4,
+          5
+        ]
+      },
+      {
+        "name": "label",
+        "className": "label",
+        "id": 5,
+        "position": {
+          "x": 0,
+          "y": -40,
+          "className": "Point2D"
+        },
+        "scale": {
+          "x": 10,
+          "y": 10
+        },
+        "rotation": 0,
+        "components": []
+      },
+      {
+        "name": "padel",
+        "id": 6,
+        "position": {
+          "x": -650,
+          "y": 0,
+          "className": "Point2D"
+        },
+        "scale": {
+          "x": 60,
+          "y": 60
+        },
+        "rotation": 0,
+        "zIndex": 0,
+        "children": [
+          7
+        ],
+        "components": [
+          6,
+          7
+        ]
+      },
+      {
+        "name": "label",
+        "className": "label",
+        "id": 7,
+        "position": {
+          "x": 0,
+          "y": -40,
+          "className": "Point2D"
+        },
+        "scale": {
+          "x": 10,
+          "y": 10
+        },
+        "rotation": 0,
+        "components": []
+      },
+      {
+        "name": "padel",
+        "id": 8,
+        "position": {
+          "x": 650,
+          "y": 0,
+          "className": "Point2D"
+        },
+        "scale": {
+          "x": 60,
+          "y": 60
+        },
+        "rotation": 0,
+        "zIndex": 0,
+        "children": [
+          9
+        ],
+        "components": [
+          8,
+          9
+        ]
+      },
+      {
+        "name": "label",
+        "className": "label",
+        "id": 9,
+        "position": {
+          "x": 0,
+          "y": -40,
+          "className": "Point2D"
+        },
+        "scale": {
+          "x": 10,
+          "y": 10
+        },
+        "rotation": 0,
+        "components": []
+      },
+      {
+        "name": "padel",
+        "id": 10,
+        "position": {
+          "x": -1050,
+          "y": 0,
+          "className": "Point2D"
+        },
+        "scale": {
+          "x": 60,
+          "y": 60
+        },
+        "rotation": 0,
+        "zIndex": 0,
+        "children": [
+          11
+        ],
+        "components": [
+          10,
+          11
+        ]
+      },
+      {
+        "name": "label",
+        "className": "label",
+        "id": 11,
+        "position": {
+          "x": 0,
+          "y": -40,
+          "className": "Point2D"
+        },
+        "scale": {
+          "x": 10,
+          "y": 10
+        },
+        "rotation": 0,
+        "components": []
+      },
+      {
+        "name": "padel",
+        "id": 12,
+        "position": {
+          "x": 1050,
+          "y": 0,
+          "className": "Point2D"
+        },
+        "scale": {
+          "x": 60,
+          "y": 60
+        },
+        "rotation": 0,
+        "zIndex": 0,
+        "children": [
+          13
+        ],
+        "components": [
+          12,
+          13
+        ]
+      },
+      {
+        "name": "label",
+        "className": "label",
+        "id": 13,
+        "position": {
+          "x": 0,
+          "y": -40,
+          "className": "Point2D"
+        },
+        "scale": {
+          "x": 10,
+          "y": 10
+        },
+        "rotation": 0,
+        "components": []
+      },
+      {
+        "name": "ball",
+        "id": 14,
+        "position": {
+          "x": 136.30835350000052,
+          "y": 102.00050266666665,
+          "className": "Point2D"
+        },
+        "scale": {
+          "x": 40,
+          "y": 40
+        },
+        "components": [
+          15,
+          14
+        ]
+      },
+      {
+        "name": "camera",
+        "id": 15,
+        "position": {
+          "x": -18.297467764987942,
+          "y": 0,
+          "className": "Point2D"
+        },
+        "scale": {
+          "x": 10,
+          "y": 10
+        },
+        "rotation": 0,
+        "zIndex": 0,
+        "components": []
+      }
+    ],
+    "components": [
+      {
+        "id": 2,
+        "name": "hitbox",
+        "renderable": false,
+        "enabled": true,
+        "isColliding": false
+      },
+      {
+        "id": 3,
+        "name": "sprite",
+        "imagePath": "assets/skins/ghost_light.png",
+        "flippedHorizontal": true,
+        "crop": false,
+        "opacity": 1,
+        "blendMode": "source-over"
+      },
+      {
+        "id": 4,
+        "name": "hitbox",
+        "renderable": false,
+        "enabled": true,
+        "isColliding": false
+      },
+      {
+        "id": 5,
+        "name": "sprite",
+        "imagePath": "assets/skins/ghost_dark.png",
+        "flippedHorizontal": false,
+        "crop": false,
+        "opacity": 1,
+        "blendMode": "source-over"
+      },
+      {
+        "id": 6,
+        "name": "hitbox",
+        "renderable": false,
+        "enabled": true,
+        "isColliding": false
+      },
+      {
+        "id": 7,
+        "name": "sprite",
+        "imagePath": "assets/skins/ghost_dark.png",
+        "flippedHorizontal": true,
+        "crop": false,
+        "opacity": 1,
+        "blendMode": "source-over"
+      },
+      {
+        "id": 8,
+        "name": "hitbox",
+        "renderable": false,
+        "enabled": true,
+        "isColliding": false
+      },
+      {
+        "id": 9,
+        "name": "sprite",
+        "imagePath": "assets/skins/ghost_dark.png",
+        "flippedHorizontal": false,
+        "crop": false,
+        "opacity": 1,
+        "blendMode": "source-over"
+      },
+      {
+        "id": 10,
+        "name": "hitbox",
+        "renderable": false,
+        "enabled": true,
+        "isColliding": false
+      },
+      {
+        "id": 11,
+        "name": "sprite",
+        "imagePath": "assets/skins/ghost_dark.png",
+        "flippedHorizontal": true,
+        "crop": false,
+        "opacity": 1,
+        "blendMode": "source-over"
+      },
+      {
+        "id": 12,
+        "name": "hitbox",
+        "renderable": false,
+        "enabled": true,
+        "isColliding": false
+      },
+      {
+        "id": 13,
+        "name": "sprite",
+        "imagePath": "assets/skins/ghost_dark.png",
+        "flippedHorizontal": false,
+        "crop": false,
+        "opacity": 1,
+        "blendMode": "source-over"
+      },
+      {
+        "id": 15,
+        "name": "hitbox",
+        "renderable": false,
+        "enabled": true,
+        "isColliding": false
+      },
+      {
+        "id": 14,
+        "name": "sprite",
+        "imagePath": "assets/ball.png",
+        "flippedHorizontal": false,
+        "crop": false,
+        "opacity": 1,
+        "blendMode": "source-over"
+      }
+    ],
+    "metadata": {
+      "delta": 0.015015944999999193
+    },
+    "type": "partial"
+  },
+  "metadata": {
+    "timestamp": 1757635835105,
+    "delta": 0.015015944999999193,
+    "fps": 0
+  }
+}

@@ -7,5 +7,9 @@ export declare class HitBox extends Component {
     init(): HitBox;
     draw(viewport: Viewport): void;
     isCollidingWith(other: HitBox): boolean;
+    toJSON(exportStatic?: boolean): {
+        id: number;
+        name: string;
+    };
 }
 //# sourceMappingURL=Hitbox.d.ts.map

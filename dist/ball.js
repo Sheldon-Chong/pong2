@@ -44,7 +44,7 @@ export class Ball extends GameObject {
         return {
             name: this.name,
             id: this.id,
-            position: this.position,
+            position: this.position.export(),
             scale: this.scale,
             components: this.componentToJSON(exportStatic),
         };

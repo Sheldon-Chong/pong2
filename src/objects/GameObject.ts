@@ -66,6 +66,8 @@ export class GameObject {
 
 	public zIndex: number = 0;
 
+	public variables: {};
+
 	// --webserver stuff--
 	cache: any = {};
 	isStatic: boolean = false;
@@ -74,7 +76,6 @@ export class GameObject {
 	}
 
 	updateToGame() {
-		this.game.world.exportBackLog.push(this);
 	}
 	
 	public components: Map<number, Component> | Component[] = new Map<number, Component>() ;

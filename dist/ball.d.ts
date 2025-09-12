@@ -15,7 +15,11 @@ export declare class Ball extends GameObject {
     export(exportStatic?: boolean): {
         name: string;
         id: number;
-        position: Point2D;
+        position: {
+            className: string;
+            x: number;
+            y: number;
+        };
         scale: Vector2D;
         components: any[];
     };

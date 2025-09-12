@@ -1,6 +1,6 @@
 import { Point2D, Vector2D, interpolate, randomBetween } from './Coordinates.js';
-import { GameObject, pruneEmpty } from './GameObject.js';
-import { PongGame } from '../pong3.js';
+import { GameObject, exportCleanup } from './GameObject.js';
+import { PongGame } from '../game/pong.js';
 import {} from './Sprite.js';
 import { Viewport } from './Viewport.js';
 export class Label extends GameObject {
@@ -24,18 +24,18 @@ export class Label extends GameObject {
         viewport.ctx.fillText(this.text, x, y);
     }
     export(exportStatic = false) {
-        return pruneEmpty({
+        return exportCleanup({
             name: this.name,
             className: this.className,
             id: this.id,
-            position: this.position,
+            position: this.position.export(),
             scale: this.scale,
             rotation: this.rotation,
             components: this.componentToJSON(exportStatic),
             children: this.children?.map(child => child.id),
-            STATIC_text: this.text,
-            STATIC_font: this.font,
-            STATIC_color: this.color
+            text: this.text,
+            font: this.font,
+            color: this.color
         }, exportStatic);
     }
 }

@@ -1,5 +1,6 @@
 import { Vector2D } from './Coordinates.js';
 import { Component } from './Component.js';
+import { exportCleanup } from './GameObject.js';
 export class HitBox extends Component {
     isColliding = false;
     onCollide;
@@ -15,17 +16,21 @@ export class HitBox extends Component {
         return this;
     }
     draw(viewport) {
-        if (!this.host)
-            return;
-        viewport.ctx.save();
-        viewport.ctx.strokeStyle = this.isColliding ? 'green' : 'red';
-        viewport.ctx.lineWidth = 2;
-        const center = viewport.toScreenCoords(this.host.getWorldPosition());
-        const scale = this.host.scale;
-        const halfScaleX = scale.x / 2;
-        const halfScaleY = scale.y / 2;
-        viewport.ctx.strokeRect(center.x - halfScaleX, center.y - halfScaleY, scale.x, scale.y);
-        viewport.ctx.restore();
+        // if (!this.host) return;
+        // viewport.ctx.save();
+        // viewport.ctx.strokeStyle = this.isColliding ? 'green' : 'red';
+        // viewport.ctx.lineWidth = 2;
+        // const center = viewport.toScreenCoords(this.host.getWorldPosition());
+        // const scale = this.host.scale;
+        // const halfScaleX = scale.x / 2;
+        // const halfScaleY = scale.y / 2;
+        // viewport.ctx.strokeRect(
+        // 	center.x - halfScaleX,
+        // 	center.y - halfScaleY,
+        // 	scale.x,
+        // 	scale.y
+        // );
+        // viewport.ctx.restore();
     }
     isCollidingWith(other) {
         if (!this.host || !other.host)
@@ -46,6 +51,12 @@ export class HitBox extends Component {
             aRight > bLeft &&
             aTop < bBottom &&
             aBottom > bTop);
+    }
+    toJSON(exportStatic = false) {
+        return exportCleanup({
+            id: this.id,
+            name: this.name
+        }, exportStatic);
     }
 }
 //# sourceMappingURL=Hitbox.js.map

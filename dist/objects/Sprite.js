@@ -2,7 +2,7 @@ import { Point2D, Vector2D } from './Coordinates.js';
 import { Glow } from './Glow.js';
 import { Component } from './Component.js';
 import { Viewport } from './Viewport.js';
-import { pruneEmpty } from './GameObject.js';
+import { exportCleanup } from './GameObject.js';
 export var Tags;
 (function (Tags) {
     Tags["Renderable"] = "Renderable";
@@ -34,17 +34,18 @@ export class Sprite extends Component {
         return this;
     }
     toJSON(exportStatic = false) {
-        return pruneEmpty({
+        const output = exportCleanup({
             id: this.id,
             name: this.name, // Add this line
             imagePath: this.imagePath,
-            flippedHorizontal: this.flippedHorizontal,
-            crop: this.crop,
-            outline: this.outline,
-            opacity: this.opacity,
-            blendMode: this.blendMode,
-            glow: this.glow // todo problem with having static glow. Need a new de-serialize system
+            STATIC_flippedHorizontal: this.flippedHorizontal,
+            STATIC_crop: this.crop,
+            STATIC_outline: this.outline,
+            STATIC_opacity: this.opacity,
+            STATIC_blendMode: this.blendMode,
+            STATIC_glow: this.glow
         }, exportStatic);
+        return output;
     }
     constructor(params = {}) {
         super({

@@ -26,6 +26,13 @@ export class Point2D {
         const dy = Math.sin(radians) * distance;
         return new Point2D(this.x + dx, this.y + dy);
     }
+    export() {
+        return {
+            className: "Point2D",
+            x: Math.round(this.x * 100) / 100,
+            y: Math.round(this.y * 100) / 100,
+        };
+    }
 }
 export class Vector2D {
     x;

@@ -1,7 +1,9 @@
 import { Point2D } from './objects/Coordinates.js';
 import { GameObject } from './objects/GameObject.js';
 import { Sprite } from './objects/Sprite.js';
+import { Camera } from './objects/Camera.js';
 import { GameWorld } from './GameWorld.js';
+import { Player } from './game/Player.js';
 export declare enum Team {
     TEAM1 = "team1",
     TEAM2 = "team2"
@@ -14,12 +16,6 @@ export declare class GameTeam {
     constructor(game: PongGame, name: String);
 }
 export declare const SKINS: Record<string, string>;
-export declare class Player {
-    name: string;
-    profileImage: string;
-    skin: string;
-    constructor(params?: Partial<Player>);
-}
 declare class GameSettings {
     playerAcceleration: number;
     playerCount: number;
@@ -35,6 +31,7 @@ export declare class Padel extends GameObject {
     isMoving: boolean;
     sprite: Sprite;
     teamWins(team: Team): void;
+    export(exportStatic?: boolean): Record<string, any>;
     constructor(params: Partial<Padel>);
 }
 export declare class PongGame {
@@ -46,6 +43,7 @@ export declare class PongGame {
     delta: number;
     world: GameWorld;
     gameSettings: GameSettings;
+    camera: Camera;
     update(): void;
     exportState(includeStaticObjects?: boolean): {
         camera: {
