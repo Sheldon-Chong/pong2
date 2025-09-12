@@ -1,6 +1,6 @@
 import { Point2D, Vector2D } from './Coordinates.js';
 import { type Renderable, Sprite } from './Sprite.js';
-import type { PongGame } from '../pong3.js';
+import type { PongGame } from '../pong.js';
 import type { Viewport } from './Viewport.js'; import { Component } from './Component.js';
 import type { HitBox } from './Hitbox.js';
 
@@ -10,7 +10,7 @@ function ownsProperty(obj: object, key: PropertyKey): boolean {
   return Object.prototype.hasOwnProperty.call(obj, key);
 }
 
-export function pruneEmpty<T extends Record<string, any>>(
+export function exportCleanup<T extends Record<string, any>>(
 	obj: T,
 	exportStatic: boolean = false
 ): T {
@@ -26,9 +26,10 @@ export function pruneEmpty<T extends Record<string, any>>(
 			continue;
 
 		if (key.startsWith("STATIC_")) {
+			const keyName = key.slice("STATIC_".length);
+
 			if (exportStatic) {
-				result[key.slice("STATIC_".length)] = value;
-				console.log("exported as", value);
+				result[keyName] = value;
 			} 
 		}
 		else {
@@ -83,7 +84,6 @@ export class GameObject {
 		this.id = GameObject.globalId;
 		GameObject.globalId++;
 
-		console.log(params.components);
 		const map = new Map<number, Component>();
 		if (Array.isArray(params.components)) {
 			for (const component of params.components) {
@@ -96,8 +96,7 @@ export class GameObject {
 	}
 
 	addComponent(component: Component) {
-
-		console.log(`component ${component.name} ${component.id} added to ${this.name} ${this.id}`);
+		// console.log(`component ${component.name} ${component.id} added to ${this.name} ${this.id}`);
 		(this.components as Map<number, Component>).set(component.id, component);
 		component.host = this;
 		component.init();
@@ -189,7 +188,6 @@ export class GameObject {
 				try { (component as Sprite).draw(viewport,); }
 				catch (error) { 
 					console.log("CAMERA", error);
-					console.log("component", component);
 				}
 			}
 			if (component.name === "hitbox") {
@@ -214,7 +212,7 @@ export class GameObject {
 		const json: any = {
 			name: this.name,
 			id: this.id,
-			position: this.position,
+			position: this.position.export(),
 			scale: this.scale,
 			rotation: this.rotation,
 			zIndex: this.zIndex,
@@ -222,6 +220,6 @@ export class GameObject {
 			components: this.componentToJSON(),
 		};
 
-		return pruneEmpty(json, exportStatic);
+		return exportCleanup(json, exportStatic);
 	}
 }

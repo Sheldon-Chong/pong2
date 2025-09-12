@@ -1,7 +1,7 @@
 import { Vector2D } from './Coordinates.js';
 import { Component } from './Component.js';
 import type { Viewport } from './Viewport.js';
-import type { GameObject } from './GameObject.js';
+import { exportCleanup, type GameObject } from './GameObject.js';
 
 export class HitBox extends Component {
 	isColliding: boolean = false;
@@ -67,5 +67,11 @@ export class HitBox extends Component {
 		);
 	}
 
+		toJSON(exportStatic: boolean = false) {
+			return exportCleanup({
+				id: this.id,
+				name: this.name
+			}, exportStatic);
+		}
 	
 }

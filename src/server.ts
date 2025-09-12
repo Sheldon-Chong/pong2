@@ -4,7 +4,7 @@ import websocketPlugin from "@fastify/websocket";
 import fastifyStatic from "@fastify/static";
 import { join } from "path";
 import type { WebSocket } from "@fastify/websocket";
-import { PongGame } from "../dist/pong3.js";
+import { PongGame } from "../dist/pong.js";
 import { Socket } from "dgram";
 import { writeFileSync } from "fs";
 import type { FastifyRequest } from "fastify";
@@ -177,7 +177,10 @@ function updateGameObjects() {
   let output = compile(false);
 
   writeFileSync("game_state.json", output,"utf-8");
-
+  
+  if (output["state"] && output["state"]["type"] === "full")
+    writeFileSync("game_state_full.json", output,"utf-8");
+    
   for (const client of clients) {
     if (client.socket.readyState === 1) { // 1 = OPEN
       client.socket.send(output);

@@ -1,15 +1,16 @@
 
 import { Point2D, Vector2D, interpolate } from './objects/Coordinates.js'
-import { GameObject } from './objects/GameObject.js'
+import { GameObject, exportCleanup } from './objects/GameObject.js'
 import { Sprite, drawImg } from './objects/Sprite.js';
 import { Glow } from './objects/Glow.js';
 import { BlendMode } from './objects/Blendmodes.js';
 import { Camera } from './objects/Camera.js';
 import { Label } from './objects/Label.js';
 import { HitBox } from './objects/Hitbox.js';
-import { Ball } from './ball.js';
+import { Ball } from './game/ball.js';
 import { Viewport } from './objects/Viewport.js';
 import { GameWorld } from './GameWorld.js';
+import { Player } from './game/Player.js';
 
 // import { GameObject, Sprite, HitBox, Glow, Particle, Timer} from './Index.js'
 // import {  BlendMode } from './GameUtils.js'
@@ -67,17 +68,6 @@ export const SKINS: Record<string, string> = {
   "ghost_42": "assets/skins/ghost_42.png"
 };
 
-export class Player {
-	name: string = "";
-	profileImage: string = "";
-	skin: string = "ghost_dark";
-
-	constructor(params: Partial<Player> = {}) {
-		Object.assign(this, params);
-	}
-}
-
-
 class GameSettings {
 	playerAcceleration: number = 4300;
 	playerCount: number = 2;
@@ -103,6 +93,21 @@ export class Padel extends GameObject {
 
 	}
 
+	export(exportStatic: boolean = false): Record<string, any> {
+		const json: any = {
+			STATIC_name: this.name,
+			id: this.id,
+			position: this.position.export(),
+			STATIC_scale: this.scale,
+			STATIC_rotation: this.rotation,
+			STATIC_zIndex: this.zIndex,
+			STATIC_children: this.children.map(child => child.id),
+			STATIC_components: this.componentToJSON(),
+		};
+
+		return exportCleanup(json, exportStatic);
+	}
+	
 	constructor(params: Partial<Padel>) {
 		super({
 			position: params.position, 
@@ -123,7 +128,7 @@ export class Padel extends GameObject {
 			host: this
 		})) as Sprite;
 
-		this.addChild(new Label({
+		this.addChild(new PadelLabel({
 			text: this.player.name, 
 			position : new Point2D(0, -40), 
 			font: "15px Century Gothic", 
@@ -198,6 +203,8 @@ export class Padel extends GameObject {
 		//     pos: new Point2D(irisOffset, -3)
 		// }), 250));
 	}
+
+	
 }
 
 
@@ -210,6 +217,24 @@ const players: Player[] = [
 	new Player({name: "player5"}),
 	new Player({name: "player6"}),
 ];
+
+class PadelLabel extends Label {
+	export(exportStatic: boolean = false): any {
+		return exportCleanup({
+			id: this.id,
+			name: this.name,
+			className: this.className,
+			STATIC_position: this.position.export(),
+			STATIC_scale: this.scale,
+			STATIC_rotation: this.rotation,
+			STATIC_components: this.componentToJSON(exportStatic),
+			STATIC_children: this.children?.map(child => child.id),
+			STATIC_text: this.text,
+			STATIC_font: this.font,
+			STATIC_color: this.color
+		}, exportStatic);
+	}
+}
 
 export class PongGame {
 
@@ -224,6 +249,7 @@ export class PongGame {
 	world: GameWorld = new GameWorld();
 
 	gameSettings: GameSettings = new GameSettings();
+	camera: Camera;
 
 	update() {
 		const now = performance.now();
@@ -234,9 +260,13 @@ export class PongGame {
 
 	exportState(includeStaticObjects: boolean = false) {
 		let state = this.world.exportState(includeStaticObjects);
-		state["metadata"] = {
-			"delta": this.delta
+		state["type"] = includeStaticObjects ? "full" : "partial";
+		if (!includeStaticObjects) {
+			delete state["components"];
 		}
+
+		console.log(this.world.camera.id);
+
 		return state;
 	}
 
@@ -263,7 +293,7 @@ export class PongGame {
 		}));
 
 
-		this.world.addObject(new Label({
+		this.world.addObject(new PadelLabel({
 			game:this,
 			text: "test", 
 			position : new Point2D(0, 0), 
@@ -324,12 +354,3 @@ export class PongGame {
 		this.world.viewport.camera = this.world.camera;
 	}
 }
-
-		// todo !!! desync issue
-
-
-		// idea: have a handshake system SPECIFICALLY for creating objects,
-		
-		// idea STATIC OBJECTS
-		// however, object properties are streamed
-

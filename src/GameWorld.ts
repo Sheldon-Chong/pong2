@@ -59,7 +59,6 @@ export class GameWorld {
   update() {
     for (const object of this.gameObjects.values()) {
       object.update();
-      object.toUpdate = true;
     }
     this.checkCollisions();
 
@@ -83,14 +82,11 @@ export class GameWorld {
       if (!obj || visited.has(obj.id)) return;
       visited.add(obj.id);
 
-      if (!obj.toUpdate)
-        return;
 
       if (obj.isStatic === true // if only exports once
         && !includeStaticObjects)
         return
       let staticObjects = obj.export(includeStaticObjects);
-      console.log(staticObjects);
 
       let keysWithId = []
       for (const [key, component] of obj.components) {
@@ -100,13 +96,14 @@ export class GameWorld {
 
       staticObjects.components = keysWithId;
       flatObjects.push(staticObjects);
-      components.push(...obj.componentToJSON());
+      
+      const componentJson = obj.componentToJSON(includeStaticObjects);
+      components.push(...componentJson);
 
       if (obj.children && obj.children.length > 0) {
         for (const child of obj.children)
           flatten(child);
       }
-      obj.toUpdate = false;
     }
 
     for (const obj of this.gameObjects.values()) {
@@ -114,11 +111,6 @@ export class GameWorld {
     }
 
     this.exportBackLog.length = 0;
-
-
-    for (const component of components) {
-      console.log(component);
-    }
 
     return {
       camera: {

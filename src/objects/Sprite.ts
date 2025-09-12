@@ -3,7 +3,7 @@ import { Glow } from './Glow.js';
 import { Component } from './Component.js';
 import { Viewport } from './Viewport.js';
 import type { Camera } from './Camera.js';
-import { pruneEmpty } from './GameObject.js';
+import { exportCleanup } from './GameObject.js';
 
 
 export interface Renderable {
@@ -50,17 +50,27 @@ export class Sprite extends Component {
 	}
 
 	toJSON(exportStatic: boolean = false) {
-		return pruneEmpty({
+
+		console.log("---- tojson called ----", this.id);
+		console.log("export static?", exportStatic);
+		const output = exportCleanup({
 			id: this.id,
 			name: this.name, // Add this line
 			imagePath: this.imagePath,
-			flippedHorizontal: this.flippedHorizontal,
-			crop: this.crop,
-			outline: this.outline,
-			opacity: this.opacity,
-			blendMode: this.blendMode,
-			glow: this.glow // todo problem with having static glow. Need a new de-serialize system
+			STATIC_flippedHorizontal: this.flippedHorizontal,
+			STATIC_crop: this.crop,
+			STATIC_outline: this.outline,
+			STATIC_opacity: this.opacity,
+			STATIC_blendMode: this.blendMode,
+			STATIC_glow: this.glow
 		}, exportStatic);
+
+		if (exportStatic) {
+			console.log("full");
+			console.log("exported", output);
+		}
+
+		return output;
 	}
 	
 	constructor(params: Partial<Sprite> = {}) {

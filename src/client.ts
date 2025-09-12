@@ -5,7 +5,7 @@ import { Glow } from './objects/Glow.js';
 import { drawImg, Sprite, Tags, type Renderable } from './objects/Sprite.js'
 import { HitBox } from './objects/Hitbox.js'
 import { Viewport } from './objects/Viewport.js'
-import { PongGame } from './pong3.js';
+import { PongGame } from './pong.js';
 import { Camera } from './objects/Camera.js';
 import { Label } from './objects/Label.js';
 import { Component } from './objects/Component.js';
@@ -68,7 +68,6 @@ ws.onopen = () => {
 };
 
 let data = {}
-let test = false;
 
 // todo !!!!! HERE
 ws.onmessage = (event) => {
@@ -80,7 +79,12 @@ ws.onmessage = (event) => {
 			type: "request",
 			payload: {}
 		}));
-		test = true;
+	}
+
+	if (!data["state"])
+		return;
+	if (data["state"]["type"] === "full") {
+		console.log(data);
 	}
 };
 
@@ -263,7 +267,6 @@ window.addEventListener("DOMContentLoaded", () => {
 				Object.assign(componentRegistry.get(component.id), component);
 			}
 			else {
-				
 				const componentConstructor = classMap[component.name];
 				if (componentConstructor) {
 					const instance = new componentConstructor();

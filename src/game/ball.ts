@@ -1,12 +1,12 @@
-import { Point2D, Vector2D } from './objects/Coordinates.js';
-import { GameObject } from './objects/GameObject.js';
-import { Sprite } from './objects/Sprite.js';
-import { HitBox } from './objects/Hitbox.js';
-import { Glow } from './objects/Glow.js';
-import { BlendMode } from './objects/Blendmodes.js';
-import { GameTeam, Padel } from './pong3.js'; // Adjust import as needed
-import { Team } from './pong3.js';   // Adjust import as needed
-import { Timer } from './objects/Timer.js';
+import { Point2D, Vector2D } from '../objects/Coordinates.js';
+import { GameObject } from '../objects/GameObject.js';
+import { Sprite } from '../objects/Sprite.js';
+import { HitBox } from '../objects/Hitbox.js';
+import { Glow } from '../objects/Glow.js';
+import { BlendMode } from '../objects/Blendmodes.js';
+import { GameTeam, Padel } from '../pong.js'; // Adjust import as needed
+import { Team } from '../pong.js';   // Adjust import as needed
+import { Timer } from '../objects/Timer.js';
 
 function lastElem<T>(array: T[]): T {
     return array[array.length - 1];
@@ -56,7 +56,7 @@ export class Ball extends GameObject {
 		return {
 			name: this.name,
 			id: this.id,
-			position: this.position,
+			position: this.position.export(),
 			scale: this.scale,
 			components: this.componentToJSON(exportStatic),
 		}
