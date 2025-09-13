@@ -109,7 +109,7 @@ function getComponents() {
 	return [];
 }
 
-const currentGameObjects = new Map<string, GameObject>();
+const gameObjectRegistry = new Map<string, GameObject>();
 
 const componentMap: Record<string, new (params: any) => any> = {
 	"Point2D": function (params: any) { return new Point2D(params.x, params.y); } as any,
@@ -198,7 +198,7 @@ window.addEventListener("DOMContentLoaded", () => {
 	});
 
 	function draw() {
-		const renderList = Array.from(currentGameObjects.values())
+		const renderList = Array.from(gameObjectRegistry.values())
     .sort((a, b) => a.zIndex - b.zIndex);
 
 		// -- CLEAR CANVAS --
@@ -228,11 +228,11 @@ window.addEventListener("DOMContentLoaded", () => {
 	}
 
 	function getObject(id) {
-		return currentGameObjects.get(id);
+		return gameObjectRegistry.get(id);
 	}
 
 	function setObject(id, object) {
-		currentGameObjects.set(id, object);
+		gameObjectRegistry.set(id, object);
 	}
 
 	function createNewInstance(object) {
@@ -263,9 +263,14 @@ window.addEventListener("DOMContentLoaded", () => {
 
 	const componentRegistry = new Map<number, Component>();
 
+	
 	function loop() {
 		let client_objects = getObjects();
 		let components = getComponents();
+
+		for (const [id, object] of gameObjectRegistry) {
+			object.clientUpdate();
+		}
 
 		for (const component of components) {
 
@@ -303,7 +308,7 @@ window.addEventListener("DOMContentLoaded", () => {
 				
 				// -- UPDATE PROPERTIES AND CHILDREN OF THE CLASS --
 				genericUpdate(clientObj, revivedObject, clientObj.cache);
-				for (const [, obj] of currentGameObjects.entries()) {
+				for (const [, obj] of gameObjectRegistry.entries()) {
 					
 				}
 

@@ -11,17 +11,8 @@ import { Viewport } from '../objects/Viewport.js';
 import { GameWorld } from './GameWorld.js';
 import { Player } from './Player.js';
 import { ImageObject } from '../objects/ImageObject.js';
-// import { GameObject, Sprite, HitBox, Glow, Particle, Timer} from './Index.js'
-// import {  BlendMode } from './GameUtils.js'
-// class GameSettings {
-//     playerAcceleration: number = 4300;
-//     playerCount: number = 6;
-//     maxPlayerCount: number = 6;
-//     ballSpeed: number = 700;
-// }
-function lastElem(array) {
-    return array[array.length - 1];
-}
+import { oscillateValue } from '../utils/calculations.js';
+import { lastElem, middle } from '../utils/indexing.js';
 export var Team;
 (function (Team) {
     Team["TEAM1"] = "team1";
@@ -134,10 +125,16 @@ export class Padel extends GameObject {
                 this.velocity.y = 0;
             try {
                 for (const client of this.game.clientData) {
-                    if (client.keysPressed.has("ArrowUp"))
+                    if (client.keysPressed.has("ArrowUp")) {
                         this.acceleration.y = -this.game.gameSettings.playerAcceleration;
-                    else if (client.keysPressed.has("ArrowDown"))
+                        if (this.position.y < -(this.game.world.viewport.height / 2))
+                            this.position.y = -(this.game.world.viewport.height / 2);
+                    }
+                    else if (client.keysPressed.has("ArrowDown")) {
                         this.acceleration.y = this.game.gameSettings.playerAcceleration;
+                        if (this.position.y > this.game.world.viewport.height / 2)
+                            this.position.y = this.game.world.viewport.height / 2;
+                    }
                     else
                         this.acceleration.y = 0;
                 }
@@ -168,14 +165,6 @@ export class Padel extends GameObject {
         // }), 250));
     }
 }
-const players = [
-    new Player({ name: "test", skin: "ghost_light" }),
-    new Player({ name: "player2", profileImage: "assets/profile2.webp" }),
-    new Player({ name: "player3" }),
-    new Player({ name: "player4" }),
-    new Player({ name: "player5" }),
-    new Player({ name: "player6" }),
-];
 class PadelLabel extends Label {
     className = "label";
     export(exportStatic = false) {
@@ -194,20 +183,19 @@ class PadelLabel extends Label {
         }, exportStatic);
     }
 }
-function oscillateValue(baseValue, amplitude, frequency, offset = 0) {
-    const t = (performance.now() / 1000) + offset; // seconds
-    return baseValue + amplitude * Math.sin(2 * Math.PI * frequency * t);
-}
 const paddleOffset = 250;
 const paddleDistance = 200;
 const goalMargin = 200;
 const leftBoardControls = [["s", "w"], ["r", "f"], ["t", "g"]];
 const rightBoardControls = [["ArrowUp", "ArrowDown"], ["o", "l"], ["y", "h"]];
-function middle(arr) {
-    if (arr.length === 0)
-        return undefined; // no middle
-    return arr[Math.floor(arr.length / 2)];
-}
+const players = [
+    new Player({ name: "test", skin: "ghost_light" }),
+    new Player({ name: "player2", profileImage: "assets/profile2.webp" }),
+    new Player({ name: "player3" }),
+    new Player({ name: "player4" }),
+    new Player({ name: "player5" }),
+    new Player({ name: "player6" }),
+];
 export class PongGame {
     clientData;
     team1 = new GameTeam(this, Team.TEAM1);
@@ -239,6 +227,7 @@ export class PongGame {
                     position: new Point2D((i * paddleDistance * -1) - paddleOffset, 0),
                     team: Team.TEAM1,
                     player: players[i],
+                    zIndex: 10
                 });
                 this.team1.players.push(padel);
                 this.world.addObject(padel);
@@ -248,6 +237,7 @@ export class PongGame {
                     position: new Point2D(((i - 1) * paddleDistance) + paddleOffset, 0),
                     team: Team.TEAM2,
                     player: players[i],
+                    zIndex: 10
                 });
                 this.team2.players.push(padel);
                 this.world.addObject(padel);
@@ -260,6 +250,7 @@ export class PongGame {
             game: this,
             position: new Point2D(0, 0)
         }));
+        ball.zIndex = 10;
         // -- add camera  --
         this.world.camera = this.world.addObject(new Camera({
             position: new Point2D(0, -100),
@@ -290,7 +281,7 @@ export class PongGame {
             sprite: new Sprite({
                 imagePath: "assets/maps/map1/floor3.png",
             }),
-            scaleFactor: scaleFactor
+            scaleFactor: scaleFactor,
         }));
         // -- shadow --
         this.world.addObject(new ImageObject({
@@ -344,7 +335,7 @@ export class PongGame {
         const scoreUI = {
             text: "0",
             font: "100px Impact",
-            zIndex: -1,
+            zIndex: -5,
         };
         this.team1.label = this.world.addObject(new Label({
             ...scoreUI, position: new Point2D(middle(this.team1.players).position.x, 0)

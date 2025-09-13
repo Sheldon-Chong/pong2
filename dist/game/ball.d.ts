@@ -13,7 +13,7 @@ export declare class Ball extends GameObject {
     init(): void;
     calculateAngle(other: Padel): void;
     export(exportStatic?: boolean): {
-        name: string;
+        STATIC_name: string;
         id: number;
         position: {
             className: string;
@@ -21,7 +21,8 @@ export declare class Ball extends GameObject {
             y: number;
         };
         scale: Vector2D;
-        components: any[];
+        STATIC_components: any[];
+        STATIC_zIndex: number;
     };
     constructor(params: {
         position: Point2D;

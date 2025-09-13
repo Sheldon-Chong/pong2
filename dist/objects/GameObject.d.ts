@@ -5,9 +5,9 @@ import { Component } from './Component.js';
 export declare function exportCleanup<T extends Record<string, any>>(obj: T, exportStatic?: boolean): T;
 export declare class GameObject {
     game: PongGame;
-    id: number;
     static globalId: number;
     name: string;
+    id: number;
     parent: GameObject | null;
     children: GameObject[];
     position: Point2D;
@@ -29,6 +29,7 @@ export declare class GameObject {
     getComponents(): Component[];
     addChild(object: GameObject): void;
     update(): void;
+    clientUpdate(): void;
     getWorldPosition(added?: Vector2D): Point2D;
     getWorldScale(): Vector2D;
     componentToJSON(exportStatic?: boolean): any[];

@@ -8,10 +8,6 @@ import { GameTeam, Padel } from './pong.js'; // Adjust import as needed
 import { Team } from './pong.js';   // Adjust import as needed
 import { Timer } from '../objects/Timer.js';
 
-function lastElem<T>(array: T[]): T {
-    return array[array.length - 1];
-}
-
 export class Ball extends GameObject {
 	rotationVelocity: number = 0;
 	lastPadelHit: Padel | null = null;
@@ -54,11 +50,12 @@ export class Ball extends GameObject {
 
 	export(exportStatic: boolean = false) {
 		return {
-			name: this.name,
+			STATIC_name: this.name,
 			id: this.id,
 			position: this.position.export(),
 			scale: this.scale,
-			components: this.componentToJSON(exportStatic),
+			STATIC_components: this.componentToJSON(exportStatic),
+			STATIC_zIndex: this.zIndex
 		}
 	}
 
@@ -128,10 +125,16 @@ export class Ball extends GameObject {
 
 
 			// -- CHECK IF HITTING GOAL --
-			if (this.position.x < this.game.team1.goalPostEnd)  
+			if (this.position.x < this.game.team1.goalPostEnd) {
+				this.position.x = this.game.team1.goalPostEnd;
+				this.velocity.x = 0;
 				this.onHitGoal(Team.TEAM1);
-			else if (this.position.x > this.game.team2.goalPostEnd)  
+			}
+			else if (this.position.x > this.game.team2.goalPostEnd) {
+				this.position.x = this.game.team2.goalPostEnd;
+				this.velocity.x = 0;
 				this.onHitGoal(Team.TEAM2);
+			}  
 
 			return true;
 		};

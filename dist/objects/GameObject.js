@@ -29,11 +29,11 @@ export function exportCleanup(obj, exportStatic = false) {
 }
 export class GameObject {
     game;
-    id;
-    static globalId = 0;
     // identification
+    static globalId = 0;
     name = "";
-    // hierarchy
+    id;
+    // grouping
     parent = null;
     children = [];
     // physics
@@ -43,7 +43,9 @@ export class GameObject {
     velocity = new Vector2D(0, 0);
     acceleration = new Vector2D(0, 0);
     maximumVelocity = new Vector2D(1000, 1000);
+    // events
     onUpdate;
+    // order
     zIndex = 0;
     variables;
     // --webserver stuff--
@@ -96,6 +98,8 @@ export class GameObject {
             child.update();
         }
     }
+    clientUpdate() {
+    }
     getWorldPosition(added = new Vector2D(0, 0)) {
         if (!this.parent) {
             return new Point2D(this.position.x, this.position.y).add(added);
@@ -137,7 +141,7 @@ export class GameObject {
                 catch (error) {
                 }
             }
-            if (component instanceof HitBox) {
+            else if (component instanceof HitBox) {
                 try {
                     component.draw(viewport);
                 }
@@ -148,13 +152,10 @@ export class GameObject {
         }
         // Recursively draw children
         for (const child of this.children) {
-            // console.log(JSON.stringify(this.children));
             try {
                 child.draw(viewport);
-                // console.log("child drawn", typeof child);
             }
             catch (error) {
-                // console.log("error", error);
             }
         }
     }

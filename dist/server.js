@@ -145,7 +145,7 @@ function updateGameObjects() {
     }
     pongGame.update();
 }
-const TICK_RATE = 1000 / 60; // 60 FPS
+const TICK_RATE = 1000 / 55; // 60 FPS
 setInterval(updateGameObjects, TICK_RATE);
 fastify.listen({ port: 3000 }, (err, address) => {
     if (err)

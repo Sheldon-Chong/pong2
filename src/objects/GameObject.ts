@@ -43,13 +43,14 @@ export class GameObject {
 
 	public game: PongGame;
 
-	public id: number;
-	static globalId = 0;
 
 	// identification
-	public name: string = "";
+	public static globalId = 0;
 
-	// hierarchy
+	public name: string = "";
+	public id: number;
+
+	// grouping
 	public parent: GameObject | null = null;
 	public children: GameObject[] = [];
 
@@ -61,9 +62,10 @@ export class GameObject {
 	public acceleration: Vector2D = new Vector2D(0, 0);
 	public maximumVelocity: Vector2D = new Vector2D(1000, 1000);
 
-
+	// events
 	public onUpdate?: () => void;
 
+	// order
 	public zIndex: number = 0;
 
 	public variables: {};
@@ -137,6 +139,10 @@ export class GameObject {
 		}
 	}
 
+	clientUpdate() {
+
+	}
+
 	getWorldPosition(added:Vector2D = new Vector2D(0,0)): Point2D {
 		if (!this.parent) {
 			return new Point2D(
@@ -190,7 +196,7 @@ export class GameObject {
 				catch (error) { 
 				}
 			}
-			if (component instanceof HitBox) {
+			else if (component instanceof HitBox) {
 				try { (component as HitBox).draw(viewport); }
 				catch (error) { console.log("error", typeof component); }
 			}
@@ -198,13 +204,10 @@ export class GameObject {
 
 		// Recursively draw children
 		for (const child of this.children) {
-			// console.log(JSON.stringify(this.children));
 			try {
 				child.draw(viewport);
-				// console.log("child drawn", typeof child);
 			}
 			catch (error) {
-				// console.log("error", error);
 			}
 		}
 	}

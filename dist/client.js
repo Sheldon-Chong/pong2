@@ -81,7 +81,7 @@ function getComponents() {
     }
     return [];
 }
-const currentGameObjects = new Map();
+const gameObjectRegistry = new Map();
 const componentMap = {
     "Point2D": function (params) { return new Point2D(params.x, params.y); },
     "Vector2D": function (params) { return new Vector2D(params.x, params.y); },
@@ -151,7 +151,7 @@ window.addEventListener("DOMContentLoaded", () => {
         height: canvas.height
     });
     function draw() {
-        const renderList = Array.from(currentGameObjects.values())
+        const renderList = Array.from(gameObjectRegistry.values())
             .sort((a, b) => a.zIndex - b.zIndex);
         // -- CLEAR CANVAS --
         ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -176,10 +176,10 @@ window.addEventListener("DOMContentLoaded", () => {
         }
     }
     function getObject(id) {
-        return currentGameObjects.get(id);
+        return gameObjectRegistry.get(id);
     }
     function setObject(id, object) {
-        currentGameObjects.set(id, object);
+        gameObjectRegistry.set(id, object);
     }
     function createNewInstance(object) {
         let clientObj;
@@ -206,6 +206,9 @@ window.addEventListener("DOMContentLoaded", () => {
     function loop() {
         let client_objects = getObjects();
         let components = getComponents();
+        for (const [id, object] of gameObjectRegistry) {
+            object.clientUpdate();
+        }
         for (const component of components) {
             if (componentRegistry.has(component.id)) {
                 Object.assign(componentRegistry.get(component.id), component);
@@ -237,7 +240,7 @@ window.addEventListener("DOMContentLoaded", () => {
                 }
                 // -- UPDATE PROPERTIES AND CHILDREN OF THE CLASS --
                 genericUpdate(clientObj, revivedObject, clientObj.cache);
-                for (const [, obj] of currentGameObjects.entries()) {
+                for (const [, obj] of gameObjectRegistry.entries()) {
                 }
                 clientObj.components.forEach((value, key) => {
                     if (value === null) {

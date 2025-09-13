@@ -34,7 +34,7 @@ export declare class Padel extends GameObject {
     isMoving: boolean;
     sprite: Sprite;
     teamWins(team: Team): void;
-    skinPath: any;
+    skinPath: string;
     export(exportStatic?: boolean): Record<string, any>;
     constructor(params: Partial<Padel>);
     init(): void;
