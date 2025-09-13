@@ -2,26 +2,22 @@ import { Vector2D } from "./Coordinates.js";
 import { GameObject, exportCleanup } from "./GameObject.js";
 import { Sprite } from "./Sprite.js";
 export class ImageObject extends GameObject {
-    path;
-    scaleFactor = new Vector2D(10, 10);
+    sprite;
+    scaleFactor = new Vector2D(1, 1);
     params;
     className = "imageObject";
-    sprite = null;
     constructor(params) {
-        super({
-            game: params.game,
-            components: []
-        });
-        this.path = params.path;
+        super({});
+        Object.assign(this, params);
+        this.components = new Map();
         this.params = params;
         this.onUpdate = () => {
-            console.log("imageds");
-            this.scale = new Vector2D(this.sprite.width, this.sprite.height);
+            this.scale = new Vector2D(this.sprite.width, this.sprite.height).multiply(this.scaleFactor);
         };
         this.sprite = this.addComponent(new Sprite({
-            imagePath: this.params.path,
+            ...params.sprite,
             onLoad: () => {
-                this.scale = new Vector2D(this.sprite.width, this.sprite.height);
+                this.scale = new Vector2D(this.sprite.width, this.sprite.height).multiply(this.scaleFactor);
                 console.log("onload called");
             }
         }));
@@ -34,7 +30,10 @@ export class ImageObject extends GameObject {
             id: this.id,
             className: this.className,
             components: this.componentToJSON(),
-            path: this.path
+            sprite: this.sprite,
+            zIndex: this.zIndex,
+            position: this.position,
+            scaleFactor: this.scaleFactor
             // scale: this.scale
         });
     }

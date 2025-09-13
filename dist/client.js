@@ -155,7 +155,7 @@ window.addEventListener("DOMContentLoaded", () => {
             .sort((a, b) => a.zIndex - b.zIndex);
         // -- CLEAR CANVAS --
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = "#9FD044";
+        ctx.fillStyle = "#6D1A1A";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         // -- RENDER OBJECTS --
         for (const clientObj of renderList) {

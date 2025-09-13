@@ -231,23 +231,34 @@ export class PongGame {
         this.world.game = this;
         // -- add background
         this.world.addObject(new ImageObject({
-            position: new Point2D(0, 0),
+            position: new Point2D(0, -300),
             name: "glass",
             isStatic: true,
             zIndex: 300,
-            path: "assets/maps/map1/glass.png",
+            sprite: new Sprite({
+                imagePath: "assets/maps/map1/glass.png",
+            }),
             scale: new Vector2D(2700, 200).multiply(1),
         }));
-        this.world.addObject(new GameObject({
+        this.world.addObject(new ImageObject({
             name: "background",
             isStatic: true,
             zIndex: -15,
-            components: [
-                new Sprite({
-                    imagePath: "assets/maps/map1/floor.png",
-                })
-            ],
-            scale: new Vector2D(2700, 430).multiply(1),
+            sprite: new Sprite({
+                imagePath: "assets/maps/map1/floor3.png",
+            }),
+            scaleFactor: new Vector2D(0.55, 0.55),
+        }));
+        this.world.addObject(new ImageObject({
+            position: new Point2D(0, -180),
+            name: "background",
+            isStatic: true,
+            zIndex: 5,
+            sprite: new Sprite({
+                imagePath: "assets/maps/map1/shadow.png",
+                blendMode: BlendMode.Multiply
+            }),
+            scaleFactor: new Vector2D(0.55, 0.55),
         }));
         for (let i = 0; i < 3; i++) {
             this.world.addObject(new GameObject({

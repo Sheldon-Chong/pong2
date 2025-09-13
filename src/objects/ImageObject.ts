@@ -1,3 +1,4 @@
+import type { Component } from "./Component.js";
 import { Vector2D } from "./Coordinates.js";
 import { GameObject, exportCleanup } from "./GameObject.js";
 import { Sprite } from "./Sprite.js";
@@ -5,37 +6,35 @@ import { Sprite } from "./Sprite.js";
 
 export class ImageObject extends GameObject {
 
-	path: string;
-	scaleFactor: Vector2D = new Vector2D(10, 10);
+	sprite: any;
+	scaleFactor: Vector2D = new Vector2D(1, 1);
 	params;
 
 	className: string = "imageObject";
-	private sprite: Sprite = null;
 
 	constructor(params: Partial<ImageObject>) {
 		super({
-			game: params.game,
-			components: []
 		});
+		Object.assign(this, params);
 
-		this.path = params.path;
+		this.components = new Map<number, Component>();
 
 		this.params = params;
 
 		this.onUpdate = () => {
-			console.log("imageds");
 			this.scale = new Vector2D(
 				this.sprite.width,
-				this.sprite.height
-			);
+				this.sprite.height,
+			).multiply(this.scaleFactor);
 		};
+
 		this.sprite = this.addComponent(new Sprite({
-			imagePath: this.params.path,
+			...params.sprite,
 			onLoad: () => {
 				this.scale = new Vector2D(
 					this.sprite.width,
 					this.sprite.height
-				);
+				).multiply(this.scaleFactor);
 				console.log("onload called");
 			}
 		})) as Sprite;
@@ -50,7 +49,10 @@ export class ImageObject extends GameObject {
 			id: this.id,
 			className: this.className,
       components: this.componentToJSON(),
-			path: this.path
+			sprite: this.sprite,
+			zIndex: this.zIndex,
+			position: this.position,
+			scaleFactor: this.scaleFactor
 			// scale: this.scale
 		});
 	}
