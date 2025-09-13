@@ -27,6 +27,9 @@ export declare class Sprite extends Component {
     opacity: number;
     blendMode: GlobalCompositeOperation;
     glow: Glow | null;
+    width: number;
+    height: number;
+    onLoad: () => void;
     config(params: Partial<Sprite>): Sprite;
     toJSON(exportStatic?: boolean): {
         id: number;

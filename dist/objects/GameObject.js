@@ -165,10 +165,10 @@ export class GameObject {
             id: this.id,
             position: this.position.export(),
             STATIC_scale: this.scale,
-            rotation: this.rotation,
+            STATIC_rotation: this.rotation,
             STATIC_zIndex: this.zIndex,
-            children: this.children.map(child => child.id),
-            components: this.componentToJSON(),
+            STATIC_children: this.children.map(child => child.id),
+            STATIC_components: this.componentToJSON(),
         };
         return exportCleanup(json, exportStatic);
     }

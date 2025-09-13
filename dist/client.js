@@ -9,6 +9,7 @@ import { PongGame } from './game/pong.js';
 import { Camera } from './objects/Camera.js';
 import { Label } from './objects/Label.js';
 import { Component } from './objects/Component.js';
+import { ImageObject } from './objects/ImageObject.js';
 const ws = new WebSocket("ws://localhost:3000/ws");
 function isArrowKey(e) {
     return e.key === "ArrowUp" || e.key === "ArrowDown";
@@ -183,6 +184,11 @@ window.addEventListener("DOMContentLoaded", () => {
         let clientObj;
         if (object.className === "label") {
             clientObj = new Label({ ...object, components: [] });
+        }
+        if (object.className === "imageObject") {
+            console.log("imageObjectReceived");
+            clientObj = new ImageObject({ ...object, components: [] });
+            console.log(object);
         }
         else
             clientObj = new GameObject({ ...object, components: [] });

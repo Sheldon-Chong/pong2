@@ -25,6 +25,7 @@ create a request for game state function by client. ONCE client connects, it wil
 
 
 1. parse  objects in search of components. export components seperate from game objects. 
-2. Game objects now store ids to components
+2. Game objects now store ids to components 
 3. 
 
+add image class extending object, with relative scaling

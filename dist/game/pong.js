@@ -10,6 +10,7 @@ import { Ball } from './ball.js';
 import { Viewport } from '../objects/Viewport.js';
 import { GameWorld } from './GameWorld.js';
 import { Player } from './Player.js';
+import { ImageObject } from '../objects/ImageObject.js';
 // import { GameObject, Sprite, HitBox, Glow, Particle, Timer} from './Index.js'
 // import {  BlendMode } from './GameUtils.js'
 // class GameSettings {
@@ -76,6 +77,7 @@ export class Padel extends GameObject {
     sprite;
     teamWins(team) {
     }
+    skinPath;
     export(exportStatic = false) {
         const json = {
             STATIC_name: this.name,
@@ -100,9 +102,11 @@ export class Padel extends GameObject {
             ]
         });
         Object.assign(this, params);
-        const skinPath = SKINS[params.player?.skin || "ghost_dark"];
+        this.skinPath = SKINS[params.player?.skin || "ghost_dark"];
+    }
+    init() {
         this.sprite = this.addComponent(new Sprite({
-            imagePath: skinPath,
+            imagePath: this.skinPath,
             host: this
         }));
         this.addChild(new PadelLabel({
@@ -111,8 +115,8 @@ export class Padel extends GameObject {
             font: "15px Century Gothic",
             color: "#ffffff",
         }));
-        this.maximumVelocity = new Vector2D(this.game.gameSettings.playerAcceleration, this.game.gameSettings.playerAcceleration).multiply(10);
-        // add shadow
+        this.maximumVelocity = new Vector2D(this.game.gameSettings.playerAcceleration).multiply(10);
+        // add shadow	
         this.sprite.glow = new Glow({
             Color: "#6881a8",
             Blur: 10,
@@ -123,7 +127,7 @@ export class Padel extends GameObject {
         // this.hitbox = new HitBox(this);
         if (this.team === Team.TEAM1)
             this.sprite.flippedHorizontal = true;
-        this.maximumVelocity = new Vector2D(this.game.gameSettings.playerAcceleration * 10, this.game.gameSettings.playerAcceleration * 10);
+        this.maximumVelocity = new Vector2D(this.game.gameSettings.playerAcceleration * 10);
         this.onUpdate = () => {
             this.velocity.y *= 0.9;
             if (Math.abs(this.velocity.y) < 0.1)
@@ -193,6 +197,11 @@ function oscillateValue(baseValue, amplitude, frequency, offset = 0) {
     const t = (performance.now() / 1000) + offset; // seconds
     return baseValue + amplitude * Math.sin(2 * Math.PI * frequency * t);
 }
+const paddleOffset = 250;
+const paddleDistance = 200;
+const goalMargin = 200;
+const leftBoardControls = [["s", "w"], ["r", "f"], ["t", "g"]];
+const rightBoardControls = [["ArrowUp", "ArrowDown"], ["o", "l"], ["y", "h"]];
 export class PongGame {
     clientData;
     team1 = new GameTeam(this, Team.TEAM1);
@@ -221,36 +230,27 @@ export class PongGame {
         this.clientData = clientData;
         this.world.game = this;
         // -- add background
-        this.world.addObject(new GameObject({ game: this }));
-        this.world.addObject(new GameObject({
-            game: this,
-            position: new Point2D(0, -280),
+        this.world.addObject(new ImageObject({
+            position: new Point2D(0, 0),
             name: "glass",
             isStatic: true,
             zIndex: 300,
-            components: [
-                new Sprite({
-                    imagePath: "assets/maps/map1/glass.png",
-                })
-            ],
+            path: "assets/maps/map1/glass.png",
             scale: new Vector2D(2700, 200).multiply(1),
         }));
         this.world.addObject(new GameObject({
-            game: this,
-            position: new Point2D(0, 0),
             name: "background",
             isStatic: true,
             zIndex: -15,
             components: [
                 new Sprite({
-                    imagePath: "assets/maps/map1/grid4.png",
+                    imagePath: "assets/maps/map1/floor.png",
                 })
             ],
             scale: new Vector2D(2700, 430).multiply(1),
         }));
         for (let i = 0; i < 3; i++) {
             this.world.addObject(new GameObject({
-                game: this,
                 position: new Point2D(0, -230),
                 name: "crowd",
                 variables: {
@@ -276,18 +276,12 @@ export class PongGame {
             }));
         }
         // -- add players --
-        const offset = 250;
-        const distance = 200;
-        const goalMargin = 200;
-        const leftBoardControls = [["s", "w"], ["r", "f"], ["t", "g"]];
-        const rightBoardControls = [["ArrowUp", "ArrowDown"], ["o", "l"], ["y", "h"]];
         for (let i = 0; i < players.length; i++) {
             if (i % 2 === 0) {
                 const padel = new Padel({
-                    position: new Point2D((i * distance * -1) - offset, 0),
+                    position: new Point2D((i * paddleDistance * -1) - paddleOffset, 0),
                     team: Team.TEAM1,
                     player: players[i],
-                    game: this,
                     moveUpKey: leftBoardControls[Math.floor(i / 2)][0],
                     moveDownKey: leftBoardControls[Math.floor(i / 2)][1]
                 });
@@ -296,10 +290,9 @@ export class PongGame {
             }
             else {
                 const padel = new Padel({
-                    position: new Point2D(((i - 1) * distance) + offset, 0),
+                    position: new Point2D(((i - 1) * paddleDistance) + paddleOffset, 0),
                     team: Team.TEAM2,
                     player: players[i],
-                    game: this,
                     moveUpKey: rightBoardControls[Math.floor((i - 1) / 2)][0],
                     moveDownKey: rightBoardControls[Math.floor((i - 1) / 2)][1]
                 });
@@ -314,15 +307,15 @@ export class PongGame {
             game: this,
             position: new Point2D(0, 0)
         }));
+        // -- add camera  --
         this.world.camera = this.world.addObject(new Camera({
             position: new Point2D(0, -100),
-            game: this,
             target: ball,
         }));
+        // -- add goalposts --
         this.world.addObject(new GameObject({
             scale: (new Vector2D(181, 471)).multiply(0.7),
             position: new Point2D(this.team1.goalPostEnd, 0),
-            game: this,
             name: "goalpost",
             components: [
                 new Sprite({

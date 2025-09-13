@@ -44,6 +44,11 @@ export class Sprite extends Component {
 	blendMode: GlobalCompositeOperation = "source-over";
 	glow: Glow | null = null;
 
+	width: number;
+	height: number;
+
+	onLoad: () => void;
+
 	config(params: Partial<Sprite> ): Sprite {
 		Object.assign(this, params);
 		return this;
@@ -120,12 +125,23 @@ export class Sprite extends Component {
 			this.host.scale = new Vector2D(this.image.width, this.image.height);
 		}
 
+		// this.width = this.image.width;
+		// this.height = this.image.height;
+		this.image.onload = () => {
+			this.width = this.image.width;
+			this.height = this.image.height;
+			if (this.onLoad)
+			this.onLoad();
+		}
+
 		return this;
 	}
 
 	draw(viewport: Viewport, camera = null): void {
 		drawImg(viewport, this, camera);
 	}
+
+
 
 	// clone(): Sprite {
 	//     const clonedImage = new Image();

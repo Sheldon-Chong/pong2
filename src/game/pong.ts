@@ -11,6 +11,7 @@ import { Ball } from './ball.js';
 import { Viewport } from '../objects/Viewport.js';
 import { GameWorld } from './GameWorld.js';
 import { Player } from './Player.js';
+import { ImageObject } from '../objects/ImageObject.js';
 
 // import { GameObject, Sprite, HitBox, Glow, Particle, Timer} from './Index.js'
 // import {  BlendMode } from './GameUtils.js'
@@ -23,13 +24,13 @@ import { Player } from './Player.js';
 // }
 
 function lastElem<T>(array: T[]): T {
-    return array[array.length - 1];
+	return array[array.length - 1];
 }
 
 
 export enum Team {
-	TEAM1= "team1",
-	TEAM2= "team2"
+	TEAM1 = "team1",
+	TEAM2 = "team2"
 }
 
 export class GameTeam {
@@ -64,21 +65,21 @@ export class GameTeam {
 
 
 export const SKINS: Record<string, string> = {
-  "ghost_dark": "assets/skins/ghost_dark.png",
-  "ghost_light": "assets/skins/ghost_light.png",
-  "ghost_blue": "assets/skins/ghost_blue.png",
-  "ghost_green": "assets/skins/ghost_green.png",
-  "ghost_purple": "assets/skins/ghost_purple.png",
-  "ghost_red": "assets/skins/ghost_red.png",
-  "ghost_yellow": "assets/skins/ghost_yellow.png",
-  "ghost_42": "assets/skins/ghost_42.png"
+	"ghost_dark": "assets/skins/ghost_dark.png",
+	"ghost_light": "assets/skins/ghost_light.png",
+	"ghost_blue": "assets/skins/ghost_blue.png",
+	"ghost_green": "assets/skins/ghost_green.png",
+	"ghost_purple": "assets/skins/ghost_purple.png",
+	"ghost_red": "assets/skins/ghost_red.png",
+	"ghost_yellow": "assets/skins/ghost_yellow.png",
+	"ghost_42": "assets/skins/ghost_42.png"
 };
 
 class GameSettings {
 	playerAcceleration: number = 4300;
 	playerCount: number = 2;
 	ballSpeed: number = 500;
-	
+
 	arrowDownKey: string = "ArrowDown";
 	arrowUpKey: string = "ArrowUp";
 }
@@ -95,9 +96,11 @@ export class Padel extends GameObject {
 	isMoving: boolean = false;
 
 	sprite: Sprite;
-	teamWins(team : Team) {
+	teamWins(team: Team) {
 
 	}
+
+	skinPath;
 
 	export(exportStatic: boolean = false): Record<string, any> {
 		const json: any = {
@@ -113,56 +116,56 @@ export class Padel extends GameObject {
 
 		return exportCleanup(json, exportStatic);
 	}
-	
+
 	constructor(params: Partial<Padel>) {
 		super({
-			position: params.position, 
+			position: params.position,
 			game: params.game,
 			name: "padel",
-			scale: new Vector2D(60,60),
+			scale: new Vector2D(60, 60),
 			components: [
 				new HitBox({})
 			]
+
 		});
 
 		Object.assign(this, params);
 
+		this.skinPath = SKINS[params.player?.skin || "ghost_dark"];
+	}
 
-		const skinPath = SKINS[params.player?.skin || "ghost_dark"];
+	init() {
+
 		this.sprite = this.addComponent(new Sprite({
-			imagePath: skinPath,
+			imagePath: this.skinPath,
 			host: this
 		})) as Sprite;
 
 		this.addChild(new PadelLabel({
-			text: this.player.name, 
-			position : new Point2D(0, -40), 
-			font: "15px Century Gothic", 
+			text: this.player.name,
+			position: new Point2D(0, -40),
+			font: "15px Century Gothic",
 			color: "#ffffff",
 		}));
 
 		this.maximumVelocity = new Vector2D(
-			this.game.gameSettings.playerAcceleration, 
 			this.game.gameSettings.playerAcceleration
 		).multiply(10);
 
-		// add shadow
+		// add shadow	
 		this.sprite.glow = new Glow({
-			Color: "#6881a8", 
+			Color: "#6881a8",
 			Blur: 10,
-			OffsetX: 0, 
-			OffsetY: 5, 
+			OffsetX: 0,
+			OffsetY: 5,
 			blendMode: BlendMode.Multiply
 		});
 		// this.hitbox = new HitBox(this);
 
-		if (this.team === Team.TEAM1) 
+		if (this.team === Team.TEAM1)
 			this.sprite.flippedHorizontal = true;
 
-		this.maximumVelocity = new Vector2D(
-			this.game.gameSettings.playerAcceleration * 10,
-			this.game.gameSettings.playerAcceleration * 10
-		);
+		this.maximumVelocity = new Vector2D(this.game.gameSettings.playerAcceleration * 10);
 
 		this.onUpdate = () => {
 			this.velocity.y *= 0.9;
@@ -170,12 +173,12 @@ export class Padel extends GameObject {
 
 			try {
 				for (const client of this.game.clientData) {
-					if (client.keysPressed.has("ArrowUp"))    
+					if (client.keysPressed.has("ArrowUp"))
 						this.acceleration.y = -this.game.gameSettings.playerAcceleration;
 					else if (client.keysPressed.has("ArrowDown"))
 						this.acceleration.y = this.game.gameSettings.playerAcceleration;
 					else
-						this.acceleration.y = 0 ;
+						this.acceleration.y = 0;
 				}
 			}
 			catch {
@@ -192,6 +195,7 @@ export class Padel extends GameObject {
 
 			// return true;
 		}
+
 		// this.addChild(new Arrow(this.game));
 
 		// const eyeOffset = this.team === Team.TEAM1 ? 3 : -3;
@@ -210,18 +214,18 @@ export class Padel extends GameObject {
 		// }), 250));
 	}
 
-	
+
 }
 
 
 
 const players: Player[] = [
-	new Player({name: "test", skin: "ghost_light"}),
-	new Player({name: "player2", profileImage: "assets/profile2.webp"}),
-	new Player({name: "player3"}),
-	new Player({name: "player4"}),
-	new Player({name: "player5"}),
-	new Player({name: "player6"}),
+	new Player({ name: "test", skin: "ghost_light" }),
+	new Player({ name: "player2", profileImage: "assets/profile2.webp" }),
+	new Player({ name: "player3" }),
+	new Player({ name: "player4" }),
+	new Player({ name: "player5" }),
+	new Player({ name: "player6" }),
 ];
 
 class PadelLabel extends Label {
@@ -243,14 +247,27 @@ class PadelLabel extends Label {
 }
 
 function oscillateValue(
-  baseValue: number,
-  amplitude: number,
-  frequency: number,
+	baseValue: number,
+	amplitude: number,
+	frequency: number,
 	offset: number = 0
 ): number {
-  const t = (performance.now() / 1000) + offset; // seconds
-  return baseValue + amplitude * Math.sin(2 * Math.PI * frequency * t);
+	const t = (performance.now() / 1000) + offset; // seconds
+	return baseValue + amplitude * Math.sin(2 * Math.PI * frequency * t);
 }
+
+
+const paddleOffset = 250;
+const paddleDistance = 200;
+const goalMargin = 200;
+
+const leftBoardControls = [["s", "w"], ["r", "f"], ["t", "g"]];
+const rightBoardControls = [["ArrowUp", "ArrowDown"], ["o", "l"], ["y", "h"]];
+
+
+
+
+
 
 export class PongGame {
 
@@ -285,47 +302,37 @@ export class PongGame {
 		return state;
 	}
 
-	
-	constructor (clientData) {
+
+	constructor(clientData) {
 		this.clientData = clientData;
 
 		this.world.game = this;
 
 		// -- add background
 
-		this.world.addObject(new GameObject({game:this}));
-
-		this.world.addObject(new GameObject({
-			game: this,
-			position: new Point2D(0, -280),
+		this.world.addObject(new ImageObject({
+			position: new Point2D(0, 0),
 			name: "glass",
 			isStatic: true,
 			zIndex: 300,
-			components: [
-				new Sprite({
-					imagePath: "assets/maps/map1/glass.png",
-				})
-			],
+			path: "assets/maps/map1/glass.png",
 			scale: new Vector2D(2700, 200).multiply(1),
 		}));
 
 		this.world.addObject(new GameObject({
-			game: this,
-			position: new Point2D(0, 0),
 			name: "background",
 			isStatic: true,
 			zIndex: -15,
 			components: [
 				new Sprite({
-					imagePath: "assets/maps/map1/grid4.png",
+					imagePath: "assets/maps/map1/floor.png",
 				})
 			],
 			scale: new Vector2D(2700, 430).multiply(1),
 		}));
-		
-		for (let i = 0; i < 3; i ++) {
+
+		for (let i = 0; i < 3; i++) {
 			this.world.addObject(new GameObject({
-				game: this,
 				position: new Point2D(0, -230),
 				name: "crowd",
 				variables: {
@@ -337,15 +344,15 @@ export class PongGame {
 						imagePath: [
 							"assets/maps/map1/crowd.png",
 							"assets/maps/map1/crowd2.png"
-						][i%2],
+						][i % 2],
 					})
 				],
 				scale: new Vector2D(4200, 118).multiply(0.5),
 				onUpdate: function () {
-					const amplitude = 5;  
+					const amplitude = 5;
 					const frequency = 0.5;
-					const baseY = -240;    
-	
+					const baseY = -240;
+
 					// apply oscillation
 					this.position.y = oscillateValue(baseY, amplitude, frequency, this.variables["offset"]);
 				}
@@ -354,33 +361,24 @@ export class PongGame {
 
 		// -- add players --
 
-		const offset = 250;
-		const distance = 200;
-		const 	goalMargin = 200;
-
-		const leftBoardControls = [["s", "w"], ["r", "f"], ["t", "g"]];
-		const rightBoardControls = [["ArrowUp", "ArrowDown"], ["o", "l"], ["y", "h"]];
-
 		for (let i = 0; i < players.length; i++) {
 			if (i % 2 === 0) {
 				const padel = new Padel({
-					position: new Point2D((i * distance * -1) - offset, 0),
+					position: new Point2D((i * paddleDistance * -1) - paddleOffset, 0),
 					team: Team.TEAM1,
 					player: players[i],
-					game: this,
 					moveUpKey: leftBoardControls[Math.floor(i / 2)][0],
 					moveDownKey: leftBoardControls[Math.floor(i / 2)][1]
 				});
 				this.team1.players.push(padel);
 				this.world.addObject(padel);
-			} 
-			
+			}
+
 			else {
 				const padel = new Padel({
-					position: new Point2D(((i - 1) * distance) + offset, 0),
+					position: new Point2D(((i - 1) * paddleDistance) + paddleOffset, 0),
 					team: Team.TEAM2,
 					player: players[i],
-					game: this,
 					moveUpKey: rightBoardControls[Math.floor((i - 1) / 2)][0],
 					moveDownKey: rightBoardControls[Math.floor((i - 1) / 2)][1]
 				});
@@ -399,16 +397,19 @@ export class PongGame {
 			position: new Point2D(0, 0)
 		}));
 
+
+		// -- add camera  --
+
 		this.world.camera = this.world.addObject(new Camera({
-			position: new Point2D(0,-100),
-			game: this,
+			position: new Point2D(0, -100),
 			target: ball,
 		})) as Camera;
+
+		// -- add goalposts --
 
 		this.world.addObject(new GameObject({
 			scale: (new Vector2D(181, 471)).multiply(0.7),
 			position: new Point2D(this.team1.goalPostEnd, 0),
-			game: this,
 			name: "goalpost",
 			components: [
 				new Sprite({

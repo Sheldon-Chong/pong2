@@ -29,6 +29,9 @@ export class Sprite extends Component {
     opacity = 1.0;
     blendMode = "source-over";
     glow = null;
+    width;
+    height;
+    onLoad;
     config(params) {
         Object.assign(this, params);
         return this;
@@ -93,6 +96,14 @@ export class Sprite extends Component {
         if (this.host.scale.x === 0 && this.host.scale.y === 0) {
             this.host.scale = new Vector2D(this.image.width, this.image.height);
         }
+        // this.width = this.image.width;
+        // this.height = this.image.height;
+        this.image.onload = () => {
+            this.width = this.image.width;
+            this.height = this.image.height;
+            if (this.onLoad)
+                this.onLoad();
+        };
         return this;
     }
     draw(viewport, camera = null) {

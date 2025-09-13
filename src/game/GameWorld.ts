@@ -24,6 +24,7 @@ export class GameWorld {
 
   addObject(object: GameObject) {
     this.gameObjects.set(object.id, object);
+    object.game = this.game;
     object.init();
     if (object.children && object.children.length > 0) {
       for (const child of object.children) {
@@ -32,6 +33,7 @@ export class GameWorld {
     }
     return object;
   }
+
 
   checkCollisions() {
     const hitboxes: HitBox[] = [];
@@ -89,15 +91,21 @@ export class GameWorld {
       let exportedObject = obj.export(includeStaticObjects);
 
       let keysWithId = []
+
       for (const [key, component] of obj.components) {
         if (component.id) 
           keysWithId.push(key);
       }
 
       exportedObject.components = keysWithId;
+      if (keysWithId.length === 0)
+        delete exportedObject.components;
+
       flatObjects.push(exportedObject);
       
+      // todo flaw here. Double-export
       const componentJson = obj.componentToJSON(includeStaticObjects);
+
       components.push(...componentJson);
 
       if (obj.children && obj.children.length > 0) {

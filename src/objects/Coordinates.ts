@@ -39,10 +39,24 @@ export class Point2D {
 }
 
 export class Vector2D {
-  constructor(
-    public x: number,
-    public y: number,
-  ) { }
+  constructor(x: number, y: number);
+  
+  constructor(xy: number);
+
+  constructor(xOrXY: number, y?: number) {
+    if (y === undefined) {
+      this.x = xOrXY;
+      this.y = xOrXY;
+    }
+    
+    else {
+      this.x = xOrXY;
+      this.y = y;
+    }
+  }
+
+  public x: number;
+  public y: number;
 
   add(other: Vector2D) { return new Vector2D(this.x + other.x, this.y + other.y); }
   subtract(other: Vector2D) { return new Vector2D(this.x - other.x, this.y - other.y); }
@@ -54,7 +68,6 @@ export class Vector2D {
   }
 
   toPoint(): Point2D { return new Point2D(this.x, this.y) }
-
 }
 
 export function interpolate(pos: Point2D, pos2: Point2D, slowness: number): Point2D {

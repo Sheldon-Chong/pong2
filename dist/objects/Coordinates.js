@@ -35,12 +35,18 @@ export class Point2D {
     }
 }
 export class Vector2D {
+    constructor(xOrXY, y) {
+        if (y === undefined) {
+            this.x = xOrXY;
+            this.y = xOrXY;
+        }
+        else {
+            this.x = xOrXY;
+            this.y = y;
+        }
+    }
     x;
     y;
-    constructor(x, y) {
-        this.x = x;
-        this.y = y;
-    }
     add(other) { return new Vector2D(this.x + other.x, this.y + other.y); }
     subtract(other) { return new Vector2D(this.x - other.x, this.y - other.y); }
     divide(other) { return new Vector2D(this.x / other.x, this.y / other.y); }

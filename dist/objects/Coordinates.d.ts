@@ -18,9 +18,10 @@ export declare class Point2D {
     };
 }
 export declare class Vector2D {
+    constructor(x: number, y: number);
+    constructor(xy: number);
     x: number;
     y: number;
-    constructor(x: number, y: number);
     add(other: Vector2D): Vector2D;
     subtract(other: Vector2D): Vector2D;
     divide(other: Vector2D): Vector2D;
