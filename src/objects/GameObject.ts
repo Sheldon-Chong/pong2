@@ -188,7 +188,6 @@ export class GameObject {
 			if (component instanceof Sprite) {
 				try { (component as Sprite).draw(viewport,); }
 				catch (error) { 
-					console.log("CAMERA", error);
 				}
 			}
 			if (component instanceof HitBox) {
@@ -196,6 +195,7 @@ export class GameObject {
 				catch (error) { console.log("error", typeof component); }
 			}
 		}
+
 		// Recursively draw children
 		for (const child of this.children) {
 			// console.log(JSON.stringify(this.children));

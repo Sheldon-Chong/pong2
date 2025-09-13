@@ -33,6 +33,7 @@ export class GameTeam {
     score = 0;
     players = [];
     goalPostEnd = 0;
+    label;
     // static leftBoardControls = [["t", "g"], ["r", "f"], ["w", "s"]];
     // static rightBoardControls = [["y", "h"], ["o", "l"], ["ArrowUp", "ArrowDown"]];
     constructor(game, name) {
@@ -124,7 +125,6 @@ export class Padel extends GameObject {
             OffsetY: 5,
             blendMode: BlendMode.Multiply
         });
-        // this.hitbox = new HitBox(this);
         if (this.team === Team.TEAM1)
             this.sprite.flippedHorizontal = true;
         this.maximumVelocity = new Vector2D(this.game.gameSettings.playerAcceleration * 10);
@@ -177,6 +177,7 @@ const players = [
     new Player({ name: "player6" }),
 ];
 class PadelLabel extends Label {
+    className = "label";
     export(exportStatic = false) {
         return exportCleanup({
             id: this.id,
@@ -202,6 +203,11 @@ const paddleDistance = 200;
 const goalMargin = 200;
 const leftBoardControls = [["s", "w"], ["r", "f"], ["t", "g"]];
 const rightBoardControls = [["ArrowUp", "ArrowDown"], ["o", "l"], ["y", "h"]];
+function middle(arr) {
+    if (arr.length === 0)
+        return undefined; // no middle
+    return arr[Math.floor(arr.length / 2)];
+}
 export class PongGame {
     clientData;
     team1 = new GameTeam(this, Team.TEAM1);
@@ -226,44 +232,81 @@ export class PongGame {
         }
         return state;
     }
+    initPongGame() {
+        for (let i = 0; i < players.length; i++) {
+            if (i % 2 === 0) {
+                const padel = new Padel({
+                    position: new Point2D((i * paddleDistance * -1) - paddleOffset, 0),
+                    team: Team.TEAM1,
+                    player: players[i],
+                });
+                this.team1.players.push(padel);
+                this.world.addObject(padel);
+            }
+            else {
+                const padel = new Padel({
+                    position: new Point2D(((i - 1) * paddleDistance) + paddleOffset, 0),
+                    team: Team.TEAM2,
+                    player: players[i],
+                });
+                this.team2.players.push(padel);
+                this.world.addObject(padel);
+            }
+        }
+        this.team1.goalPostEnd = lastElem(this.team1.players).position.x - goalMargin;
+        this.team2.goalPostEnd = lastElem(this.team2.players).position.x + goalMargin;
+        // -- add ball --
+        let ball = this.world.addObject(new Ball({
+            game: this,
+            position: new Point2D(0, 0)
+        }));
+        // -- add camera  --
+        this.world.camera = this.world.addObject(new Camera({
+            position: new Point2D(0, -100),
+            target: ball,
+        }));
+        this.world.viewport.camera = this.world.camera;
+    }
     constructor(clientData) {
         this.clientData = clientData;
         this.world.game = this;
+        this.initPongGame();
+        const scaleFactor = new Vector2D(0.55, 0.55);
         // -- add background
+        // this.world.addObject(new ImageObject({
+        // 	position: new Point2D(0, -280),
+        // 	name: "glass",
+        // 	isStatic: true,
+        // 	zIndex: 300,
+        // 	sprite: new Sprite({
+        // 		imagePath: "assets/maps/map1/glass.png",
+        // 	}),
+        // 	scaleFactor: scaleFactor
+        // }));
+        // -- floor --
         this.world.addObject(new ImageObject({
-            position: new Point2D(0, -300),
-            name: "glass",
-            isStatic: true,
-            zIndex: 300,
-            sprite: new Sprite({
-                imagePath: "assets/maps/map1/glass.png",
-            }),
-            scale: new Vector2D(2700, 200).multiply(1),
-        }));
-        this.world.addObject(new ImageObject({
-            name: "background",
             isStatic: true,
             zIndex: -15,
             sprite: new Sprite({
                 imagePath: "assets/maps/map1/floor3.png",
             }),
-            scaleFactor: new Vector2D(0.55, 0.55),
+            scaleFactor: scaleFactor
         }));
+        // -- shadow --
         this.world.addObject(new ImageObject({
             position: new Point2D(0, -180),
-            name: "background",
             isStatic: true,
             zIndex: 5,
             sprite: new Sprite({
                 imagePath: "assets/maps/map1/shadow.png",
                 blendMode: BlendMode.Multiply
             }),
-            scaleFactor: new Vector2D(0.55, 0.55),
+            scaleFactor: scaleFactor
         }));
+        // -- crowd --
         for (let i = 0; i < 3; i++) {
             this.world.addObject(new GameObject({
                 position: new Point2D(0, -230),
-                name: "crowd",
                 variables: {
                     offset: i * 15
                 },
@@ -286,43 +329,6 @@ export class PongGame {
                 }
             }));
         }
-        // -- add players --
-        for (let i = 0; i < players.length; i++) {
-            if (i % 2 === 0) {
-                const padel = new Padel({
-                    position: new Point2D((i * paddleDistance * -1) - paddleOffset, 0),
-                    team: Team.TEAM1,
-                    player: players[i],
-                    moveUpKey: leftBoardControls[Math.floor(i / 2)][0],
-                    moveDownKey: leftBoardControls[Math.floor(i / 2)][1]
-                });
-                this.team1.players.push(padel);
-                this.world.addObject(padel);
-            }
-            else {
-                const padel = new Padel({
-                    position: new Point2D(((i - 1) * paddleDistance) + paddleOffset, 0),
-                    team: Team.TEAM2,
-                    player: players[i],
-                    moveUpKey: rightBoardControls[Math.floor((i - 1) / 2)][0],
-                    moveDownKey: rightBoardControls[Math.floor((i - 1) / 2)][1]
-                });
-                this.team2.players.push(padel);
-                this.world.addObject(padel);
-            }
-        }
-        this.team1.goalPostEnd = lastElem(this.team1.players).position.x - goalMargin;
-        this.team2.goalPostEnd = lastElem(this.team2.players).position.x + goalMargin;
-        // -- add ball --
-        let ball = this.world.addObject(new Ball({
-            game: this,
-            position: new Point2D(0, 0)
-        }));
-        // -- add camera  --
-        this.world.camera = this.world.addObject(new Camera({
-            position: new Point2D(0, -100),
-            target: ball,
-        }));
         // -- add goalposts --
         this.world.addObject(new GameObject({
             scale: (new Vector2D(181, 471)).multiply(0.7),
@@ -335,7 +341,17 @@ export class PongGame {
                 }),
             ],
         }));
-        this.world.viewport.camera = this.world.camera;
+        const scoreUI = {
+            text: "0",
+            font: "100px Impact",
+            zIndex: -1,
+        };
+        this.team1.label = this.world.addObject(new Label({
+            ...scoreUI, position: new Point2D(middle(this.team1.players).position.x, 0)
+        }));
+        this.team2.label = this.world.addObject(new Label({
+            ...scoreUI, position: new Point2D(middle(this.team2.players).position.x, 0)
+        }));
     }
 }
 //# sourceMappingURL=pong.js.map

@@ -5,7 +5,7 @@ export declare class Label extends GameObject {
     font: string;
     color: string;
     className: string;
-    constructor(params: any);
+    constructor(params: Partial<Label>);
     draw(viewport: Viewport): void;
     export(exportStatic?: boolean): any;
 }

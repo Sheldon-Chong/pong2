@@ -3,55 +3,70 @@
   "state": {
     "camera": {
       "position": {
-        "x": 804.0381446416685,
+        "x": -79.22790018580407,
         "y": 0,
         "className": "Point2D"
       }
     },
     "gameObjects": [
       {
-        "id": 3,
+        "id": 0,
         "position": {
           "className": "Point2D",
-          "x": 0,
-          "y": -243.08
+          "x": -250,
+          "y": -49.88
         },
         "components": [
-          7
+          1,
+          2
         ]
+      },
+      {
+        "id": 1,
+        "className": "label"
+      },
+      {
+        "id": 2,
+        "position": {
+          "className": "Point2D",
+          "x": 250,
+          "y": -49.88
+        },
+        "components": [
+          3,
+          4
+        ]
+      },
+      {
+        "id": 3,
+        "className": "label"
       },
       {
         "id": 4,
         "position": {
           "className": "Point2D",
-          "x": 0,
-          "y": -236.92
+          "x": -650,
+          "y": -49.88
         },
         "components": [
-          8
+          5,
+          6
         ]
       },
       {
         "id": 5,
-        "position": {
-          "className": "Point2D",
-          "x": 0,
-          "y": -243.08
-        },
-        "components": [
-          9
-        ]
+        "className": "label"
       },
       {
         "id": 6,
         "position": {
           "className": "Point2D",
-          "x": -250,
-          "y": -159.36
+          "x": 650,
+          "y": -49.88
         },
         "components": [
-          10,
-          11
+          7,
+          8
         ]
       },
       {
@@ -62,12 +77,12 @@
         "id": 8,
         "position": {
           "className": "Point2D",
-          "x": 250,
-          "y": -159.36
+          "x": -1050,
+          "y": -49.88
         },
         "components": [
-          12,
-          13
+          9,
+          10
         ]
       },
       {
@@ -78,12 +93,12 @@
         "id": 10,
         "position": {
           "className": "Point2D",
-          "x": -650,
-          "y": -159.36
+          "x": 1050,
+          "y": -49.88
         },
         "components": [
-          14,
-          15
+          11,
+          12
         ]
       },
       {
@@ -91,95 +106,114 @@
         "className": "label"
       },
       {
+        "name": "ball",
         "id": 12,
         "position": {
           "className": "Point2D",
-          "x": 650,
-          "y": -159.36
-        },
-        "components": [
-          16,
-          17
-        ]
-      },
-      {
-        "id": 13,
-        "className": "label"
-      },
-      {
-        "id": 14,
-        "position": {
-          "className": "Point2D",
-          "x": -1050,
-          "y": -159.36
-        },
-        "components": [
-          18,
-          19
-        ]
-      },
-      {
-        "id": 15,
-        "className": "label"
-      },
-      {
-        "id": 16,
-        "position": {
-          "className": "Point2D",
-          "x": 1050,
-          "y": -159.36
-        },
-        "components": [
-          20,
-          21
-        ]
-      },
-      {
-        "id": 17,
-        "className": "label"
-      },
-      {
-        "name": "ball",
-        "id": 18,
-        "position": {
-          "className": "Point2D",
-          "x": 848.62,
-          "y": -161.33
+          "x": -228.99,
+          "y": -176.84
         },
         "scale": {
           "x": 40,
           "y": 40
         },
         "components": [
-          23,
-          22
+          14,
+          13
         ]
       },
       {
         "position": {
-          "x": 804.0381446416685,
+          "x": -79.22790018580407,
           "y": 0,
           "className": "Point2D"
         },
         "className": "camera"
       },
       {
-        "id": 20,
+        "id": 16,
+        "position": {
+          "className": "Point2D",
+          "x": 0,
+          "y": -239.93
+        },
+        "components": [
+          19
+        ]
+      },
+      {
+        "id": 17,
+        "position": {
+          "className": "Point2D",
+          "x": 0,
+          "y": -240.07
+        },
+        "components": [
+          20
+        ]
+      },
+      {
+        "id": 18,
+        "position": {
+          "className": "Point2D",
+          "x": 0,
+          "y": -239.93
+        },
+        "components": [
+          21
+        ]
+      },
+      {
+        "id": 19,
         "position": {
           "className": "Point2D",
           "x": -1250,
           "y": 0
         },
         "components": [
-          24
+          22
         ]
+      },
+      {
+        "className": "label",
+        "id": 20,
+        "position": {
+          "className": "Point2D",
+          "x": -650,
+          "y": 0
+        },
+        "scale": {
+          "x": 10,
+          "y": 10
+        },
+        "rotation": 0,
+        "text": "0",
+        "font": "100px Impact",
+        "color": "black"
+      },
+      {
+        "className": "label",
+        "id": 21,
+        "position": {
+          "className": "Point2D",
+          "x": 650,
+          "y": 0
+        },
+        "scale": {
+          "x": 10,
+          "y": 10
+        },
+        "rotation": 0,
+        "text": "0",
+        "font": "100px Impact",
+        "color": "black"
       }
     ],
     "type": "partial"
   },
   "metadata": {
-    "timestamp": 1757754368201,
-    "delta": 0.016052036999997653,
+    "timestamp": 1757759535142,
+    "delta": 0.016342897999999877,
     "fps": 0
   }
 }

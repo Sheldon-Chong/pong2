@@ -208,6 +208,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
 		// -- RENDER OBJECTS --
 		for (const clientObj of renderList) {
+			console.log(clientObj.constructor.name);
 			clientObj.draw(viewport);
 		}
 
@@ -240,8 +241,7 @@ window.addEventListener("DOMContentLoaded", () => {
 		if (object.className === "label") {
 			clientObj = new Label({ ...object, components: [] });
 		}
-		if (object.className === "imageObject") {
-			console.log("imageObjectReceived");
+		else if (object.className === "imageObject") {
 			clientObj = new ImageObject({ ...object, components: [] });
 			console.log(object);
 		}

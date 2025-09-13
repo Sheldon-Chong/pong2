@@ -135,7 +135,6 @@ export class GameObject {
                     component.draw(viewport);
                 }
                 catch (error) {
-                    console.log("CAMERA", error);
                 }
             }
             if (component instanceof HitBox) {

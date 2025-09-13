@@ -2,6 +2,7 @@ import { Point2D } from '../objects/Coordinates.js';
 import { GameObject } from '../objects/GameObject.js';
 import { Sprite } from '../objects/Sprite.js';
 import { Camera } from '../objects/Camera.js';
+import { Label } from '../objects/Label.js';
 import { GameWorld } from './GameWorld.js';
 import { Player } from './Player.js';
 export declare enum Team {
@@ -14,6 +15,7 @@ export declare class GameTeam {
     score: number;
     players: Padel[];
     goalPostEnd: number;
+    label: Label;
     constructor(game: PongGame, name: String);
 }
 export declare const SKINS: Record<string, string>;
@@ -55,6 +57,7 @@ export declare class PongGame {
         gameObjects: any[];
         components: any[];
     };
+    initPongGame(): void;
     constructor(clientData: any);
 }
 export {};

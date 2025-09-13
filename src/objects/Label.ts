@@ -11,7 +11,7 @@ export class Label extends GameObject {
     public color: string = "black";
     className: string = "label";
 
-    constructor(params) {
+    constructor(params: Partial<Label>) {
         super({ game: params.game, name: "label"});
         Object.assign(this, params);
     }
