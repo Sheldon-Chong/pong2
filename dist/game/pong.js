@@ -123,17 +123,21 @@ export class Padel extends GameObject {
             this.velocity.y *= 0.9;
             if (Math.abs(this.velocity.y) < 0.1)
                 this.velocity.y = 0;
+            if (this.position.y < -(this.game.world.viewport.height / 2)) {
+                this.position.y = -(this.game.world.viewport.height / 2);
+                this.velocity.y = 0;
+            }
+            if (this.position.y > this.game.world.viewport.height / 2) {
+                this.position.y = this.game.world.viewport.height / 2;
+                this.velocity.y = 0;
+            }
             try {
                 for (const client of this.game.clientData) {
                     if (client.keysPressed.has("ArrowUp")) {
                         this.acceleration.y = -this.game.gameSettings.playerAcceleration;
-                        if (this.position.y < -(this.game.world.viewport.height / 2))
-                            this.position.y = -(this.game.world.viewport.height / 2);
                     }
                     else if (client.keysPressed.has("ArrowDown")) {
                         this.acceleration.y = this.game.gameSettings.playerAcceleration;
-                        if (this.position.y > this.game.world.viewport.height / 2)
-                            this.position.y = this.game.world.viewport.height / 2;
                     }
                     else
                         this.acceleration.y = 0;
@@ -219,6 +223,16 @@ export class PongGame {
             delete state["components"];
         }
         return state;
+    }
+    teamWins(team) {
+        if (team === Team.TEAM1) {
+            this.team1.score++;
+            this.team1.label.text = String(this.team1.score);
+        }
+        else if (team === Team.TEAM2) {
+            this.team2.score++;
+            this.team2.label.text = String(this.team2.score);
+        }
     }
     initPongGame() {
         for (let i = 0; i < players.length; i++) {

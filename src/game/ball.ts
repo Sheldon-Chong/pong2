@@ -146,6 +146,9 @@ export class Ball extends GameObject {
 		this.game.world.addTimer(1, () => {
 			this.position.x = 0;
 			this.velocity.x = 0;
+
+			this.game.teamWins(team);
+
 			this.game.world.addTimer(3, () => {
 				if (team === Team.TEAM1)
 					this.velocity.x = this.game.gameSettings.ballSpeed;

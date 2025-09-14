@@ -57,6 +57,7 @@ export declare class PongGame {
         gameObjects: any[];
         components: any[];
     };
+    teamWins(team: string): void;
     initPongGame(): void;
     constructor(clientData: any);
 }
