@@ -22,7 +22,7 @@ export class Label extends GameObject {
         const textWidth = viewport.ctx.measureText(this.text).width;
         const metrics = viewport.ctx.measureText(this.text);
         const textHeight = metrics.actualBoundingBoxAscent + metrics.actualBoundingBoxDescent;
-        const screenPos = viewport.toScreenCoords(this.getWorldPosition());
+        const screenPos = this.toScreenPosition(viewport);
         const x = screenPos.x - textWidth / 2;
         const y = screenPos.y + textHeight / 2;
         viewport.ctx.fillText(this.text, x, y);

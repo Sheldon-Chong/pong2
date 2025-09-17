@@ -118,6 +118,9 @@ const componentMap: Record<string, new (params: any) => any> = {
 	"sprite": Sprite,
 	"glow": Glow,
 	"hitbox": HitBox,
+  // "imageObject": ImageObject,
+  // "label": Label,
+  // "gameObject": GameObject,
 };
 
 
@@ -153,18 +156,23 @@ function revive(obj: any): any {
 
     // Otherwise, recurse further
     for (const key in obj) {
-      obj[key] = revive(obj[key]);
-			if (key === "position")
+			if (key === "position") {
 				obj.position = new Point2D(obj.position.x, obj.position.y);
+				continue;
+			}
+			if (key === "scaleFactor") {
+				console.log("object type: ", obj.constructor.name);
+				obj.scaleFactor = new Vector2D(obj.scaleFactor.x, obj.scaleFactor.y);
+				continue;
+			}
+      obj[key] = revive(obj[key]);
     }
   }
 
-  // Primitives or anything else: return as-is
   return obj;
 }
 
 
-// todo potential redudancy because of revive function and generic function overlap in funcionality
 
 function genericUpdate(
 	obj: Record<string, any>,
@@ -193,6 +201,10 @@ function genericUpdate(
 			continue;	
 		}
 
+		if (key === "sprite") {
+			console.log("sprite key");
+		}
+
 
 		// -- update nested object types -- 
 		else if (typeof value === "object" && value !== null) {
@@ -206,6 +218,83 @@ function genericUpdate(
 }
 
 window.addEventListener("DOMContentLoaded", () => {
+
+	function loop() {
+		let client_objects = getObjects();
+		let components = getComponents();
+
+		for (const component of components) {
+
+			if (componentRegistry.has(component.id)) {
+				Object.assign(componentRegistry.get(component.id), component);
+			}
+			else {
+				const componentConstructor = classMap[component.name];
+				if (componentConstructor) {
+					const instance = new componentConstructor();
+					componentRegistry.set(component.id, instance);
+				}
+			}
+		}
+
+for (const object of client_objects) {
+  const id = object["id"];
+  let clientObj = getObject(id);
+
+  if (!clientObj) {
+    // hydrate only once
+    const revivedObject = revive(object);
+    clientObj = createNewInstance(revivedObject);
+  } else {
+    // update from raw JSON
+    genericUpdate(clientObj, object, clientObj.cache);
+
+    // handle children, components, etc.
+    for (const [i, childId] of object.children?.entries() ?? []) {
+      const childObj = getObject(childId);
+      if (childObj) {
+        childObj.parent = clientObj;
+        clientObj.children[i] = childObj;
+      }
+    }
+
+    if (object.components) {
+      for (const componentId of object.components) {
+        if (!(componentId in clientObj.components)) {
+          const component = componentRegistry.get(componentId);
+          if (component) {
+            clientObj.addComponent(component);
+          }
+        }
+      }
+    }
+
+    clientObj.components.forEach((value, key) => {
+      if (value === null) {
+        const component = componentRegistry.get(key);
+        if (component) {
+          clientObj.addComponent(component);
+        }
+      }
+    });
+
+    if (object.className === "camera") {
+      game.camera = clientObj;
+      viewport.camera = clientObj;
+    }
+  }
+}
+
+		for (const [id, object] of gameObjectRegistry) {
+			if (typeof object.clientUpdate === 'function') {
+				object.clientUpdate();
+			}
+		}
+		draw();
+		requestAnimationFrame(loop);
+	}
+
+
 	const game = new PongGame(null);
 	game.camera = null;
 
@@ -262,10 +351,12 @@ window.addEventListener("DOMContentLoaded", () => {
 			clientObj = new Label({ ...object, components: [] });
 		}
 		else if (object.className === "imageObject") {
+			console.log("image object created");
 			clientObj = new ImageObject({ ...object, components: [] });
 		}
-		else
+		else {
 			clientObj = new GameObject({ ...object, components: [] });
+		}
 		setObject(object["id"], clientObj);
 
 		if (!object.components)
@@ -283,91 +374,10 @@ window.addEventListener("DOMContentLoaded", () => {
 	const componentRegistry = new Map<number, Component>();
 
 	
-	function loop() {
-		let client_objects = getObjects();
-		let components = getComponents();
-
-
-
-		for (const component of components) {
-
-			if (componentRegistry.has(component.id)) {
-				Object.assign(componentRegistry.get(component.id), component);
-			}
-			else {
-				const componentConstructor = classMap[component.name];
-				if (componentConstructor) {
-					const instance = new componentConstructor();
-					componentRegistry.set(component.id, instance);
-				}
-			}
-		}
-		
-		for (const object of client_objects) {
-			const revivedObject = revive(object);
-			const id = object["id"];
-
-			// -- CHECK IF CLIENT OBJECT EXISTS --
-			let clientObj = getObject(id);
-			if (!clientObj) {
-				clientObj = createNewInstance(revivedObject);
-			}
-
-			else {
-				// -- ASSIGN CHILDREN TO PARENT --
-				for (const [i, childId] of revivedObject.children?.entries() ?? []) {
-					const childObj = getObject(childId);
-					if (childObj) {
-						childObj.parent = clientObj;
-						clientObj.children[i] = childObj;
-					}
-				}
-				
-				// -- UPDATE PROPERTIES AND CHILDREN OF THE CLASS --
-				genericUpdate(clientObj, revivedObject, clientObj.cache);
-				for (const [, obj] of gameObjectRegistry.entries()) {
-					
-				}
-
-				if (object.components) {
-					for (const componentId of object.components) {
-						if (!(componentId in clientObj.components)) {
-							const component = componentRegistry.get(componentId);
-							if (component) {
-								clientObj.addComponent(component);
-							}
-						}
-					}
-				}
-
-				clientObj.components.forEach((value, key) => {
-					if (value === null) {
-						const component = componentRegistry.get(key);
-						if (component) {
-							clientObj.addComponent(component);
-						}
-					}
-				});
-
-				// -- CAMERA --
-				if (revivedObject["className"] === "camera") {
-					game.camera = revivedObject;
-					viewport.camera = revivedObject;
-				}
-			}
-		}
-
-				for (const [id, object] of gameObjectRegistry) {
-			if (typeof object.clientUpdate === 'function') {
-				object.clientUpdate();
-			}
-		}
-		draw();
-		requestAnimationFrame(loop);
-	}
 
 	loop();
 });
+// todo potential redudancy because of revive function and generic function overlap in funcionality
 
 
 // In that case, should I have a special class for frontend that extends sprite, which serves the prupsoe of being updated? I'm assumging the frontend won't need a lot of classes, mostly those that are supposed to be used for rendering right?

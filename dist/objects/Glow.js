@@ -6,7 +6,6 @@ export class Glow {
     OffsetY = 0;
     blendMode = "source-over";
     constructor(params) {
-        console.log("glow created");
         Object.assign(this, params);
     }
 }

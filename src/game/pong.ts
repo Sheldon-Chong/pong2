@@ -10,7 +10,7 @@ import { HitBox } from '../objects/Hitbox.js';
 import { Ball } from './ball.js';
 import { GameWorld } from './GameWorld.js';
 import { Player } from './Player.js';
-import { ImageObject } from '../objects/ImageObject.js';
+import { ImageObject, Interpolate } from '../objects/ImageObject.js';
 import { oscillateValue } from '../utils/calculations.js';
 import { lastElem, middle } from '../utils/indexing.js';
 
@@ -205,6 +205,33 @@ export class Padel extends GameObject {
 		//     pos: new Point2D(eyeOffset, -3)
 		// }), 160));
 
+		const scaleFactor = new Vector2D(0.48, 0.48);
+
+		this.addChild(new ImageObject({
+			scaleFactor: scaleFactor,
+			sprite: new Sprite({
+				imagePath: "./assets/skins/components/eyes.png",
+			}),
+			interpolate: new Interpolate({
+				targetOffset: new Vector2D(-5, -5),
+				target: this,
+				slowness: 2,
+			})
+		})) 
+
+		this.addChild(new ImageObject({
+			scaleFactor: scaleFactor,
+			sprite: new Sprite({
+				imagePath: "./assets/skins/components/iris.png",
+			}),
+			interpolate: new Interpolate({
+				targetOffset: new Vector2D(-9, -5),
+				target: this,
+				slowness: 3,
+			}),
+		})) 
+		
+
 		// this.addChild(new TrailSprite(this.game, this, new Sprite({
 		//     imagePath: "./assets/skins/components/iris.png",
 		//     size: new Vector2D(30, 12),
@@ -287,6 +314,8 @@ export class PongGame {
 		if (!includeStaticObjects) {
 			delete state["components"];
 		}
+		else {
+		}
 
 		return state;
 	}
@@ -363,19 +392,9 @@ export class PongGame {
 
 		// -- add background
 
-		// this.world.addObject(new ImageObject({
-		// 	position: new Point2D(0, -280),
-		// 	name: "glass",
-		// 	isStatic: true,
-		// 	zIndex: 300,
-		// 	sprite: new Sprite({
-		// 		imagePath: "assets/maps/map1/glass.png",
-		// 	}),
-		// 	scaleFactor: scaleFactor
-		// }));
-
 		// -- floor --
 		this.world.addObject(new ImageObject({
+			name: "floor",
 			isStatic: true,
 			zIndex: -15,
 			sprite: new Sprite({
@@ -386,6 +405,7 @@ export class PongGame {
 
 		// -- shadow --
 		this.world.addObject(new ImageObject({
+			name: "shadow",
 			position: new Point2D(0, -180),
 			isStatic: true,
 			zIndex: 20,
@@ -415,14 +435,6 @@ export class PongGame {
 					})
 				],
 				scale: new Vector2D(4200, 118).multiply(0.5),
-				// onUpdate: function () {
-				// 	const amplitude = 5;
-				// 	const frequency = 0.5;
-				// 	const baseY = -240;
-
-				// 	// apply oscillation
-				// 	this.position.y = oscillateValue(baseY, amplitude, frequency, this.variables["offset"]);
-				// },
 			})
 
 			object.setOnClientUpdate("moveCrowd");
@@ -433,16 +445,26 @@ export class PongGame {
 
 		// -- add goalposts --
 
-		this.world.addObject(new GameObject({
-			scale: (new Vector2D(181, 471)).multiply(0.7),
+		this.world.addObject(new ImageObject({
+			scaleFactor: scaleFactor,
 			position: new Point2D(this.team1.goalPostEnd, 0),
 			name: "goalpost",
-			components: [
+			sprite:
 				new Sprite({
 					imagePath: "assets/goalpost.png",
 					flippedHorizontal: true
 				}),
-			],
+		}))
+
+		this.world.addObject(new ImageObject({
+			scaleFactor: scaleFactor,
+			position: new Point2D(this.team2.goalPostEnd, 0),
+			name: "goalpost",
+			sprite:
+				new Sprite({
+					imagePath: "assets/goalpost.png",
+					flippedHorizontal: false
+				}),
 		}))
 
 		const scoreUI = {
@@ -458,6 +480,10 @@ export class PongGame {
 		this.team2.label = this.world.addObject(new Label({
 			...scoreUI, position: new Point2D(middle(this.team2.players).position.x, 0)
 		})) as Label;
+
+		for (const object of this.world.gameObjects.values()) {
+      console.log(object.id + ": " + object.name);
+    }
 
 	}
 }

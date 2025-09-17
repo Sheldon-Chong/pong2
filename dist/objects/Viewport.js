@@ -7,7 +7,7 @@ export class Viewport {
     constructor(params) {
         Object.assign(this, params);
     }
-    toScreenCoords(position, camera = null) {
+    toScreenCoords(position) {
         const canvasCenter = new Vector2D(this.width / 2, this.height / 2);
         if (this.camera !== null) {
             return position.add(canvasCenter).subtract(this.camera.position.toVector2D());

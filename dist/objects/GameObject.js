@@ -54,12 +54,22 @@ export class GameObject {
     // --webserver stuff--
     cache = {};
     isStatic = false;
+    // /** Each subclass can declare extra fields here */
+    // protected staticFields(): Record<string, any> {
+    //   return {};
+    // }
+    // /** override if needed to stream live (non-static) properties */
+    // protected dynamicFields(): Record<string, any> {
+    //   return { position: this.position.export() };
+    // }
     init() {
     }
-    updateToGame() {
-    }
     components = new Map();
+    toScreenPosition;
     constructor(params) {
+        this.toScreenPosition = (viewport) => {
+            return viewport.toScreenCoords(this.getWorldPosition());
+        };
         Object.assign(this, params);
         this.id = GameObject.globalId;
         GameObject.globalId++;
@@ -74,7 +84,6 @@ export class GameObject {
         this.components = map;
     }
     addComponent(component) {
-        // console.log(`component ${component.name} ${component.id} added to ${this.name} ${this.id}`);
         this.components.set(component.id, component);
         component.host = this;
         component.init();
@@ -112,8 +121,6 @@ export class GameObject {
         if (this.onClientUpdate) {
             this.onClientUpdate();
         }
-        // console.log(Object.entries(clientScripts));
-        // console.log("calling " + this.id + " method " + this.onClientUpdate);
     }
     getWorldPosition(added = new Vector2D(0, 0)) {
         if (!this.parent) {
@@ -144,34 +151,25 @@ export class GameObject {
         });
     }
     draw(viewport) {
-        // Draw this object's components
         for (const component of this.getComponents()) {
             if (component === null || component.host === null) {
                 continue;
             }
-            if (component instanceof Sprite) {
-                try {
+            try {
+                if (component instanceof Sprite)
                     component.draw(viewport);
-                }
-                catch (error) {
-                }
+                else if (component instanceof HitBox)
+                    component.draw(viewport);
             }
-            else if (component instanceof HitBox) {
-                try {
-                    component.draw(viewport);
-                }
-                catch (error) {
-                    console.log("error", typeof component);
-                }
+            catch (error) {
+                console.log("cannot draw: ", error);
+                console.log(component.imagePath);
             }
         }
         // Recursively draw children
         for (const child of this.children) {
-            try {
+            if (child instanceof GameObject)
                 child.draw(viewport);
-            }
-            catch (error) {
-            }
         }
     }
     export(exportStatic = false) {
@@ -184,7 +182,7 @@ export class GameObject {
             STATIC_zIndex: this.zIndex,
             STATIC_children: this.children.map(child => child.id),
             STATIC_components: this.componentToJSON(),
-            cUpdate: this.onClientUpdateId
+            STATIC_cUpdate: this.onClientUpdateId
         };
         return exportCleanup(json, exportStatic);
     }

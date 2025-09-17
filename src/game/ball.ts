@@ -18,7 +18,6 @@ export class Ball extends GameObject {
 	sprite: Sprite;
 
 	init () {
-		this.updateToGame();
 	}
 
 	calculateAngle(other: Padel) {

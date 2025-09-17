@@ -15,7 +15,6 @@ export class Ball extends GameObject {
     hitbox;
     sprite;
     init() {
-        this.updateToGame();
     }
     calculateAngle(other) {
         // Center positions

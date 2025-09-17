@@ -15,7 +15,6 @@ export class GameWorld {
 
   constructor(viewport?: Viewport) {
     this.viewport = viewport ?? new Viewport({ width: 800, height: 400 });
-    
   }
 
   addTimer(durationSeconds: number, callback: () => void) {

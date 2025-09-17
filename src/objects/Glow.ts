@@ -9,7 +9,6 @@ export class Glow {
     public blendMode: GlobalCompositeOperation = "source-over";
 
     constructor(params: Partial<Glow>) {
-        console.log("glow created");
         Object.assign(this, params);
     }
 }

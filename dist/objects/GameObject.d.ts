@@ -24,8 +24,8 @@ export declare class GameObject {
     cache: any;
     isStatic: boolean;
     init(): void;
-    updateToGame(): void;
     components: Map<number, Component> | Component[];
+    toScreenPosition: (viewport: Viewport) => Point2D;
     constructor(params: Partial<GameObject>);
     addComponent(component: Component): Component;
     getComponents(): Component[];

@@ -155,7 +155,6 @@ function compile(includeStaticObjects: boolean) {
   const state = pongGame.exportState(includeStaticObjects);
 
   let output = JSON.stringify({ 
-    type: "state", 
     state: state,
     metadata: {
       timestamp: Date.now(),
@@ -163,6 +162,11 @@ function compile(includeStaticObjects: boolean) {
       fps: pongGame.fps,
     }
   }, null, 2);
+
+  if (includeStaticObjects) {
+    // console.log("full");
+    writeFileSync("game_state_full.json", output,"utf-8");
+  }
 
   return output;
 }
@@ -174,9 +178,6 @@ function updateGameObjects() {
   let output = compile(false);
 
   writeFileSync("game_state.json", output,"utf-8");
-  
-  if (output["state"] && output["state"]["type"] === "full")
-    writeFileSync("game_state_full.json", output,"utf-8");
     
   for (const client of clients) {
     if (client.socket.readyState === 1) { // 1 = OPEN

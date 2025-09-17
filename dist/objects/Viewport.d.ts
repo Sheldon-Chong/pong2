@@ -6,6 +6,6 @@ export declare class Viewport {
     height: number;
     camera: Camera;
     constructor(params: Partial<Viewport>);
-    toScreenCoords(position: Point2D, camera?: Camera): Point2D;
+    toScreenCoords(position: Point2D): Point2D;
 }
 //# sourceMappingURL=Viewport.d.ts.map
