@@ -5,10 +5,12 @@ export declare class Camera extends GameObject {
     target: GameObject;
     rawPosition: Point2D;
     className: string;
-    position: Point2D;
     constructor(params: Partial<Camera>);
     export(): {
-        position: Point2D;
+        position: {
+            x: number;
+            y: number;
+        };
         className: string;
     };
 }

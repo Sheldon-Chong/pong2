@@ -3,7 +3,7 @@
   "state": {
     "camera": {
       "position": {
-        "x": -479.11185900783096,
+        "x": -370.50340723278435,
         "y": 0,
         "className": "Point2D"
       }
@@ -13,12 +13,8 @@
         "id": 0,
         "position": {
           "x": -250,
-          "y": 107.3
-        },
-        "components": [
-          1,
-          2
-        ]
+          "y": 200
+        }
       },
       {
         "id": 1,
@@ -28,12 +24,8 @@
         "id": 2,
         "position": {
           "x": 250,
-          "y": 107.3
-        },
-        "components": [
-          3,
-          4
-        ]
+          "y": 200
+        }
       },
       {
         "id": 3,
@@ -43,12 +35,8 @@
         "id": 4,
         "position": {
           "x": -650,
-          "y": 107.3
-        },
-        "components": [
-          5,
-          6
-        ]
+          "y": 200
+        }
       },
       {
         "id": 5,
@@ -58,12 +46,8 @@
         "id": 6,
         "position": {
           "x": 650,
-          "y": 107.3
-        },
-        "components": [
-          7,
-          8
-        ]
+          "y": 200
+        }
       },
       {
         "id": 7,
@@ -73,12 +57,8 @@
         "id": 8,
         "position": {
           "x": -1050,
-          "y": 107.3
-        },
-        "components": [
-          9,
-          10
-        ]
+          "y": 200
+        }
       },
       {
         "id": 9,
@@ -88,12 +68,8 @@
         "id": 10,
         "position": {
           "x": 1050,
-          "y": 107.3
-        },
-        "components": [
-          11,
-          12
-        ]
+          "y": 200
+        }
       },
       {
         "id": 11,
@@ -102,23 +78,18 @@
       {
         "id": 12,
         "position": {
-          "x": -706.39,
-          "y": -56.83
+          "x": -867.16,
+          "y": -125.63
         },
         "scale": {
           "x": 40,
           "y": 40
-        },
-        "components": [
-          14,
-          13
-        ]
+        }
       },
       {
         "position": {
-          "x": -479.11185900783096,
-          "y": 0,
-          "className": "Point2D"
+          "x": -370.5,
+          "y": 0
         },
         "className": "camera"
       },
@@ -126,48 +97,28 @@
         "id": 16,
         "position": {
           "x": 0,
-          "y": -244.68
+          "y": -230
         },
-        "cUpdate": "moveCrowd",
-        "components": [
-          19
-        ]
+        "cUpdate": "moveCrowd"
       },
       {
         "id": 17,
         "position": {
           "x": 0,
-          "y": -235.32
+          "y": -230
         },
-        "cUpdate": "moveCrowd",
-        "components": [
-          20
-        ]
+        "cUpdate": "moveCrowd"
       },
       {
         "id": 18,
         "position": {
-          "x": 0,
-          "y": -244.68
-        },
-        "cUpdate": "moveCrowd",
-        "components": [
-          21
-        ]
-      },
-      {
-        "id": 19,
-        "position": {
           "x": -1250,
           "y": 0
-        },
-        "components": [
-          22
-        ]
+        }
       },
       {
         "className": "label",
-        "id": 20,
+        "id": 19,
         "position": {
           "x": -650,
           "y": 0
@@ -175,7 +126,7 @@
       },
       {
         "className": "label",
-        "id": 21,
+        "id": 20,
         "position": {
           "x": 650,
           "y": 0
@@ -185,8 +136,8 @@
     "type": "partial"
   },
   "metadata": {
-    "timestamp": 1758079748808,
-    "delta": 0.01759788000000026,
+    "timestamp": 1758087322507,
+    "delta": 0.01866975199999797,
     "fps": 0
   }
 }

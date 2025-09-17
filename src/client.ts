@@ -131,16 +131,17 @@ type T_Constructor<T> = new (...args: any[]) => T;
 
 
 function revive(obj: any): any {
-  // Handle arrays by reviving each element
+  // -- handle arrays --
   if (Array.isArray(obj)) {
     return obj.map(revive);
   }
 
-  // Handle plain objects
+	// -- handle object (nested) --
   if (obj && typeof obj === "object") {
     const { className } = obj;
 
     // If the object matches a known component, rebuild as an instance
+		// -end of recursion
     if (className && componentMap[className]) {
       const revivedParams: Record<string, any> = {};
       for (const key in obj) {
@@ -150,12 +151,11 @@ function revive(obj: any): any {
       return new componentMap[className](revivedParams);
     }
 
-    // Otherwise, just recurse into nested properties
+    // Otherwise, recurse further
     for (const key in obj) {
       obj[key] = revive(obj[key]);
-			if (key === "clientUpdate") {
-				console.log("script");
-			}
+			if (key === "position")
+				obj.position = new Point2D(obj.position.x, obj.position.y);
     }
   }
 
@@ -163,6 +163,8 @@ function revive(obj: any): any {
   return obj;
 }
 
+
+// todo potential redudancy because of revive function and generic function overlap in funcionality
 
 function genericUpdate(
 	obj: Record<string, any>,
@@ -185,13 +187,9 @@ function genericUpdate(
 			});
 		}
 
+
 		if (key === "cUpdate" && obj.onClientUpdateId !== value) {
-			const script = clientScripts[value];
-			if (script) {
-				obj.onClientUpdateId = value;
-				obj.onClientUpdate = script;
-				// console.log("updated " + obj.id + " to " + value);
-			}
+			obj.setOnClientUpdate(value);
 			continue;	
 		}
 
@@ -329,6 +327,17 @@ window.addEventListener("DOMContentLoaded", () => {
 				genericUpdate(clientObj, revivedObject, clientObj.cache);
 				for (const [, obj] of gameObjectRegistry.entries()) {
 					
+				}
+
+				if (object.components) {
+					for (const componentId of object.components) {
+						if (!(componentId in clientObj.components)) {
+							const component = componentRegistry.get(componentId);
+							if (component) {
+								clientObj.addComponent(component);
+							}
+						}
+					}
 				}
 
 				clientObj.components.forEach((value, key) => {

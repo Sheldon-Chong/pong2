@@ -149,10 +149,10 @@ export class GameObject {
 		const script = clientScripts[id];
 		if (script) {
 			this.onClientUpdateId = id;
-			this.onClientUpdate = script;
-		} 
+			this.onClientUpdate = () => script(this); // pass the current object
+		}
 	}
-
+	
 	clientUpdate() {
 		if (this.onClientUpdate) {
 			this.onClientUpdate();

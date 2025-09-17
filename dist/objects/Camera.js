@@ -26,8 +26,9 @@ export class Camera extends GameObject {
         };
     }
     export() {
+        console.log(this.position.constructor.name);
         return {
-            position: this.position,
+            position: this.position.export(),
             className: this.className
         };
     }

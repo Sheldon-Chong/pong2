@@ -1,1 +1,1 @@
-{"version":3,"file":"clientScripts.d.ts","sourceRoot":"","sources":["../../src/game/clientScripts.ts"],"names":[],"mappings":"AACA,eAAO,MAAM,aAAa,EAAE,MAAM,CAAC,MAAM,EAAE,MAAM,IAAI,CAIpD,CAAC"}
+{"version":3,"file":"clientScripts.d.ts","sourceRoot":"","sources":["../../src/game/clientScripts.ts"],"names":[],"mappings":"AAGA,eAAO,MAAM,aAAa,EAAE,MAAM,CAAC,MAAM,EAAE,CAAC,MAAM,KAAA,KAAK,IAAI,CAU1D,CAAC"}

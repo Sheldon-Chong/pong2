@@ -96,14 +96,15 @@ const classMap = {
     "hitbox": HitBox
 };
 function revive(obj) {
-    // Handle arrays by reviving each element
+    // -- handle arrays --
     if (Array.isArray(obj)) {
         return obj.map(revive);
     }
-    // Handle plain objects
+    // -- handle object (nested) --
     if (obj && typeof obj === "object") {
         const { className } = obj;
         // If the object matches a known component, rebuild as an instance
+        // -end of recursion
         if (className && componentMap[className]) {
             const revivedParams = {};
             for (const key in obj) {
@@ -111,17 +112,17 @@ function revive(obj) {
             }
             return new componentMap[className](revivedParams);
         }
-        // Otherwise, just recurse into nested properties
+        // Otherwise, recurse further
         for (const key in obj) {
             obj[key] = revive(obj[key]);
-            if (key === "clientUpdate") {
-                console.log("script");
-            }
+            if (key === "position")
+                obj.position = new Point2D(obj.position.x, obj.position.y);
         }
     }
     // Primitives or anything else: return as-is
     return obj;
 }
+// todo potential redudancy because of revive function and generic function overlap in funcionality
 function genericUpdate(obj, params, cache) {
     for (const key in params) {
         if (key === "parent" || key === "children")
@@ -138,12 +139,7 @@ function genericUpdate(obj, params, cache) {
             });
         }
         if (key === "cUpdate" && obj.onClientUpdateId !== value) {
-            const script = clientScripts[value];
-            if (script) {
-                obj.onClientUpdateId = value;
-                obj.onClientUpdate = script;
-                // console.log("updated " + obj.id + " to " + value);
-            }
+            obj.setOnClientUpdate(value);
             continue;
         }
         // -- update nested object types -- 
@@ -252,6 +248,16 @@ window.addEventListener("DOMContentLoaded", () => {
                 // -- UPDATE PROPERTIES AND CHILDREN OF THE CLASS --
                 genericUpdate(clientObj, revivedObject, clientObj.cache);
                 for (const [, obj] of gameObjectRegistry.entries()) {
+                }
+                if (object.components) {
+                    for (const componentId of object.components) {
+                        if (!(componentId in clientObj.components)) {
+                            const component = componentRegistry.get(componentId);
+                            if (component) {
+                                clientObj.addComponent(component);
+                            }
+                        }
+                    }
                 }
                 clientObj.components.forEach((value, key) => {
                     if (value === null) {

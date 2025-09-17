@@ -6,7 +6,6 @@ export class Camera extends GameObject {
     target: GameObject;
     rawPosition: Point2D;
     className:string = "camera";
-    declare position: Point2D;
 
     constructor (params: Partial<Camera>) {
         const startingPos = new Point2D(0, 0);
@@ -33,8 +32,9 @@ export class Camera extends GameObject {
     }
 
     export() {
+        console.log(this.position.constructor.name);
         return {
-            position: this.position,
+            position: this.position.export(),
             className: this.className
         }
     }

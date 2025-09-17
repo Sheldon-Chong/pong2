@@ -388,7 +388,7 @@ export class PongGame {
 		this.world.addObject(new ImageObject({
 			position: new Point2D(0, -180),
 			isStatic: true,
-			zIndex: 5,
+			zIndex: 20,
 			sprite: new Sprite({
 				imagePath: "assets/maps/map1/shadow.png",
 				blendMode: BlendMode.Multiply
@@ -398,7 +398,7 @@ export class PongGame {
 
 
 		// -- crowd --
-		for (let i = 0; i < 3; i++) {
+		for (let i = 0; i < 2; i++) {
 
 			const object = new GameObject({
 				position: new Point2D(0, -230),
@@ -415,14 +415,14 @@ export class PongGame {
 					})
 				],
 				scale: new Vector2D(4200, 118).multiply(0.5),
-				onUpdate: function () {
-					const amplitude = 5;
-					const frequency = 0.5;
-					const baseY = -240;
+				// onUpdate: function () {
+				// 	const amplitude = 5;
+				// 	const frequency = 0.5;
+				// 	const baseY = -240;
 
-					// apply oscillation
-					this.position.y = oscillateValue(baseY, amplitude, frequency, this.variables["offset"]);
-				},
+				// 	// apply oscillation
+				// 	this.position.y = oscillateValue(baseY, amplitude, frequency, this.variables["offset"]);
+				// },
 			})
 
 			object.setOnClientUpdate("moveCrowd");
