@@ -1,7 +1,6 @@
 import { Point2D, Vector2D } from './Coordinates.js';
 import { type Renderable, Sprite } from './Sprite.js';
-import { type PongGame } from '../game/pong.js';
-import { clientScripts } from '../game/clientScripts.js';
+import type { PongGame } from '../game/pong.js';
 import type { Viewport } from './Viewport.js'; 
 import { Component } from './Component.js';
 import { HitBox } from './Hitbox.js';
@@ -81,13 +80,13 @@ export class GameObject {
 	init() {
 	}
 
-	setOnClientUpdate(id: string) {
-		const script = clientScripts[id];
-		if (script) {
-			this.onClientUpdateId = id;
-			this.onClientUpdate = script;
-		} 
-	}
+	// setOnClientUpdate(id: string) {
+	// 	const script = clientScripts[id];
+	// 	if (script) {
+	// 		this.onClientUpdateId = id;
+	// 		this.onClientUpdate = script;
+	// 	} 
+	// }
 
 	updateToGame() {
 	}

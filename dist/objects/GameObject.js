@@ -1,7 +1,5 @@
 import { Point2D, Vector2D } from './Coordinates.js';
 import { Sprite } from './Sprite.js';
-import {} from '../game/pong.js';
-import { clientScripts } from '../game/clientScripts.js';
 import { Component } from './Component.js';
 import { HitBox } from './Hitbox.js';
 const RenderableMarker = Symbol("Renderable");
@@ -57,13 +55,13 @@ export class GameObject {
     isStatic = false;
     init() {
     }
-    setOnClientUpdate(id) {
-        const script = clientScripts[id];
-        if (script) {
-            this.onClientUpdateId = id;
-            this.onClientUpdate = script;
-        }
-    }
+    // setOnClientUpdate(id: string) {
+    // 	const script = clientScripts[id];
+    // 	if (script) {
+    // 		this.onClientUpdateId = id;
+    // 		this.onClientUpdate = script;
+    // 	} 
+    // }
     updateToGame() {
     }
     components = new Map();

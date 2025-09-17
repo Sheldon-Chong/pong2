@@ -80,8 +80,8 @@ export class GameWorld {
             exportedObject.components = keysWithId;
             if (keysWithId.length === 0)
                 delete exportedObject.components;
-            if (!includeStaticObjects)
-                delete exportedObject.components;
+            // if (!includeStaticObjects)
+            //   delete exportedObject.components;
             flatObjects.push(exportedObject);
             // todo flaw here. Double-export
             const componentJson = obj.componentToJSON(includeStaticObjects);
