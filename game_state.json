@@ -3,7 +3,7 @@
   "state": {
     "camera": {
       "position": {
-        "x": 58.96844580419983,
+        "x": -479.11185900783096,
         "y": 0,
         "className": "Point2D"
       }
@@ -13,7 +13,7 @@
         "id": 0,
         "position": {
           "x": -250,
-          "y": -28.51
+          "y": 107.3
         },
         "components": [
           1,
@@ -28,7 +28,7 @@
         "id": 2,
         "position": {
           "x": 250,
-          "y": -28.51
+          "y": 107.3
         },
         "components": [
           3,
@@ -43,7 +43,7 @@
         "id": 4,
         "position": {
           "x": -650,
-          "y": -28.51
+          "y": 107.3
         },
         "components": [
           5,
@@ -58,7 +58,7 @@
         "id": 6,
         "position": {
           "x": 650,
-          "y": -28.51
+          "y": 107.3
         },
         "components": [
           7,
@@ -73,7 +73,7 @@
         "id": 8,
         "position": {
           "x": -1050,
-          "y": -28.51
+          "y": 107.3
         },
         "components": [
           9,
@@ -88,7 +88,7 @@
         "id": 10,
         "position": {
           "x": 1050,
-          "y": -28.51
+          "y": 107.3
         },
         "components": [
           11,
@@ -102,8 +102,8 @@
       {
         "id": 12,
         "position": {
-          "x": 475.62,
-          "y": 148.15
+          "x": -706.39,
+          "y": -56.83
         },
         "scale": {
           "x": 40,
@@ -116,7 +116,7 @@
       },
       {
         "position": {
-          "x": 58.96844580419983,
+          "x": -479.11185900783096,
           "y": 0,
           "className": "Point2D"
         },
@@ -126,9 +126,9 @@
         "id": 16,
         "position": {
           "x": 0,
-          "y": -235.76
+          "y": -244.68
         },
-        "clientUpdate": "moveCrowd",
+        "cUpdate": "moveCrowd",
         "components": [
           19
         ]
@@ -137,9 +137,9 @@
         "id": 17,
         "position": {
           "x": 0,
-          "y": -244.24
+          "y": -235.32
         },
-        "clientUpdate": "moveCrowd",
+        "cUpdate": "moveCrowd",
         "components": [
           20
         ]
@@ -148,9 +148,9 @@
         "id": 18,
         "position": {
           "x": 0,
-          "y": -235.76
+          "y": -244.68
         },
-        "clientUpdate": "moveCrowd",
+        "cUpdate": "moveCrowd",
         "components": [
           21
         ]
@@ -185,8 +185,8 @@
     "type": "partial"
   },
   "metadata": {
-    "timestamp": 1758079311739,
-    "delta": 0.018136057000000618,
+    "timestamp": 1758079748808,
+    "delta": 0.01759788000000026,
     "fps": 0
   }
 }

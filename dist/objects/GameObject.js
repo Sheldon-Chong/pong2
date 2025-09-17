@@ -112,8 +112,8 @@ export class GameObject {
         if (this.onClientUpdate) {
             this.onClientUpdate();
         }
-        console.log(Object.entries(clientScripts));
-        console.log("calling " + this.id + " method " + this.onClientUpdate);
+        // console.log(Object.entries(clientScripts));
+        // console.log("calling " + this.id + " method " + this.onClientUpdate);
     }
     getWorldPosition(added = new Vector2D(0, 0)) {
         if (!this.parent) {
@@ -184,7 +184,7 @@ export class GameObject {
             STATIC_zIndex: this.zIndex,
             STATIC_children: this.children.map(child => child.id),
             STATIC_components: this.componentToJSON(),
-            clientUpdate: this.onClientUpdateId
+            cUpdate: this.onClientUpdateId
         };
         return exportCleanup(json, exportStatic);
     }

@@ -96,24 +96,30 @@ const classMap = {
     "hitbox": HitBox
 };
 function revive(obj) {
+    // Handle arrays by reviving each element
     if (Array.isArray(obj)) {
         return obj.map(revive);
     }
+    // Handle plain objects
     if (obj && typeof obj === "object") {
-        if (obj.className && componentMap[obj.className]) {
+        const { className } = obj;
+        // If the object matches a known component, rebuild as an instance
+        if (className && componentMap[className]) {
             const revivedParams = {};
             for (const key in obj) {
                 revivedParams[key] = revive(obj[key]);
             }
-            const component = new componentMap[obj.className](revivedParams);
-            return component;
+            return new componentMap[className](revivedParams);
         }
-        else {
-            for (const key in obj) {
-                obj[key] = revive(obj[key]);
+        // Otherwise, just recurse into nested properties
+        for (const key in obj) {
+            obj[key] = revive(obj[key]);
+            if (key === "clientUpdate") {
+                console.log("script");
             }
         }
     }
+    // Primitives or anything else: return as-is
     return obj;
 }
 function genericUpdate(obj, params, cache) {
@@ -131,12 +137,12 @@ function genericUpdate(obj, params, cache) {
                 genericUpdate(obj[key][index], item, cache[key][index]);
             });
         }
-        if (key === "clientUpdate" && obj.onClientUpdateId !== value) {
+        if (key === "cUpdate" && obj.onClientUpdateId !== value) {
             const script = clientScripts[value];
             if (script) {
                 obj.onClientUpdateId = value;
                 obj.onClientUpdate = script;
-                console.log("updated " + obj.id + " to " + value);
+                // console.log("updated " + obj.id + " to " + value);
             }
             continue;
         }

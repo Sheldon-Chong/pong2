@@ -131,25 +131,36 @@ type T_Constructor<T> = new (...args: any[]) => T;
 
 
 function revive(obj: any): any {
-	if (Array.isArray(obj)) {
-		return obj.map(revive);
-	}
-	if (obj && typeof obj === "object") {
-		if (obj.className && componentMap[obj.className]) {
-			const revivedParams: any = {};
-			for (const key in obj) {
-				revivedParams[key] = revive(obj[key]);
-			}
+  // Handle arrays by reviving each element
+  if (Array.isArray(obj)) {
+    return obj.map(revive);
+  }
 
-			const component = new componentMap[obj.className](revivedParams);
-			return component;
-		} else {
-			for (const key in obj) {
-				obj[key] = revive(obj[key]);
+  // Handle plain objects
+  if (obj && typeof obj === "object") {
+    const { className } = obj;
+
+    // If the object matches a known component, rebuild as an instance
+    if (className && componentMap[className]) {
+      const revivedParams: Record<string, any> = {};
+      for (const key in obj) {
+        revivedParams[key] = revive(obj[key]);
+      }
+
+      return new componentMap[className](revivedParams);
+    }
+
+    // Otherwise, just recurse into nested properties
+    for (const key in obj) {
+      obj[key] = revive(obj[key]);
+			if (key === "clientUpdate") {
+				console.log("script");
 			}
-		}
-	}
-	return obj;
+    }
+  }
+
+  // Primitives or anything else: return as-is
+  return obj;
 }
 
 
@@ -174,12 +185,12 @@ function genericUpdate(
 			});
 		}
 
-		if (key === "clientUpdate" && obj.onClientUpdateId !== value) {
+		if (key === "cUpdate" && obj.onClientUpdateId !== value) {
 			const script = clientScripts[value];
 			if (script) {
 				obj.onClientUpdateId = value;
 				obj.onClientUpdate = script;
-				console.log("updated " + obj.id + " to " + value);
+				// console.log("updated " + obj.id + " to " + value);
 			}
 			continue;	
 		}
