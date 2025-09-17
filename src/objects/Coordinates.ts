@@ -16,6 +16,13 @@ export class Point2D {
     return new Point2D(this.x * other.x, this.y * other.y);
   }
 
+  equals (other: Point2D): boolean {
+    return (
+      this.x === other.x,
+      this.y === other.y
+    );
+  }
+
   getCenter(other: Point2D): Point2D { return this.add(other.toVector2D()).divide(new Vector2D(2, 2)); }
 
   toVector2D() { return new Vector2D(this.x, this.y); }
@@ -31,7 +38,6 @@ export class Point2D {
   }
   export() {
     return {
-      className: "Point2D",
       x: Math.round(this.x * 100) / 100,
       y: Math.round(this.y * 100) / 100,
     }

@@ -7,7 +7,6 @@ import { Camera } from '../objects/Camera.js';
 import { Label } from '../objects/Label.js';
 import { HitBox } from '../objects/Hitbox.js';
 import { Ball } from './ball.js';
-import { Viewport } from '../objects/Viewport.js';
 import { GameWorld } from './GameWorld.js';
 import { Player } from './Player.js';
 import { ImageObject } from '../objects/ImageObject.js';
@@ -170,6 +169,7 @@ export class Padel extends GameObject {
     }
 }
 class PadelLabel extends Label {
+    isClient = false;
     className = "label";
     export(exportStatic = false) {
         return exportCleanup({

@@ -1,7 +1,9 @@
 import { Point2D, Vector2D } from './Coordinates.js';
 import { type Renderable, Sprite } from './Sprite.js';
-import type { PongGame } from '../game/pong.js';
-import type { Viewport } from './Viewport.js'; import { Component } from './Component.js';
+import { type PongGame } from '../game/pong.js';
+import { clientScripts } from '../game/clientScripts.js';
+import type { Viewport } from './Viewport.js'; 
+import { Component } from './Component.js';
 import { HitBox } from './Hitbox.js';
 
 const RenderableMarker = Symbol("Renderable");
@@ -64,6 +66,8 @@ export class GameObject {
 
 	// events
 	public onUpdate?: () => void;
+	public onClientUpdate?: () => void;
+	public onClientUpdateId?: string;
 
 	// order
 	public zIndex: number = 0;
@@ -75,6 +79,14 @@ export class GameObject {
 	isStatic: boolean = false;
 
 	init() {
+	}
+
+	setOnClientUpdate(id: string) {
+		const script = clientScripts[id];
+		if (script) {
+			this.onClientUpdateId = id;
+			this.onClientUpdate = script;
+		} 
 	}
 
 	updateToGame() {
@@ -140,7 +152,8 @@ export class GameObject {
 	}
 
 	clientUpdate() {
-
+		if (this.onClientUpdate)
+			this.clientUpdate();
 	}
 
 	getWorldPosition(added:Vector2D = new Vector2D(0,0)): Point2D {
@@ -192,7 +205,7 @@ export class GameObject {
 			}
 
 			if (component instanceof Sprite) {
-				try { (component as Sprite).draw(viewport,); }
+				try { (component as Sprite).draw(viewport); }
 				catch (error) { 
 				}
 			}
@@ -222,6 +235,7 @@ export class GameObject {
 			STATIC_zIndex: this.zIndex,
 			STATIC_children: this.children.map(child => child.id),
 			STATIC_components: this.componentToJSON(),
+			clientUpdate: this.clientUpdate
 		};
 
 		return exportCleanup(json, exportStatic);

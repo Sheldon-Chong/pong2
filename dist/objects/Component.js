@@ -1,4 +1,3 @@
-import { GameObject } from './GameObject.js';
 export class Component {
     static globalId = 1;
     id = -1;

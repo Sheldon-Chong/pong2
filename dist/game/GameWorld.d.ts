@@ -1,6 +1,6 @@
 import { Point2D } from '../objects/Coordinates.js';
 import { GameObject } from '../objects/GameObject.js';
-import { Camera } from '../objects/Camera.js';
+import type { Camera } from '../objects/Camera.js';
 import { Viewport } from '../objects/Viewport.js';
 import { Timer } from '../objects/Timer.js';
 export declare class GameWorld {

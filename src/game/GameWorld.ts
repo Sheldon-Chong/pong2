@@ -1,6 +1,6 @@
 import { Point2D, Vector2D } from '../objects/Coordinates.js';
 import { GameObject } from '../objects/GameObject.js';
-import { Camera } from '../objects/Camera.js';
+import type { Camera } from '../objects/Camera.js';
 import { Viewport } from '../objects/Viewport.js';
 import { HitBox } from '../objects/Hitbox.js';
 import { Timer } from '../objects/Timer.js';
@@ -100,6 +100,8 @@ export class GameWorld {
       exportedObject.components = keysWithId;
       if (keysWithId.length === 0)
         delete exportedObject.components;
+      if (!includeStaticObjects)
+        delete exportedObject.components;
 
       flatObjects.push(exportedObject);
       
@@ -118,12 +120,15 @@ export class GameWorld {
       flatten(obj);
     }
 
-    return {
+    const output = {
       camera: {
         position: this.camera?.position
       },
       gameObjects: flatObjects,
       components: components
     };
+
+    return output; 
   }
 }
+

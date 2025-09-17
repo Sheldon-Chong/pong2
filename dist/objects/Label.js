@@ -29,13 +29,13 @@ export class Label extends GameObject {
             className: this.className,
             id: this.id,
             position: this.position.export(),
-            scale: this.scale,
-            rotation: this.rotation,
-            components: this.componentToJSON(exportStatic),
-            children: this.children?.map(child => child.id),
-            text: this.text,
-            font: this.font,
-            color: this.color
+            STATIC_scale: this.scale,
+            STATIC_rotation: this.rotation,
+            STATIC_components: this.componentToJSON(exportStatic),
+            STATIC_children: this.children?.map(child => child.id),
+            STATIC_text: this.text,
+            STATIC_font: this.font,
+            STATIC_color: this.color
         }, exportStatic);
     }
 }

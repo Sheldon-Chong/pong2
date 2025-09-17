@@ -16,7 +16,6 @@ export declare class Ball extends GameObject {
         STATIC_name: string;
         id: number;
         position: {
-            className: string;
             x: number;
             y: number;
         };

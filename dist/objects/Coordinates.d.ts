@@ -7,12 +7,12 @@ export declare class Point2D {
     subtract(other: Vector2D): Point2D;
     divide(other: Vector2D): Point2D;
     multiply(other: Vector2D | number): Point2D;
+    equals(other: Point2D): boolean;
     getCenter(other: Point2D): Point2D;
     toVector2D(): Vector2D;
     clone(): Point2D;
     move(direction: number, distance: number): Point2D;
     export(): {
-        className: string;
         x: number;
         y: number;
     };

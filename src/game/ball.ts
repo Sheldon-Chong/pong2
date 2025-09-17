@@ -1,5 +1,5 @@
 import { Point2D, Vector2D } from '../objects/Coordinates.js';
-import { GameObject } from '../objects/GameObject.js';
+import { exportCleanup, GameObject } from '../objects/GameObject.js';
 import { Sprite } from '../objects/Sprite.js';
 import { HitBox } from '../objects/Hitbox.js';
 import { Glow } from '../objects/Glow.js';
@@ -49,14 +49,14 @@ export class Ball extends GameObject {
 	}
 
 	export(exportStatic: boolean = false) {
-		return {
+		return exportCleanup({
 			STATIC_name: this.name,
 			id: this.id,
 			position: this.position.export(),
 			scale: this.scale,
 			STATIC_components: this.componentToJSON(exportStatic),
 			STATIC_zIndex: this.zIndex
-		}
+		})
 	}
 
 	constructor(params: { position: Point2D, game: any }) {

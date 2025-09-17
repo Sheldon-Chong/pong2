@@ -1,5 +1,7 @@
 import { Point2D, Vector2D } from './Coordinates.js';
 import { Sprite } from './Sprite.js';
+import {} from '../game/pong.js';
+import { clientScripts } from '../game/clientScripts.js';
 import { Component } from './Component.js';
 import { HitBox } from './Hitbox.js';
 const RenderableMarker = Symbol("Renderable");
@@ -45,6 +47,8 @@ export class GameObject {
     maximumVelocity = new Vector2D(1000, 1000);
     // events
     onUpdate;
+    onClientUpdate;
+    onClientUpdateId;
     // order
     zIndex = 0;
     variables;
@@ -52,6 +56,13 @@ export class GameObject {
     cache = {};
     isStatic = false;
     init() {
+    }
+    setOnClientUpdate(id) {
+        const script = clientScripts[id];
+        if (script) {
+            this.onClientUpdateId = id;
+            this.onClientUpdate = script;
+        }
     }
     updateToGame() {
     }
@@ -99,6 +110,8 @@ export class GameObject {
         }
     }
     clientUpdate() {
+        if (this.onClientUpdate)
+            this.clientUpdate();
     }
     getWorldPosition(added = new Vector2D(0, 0)) {
         if (!this.parent) {
@@ -169,6 +182,7 @@ export class GameObject {
             STATIC_zIndex: this.zIndex,
             STATIC_children: this.children.map(child => child.id),
             STATIC_components: this.componentToJSON(),
+            clientUpdate: this.clientUpdate
         };
         return exportCleanup(json, exportStatic);
     }

@@ -1,5 +1,5 @@
 import { Point2D, Vector2D } from './Coordinates.js';
-import type { PongGame } from '../game/pong.js';
+import { type PongGame } from '../game/pong.js';
 import type { Viewport } from './Viewport.js';
 import { Component } from './Component.js';
 export declare function exportCleanup<T extends Record<string, any>>(obj: T, exportStatic?: boolean): T;
@@ -17,11 +17,14 @@ export declare class GameObject {
     acceleration: Vector2D;
     maximumVelocity: Vector2D;
     onUpdate?: () => void;
+    onClientUpdate?: () => void;
+    onClientUpdateId?: string;
     zIndex: number;
     variables: {};
     cache: any;
     isStatic: boolean;
     init(): void;
+    setOnClientUpdate(id: string): void;
     updateToGame(): void;
     components: Map<number, Component> | Component[];
     constructor(params: Partial<GameObject>);

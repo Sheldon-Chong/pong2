@@ -1,0 +1,841 @@
+======== Resolving module 'react/jsx-runtime' from '/home/cooper/coreProgram/barebones/pong-ws/src/client.ts'. ========
+Module resolution kind is not specified, using 'Classic'.
+Directory '/home/cooper/coreProgram/barebones/pong-ws/src/node_modules' does not exist, skipping all lookups in it.
+Directory '/home/cooper/coreProgram/barebones/node_modules' does not exist, skipping all lookups in it.
+Directory '/home/cooper/coreProgram/node_modules' does not exist, skipping all lookups in it.
+Directory '/home/cooper/node_modules' does not exist, skipping all lookups in it.
+Directory '/home/node_modules' does not exist, skipping all lookups in it.
+Directory '/node_modules' does not exist, skipping all lookups in it.
+======== Module name 'react/jsx-runtime' was not resolved. ========
+======== Resolving module './objects/Coordinates.js' from '/home/cooper/coreProgram/barebones/pong-ws/src/client.ts'. ========
+Module resolution kind is not specified, using 'Classic'.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Coordinates.js.ts' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Coordinates.js.tsx' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Coordinates.js.d.ts' does not exist.
+File name '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Coordinates.js' has a '.js' extension - stripping it.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Coordinates.ts' exist - use it as a name resolution result.
+======== Module name './objects/Coordinates.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Coordinates.ts'. ========
+======== Resolving module './objects/GameObject.js' from '/home/cooper/coreProgram/barebones/pong-ws/src/client.ts'. ========
+Module resolution kind is not specified, using 'Classic'.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/GameObject.js.ts' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/GameObject.js.tsx' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/GameObject.js.d.ts' does not exist.
+File name '/home/cooper/coreProgram/barebones/pong-ws/src/objects/GameObject.js' has a '.js' extension - stripping it.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/GameObject.ts' exist - use it as a name resolution result.
+======== Module name './objects/GameObject.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/src/objects/GameObject.ts'. ========
+======== Resolving module './objects/Glow.js' from '/home/cooper/coreProgram/barebones/pong-ws/src/client.ts'. ========
+Module resolution kind is not specified, using 'Classic'.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Glow.js.ts' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Glow.js.tsx' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Glow.js.d.ts' does not exist.
+File name '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Glow.js' has a '.js' extension - stripping it.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Glow.ts' exist - use it as a name resolution result.
+======== Module name './objects/Glow.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Glow.ts'. ========
+======== Resolving module './objects/Sprite.js' from '/home/cooper/coreProgram/barebones/pong-ws/src/client.ts'. ========
+Module resolution kind is not specified, using 'Classic'.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Sprite.js.ts' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Sprite.js.tsx' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Sprite.js.d.ts' does not exist.
+File name '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Sprite.js' has a '.js' extension - stripping it.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Sprite.ts' exist - use it as a name resolution result.
+======== Module name './objects/Sprite.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Sprite.ts'. ========
+======== Resolving module './objects/Hitbox.js' from '/home/cooper/coreProgram/barebones/pong-ws/src/client.ts'. ========
+Module resolution kind is not specified, using 'Classic'.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Hitbox.js.ts' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Hitbox.js.tsx' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Hitbox.js.d.ts' does not exist.
+File name '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Hitbox.js' has a '.js' extension - stripping it.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Hitbox.ts' exist - use it as a name resolution result.
+======== Module name './objects/Hitbox.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Hitbox.ts'. ========
+======== Resolving module './objects/Viewport.js' from '/home/cooper/coreProgram/barebones/pong-ws/src/client.ts'. ========
+Module resolution kind is not specified, using 'Classic'.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Viewport.js.ts' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Viewport.js.tsx' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Viewport.js.d.ts' does not exist.
+File name '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Viewport.js' has a '.js' extension - stripping it.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Viewport.ts' exist - use it as a name resolution result.
+======== Module name './objects/Viewport.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Viewport.ts'. ========
+======== Resolving module './game/pong.js' from '/home/cooper/coreProgram/barebones/pong-ws/src/client.ts'. ========
+Module resolution kind is not specified, using 'Classic'.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/game/pong.js.ts' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/game/pong.js.tsx' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/game/pong.js.d.ts' does not exist.
+File name '/home/cooper/coreProgram/barebones/pong-ws/src/game/pong.js' has a '.js' extension - stripping it.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/game/pong.ts' exist - use it as a name resolution result.
+======== Module name './game/pong.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/src/game/pong.ts'. ========
+======== Resolving module './game/clientScripts.js' from '/home/cooper/coreProgram/barebones/pong-ws/src/client.ts'. ========
+Module resolution kind is not specified, using 'Classic'.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/game/clientScripts.js.ts' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/game/clientScripts.js.tsx' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/game/clientScripts.js.d.ts' does not exist.
+File name '/home/cooper/coreProgram/barebones/pong-ws/src/game/clientScripts.js' has a '.js' extension - stripping it.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/game/clientScripts.ts' exist - use it as a name resolution result.
+======== Module name './game/clientScripts.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/src/game/clientScripts.ts'. ========
+======== Resolving module './objects/Label.js' from '/home/cooper/coreProgram/barebones/pong-ws/src/client.ts'. ========
+Module resolution kind is not specified, using 'Classic'.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Label.js.ts' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Label.js.tsx' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Label.js.d.ts' does not exist.
+File name '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Label.js' has a '.js' extension - stripping it.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Label.ts' exist - use it as a name resolution result.
+======== Module name './objects/Label.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Label.ts'. ========
+======== Resolving module './objects/Component.js' from '/home/cooper/coreProgram/barebones/pong-ws/src/client.ts'. ========
+Module resolution kind is not specified, using 'Classic'.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Component.js.ts' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Component.js.tsx' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Component.js.d.ts' does not exist.
+File name '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Component.js' has a '.js' extension - stripping it.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Component.ts' exist - use it as a name resolution result.
+======== Module name './objects/Component.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Component.ts'. ========
+======== Resolving module './objects/ImageObject.js' from '/home/cooper/coreProgram/barebones/pong-ws/src/client.ts'. ========
+Module resolution kind is not specified, using 'Classic'.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/ImageObject.js.ts' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/ImageObject.js.tsx' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/ImageObject.js.d.ts' does not exist.
+File name '/home/cooper/coreProgram/barebones/pong-ws/src/objects/ImageObject.js' has a '.js' extension - stripping it.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/ImageObject.ts' exist - use it as a name resolution result.
+======== Module name './objects/ImageObject.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/src/objects/ImageObject.ts'. ========
+======== Resolving module 'react/jsx-runtime' from '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Coordinates.ts'. ========
+Module resolution kind is not specified, using 'Classic'.
+Resolution for module 'react/jsx-runtime' was found in cache from location '/home/cooper/coreProgram/barebones/pong-ws/src'.
+======== Module name 'react/jsx-runtime' was not resolved. ========
+======== Resolving module 'react/jsx-runtime' from '/home/cooper/coreProgram/barebones/pong-ws/src/objects/GameObject.ts'. ========
+Resolution for module 'react/jsx-runtime' was found in cache from location '/home/cooper/coreProgram/barebones/pong-ws/src/objects'.
+======== Module name 'react/jsx-runtime' was not resolved. ========
+======== Resolving module './Coordinates.js' from '/home/cooper/coreProgram/barebones/pong-ws/src/objects/GameObject.ts'. ========
+Module resolution kind is not specified, using 'Classic'.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Coordinates.js.ts' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Coordinates.js.tsx' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Coordinates.js.d.ts' does not exist.
+File name '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Coordinates.js' has a '.js' extension - stripping it.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Coordinates.ts' exist - use it as a name resolution result.
+======== Module name './Coordinates.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Coordinates.ts'. ========
+======== Resolving module './Sprite.js' from '/home/cooper/coreProgram/barebones/pong-ws/src/objects/GameObject.ts'. ========
+Module resolution kind is not specified, using 'Classic'.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Sprite.js.ts' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Sprite.js.tsx' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Sprite.js.d.ts' does not exist.
+File name '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Sprite.js' has a '.js' extension - stripping it.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Sprite.ts' exist - use it as a name resolution result.
+======== Module name './Sprite.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Sprite.ts'. ========
+======== Resolving module '../game/pong.js' from '/home/cooper/coreProgram/barebones/pong-ws/src/objects/GameObject.ts'. ========
+Module resolution kind is not specified, using 'Classic'.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/game/pong.js.ts' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/game/pong.js.tsx' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/game/pong.js.d.ts' does not exist.
+File name '/home/cooper/coreProgram/barebones/pong-ws/src/game/pong.js' has a '.js' extension - stripping it.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/game/pong.ts' exist - use it as a name resolution result.
+======== Module name '../game/pong.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/src/game/pong.ts'. ========
+======== Resolving module '../game/clientScripts.js' from '/home/cooper/coreProgram/barebones/pong-ws/src/objects/GameObject.ts'. ========
+Module resolution kind is not specified, using 'Classic'.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/game/clientScripts.js.ts' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/game/clientScripts.js.tsx' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/game/clientScripts.js.d.ts' does not exist.
+File name '/home/cooper/coreProgram/barebones/pong-ws/src/game/clientScripts.js' has a '.js' extension - stripping it.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/game/clientScripts.ts' exist - use it as a name resolution result.
+======== Module name '../game/clientScripts.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/src/game/clientScripts.ts'. ========
+======== Resolving module './Viewport.js' from '/home/cooper/coreProgram/barebones/pong-ws/src/objects/GameObject.ts'. ========
+Module resolution kind is not specified, using 'Classic'.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Viewport.js.ts' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Viewport.js.tsx' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Viewport.js.d.ts' does not exist.
+File name '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Viewport.js' has a '.js' extension - stripping it.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Viewport.ts' exist - use it as a name resolution result.
+======== Module name './Viewport.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Viewport.ts'. ========
+======== Resolving module './Component.js' from '/home/cooper/coreProgram/barebones/pong-ws/src/objects/GameObject.ts'. ========
+Module resolution kind is not specified, using 'Classic'.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Component.js.ts' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Component.js.tsx' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Component.js.d.ts' does not exist.
+File name '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Component.js' has a '.js' extension - stripping it.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Component.ts' exist - use it as a name resolution result.
+======== Module name './Component.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Component.ts'. ========
+======== Resolving module './Hitbox.js' from '/home/cooper/coreProgram/barebones/pong-ws/src/objects/GameObject.ts'. ========
+Module resolution kind is not specified, using 'Classic'.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Hitbox.js.ts' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Hitbox.js.tsx' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Hitbox.js.d.ts' does not exist.
+File name '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Hitbox.js' has a '.js' extension - stripping it.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Hitbox.ts' exist - use it as a name resolution result.
+======== Module name './Hitbox.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Hitbox.ts'. ========
+======== Resolving module 'react/jsx-runtime' from '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Sprite.ts'. ========
+Resolution for module 'react/jsx-runtime' was found in cache from location '/home/cooper/coreProgram/barebones/pong-ws/src/objects'.
+======== Module name 'react/jsx-runtime' was not resolved. ========
+======== Resolving module './Coordinates.js' from '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Sprite.ts'. ========
+Resolution for module './Coordinates.js' was found in cache from location '/home/cooper/coreProgram/barebones/pong-ws/src/objects'.
+======== Module name './Coordinates.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Coordinates.ts'. ========
+======== Resolving module './Glow.js' from '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Sprite.ts'. ========
+Module resolution kind is not specified, using 'Classic'.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Glow.js.ts' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Glow.js.tsx' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Glow.js.d.ts' does not exist.
+File name '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Glow.js' has a '.js' extension - stripping it.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Glow.ts' exist - use it as a name resolution result.
+======== Module name './Glow.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Glow.ts'. ========
+======== Resolving module './Component.js' from '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Sprite.ts'. ========
+Resolution for module './Component.js' was found in cache from location '/home/cooper/coreProgram/barebones/pong-ws/src/objects'.
+======== Module name './Component.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Component.ts'. ========
+======== Resolving module './Viewport.js' from '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Sprite.ts'. ========
+Resolution for module './Viewport.js' was found in cache from location '/home/cooper/coreProgram/barebones/pong-ws/src/objects'.
+======== Module name './Viewport.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Viewport.ts'. ========
+======== Resolving module './Camera.js' from '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Sprite.ts'. ========
+Module resolution kind is not specified, using 'Classic'.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Camera.js.ts' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Camera.js.tsx' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Camera.js.d.ts' does not exist.
+File name '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Camera.js' has a '.js' extension - stripping it.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Camera.ts' exist - use it as a name resolution result.
+======== Module name './Camera.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Camera.ts'. ========
+======== Resolving module './GameObject.js' from '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Sprite.ts'. ========
+Module resolution kind is not specified, using 'Classic'.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/GameObject.js.ts' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/GameObject.js.tsx' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/GameObject.js.d.ts' does not exist.
+File name '/home/cooper/coreProgram/barebones/pong-ws/src/objects/GameObject.js' has a '.js' extension - stripping it.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/GameObject.ts' exist - use it as a name resolution result.
+======== Module name './GameObject.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/src/objects/GameObject.ts'. ========
+======== Resolving module 'react/jsx-runtime' from '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Glow.ts'. ========
+Resolution for module 'react/jsx-runtime' was found in cache from location '/home/cooper/coreProgram/barebones/pong-ws/src/objects'.
+======== Module name 'react/jsx-runtime' was not resolved. ========
+======== Resolving module 'react/jsx-runtime' from '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Component.ts'. ========
+Resolution for module 'react/jsx-runtime' was found in cache from location '/home/cooper/coreProgram/barebones/pong-ws/src/objects'.
+======== Module name 'react/jsx-runtime' was not resolved. ========
+======== Resolving module './GameObject.js' from '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Component.ts'. ========
+Resolution for module './GameObject.js' was found in cache from location '/home/cooper/coreProgram/barebones/pong-ws/src/objects'.
+======== Module name './GameObject.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/src/objects/GameObject.ts'. ========
+======== Resolving module 'react/jsx-runtime' from '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Viewport.ts'. ========
+Resolution for module 'react/jsx-runtime' was found in cache from location '/home/cooper/coreProgram/barebones/pong-ws/src/objects'.
+======== Module name 'react/jsx-runtime' was not resolved. ========
+======== Resolving module './Coordinates.js' from '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Viewport.ts'. ========
+Resolution for module './Coordinates.js' was found in cache from location '/home/cooper/coreProgram/barebones/pong-ws/src/objects'.
+======== Module name './Coordinates.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Coordinates.ts'. ========
+======== Resolving module 'react/jsx-runtime' from '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Camera.ts'. ========
+Resolution for module 'react/jsx-runtime' was found in cache from location '/home/cooper/coreProgram/barebones/pong-ws/src/objects'.
+======== Module name 'react/jsx-runtime' was not resolved. ========
+======== Resolving module './Coordinates.js' from '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Camera.ts'. ========
+Resolution for module './Coordinates.js' was found in cache from location '/home/cooper/coreProgram/barebones/pong-ws/src/objects'.
+======== Module name './Coordinates.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Coordinates.ts'. ========
+======== Resolving module './GameObject.js' from '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Camera.ts'. ========
+Resolution for module './GameObject.js' was found in cache from location '/home/cooper/coreProgram/barebones/pong-ws/src/objects'.
+======== Module name './GameObject.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/src/objects/GameObject.ts'. ========
+======== Resolving module 'react/jsx-runtime' from '/home/cooper/coreProgram/barebones/pong-ws/src/game/pong.ts'. ========
+Module resolution kind is not specified, using 'Classic'.
+Resolution for module 'react/jsx-runtime' was found in cache from location '/home/cooper/coreProgram/barebones/pong-ws/src'.
+======== Module name 'react/jsx-runtime' was not resolved. ========
+======== Resolving module '../objects/Coordinates.js' from '/home/cooper/coreProgram/barebones/pong-ws/src/game/pong.ts'. ========
+Module resolution kind is not specified, using 'Classic'.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Coordinates.js.ts' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Coordinates.js.tsx' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Coordinates.js.d.ts' does not exist.
+File name '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Coordinates.js' has a '.js' extension - stripping it.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Coordinates.ts' exist - use it as a name resolution result.
+======== Module name '../objects/Coordinates.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Coordinates.ts'. ========
+======== Resolving module '../objects/GameObject.js' from '/home/cooper/coreProgram/barebones/pong-ws/src/game/pong.ts'. ========
+Module resolution kind is not specified, using 'Classic'.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/GameObject.js.ts' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/GameObject.js.tsx' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/GameObject.js.d.ts' does not exist.
+File name '/home/cooper/coreProgram/barebones/pong-ws/src/objects/GameObject.js' has a '.js' extension - stripping it.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/GameObject.ts' exist - use it as a name resolution result.
+======== Module name '../objects/GameObject.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/src/objects/GameObject.ts'. ========
+======== Resolving module '../objects/Sprite.js' from '/home/cooper/coreProgram/barebones/pong-ws/src/game/pong.ts'. ========
+Module resolution kind is not specified, using 'Classic'.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Sprite.js.ts' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Sprite.js.tsx' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Sprite.js.d.ts' does not exist.
+File name '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Sprite.js' has a '.js' extension - stripping it.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Sprite.ts' exist - use it as a name resolution result.
+======== Module name '../objects/Sprite.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Sprite.ts'. ========
+======== Resolving module '../objects/Glow.js' from '/home/cooper/coreProgram/barebones/pong-ws/src/game/pong.ts'. ========
+Module resolution kind is not specified, using 'Classic'.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Glow.js.ts' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Glow.js.tsx' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Glow.js.d.ts' does not exist.
+File name '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Glow.js' has a '.js' extension - stripping it.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Glow.ts' exist - use it as a name resolution result.
+======== Module name '../objects/Glow.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Glow.ts'. ========
+======== Resolving module '../objects/Blendmodes.js' from '/home/cooper/coreProgram/barebones/pong-ws/src/game/pong.ts'. ========
+Module resolution kind is not specified, using 'Classic'.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Blendmodes.js.ts' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Blendmodes.js.tsx' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Blendmodes.js.d.ts' does not exist.
+File name '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Blendmodes.js' has a '.js' extension - stripping it.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Blendmodes.ts' exist - use it as a name resolution result.
+======== Module name '../objects/Blendmodes.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Blendmodes.ts'. ========
+======== Resolving module '../objects/Camera.js' from '/home/cooper/coreProgram/barebones/pong-ws/src/game/pong.ts'. ========
+Module resolution kind is not specified, using 'Classic'.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Camera.js.ts' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Camera.js.tsx' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Camera.js.d.ts' does not exist.
+File name '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Camera.js' has a '.js' extension - stripping it.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Camera.ts' exist - use it as a name resolution result.
+======== Module name '../objects/Camera.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Camera.ts'. ========
+======== Resolving module '../objects/Label.js' from '/home/cooper/coreProgram/barebones/pong-ws/src/game/pong.ts'. ========
+Module resolution kind is not specified, using 'Classic'.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Label.js.ts' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Label.js.tsx' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Label.js.d.ts' does not exist.
+File name '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Label.js' has a '.js' extension - stripping it.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Label.ts' exist - use it as a name resolution result.
+======== Module name '../objects/Label.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Label.ts'. ========
+======== Resolving module '../objects/Hitbox.js' from '/home/cooper/coreProgram/barebones/pong-ws/src/game/pong.ts'. ========
+Module resolution kind is not specified, using 'Classic'.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Hitbox.js.ts' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Hitbox.js.tsx' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Hitbox.js.d.ts' does not exist.
+File name '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Hitbox.js' has a '.js' extension - stripping it.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Hitbox.ts' exist - use it as a name resolution result.
+======== Module name '../objects/Hitbox.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Hitbox.ts'. ========
+======== Resolving module './ball.js' from '/home/cooper/coreProgram/barebones/pong-ws/src/game/pong.ts'. ========
+Module resolution kind is not specified, using 'Classic'.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/game/ball.js.ts' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/game/ball.js.tsx' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/game/ball.js.d.ts' does not exist.
+File name '/home/cooper/coreProgram/barebones/pong-ws/src/game/ball.js' has a '.js' extension - stripping it.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/game/ball.ts' exist - use it as a name resolution result.
+======== Module name './ball.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/src/game/ball.ts'. ========
+======== Resolving module '../objects/Viewport.js' from '/home/cooper/coreProgram/barebones/pong-ws/src/game/pong.ts'. ========
+Module resolution kind is not specified, using 'Classic'.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Viewport.js.ts' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Viewport.js.tsx' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Viewport.js.d.ts' does not exist.
+File name '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Viewport.js' has a '.js' extension - stripping it.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Viewport.ts' exist - use it as a name resolution result.
+======== Module name '../objects/Viewport.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Viewport.ts'. ========
+======== Resolving module './GameWorld.js' from '/home/cooper/coreProgram/barebones/pong-ws/src/game/pong.ts'. ========
+Module resolution kind is not specified, using 'Classic'.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/game/GameWorld.js.ts' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/game/GameWorld.js.tsx' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/game/GameWorld.js.d.ts' does not exist.
+File name '/home/cooper/coreProgram/barebones/pong-ws/src/game/GameWorld.js' has a '.js' extension - stripping it.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/game/GameWorld.ts' exist - use it as a name resolution result.
+======== Module name './GameWorld.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/src/game/GameWorld.ts'. ========
+======== Resolving module './Player.js' from '/home/cooper/coreProgram/barebones/pong-ws/src/game/pong.ts'. ========
+Module resolution kind is not specified, using 'Classic'.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/game/Player.js.ts' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/game/Player.js.tsx' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/game/Player.js.d.ts' does not exist.
+File name '/home/cooper/coreProgram/barebones/pong-ws/src/game/Player.js' has a '.js' extension - stripping it.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/game/Player.ts' exist - use it as a name resolution result.
+======== Module name './Player.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/src/game/Player.ts'. ========
+======== Resolving module '../objects/ImageObject.js' from '/home/cooper/coreProgram/barebones/pong-ws/src/game/pong.ts'. ========
+Module resolution kind is not specified, using 'Classic'.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/ImageObject.js.ts' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/ImageObject.js.tsx' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/ImageObject.js.d.ts' does not exist.
+File name '/home/cooper/coreProgram/barebones/pong-ws/src/objects/ImageObject.js' has a '.js' extension - stripping it.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/ImageObject.ts' exist - use it as a name resolution result.
+======== Module name '../objects/ImageObject.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/src/objects/ImageObject.ts'. ========
+======== Resolving module '../utils/calculations.js' from '/home/cooper/coreProgram/barebones/pong-ws/src/game/pong.ts'. ========
+Module resolution kind is not specified, using 'Classic'.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/utils/calculations.js.ts' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/utils/calculations.js.tsx' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/utils/calculations.js.d.ts' does not exist.
+File name '/home/cooper/coreProgram/barebones/pong-ws/src/utils/calculations.js' has a '.js' extension - stripping it.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/utils/calculations.ts' exist - use it as a name resolution result.
+======== Module name '../utils/calculations.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/src/utils/calculations.ts'. ========
+======== Resolving module '../utils/indexing.js' from '/home/cooper/coreProgram/barebones/pong-ws/src/game/pong.ts'. ========
+Module resolution kind is not specified, using 'Classic'.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/utils/indexing.js.ts' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/utils/indexing.js.tsx' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/utils/indexing.js.d.ts' does not exist.
+File name '/home/cooper/coreProgram/barebones/pong-ws/src/utils/indexing.js' has a '.js' extension - stripping it.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/utils/indexing.ts' exist - use it as a name resolution result.
+======== Module name '../utils/indexing.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/src/utils/indexing.ts'. ========
+======== Resolving module 'react/jsx-runtime' from '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Blendmodes.ts'. ========
+Resolution for module 'react/jsx-runtime' was found in cache from location '/home/cooper/coreProgram/barebones/pong-ws/src/objects'.
+======== Module name 'react/jsx-runtime' was not resolved. ========
+======== Resolving module 'react/jsx-runtime' from '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Label.ts'. ========
+Resolution for module 'react/jsx-runtime' was found in cache from location '/home/cooper/coreProgram/barebones/pong-ws/src/objects'.
+======== Module name 'react/jsx-runtime' was not resolved. ========
+======== Resolving module './Coordinates.js' from '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Label.ts'. ========
+Resolution for module './Coordinates.js' was found in cache from location '/home/cooper/coreProgram/barebones/pong-ws/src/objects'.
+======== Module name './Coordinates.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Coordinates.ts'. ========
+======== Resolving module './GameObject.js' from '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Label.ts'. ========
+Resolution for module './GameObject.js' was found in cache from location '/home/cooper/coreProgram/barebones/pong-ws/src/objects'.
+======== Module name './GameObject.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/src/objects/GameObject.ts'. ========
+======== Resolving module '../game/pong.js' from '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Label.ts'. ========
+Resolution for module '../game/pong.js' was found in cache from location '/home/cooper/coreProgram/barebones/pong-ws/src/objects'.
+======== Module name '../game/pong.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/src/game/pong.ts'. ========
+======== Resolving module './Sprite.js' from '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Label.ts'. ========
+Resolution for module './Sprite.js' was found in cache from location '/home/cooper/coreProgram/barebones/pong-ws/src/objects'.
+======== Module name './Sprite.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Sprite.ts'. ========
+======== Resolving module './Viewport.js' from '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Label.ts'. ========
+Resolution for module './Viewport.js' was found in cache from location '/home/cooper/coreProgram/barebones/pong-ws/src/objects'.
+======== Module name './Viewport.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Viewport.ts'. ========
+======== Resolving module 'react/jsx-runtime' from '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Hitbox.ts'. ========
+Resolution for module 'react/jsx-runtime' was found in cache from location '/home/cooper/coreProgram/barebones/pong-ws/src/objects'.
+======== Module name 'react/jsx-runtime' was not resolved. ========
+======== Resolving module './Coordinates.js' from '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Hitbox.ts'. ========
+Resolution for module './Coordinates.js' was found in cache from location '/home/cooper/coreProgram/barebones/pong-ws/src/objects'.
+======== Module name './Coordinates.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Coordinates.ts'. ========
+======== Resolving module './Component.js' from '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Hitbox.ts'. ========
+Resolution for module './Component.js' was found in cache from location '/home/cooper/coreProgram/barebones/pong-ws/src/objects'.
+======== Module name './Component.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Component.ts'. ========
+======== Resolving module './Viewport.js' from '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Hitbox.ts'. ========
+Resolution for module './Viewport.js' was found in cache from location '/home/cooper/coreProgram/barebones/pong-ws/src/objects'.
+======== Module name './Viewport.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Viewport.ts'. ========
+======== Resolving module './GameObject.js' from '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Hitbox.ts'. ========
+Resolution for module './GameObject.js' was found in cache from location '/home/cooper/coreProgram/barebones/pong-ws/src/objects'.
+======== Module name './GameObject.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/src/objects/GameObject.ts'. ========
+======== Resolving module 'react/jsx-runtime' from '/home/cooper/coreProgram/barebones/pong-ws/src/game/ball.ts'. ========
+Resolution for module 'react/jsx-runtime' was found in cache from location '/home/cooper/coreProgram/barebones/pong-ws/src/game'.
+======== Module name 'react/jsx-runtime' was not resolved. ========
+======== Resolving module '../objects/Coordinates.js' from '/home/cooper/coreProgram/barebones/pong-ws/src/game/ball.ts'. ========
+Resolution for module '../objects/Coordinates.js' was found in cache from location '/home/cooper/coreProgram/barebones/pong-ws/src/game'.
+======== Module name '../objects/Coordinates.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Coordinates.ts'. ========
+======== Resolving module '../objects/GameObject.js' from '/home/cooper/coreProgram/barebones/pong-ws/src/game/ball.ts'. ========
+Resolution for module '../objects/GameObject.js' was found in cache from location '/home/cooper/coreProgram/barebones/pong-ws/src/game'.
+======== Module name '../objects/GameObject.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/src/objects/GameObject.ts'. ========
+======== Resolving module '../objects/Sprite.js' from '/home/cooper/coreProgram/barebones/pong-ws/src/game/ball.ts'. ========
+Resolution for module '../objects/Sprite.js' was found in cache from location '/home/cooper/coreProgram/barebones/pong-ws/src/game'.
+======== Module name '../objects/Sprite.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Sprite.ts'. ========
+======== Resolving module '../objects/Hitbox.js' from '/home/cooper/coreProgram/barebones/pong-ws/src/game/ball.ts'. ========
+Resolution for module '../objects/Hitbox.js' was found in cache from location '/home/cooper/coreProgram/barebones/pong-ws/src/game'.
+======== Module name '../objects/Hitbox.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Hitbox.ts'. ========
+======== Resolving module '../objects/Glow.js' from '/home/cooper/coreProgram/barebones/pong-ws/src/game/ball.ts'. ========
+Resolution for module '../objects/Glow.js' was found in cache from location '/home/cooper/coreProgram/barebones/pong-ws/src/game'.
+======== Module name '../objects/Glow.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Glow.ts'. ========
+======== Resolving module '../objects/Blendmodes.js' from '/home/cooper/coreProgram/barebones/pong-ws/src/game/ball.ts'. ========
+Resolution for module '../objects/Blendmodes.js' was found in cache from location '/home/cooper/coreProgram/barebones/pong-ws/src/game'.
+======== Module name '../objects/Blendmodes.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Blendmodes.ts'. ========
+======== Resolving module './pong.js' from '/home/cooper/coreProgram/barebones/pong-ws/src/game/ball.ts'. ========
+Module resolution kind is not specified, using 'Classic'.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/game/pong.js.ts' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/game/pong.js.tsx' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/game/pong.js.d.ts' does not exist.
+File name '/home/cooper/coreProgram/barebones/pong-ws/src/game/pong.js' has a '.js' extension - stripping it.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/game/pong.ts' exist - use it as a name resolution result.
+======== Module name './pong.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/src/game/pong.ts'. ========
+======== Resolving module '../objects/Timer.js' from '/home/cooper/coreProgram/barebones/pong-ws/src/game/ball.ts'. ========
+Module resolution kind is not specified, using 'Classic'.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Timer.js.ts' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Timer.js.tsx' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Timer.js.d.ts' does not exist.
+File name '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Timer.js' has a '.js' extension - stripping it.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Timer.ts' exist - use it as a name resolution result.
+======== Module name '../objects/Timer.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Timer.ts'. ========
+======== Resolving module 'react/jsx-runtime' from '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Timer.ts'. ========
+Resolution for module 'react/jsx-runtime' was found in cache from location '/home/cooper/coreProgram/barebones/pong-ws/src/objects'.
+======== Module name 'react/jsx-runtime' was not resolved. ========
+======== Resolving module 'react/jsx-runtime' from '/home/cooper/coreProgram/barebones/pong-ws/src/game/GameWorld.ts'. ========
+Resolution for module 'react/jsx-runtime' was found in cache from location '/home/cooper/coreProgram/barebones/pong-ws/src/game'.
+======== Module name 'react/jsx-runtime' was not resolved. ========
+======== Resolving module '../objects/Coordinates.js' from '/home/cooper/coreProgram/barebones/pong-ws/src/game/GameWorld.ts'. ========
+Resolution for module '../objects/Coordinates.js' was found in cache from location '/home/cooper/coreProgram/barebones/pong-ws/src/game'.
+======== Module name '../objects/Coordinates.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Coordinates.ts'. ========
+======== Resolving module '../objects/GameObject.js' from '/home/cooper/coreProgram/barebones/pong-ws/src/game/GameWorld.ts'. ========
+Resolution for module '../objects/GameObject.js' was found in cache from location '/home/cooper/coreProgram/barebones/pong-ws/src/game'.
+======== Module name '../objects/GameObject.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/src/objects/GameObject.ts'. ========
+======== Resolving module '../objects/Camera.js' from '/home/cooper/coreProgram/barebones/pong-ws/src/game/GameWorld.ts'. ========
+Resolution for module '../objects/Camera.js' was found in cache from location '/home/cooper/coreProgram/barebones/pong-ws/src/game'.
+======== Module name '../objects/Camera.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Camera.ts'. ========
+======== Resolving module '../objects/Viewport.js' from '/home/cooper/coreProgram/barebones/pong-ws/src/game/GameWorld.ts'. ========
+Resolution for module '../objects/Viewport.js' was found in cache from location '/home/cooper/coreProgram/barebones/pong-ws/src/game'.
+======== Module name '../objects/Viewport.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Viewport.ts'. ========
+======== Resolving module '../objects/Hitbox.js' from '/home/cooper/coreProgram/barebones/pong-ws/src/game/GameWorld.ts'. ========
+Resolution for module '../objects/Hitbox.js' was found in cache from location '/home/cooper/coreProgram/barebones/pong-ws/src/game'.
+======== Module name '../objects/Hitbox.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Hitbox.ts'. ========
+======== Resolving module '../objects/Timer.js' from '/home/cooper/coreProgram/barebones/pong-ws/src/game/GameWorld.ts'. ========
+Resolution for module '../objects/Timer.js' was found in cache from location '/home/cooper/coreProgram/barebones/pong-ws/src/game'.
+======== Module name '../objects/Timer.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Timer.ts'. ========
+======== Resolving module 'react/jsx-runtime' from '/home/cooper/coreProgram/barebones/pong-ws/src/game/Player.ts'. ========
+Resolution for module 'react/jsx-runtime' was found in cache from location '/home/cooper/coreProgram/barebones/pong-ws/src/game'.
+======== Module name 'react/jsx-runtime' was not resolved. ========
+======== Resolving module 'react/jsx-runtime' from '/home/cooper/coreProgram/barebones/pong-ws/src/objects/ImageObject.ts'. ========
+Resolution for module 'react/jsx-runtime' was found in cache from location '/home/cooper/coreProgram/barebones/pong-ws/src/objects'.
+======== Module name 'react/jsx-runtime' was not resolved. ========
+======== Resolving module './Component.js' from '/home/cooper/coreProgram/barebones/pong-ws/src/objects/ImageObject.ts'. ========
+Resolution for module './Component.js' was found in cache from location '/home/cooper/coreProgram/barebones/pong-ws/src/objects'.
+======== Module name './Component.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Component.ts'. ========
+======== Resolving module './Coordinates.js' from '/home/cooper/coreProgram/barebones/pong-ws/src/objects/ImageObject.ts'. ========
+Resolution for module './Coordinates.js' was found in cache from location '/home/cooper/coreProgram/barebones/pong-ws/src/objects'.
+======== Module name './Coordinates.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Coordinates.ts'. ========
+======== Resolving module './GameObject.js' from '/home/cooper/coreProgram/barebones/pong-ws/src/objects/ImageObject.ts'. ========
+Resolution for module './GameObject.js' was found in cache from location '/home/cooper/coreProgram/barebones/pong-ws/src/objects'.
+======== Module name './GameObject.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/src/objects/GameObject.ts'. ========
+======== Resolving module './Sprite.js' from '/home/cooper/coreProgram/barebones/pong-ws/src/objects/ImageObject.ts'. ========
+Resolution for module './Sprite.js' was found in cache from location '/home/cooper/coreProgram/barebones/pong-ws/src/objects'.
+======== Module name './Sprite.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/src/objects/Sprite.ts'. ========
+======== Resolving module 'react/jsx-runtime' from '/home/cooper/coreProgram/barebones/pong-ws/src/utils/calculations.ts'. ========
+Module resolution kind is not specified, using 'Classic'.
+Resolution for module 'react/jsx-runtime' was found in cache from location '/home/cooper/coreProgram/barebones/pong-ws/src'.
+======== Module name 'react/jsx-runtime' was not resolved. ========
+======== Resolving module 'react/jsx-runtime' from '/home/cooper/coreProgram/barebones/pong-ws/src/utils/indexing.ts'. ========
+Resolution for module 'react/jsx-runtime' was found in cache from location '/home/cooper/coreProgram/barebones/pong-ws/src/utils'.
+======== Module name 'react/jsx-runtime' was not resolved. ========
+======== Resolving module 'react/jsx-runtime' from '/home/cooper/coreProgram/barebones/pong-ws/src/game/clientScripts.ts'. ========
+Resolution for module 'react/jsx-runtime' was found in cache from location '/home/cooper/coreProgram/barebones/pong-ws/src/game'.
+======== Module name 'react/jsx-runtime' was not resolved. ========
+======== Resolving module 'react/jsx-runtime' from '/home/cooper/coreProgram/barebones/pong-ws/src/server.ts'. ========
+Resolution for module 'react/jsx-runtime' was found in cache from location '/home/cooper/coreProgram/barebones/pong-ws/src'.
+======== Module name 'react/jsx-runtime' was not resolved. ========
+======== Resolving module 'fastify' from '/home/cooper/coreProgram/barebones/pong-ws/src/server.ts'. ========
+Module resolution kind is not specified, using 'Classic'.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/fastify.ts' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/fastify.tsx' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/fastify.d.ts' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/fastify.ts' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/fastify.tsx' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/fastify.d.ts' does not exist.
+File '/home/cooper/coreProgram/barebones/fastify.ts' does not exist.
+File '/home/cooper/coreProgram/barebones/fastify.tsx' does not exist.
+File '/home/cooper/coreProgram/barebones/fastify.d.ts' does not exist.
+File '/home/cooper/coreProgram/fastify.ts' does not exist.
+File '/home/cooper/coreProgram/fastify.tsx' does not exist.
+File '/home/cooper/coreProgram/fastify.d.ts' does not exist.
+File '/home/cooper/fastify.ts' does not exist.
+File '/home/cooper/fastify.tsx' does not exist.
+File '/home/cooper/fastify.d.ts' does not exist.
+File '/home/fastify.ts' does not exist.
+File '/home/fastify.tsx' does not exist.
+File '/home/fastify.d.ts' does not exist.
+File '/fastify.ts' does not exist.
+File '/fastify.tsx' does not exist.
+File '/fastify.d.ts' does not exist.
+Directory '/home/cooper/coreProgram/barebones/pong-ws/src/node_modules' does not exist, skipping all lookups in it.
+File '/home/cooper/coreProgram/barebones/pong-ws/node_modules/@types/fastify.d.ts' does not exist.
+Directory '/home/cooper/coreProgram/barebones/node_modules' does not exist, skipping all lookups in it.
+Directory '/home/cooper/coreProgram/node_modules' does not exist, skipping all lookups in it.
+Directory '/home/cooper/node_modules' does not exist, skipping all lookups in it.
+Directory '/home/node_modules' does not exist, skipping all lookups in it.
+Directory '/node_modules' does not exist, skipping all lookups in it.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/fastify.js' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/fastify.jsx' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/fastify.js' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/fastify.jsx' does not exist.
+File '/home/cooper/coreProgram/barebones/fastify.js' does not exist.
+File '/home/cooper/coreProgram/barebones/fastify.jsx' does not exist.
+File '/home/cooper/coreProgram/fastify.js' does not exist.
+File '/home/cooper/coreProgram/fastify.jsx' does not exist.
+File '/home/cooper/fastify.js' does not exist.
+File '/home/cooper/fastify.jsx' does not exist.
+File '/home/fastify.js' does not exist.
+File '/home/fastify.jsx' does not exist.
+File '/fastify.js' does not exist.
+File '/fastify.jsx' does not exist.
+======== Module name 'fastify' was not resolved. ========
+======== Resolving module '@fastify/websocket' from '/home/cooper/coreProgram/barebones/pong-ws/src/server.ts'. ========
+Module resolution kind is not specified, using 'Classic'.
+Directory '/home/cooper/coreProgram/barebones/pong-ws/src/node_modules' does not exist, skipping all lookups in it.
+Scoped package detected, looking in 'fastify__websocket'
+Scoped package detected, looking in 'fastify__websocket'
+File '/home/cooper/coreProgram/barebones/pong-ws/node_modules/@types/fastify__websocket.d.ts' does not exist.
+Directory '/home/cooper/coreProgram/barebones/node_modules' does not exist, skipping all lookups in it.
+Scoped package detected, looking in 'fastify__websocket'
+Directory '/home/cooper/coreProgram/node_modules' does not exist, skipping all lookups in it.
+Scoped package detected, looking in 'fastify__websocket'
+Directory '/home/cooper/node_modules' does not exist, skipping all lookups in it.
+Scoped package detected, looking in 'fastify__websocket'
+Directory '/home/node_modules' does not exist, skipping all lookups in it.
+Scoped package detected, looking in 'fastify__websocket'
+Directory '/node_modules' does not exist, skipping all lookups in it.
+Scoped package detected, looking in 'fastify__websocket'
+======== Module name '@fastify/websocket' was not resolved. ========
+======== Resolving module '@fastify/static' from '/home/cooper/coreProgram/barebones/pong-ws/src/server.ts'. ========
+Module resolution kind is not specified, using 'Classic'.
+Directory '/home/cooper/coreProgram/barebones/pong-ws/src/node_modules' does not exist, skipping all lookups in it.
+Scoped package detected, looking in 'fastify__static'
+Scoped package detected, looking in 'fastify__static'
+File '/home/cooper/coreProgram/barebones/pong-ws/node_modules/@types/fastify__static.d.ts' does not exist.
+Directory '/home/cooper/coreProgram/barebones/node_modules' does not exist, skipping all lookups in it.
+Scoped package detected, looking in 'fastify__static'
+Directory '/home/cooper/coreProgram/node_modules' does not exist, skipping all lookups in it.
+Scoped package detected, looking in 'fastify__static'
+Directory '/home/cooper/node_modules' does not exist, skipping all lookups in it.
+Scoped package detected, looking in 'fastify__static'
+Directory '/home/node_modules' does not exist, skipping all lookups in it.
+Scoped package detected, looking in 'fastify__static'
+Directory '/node_modules' does not exist, skipping all lookups in it.
+Scoped package detected, looking in 'fastify__static'
+======== Module name '@fastify/static' was not resolved. ========
+======== Resolving module 'path' from '/home/cooper/coreProgram/barebones/pong-ws/src/server.ts'. ========
+Module resolution kind is not specified, using 'Classic'.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/path.ts' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/path.tsx' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/path.d.ts' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/path.ts' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/path.tsx' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/path.d.ts' does not exist.
+File '/home/cooper/coreProgram/barebones/path.ts' does not exist.
+File '/home/cooper/coreProgram/barebones/path.tsx' does not exist.
+File '/home/cooper/coreProgram/barebones/path.d.ts' does not exist.
+File '/home/cooper/coreProgram/path.ts' does not exist.
+File '/home/cooper/coreProgram/path.tsx' does not exist.
+File '/home/cooper/coreProgram/path.d.ts' does not exist.
+File '/home/cooper/path.ts' does not exist.
+File '/home/cooper/path.tsx' does not exist.
+File '/home/cooper/path.d.ts' does not exist.
+File '/home/path.ts' does not exist.
+File '/home/path.tsx' does not exist.
+File '/home/path.d.ts' does not exist.
+File '/path.ts' does not exist.
+File '/path.tsx' does not exist.
+File '/path.d.ts' does not exist.
+Directory '/home/cooper/coreProgram/barebones/pong-ws/src/node_modules' does not exist, skipping all lookups in it.
+File '/home/cooper/coreProgram/barebones/pong-ws/node_modules/@types/path.d.ts' does not exist.
+Directory '/home/cooper/coreProgram/barebones/node_modules' does not exist, skipping all lookups in it.
+Directory '/home/cooper/coreProgram/node_modules' does not exist, skipping all lookups in it.
+Directory '/home/cooper/node_modules' does not exist, skipping all lookups in it.
+Directory '/home/node_modules' does not exist, skipping all lookups in it.
+Directory '/node_modules' does not exist, skipping all lookups in it.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/path.js' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/path.jsx' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/path.js' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/path.jsx' does not exist.
+File '/home/cooper/coreProgram/barebones/path.js' does not exist.
+File '/home/cooper/coreProgram/barebones/path.jsx' does not exist.
+File '/home/cooper/coreProgram/path.js' does not exist.
+File '/home/cooper/coreProgram/path.jsx' does not exist.
+File '/home/cooper/path.js' does not exist.
+File '/home/cooper/path.jsx' does not exist.
+File '/home/path.js' does not exist.
+File '/home/path.jsx' does not exist.
+File '/path.js' does not exist.
+File '/path.jsx' does not exist.
+======== Module name 'path' was not resolved. ========
+======== Resolving module '../dist/game/pong.js' from '/home/cooper/coreProgram/barebones/pong-ws/src/server.ts'. ========
+Module resolution kind is not specified, using 'Classic'.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/game/pong.js.ts' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/game/pong.js.tsx' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/game/pong.js.d.ts' does not exist.
+File name '/home/cooper/coreProgram/barebones/pong-ws/dist/game/pong.js' has a '.js' extension - stripping it.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/game/pong.ts' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/game/pong.tsx' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/game/pong.d.ts' exist - use it as a name resolution result.
+======== Module name '../dist/game/pong.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/dist/game/pong.d.ts'. ========
+======== Resolving module 'fs' from '/home/cooper/coreProgram/barebones/pong-ws/src/server.ts'. ========
+Module resolution kind is not specified, using 'Classic'.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/fs.ts' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/fs.tsx' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/fs.d.ts' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/fs.ts' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/fs.tsx' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/fs.d.ts' does not exist.
+File '/home/cooper/coreProgram/barebones/fs.ts' does not exist.
+File '/home/cooper/coreProgram/barebones/fs.tsx' does not exist.
+File '/home/cooper/coreProgram/barebones/fs.d.ts' does not exist.
+File '/home/cooper/coreProgram/fs.ts' does not exist.
+File '/home/cooper/coreProgram/fs.tsx' does not exist.
+File '/home/cooper/coreProgram/fs.d.ts' does not exist.
+File '/home/cooper/fs.ts' does not exist.
+File '/home/cooper/fs.tsx' does not exist.
+File '/home/cooper/fs.d.ts' does not exist.
+File '/home/fs.ts' does not exist.
+File '/home/fs.tsx' does not exist.
+File '/home/fs.d.ts' does not exist.
+File '/fs.ts' does not exist.
+File '/fs.tsx' does not exist.
+File '/fs.d.ts' does not exist.
+Directory '/home/cooper/coreProgram/barebones/pong-ws/src/node_modules' does not exist, skipping all lookups in it.
+File '/home/cooper/coreProgram/barebones/pong-ws/node_modules/@types/fs.d.ts' does not exist.
+Directory '/home/cooper/coreProgram/barebones/node_modules' does not exist, skipping all lookups in it.
+Directory '/home/cooper/coreProgram/node_modules' does not exist, skipping all lookups in it.
+Directory '/home/cooper/node_modules' does not exist, skipping all lookups in it.
+Directory '/home/node_modules' does not exist, skipping all lookups in it.
+Directory '/node_modules' does not exist, skipping all lookups in it.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/fs.js' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/src/fs.jsx' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/fs.js' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/fs.jsx' does not exist.
+File '/home/cooper/coreProgram/barebones/fs.js' does not exist.
+File '/home/cooper/coreProgram/barebones/fs.jsx' does not exist.
+File '/home/cooper/coreProgram/fs.js' does not exist.
+File '/home/cooper/coreProgram/fs.jsx' does not exist.
+File '/home/cooper/fs.js' does not exist.
+File '/home/cooper/fs.jsx' does not exist.
+File '/home/fs.js' does not exist.
+File '/home/fs.jsx' does not exist.
+File '/fs.js' does not exist.
+File '/fs.jsx' does not exist.
+======== Module name 'fs' was not resolved. ========
+======== Resolving module '../objects/Coordinates.js' from '/home/cooper/coreProgram/barebones/pong-ws/dist/game/pong.d.ts'. ========
+Module resolution kind is not specified, using 'Classic'.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Coordinates.js.ts' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Coordinates.js.tsx' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Coordinates.js.d.ts' does not exist.
+File name '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Coordinates.js' has a '.js' extension - stripping it.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Coordinates.ts' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Coordinates.tsx' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Coordinates.d.ts' exist - use it as a name resolution result.
+======== Module name '../objects/Coordinates.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Coordinates.d.ts'. ========
+======== Resolving module '../objects/GameObject.js' from '/home/cooper/coreProgram/barebones/pong-ws/dist/game/pong.d.ts'. ========
+Module resolution kind is not specified, using 'Classic'.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/GameObject.js.ts' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/GameObject.js.tsx' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/GameObject.js.d.ts' does not exist.
+File name '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/GameObject.js' has a '.js' extension - stripping it.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/GameObject.ts' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/GameObject.tsx' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/GameObject.d.ts' exist - use it as a name resolution result.
+======== Module name '../objects/GameObject.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/GameObject.d.ts'. ========
+======== Resolving module '../objects/Sprite.js' from '/home/cooper/coreProgram/barebones/pong-ws/dist/game/pong.d.ts'. ========
+Module resolution kind is not specified, using 'Classic'.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Sprite.js.ts' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Sprite.js.tsx' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Sprite.js.d.ts' does not exist.
+File name '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Sprite.js' has a '.js' extension - stripping it.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Sprite.ts' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Sprite.tsx' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Sprite.d.ts' exist - use it as a name resolution result.
+======== Module name '../objects/Sprite.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Sprite.d.ts'. ========
+======== Resolving module '../objects/Label.js' from '/home/cooper/coreProgram/barebones/pong-ws/dist/game/pong.d.ts'. ========
+Module resolution kind is not specified, using 'Classic'.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Label.js.ts' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Label.js.tsx' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Label.js.d.ts' does not exist.
+File name '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Label.js' has a '.js' extension - stripping it.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Label.ts' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Label.tsx' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Label.d.ts' exist - use it as a name resolution result.
+======== Module name '../objects/Label.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Label.d.ts'. ========
+======== Resolving module './GameWorld.js' from '/home/cooper/coreProgram/barebones/pong-ws/dist/game/pong.d.ts'. ========
+Module resolution kind is not specified, using 'Classic'.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/game/GameWorld.js.ts' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/game/GameWorld.js.tsx' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/game/GameWorld.js.d.ts' does not exist.
+File name '/home/cooper/coreProgram/barebones/pong-ws/dist/game/GameWorld.js' has a '.js' extension - stripping it.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/game/GameWorld.ts' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/game/GameWorld.tsx' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/game/GameWorld.d.ts' exist - use it as a name resolution result.
+======== Module name './GameWorld.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/dist/game/GameWorld.d.ts'. ========
+======== Resolving module './Player.js' from '/home/cooper/coreProgram/barebones/pong-ws/dist/game/pong.d.ts'. ========
+Module resolution kind is not specified, using 'Classic'.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/game/Player.js.ts' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/game/Player.js.tsx' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/game/Player.js.d.ts' does not exist.
+File name '/home/cooper/coreProgram/barebones/pong-ws/dist/game/Player.js' has a '.js' extension - stripping it.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/game/Player.ts' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/game/Player.tsx' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/game/Player.d.ts' exist - use it as a name resolution result.
+======== Module name './Player.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/dist/game/Player.d.ts'. ========
+======== Resolving module './Coordinates.js' from '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/GameObject.d.ts'. ========
+Module resolution kind is not specified, using 'Classic'.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Coordinates.js.ts' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Coordinates.js.tsx' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Coordinates.js.d.ts' does not exist.
+File name '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Coordinates.js' has a '.js' extension - stripping it.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Coordinates.ts' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Coordinates.tsx' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Coordinates.d.ts' exist - use it as a name resolution result.
+======== Module name './Coordinates.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Coordinates.d.ts'. ========
+======== Resolving module '../game/pong.js' from '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/GameObject.d.ts'. ========
+Module resolution kind is not specified, using 'Classic'.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/game/pong.js.ts' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/game/pong.js.tsx' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/game/pong.js.d.ts' does not exist.
+File name '/home/cooper/coreProgram/barebones/pong-ws/dist/game/pong.js' has a '.js' extension - stripping it.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/game/pong.ts' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/game/pong.tsx' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/game/pong.d.ts' exist - use it as a name resolution result.
+======== Module name '../game/pong.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/dist/game/pong.d.ts'. ========
+======== Resolving module './Viewport.js' from '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/GameObject.d.ts'. ========
+Module resolution kind is not specified, using 'Classic'.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Viewport.js.ts' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Viewport.js.tsx' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Viewport.js.d.ts' does not exist.
+File name '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Viewport.js' has a '.js' extension - stripping it.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Viewport.ts' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Viewport.tsx' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Viewport.d.ts' exist - use it as a name resolution result.
+======== Module name './Viewport.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Viewport.d.ts'. ========
+======== Resolving module './Component.js' from '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/GameObject.d.ts'. ========
+Module resolution kind is not specified, using 'Classic'.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Component.js.ts' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Component.js.tsx' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Component.js.d.ts' does not exist.
+File name '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Component.js' has a '.js' extension - stripping it.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Component.ts' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Component.tsx' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Component.d.ts' exist - use it as a name resolution result.
+======== Module name './Component.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Component.d.ts'. ========
+======== Resolving module './Camera.js' from '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Viewport.d.ts'. ========
+Module resolution kind is not specified, using 'Classic'.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Camera.js.ts' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Camera.js.tsx' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Camera.js.d.ts' does not exist.
+File name '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Camera.js' has a '.js' extension - stripping it.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Camera.ts' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Camera.tsx' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Camera.d.ts' exist - use it as a name resolution result.
+======== Module name './Camera.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Camera.d.ts'. ========
+======== Resolving module './Coordinates.js' from '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Viewport.d.ts'. ========
+Resolution for module './Coordinates.js' was found in cache from location '/home/cooper/coreProgram/barebones/pong-ws/dist/objects'.
+======== Module name './Coordinates.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Coordinates.d.ts'. ========
+======== Resolving module './Coordinates.js' from '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Camera.d.ts'. ========
+Resolution for module './Coordinates.js' was found in cache from location '/home/cooper/coreProgram/barebones/pong-ws/dist/objects'.
+======== Module name './Coordinates.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Coordinates.d.ts'. ========
+======== Resolving module './GameObject.js' from '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Camera.d.ts'. ========
+Module resolution kind is not specified, using 'Classic'.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/GameObject.js.ts' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/GameObject.js.tsx' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/GameObject.js.d.ts' does not exist.
+File name '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/GameObject.js' has a '.js' extension - stripping it.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/GameObject.ts' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/GameObject.tsx' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/GameObject.d.ts' exist - use it as a name resolution result.
+======== Module name './GameObject.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/GameObject.d.ts'. ========
+======== Resolving module './GameObject.js' from '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Component.d.ts'. ========
+Resolution for module './GameObject.js' was found in cache from location '/home/cooper/coreProgram/barebones/pong-ws/dist/objects'.
+======== Module name './GameObject.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/GameObject.d.ts'. ========
+======== Resolving module './Glow.js' from '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Sprite.d.ts'. ========
+Module resolution kind is not specified, using 'Classic'.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Glow.js.ts' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Glow.js.tsx' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Glow.js.d.ts' does not exist.
+File name '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Glow.js' has a '.js' extension - stripping it.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Glow.ts' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Glow.tsx' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Glow.d.ts' exist - use it as a name resolution result.
+======== Module name './Glow.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Glow.d.ts'. ========
+======== Resolving module './Component.js' from '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Sprite.d.ts'. ========
+Resolution for module './Component.js' was found in cache from location '/home/cooper/coreProgram/barebones/pong-ws/dist/objects'.
+======== Module name './Component.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Component.d.ts'. ========
+======== Resolving module './Viewport.js' from '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Sprite.d.ts'. ========
+Resolution for module './Viewport.js' was found in cache from location '/home/cooper/coreProgram/barebones/pong-ws/dist/objects'.
+======== Module name './Viewport.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Viewport.d.ts'. ========
+======== Resolving module './Camera.js' from '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Sprite.d.ts'. ========
+Resolution for module './Camera.js' was found in cache from location '/home/cooper/coreProgram/barebones/pong-ws/dist/objects'.
+======== Module name './Camera.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Camera.d.ts'. ========
+======== Resolving module './GameObject.js' from '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Label.d.ts'. ========
+Resolution for module './GameObject.js' was found in cache from location '/home/cooper/coreProgram/barebones/pong-ws/dist/objects'.
+======== Module name './GameObject.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/GameObject.d.ts'. ========
+======== Resolving module './Viewport.js' from '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Label.d.ts'. ========
+Resolution for module './Viewport.js' was found in cache from location '/home/cooper/coreProgram/barebones/pong-ws/dist/objects'.
+======== Module name './Viewport.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Viewport.d.ts'. ========
+======== Resolving module '../objects/Coordinates.js' from '/home/cooper/coreProgram/barebones/pong-ws/dist/game/GameWorld.d.ts'. ========
+Resolution for module '../objects/Coordinates.js' was found in cache from location '/home/cooper/coreProgram/barebones/pong-ws/dist/game'.
+======== Module name '../objects/Coordinates.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Coordinates.d.ts'. ========
+======== Resolving module '../objects/GameObject.js' from '/home/cooper/coreProgram/barebones/pong-ws/dist/game/GameWorld.d.ts'. ========
+Resolution for module '../objects/GameObject.js' was found in cache from location '/home/cooper/coreProgram/barebones/pong-ws/dist/game'.
+======== Module name '../objects/GameObject.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/GameObject.d.ts'. ========
+======== Resolving module '../objects/Camera.js' from '/home/cooper/coreProgram/barebones/pong-ws/dist/game/GameWorld.d.ts'. ========
+Module resolution kind is not specified, using 'Classic'.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Camera.js.ts' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Camera.js.tsx' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Camera.js.d.ts' does not exist.
+File name '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Camera.js' has a '.js' extension - stripping it.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Camera.ts' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Camera.tsx' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Camera.d.ts' exist - use it as a name resolution result.
+======== Module name '../objects/Camera.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Camera.d.ts'. ========
+======== Resolving module '../objects/Viewport.js' from '/home/cooper/coreProgram/barebones/pong-ws/dist/game/GameWorld.d.ts'. ========
+Module resolution kind is not specified, using 'Classic'.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Viewport.js.ts' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Viewport.js.tsx' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Viewport.js.d.ts' does not exist.
+File name '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Viewport.js' has a '.js' extension - stripping it.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Viewport.ts' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Viewport.tsx' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Viewport.d.ts' exist - use it as a name resolution result.
+======== Module name '../objects/Viewport.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Viewport.d.ts'. ========
+======== Resolving module '../objects/Timer.js' from '/home/cooper/coreProgram/barebones/pong-ws/dist/game/GameWorld.d.ts'. ========
+Module resolution kind is not specified, using 'Classic'.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Timer.js.ts' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Timer.js.tsx' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Timer.js.d.ts' does not exist.
+File name '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Timer.js' has a '.js' extension - stripping it.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Timer.ts' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Timer.tsx' does not exist.
+File '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Timer.d.ts' exist - use it as a name resolution result.
+======== Module name '../objects/Timer.js' was successfully resolved to '/home/cooper/coreProgram/barebones/pong-ws/dist/objects/Timer.d.ts'. ========
