@@ -4,6 +4,7 @@ import type { PongGame } from '../game/pong.js';
 import type { Viewport } from './Viewport.js'; 
 import { Component } from './Component.js';
 import { HitBox } from './Hitbox.js';
+import { clientScripts } from '../game/clientScripts.js';
 
 const RenderableMarker = Symbol("Renderable");
 
@@ -80,13 +81,7 @@ export class GameObject {
 	init() {
 	}
 
-	// setOnClientUpdate(id: string) {
-	// 	const script = clientScripts[id];
-	// 	if (script) {
-	// 		this.onClientUpdateId = id;
-	// 		this.onClientUpdate = script;
-	// 	} 
-	// }
+
 
 	updateToGame() {
 	}
@@ -150,9 +145,20 @@ export class GameObject {
 		}
 	}
 
+	setOnClientUpdate(id: string) {
+		const script = clientScripts[id];
+		if (script) {
+			this.onClientUpdateId = id;
+			this.onClientUpdate = script;
+		} 
+	}
+
 	clientUpdate() {
-		if (this.onClientUpdate)
-			this.clientUpdate();
+		if (this.onClientUpdate) {
+			this.onClientUpdate();
+		}
+		console.log(Object.entries(clientScripts));
+		console.log("calling " + this.id + " method " + this.onClientUpdate);
 	}
 
 	getWorldPosition(added:Vector2D = new Vector2D(0,0)): Point2D {
@@ -234,7 +240,7 @@ export class GameObject {
 			STATIC_zIndex: this.zIndex,
 			STATIC_children: this.children.map(child => child.id),
 			STATIC_components: this.componentToJSON(),
-			clientUpdate: this.clientUpdate
+			clientUpdate: this.onClientUpdateId
 		};
 
 		return exportCleanup(json, exportStatic);

@@ -31,6 +31,7 @@ export declare class GameObject {
     getComponents(): Component[];
     addChild(object: GameObject): void;
     update(): void;
+    setOnClientUpdate(id: string): void;
     clientUpdate(): void;
     getWorldPosition(added?: Vector2D): Point2D;
     getWorldScale(): Vector2D;

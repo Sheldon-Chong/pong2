@@ -2,6 +2,7 @@ import { Point2D, Vector2D } from './Coordinates.js';
 import { Sprite } from './Sprite.js';
 import { Component } from './Component.js';
 import { HitBox } from './Hitbox.js';
+import { clientScripts } from '../game/clientScripts.js';
 const RenderableMarker = Symbol("Renderable");
 function ownsProperty(obj, key) {
     return Object.prototype.hasOwnProperty.call(obj, key);
@@ -55,13 +56,6 @@ export class GameObject {
     isStatic = false;
     init() {
     }
-    // setOnClientUpdate(id: string) {
-    // 	const script = clientScripts[id];
-    // 	if (script) {
-    // 		this.onClientUpdateId = id;
-    // 		this.onClientUpdate = script;
-    // 	} 
-    // }
     updateToGame() {
     }
     components = new Map();
@@ -107,9 +101,19 @@ export class GameObject {
             child.update();
         }
     }
+    setOnClientUpdate(id) {
+        const script = clientScripts[id];
+        if (script) {
+            this.onClientUpdateId = id;
+            this.onClientUpdate = script;
+        }
+    }
     clientUpdate() {
-        if (this.onClientUpdate)
-            this.clientUpdate();
+        if (this.onClientUpdate) {
+            this.onClientUpdate();
+        }
+        console.log(Object.entries(clientScripts));
+        console.log("calling " + this.id + " method " + this.onClientUpdate);
     }
     getWorldPosition(added = new Vector2D(0, 0)) {
         if (!this.parent) {
@@ -180,7 +184,7 @@ export class GameObject {
             STATIC_zIndex: this.zIndex,
             STATIC_children: this.children.map(child => child.id),
             STATIC_components: this.componentToJSON(),
-            clientUpdate: this.clientUpdate
+            clientUpdate: this.onClientUpdateId
         };
         return exportCleanup(json, exportStatic);
     }

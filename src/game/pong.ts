@@ -399,7 +399,8 @@ export class PongGame {
 
 		// -- crowd --
 		for (let i = 0; i < 3; i++) {
-			this.world.addObject(new GameObject({
+
+			const object = new GameObject({
 				position: new Point2D(0, -230),
 				variables: {
 					offset: i * 15
@@ -421,8 +422,12 @@ export class PongGame {
 
 					// apply oscillation
 					this.position.y = oscillateValue(baseY, amplitude, frequency, this.variables["offset"]);
-				}
-			}));
+				},
+			})
+
+			object.setOnClientUpdate("moveCrowd");
+
+			this.world.addObject(object);
 		}
 
 

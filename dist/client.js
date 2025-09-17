@@ -10,6 +10,7 @@ import { Camera } from './objects/Camera.js';
 import { Label } from './objects/Label.js';
 import { Component } from './objects/Component.js';
 import { ImageObject } from './objects/ImageObject.js';
+import { clientScripts } from './game/clientScripts.js';
 const ws = new WebSocket("ws://localhost:3000/ws");
 function isArrowKey(e) {
     return e.key === "ArrowUp" || e.key === "ArrowDown";
@@ -130,6 +131,15 @@ function genericUpdate(obj, params, cache) {
                 genericUpdate(obj[key][index], item, cache[key][index]);
             });
         }
+        if (key === "clientUpdate" && obj.onClientUpdateId !== value) {
+            const script = clientScripts[value];
+            if (script) {
+                obj.onClientUpdateId = value;
+                obj.onClientUpdate = script;
+                console.log("updated " + obj.id + " to " + value);
+            }
+            continue;
+        }
         // -- update nested object types -- 
         else if (typeof value === "object" && value !== null) {
             obj[key] = obj[key] || {};
@@ -159,7 +169,6 @@ window.addEventListener("DOMContentLoaded", () => {
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         // -- RENDER OBJECTS --
         for (const clientObj of renderList) {
-            console.log(clientObj.constructor.name);
             clientObj.draw(viewport);
         }
         // - DEBUG VALUES --
@@ -188,7 +197,6 @@ window.addEventListener("DOMContentLoaded", () => {
         }
         else if (object.className === "imageObject") {
             clientObj = new ImageObject({ ...object, components: [] });
-            console.log(object);
         }
         else
             clientObj = new GameObject({ ...object, components: [] });
@@ -206,9 +214,6 @@ window.addEventListener("DOMContentLoaded", () => {
     function loop() {
         let client_objects = getObjects();
         let components = getComponents();
-        for (const [id, object] of gameObjectRegistry) {
-            object.clientUpdate();
-        }
         for (const component of components) {
             if (componentRegistry.has(component.id)) {
                 Object.assign(componentRegistry.get(component.id), component);
@@ -223,7 +228,7 @@ window.addEventListener("DOMContentLoaded", () => {
         }
         for (const object of client_objects) {
             const revivedObject = revive(object);
-            const id = revivedObject["id"];
+            const id = object["id"];
             // -- CHECK IF CLIENT OBJECT EXISTS --
             let clientObj = getObject(id);
             if (!clientObj) {
@@ -255,6 +260,11 @@ window.addEventListener("DOMContentLoaded", () => {
                     game.camera = revivedObject;
                     viewport.camera = revivedObject;
                 }
+            }
+        }
+        for (const [id, object] of gameObjectRegistry) {
+            if (typeof object.clientUpdate === 'function') {
+                object.clientUpdate();
             }
         }
         draw();
