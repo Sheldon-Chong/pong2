@@ -2,7 +2,7 @@
   "state": {
     "camera": {
       "position": {
-        "x": -175.47032096306887,
+        "x": -45.082000666143365,
         "y": 0,
         "className": "Point2D"
       }
@@ -51,11 +51,9 @@
       {
         "id": 2,
         "className": "imageObject",
-        "sprite": {
-          "id": 3,
-          "name": "sprite",
-          "imagePath": "./assets/skins/components/eyes.png"
-        },
+        "components": [
+          3
+        ],
         "zIndex": 0,
         "position": {
           "x": -255,
@@ -64,19 +62,14 @@
         "scaleFactor": {
           "x": 0.48,
           "y": 0.48
-        },
-        "components": [
-          3
-        ]
+        }
       },
       {
         "id": 3,
         "className": "imageObject",
-        "sprite": {
-          "id": 5,
-          "name": "sprite",
-          "imagePath": "./assets/skins/components/iris.png"
-        },
+        "components": [
+          5
+        ],
         "zIndex": 0,
         "position": {
           "x": -259,
@@ -85,10 +78,7 @@
         "scaleFactor": {
           "x": 0.48,
           "y": 0.48
-        },
-        "components": [
-          5
-        ]
+        }
       },
       {
         "name": "padel",
@@ -133,11 +123,9 @@
       {
         "id": 6,
         "className": "imageObject",
-        "sprite": {
-          "id": 9,
-          "name": "sprite",
-          "imagePath": "./assets/skins/components/eyes.png"
-        },
+        "components": [
+          9
+        ],
         "zIndex": 0,
         "position": {
           "x": 245,
@@ -146,19 +134,14 @@
         "scaleFactor": {
           "x": 0.48,
           "y": 0.48
-        },
-        "components": [
-          9
-        ]
+        }
       },
       {
         "id": 7,
         "className": "imageObject",
-        "sprite": {
-          "id": 11,
-          "name": "sprite",
-          "imagePath": "./assets/skins/components/iris.png"
-        },
+        "components": [
+          11
+        ],
         "zIndex": 0,
         "position": {
           "x": 241,
@@ -167,10 +150,7 @@
         "scaleFactor": {
           "x": 0.48,
           "y": 0.48
-        },
-        "components": [
-          11
-        ]
+        }
       },
       {
         "name": "padel",
@@ -215,11 +195,9 @@
       {
         "id": 10,
         "className": "imageObject",
-        "sprite": {
-          "id": 15,
-          "name": "sprite",
-          "imagePath": "./assets/skins/components/eyes.png"
-        },
+        "components": [
+          15
+        ],
         "zIndex": 0,
         "position": {
           "x": -655,
@@ -228,19 +206,14 @@
         "scaleFactor": {
           "x": 0.48,
           "y": 0.48
-        },
-        "components": [
-          15
-        ]
+        }
       },
       {
         "id": 11,
         "className": "imageObject",
-        "sprite": {
-          "id": 17,
-          "name": "sprite",
-          "imagePath": "./assets/skins/components/iris.png"
-        },
+        "components": [
+          17
+        ],
         "zIndex": 0,
         "position": {
           "x": -659,
@@ -249,10 +222,7 @@
         "scaleFactor": {
           "x": 0.48,
           "y": 0.48
-        },
-        "components": [
-          17
-        ]
+        }
       },
       {
         "name": "padel",
@@ -297,11 +267,9 @@
       {
         "id": 14,
         "className": "imageObject",
-        "sprite": {
-          "id": 21,
-          "name": "sprite",
-          "imagePath": "./assets/skins/components/eyes.png"
-        },
+        "components": [
+          21
+        ],
         "zIndex": 0,
         "position": {
           "x": 645,
@@ -310,19 +278,14 @@
         "scaleFactor": {
           "x": 0.48,
           "y": 0.48
-        },
-        "components": [
-          21
-        ]
+        }
       },
       {
         "id": 15,
         "className": "imageObject",
-        "sprite": {
-          "id": 23,
-          "name": "sprite",
-          "imagePath": "./assets/skins/components/iris.png"
-        },
+        "components": [
+          23
+        ],
         "zIndex": 0,
         "position": {
           "x": 641,
@@ -331,10 +294,7 @@
         "scaleFactor": {
           "x": 0.48,
           "y": 0.48
-        },
-        "components": [
-          23
-        ]
+        }
       },
       {
         "name": "padel",
@@ -379,11 +339,9 @@
       {
         "id": 18,
         "className": "imageObject",
-        "sprite": {
-          "id": 27,
-          "name": "sprite",
-          "imagePath": "./assets/skins/components/eyes.png"
-        },
+        "components": [
+          27
+        ],
         "zIndex": 0,
         "position": {
           "x": -1055,
@@ -392,19 +350,14 @@
         "scaleFactor": {
           "x": 0.48,
           "y": 0.48
-        },
-        "components": [
-          27
-        ]
+        }
       },
       {
         "id": 19,
         "className": "imageObject",
-        "sprite": {
-          "id": 29,
-          "name": "sprite",
-          "imagePath": "./assets/skins/components/iris.png"
-        },
+        "components": [
+          29
+        ],
         "zIndex": 0,
         "position": {
           "x": -1059,
@@ -413,10 +366,7 @@
         "scaleFactor": {
           "x": 0.48,
           "y": 0.48
-        },
-        "components": [
-          29
-        ]
+        }
       },
       {
         "name": "padel",
@@ -461,11 +411,9 @@
       {
         "id": 22,
         "className": "imageObject",
-        "sprite": {
-          "id": 33,
-          "name": "sprite",
-          "imagePath": "./assets/skins/components/eyes.png"
-        },
+        "components": [
+          33
+        ],
         "zIndex": 0,
         "position": {
           "x": 1045,
@@ -474,19 +422,14 @@
         "scaleFactor": {
           "x": 0.48,
           "y": 0.48
-        },
-        "components": [
-          33
-        ]
+        }
       },
       {
         "id": 23,
         "className": "imageObject",
-        "sprite": {
-          "id": 35,
-          "name": "sprite",
-          "imagePath": "./assets/skins/components/iris.png"
-        },
+        "components": [
+          35
+        ],
         "zIndex": 0,
         "position": {
           "x": 1041,
@@ -495,16 +438,13 @@
         "scaleFactor": {
           "x": 0.48,
           "y": 0.48
-        },
-        "components": [
-          35
-        ]
+        }
       },
       {
         "id": 24,
         "position": {
-          "x": -537.76,
-          "y": -99.47
+          "x": -308.42,
+          "y": -68.32
         },
         "scale": {
           "x": 40,
@@ -517,7 +457,7 @@
       },
       {
         "position": {
-          "x": -175.47,
+          "x": -45.08,
           "y": 0
         },
         "className": "camera"
@@ -525,11 +465,9 @@
       {
         "id": 26,
         "className": "imageObject",
-        "sprite": {
-          "id": 39,
-          "name": "sprite",
-          "imagePath": "assets/maps/map1/floor3.png"
-        },
+        "components": [
+          39
+        ],
         "zIndex": -15,
         "position": {
           "x": 0,
@@ -538,19 +476,14 @@
         "scaleFactor": {
           "x": 0.55,
           "y": 0.55
-        },
-        "components": [
-          39
-        ]
+        }
       },
       {
         "id": 27,
         "className": "imageObject",
-        "sprite": {
-          "id": 41,
-          "name": "sprite",
-          "imagePath": "assets/maps/map1/shadow.png"
-        },
+        "components": [
+          41
+        ],
         "zIndex": 20,
         "position": {
           "x": 0,
@@ -559,10 +492,7 @@
         "scaleFactor": {
           "x": 0.55,
           "y": 0.55
-        },
-        "components": [
-          41
-        ]
+        }
       },
       {
         "name": "",
@@ -603,11 +533,9 @@
       {
         "id": 30,
         "className": "imageObject",
-        "sprite": {
-          "id": 45,
-          "name": "sprite",
-          "imagePath": "assets/goalpost.png"
-        },
+        "components": [
+          45
+        ],
         "zIndex": 0,
         "position": {
           "x": -1250,
@@ -616,19 +544,14 @@
         "scaleFactor": {
           "x": 0.55,
           "y": 0.55
-        },
-        "components": [
-          45
-        ]
+        }
       },
       {
         "id": 31,
         "className": "imageObject",
-        "sprite": {
-          "id": 47,
-          "name": "sprite",
-          "imagePath": "assets/goalpost.png"
-        },
+        "components": [
+          47
+        ],
         "zIndex": 0,
         "position": {
           "x": 1250,
@@ -637,10 +560,7 @@
         "scaleFactor": {
           "x": 0.55,
           "y": 0.55
-        },
-        "components": [
-          47
-        ]
+        }
       },
       {
         "name": "label",
@@ -991,8 +911,8 @@
     "type": "full"
   },
   "metadata": {
-    "timestamp": 1758120796103,
-    "delta": 0.01845519400000012,
+    "timestamp": 1758159498000,
+    "delta": 0.018017913000000135,
     "fps": 0
   }
 }

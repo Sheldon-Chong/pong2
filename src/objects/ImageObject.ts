@@ -1,6 +1,6 @@
 import type { Component } from "./Component.js";
 import { interpolate, Point2D, Vector2D } from "./Coordinates.js";
-import { GameObject, exportCleanup } from "./GameObject.js";
+import { exportCleanup, GameObject } from "./GameObject.js";
 import { Sprite } from "./Sprite.js";
 
 
@@ -17,7 +17,7 @@ export class Interpolate {
 
 export class ImageObject extends GameObject {
 
-	sprite: Sprite;
+	sprite: Sprite = null;
 	scaleFactor: Vector2D = new Vector2D(1, 1);
 	params;
 
@@ -28,9 +28,18 @@ export class ImageObject extends GameObject {
 
 	className: string = "imageObject";
 
+	clientUpdate(): void {
+		// console.log(this.id, [
+		// 	this.sprite.width,
+		// 	this.sprite.height,
+		// 	this.scaleFactor
+		// ])
+	}
+
 	constructor(params: Partial<ImageObject>) {
 		super({});
 		Object.assign(this, params);
+		console.log("image object created with", params);
 
 		this.components = new Map<number, Component>();
 
@@ -38,10 +47,11 @@ export class ImageObject extends GameObject {
 
 		this.params = params;
 
+		if (this.sprite === null) {
+			this.sprite = this.components[0]
+		}
+
 		this.onUpdate = () => {
-
-			console.log("factor:", this.scaleFactor);
-
 			this.scale = new Vector2D(
 				this.sprite.width,
 				this.sprite.height,
@@ -81,12 +91,12 @@ export class ImageObject extends GameObject {
 	}
 
 	export(exportStatic: boolean = false) {
-		// console.log(this.componentToJSON());
+		// console.log(Object.entries(this.sprite));
 		return exportCleanup({
 			id: this.id,
 			className: this.className,
-      // components: this.componentToJSON(),
-			sprite: this.sprite.toJSON(), //todo problem here!! nonstatic not working
+      components: this.componentToJSON(),
+			// STATIC_sprite: this.sprite.toJSON(), //todo problem here!! nonstatic not working
 			zIndex: this.zIndex,
 			position: this.position.export(),
 			scaleFactor: this.scaleFactor,
@@ -96,3 +106,4 @@ export class ImageObject extends GameObject {
 }
 
 //todo fix the revive and update methods using seperate tester file
+// todo outptu from client shows that the width and height are undefined, which is why the image is so small

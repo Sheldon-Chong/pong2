@@ -376,9 +376,9 @@ export class PongGame {
         this.team2.label = this.world.addObject(new Label({
             ...scoreUI, position: new Point2D(middle(this.team2.players).position.x, 0)
         }));
-        for (const object of this.world.gameObjects.values()) {
-            console.log(object.id + ": " + object.name);
-        }
+        // for (const object of this.world.gameObjects.values()) {
+        //   console.log(object.id + ": " + object.name);
+        // }
     }
 }
 //# sourceMappingURL=pong.js.map

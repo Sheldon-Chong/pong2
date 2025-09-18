@@ -2,7 +2,7 @@
   "state": {
     "camera": {
       "position": {
-        "x": -682.4574511517746,
+        "x": -305.0011066793208,
         "y": 0,
         "className": "Point2D"
       }
@@ -12,7 +12,7 @@
         "id": 0,
         "position": {
           "x": -250,
-          "y": -1.9
+          "y": -59.35
         }
       },
       {
@@ -22,15 +22,10 @@
       {
         "id": 2,
         "className": "imageObject",
-        "sprite": {
-          "id": 3,
-          "name": "sprite",
-          "imagePath": "./assets/skins/components/eyes.png"
-        },
         "zIndex": 0,
         "position": {
           "x": -255,
-          "y": -6.9
+          "y": -64.37
         },
         "scaleFactor": {
           "x": 0.48,
@@ -40,15 +35,10 @@
       {
         "id": 3,
         "className": "imageObject",
-        "sprite": {
-          "id": 5,
-          "name": "sprite",
-          "imagePath": "./assets/skins/components/iris.png"
-        },
         "zIndex": 0,
         "position": {
           "x": -259,
-          "y": -6.89
+          "y": -64.39
         },
         "scaleFactor": {
           "x": 0.48,
@@ -59,7 +49,7 @@
         "id": 4,
         "position": {
           "x": 250,
-          "y": -1.9
+          "y": -59.35
         }
       },
       {
@@ -69,15 +59,10 @@
       {
         "id": 6,
         "className": "imageObject",
-        "sprite": {
-          "id": 9,
-          "name": "sprite",
-          "imagePath": "./assets/skins/components/eyes.png"
-        },
         "zIndex": 0,
         "position": {
           "x": 245,
-          "y": -6.9
+          "y": -64.37
         },
         "scaleFactor": {
           "x": 0.48,
@@ -87,15 +72,10 @@
       {
         "id": 7,
         "className": "imageObject",
-        "sprite": {
-          "id": 11,
-          "name": "sprite",
-          "imagePath": "./assets/skins/components/iris.png"
-        },
         "zIndex": 0,
         "position": {
           "x": 241,
-          "y": -6.89
+          "y": -64.39
         },
         "scaleFactor": {
           "x": 0.48,
@@ -106,7 +86,7 @@
         "id": 8,
         "position": {
           "x": -650,
-          "y": -1.9
+          "y": -59.35
         }
       },
       {
@@ -116,15 +96,10 @@
       {
         "id": 10,
         "className": "imageObject",
-        "sprite": {
-          "id": 15,
-          "name": "sprite",
-          "imagePath": "./assets/skins/components/eyes.png"
-        },
         "zIndex": 0,
         "position": {
           "x": -655,
-          "y": -6.9
+          "y": -64.37
         },
         "scaleFactor": {
           "x": 0.48,
@@ -134,15 +109,10 @@
       {
         "id": 11,
         "className": "imageObject",
-        "sprite": {
-          "id": 17,
-          "name": "sprite",
-          "imagePath": "./assets/skins/components/iris.png"
-        },
         "zIndex": 0,
         "position": {
           "x": -659,
-          "y": -6.89
+          "y": -64.39
         },
         "scaleFactor": {
           "x": 0.48,
@@ -153,7 +123,7 @@
         "id": 12,
         "position": {
           "x": 650,
-          "y": -1.9
+          "y": -59.35
         }
       },
       {
@@ -163,15 +133,10 @@
       {
         "id": 14,
         "className": "imageObject",
-        "sprite": {
-          "id": 21,
-          "name": "sprite",
-          "imagePath": "./assets/skins/components/eyes.png"
-        },
         "zIndex": 0,
         "position": {
           "x": 645,
-          "y": -6.9
+          "y": -64.37
         },
         "scaleFactor": {
           "x": 0.48,
@@ -181,15 +146,10 @@
       {
         "id": 15,
         "className": "imageObject",
-        "sprite": {
-          "id": 23,
-          "name": "sprite",
-          "imagePath": "./assets/skins/components/iris.png"
-        },
         "zIndex": 0,
         "position": {
           "x": 641,
-          "y": -6.89
+          "y": -64.39
         },
         "scaleFactor": {
           "x": 0.48,
@@ -200,7 +160,7 @@
         "id": 16,
         "position": {
           "x": -1050,
-          "y": -1.9
+          "y": -59.35
         }
       },
       {
@@ -210,15 +170,10 @@
       {
         "id": 18,
         "className": "imageObject",
-        "sprite": {
-          "id": 27,
-          "name": "sprite",
-          "imagePath": "./assets/skins/components/eyes.png"
-        },
         "zIndex": 0,
         "position": {
           "x": -1055,
-          "y": -6.9
+          "y": -64.37
         },
         "scaleFactor": {
           "x": 0.48,
@@ -228,15 +183,10 @@
       {
         "id": 19,
         "className": "imageObject",
-        "sprite": {
-          "id": 29,
-          "name": "sprite",
-          "imagePath": "./assets/skins/components/iris.png"
-        },
         "zIndex": 0,
         "position": {
           "x": -1059,
-          "y": -6.89
+          "y": -64.39
         },
         "scaleFactor": {
           "x": 0.48,
@@ -247,7 +197,7 @@
         "id": 20,
         "position": {
           "x": 1050,
-          "y": -1.9
+          "y": -59.35
         }
       },
       {
@@ -257,15 +207,10 @@
       {
         "id": 22,
         "className": "imageObject",
-        "sprite": {
-          "id": 33,
-          "name": "sprite",
-          "imagePath": "./assets/skins/components/eyes.png"
-        },
         "zIndex": 0,
         "position": {
           "x": 1045,
-          "y": -6.9
+          "y": -64.37
         },
         "scaleFactor": {
           "x": 0.48,
@@ -275,15 +220,10 @@
       {
         "id": 23,
         "className": "imageObject",
-        "sprite": {
-          "id": 35,
-          "name": "sprite",
-          "imagePath": "./assets/skins/components/iris.png"
-        },
         "zIndex": 0,
         "position": {
           "x": 1041,
-          "y": -6.89
+          "y": -64.39
         },
         "scaleFactor": {
           "x": 0.48,
@@ -293,8 +233,8 @@
       {
         "id": 24,
         "position": {
-          "x": 0,
-          "y": -106.02
+          "x": -225.3,
+          "y": -144.82
         },
         "scale": {
           "x": 40,
@@ -303,7 +243,7 @@
       },
       {
         "position": {
-          "x": -682.46,
+          "x": -305,
           "y": 0
         },
         "className": "camera"
@@ -325,11 +265,6 @@
       {
         "id": 30,
         "className": "imageObject",
-        "sprite": {
-          "id": 45,
-          "name": "sprite",
-          "imagePath": "assets/goalpost.png"
-        },
         "zIndex": 0,
         "position": {
           "x": -1250,
@@ -343,11 +278,6 @@
       {
         "id": 31,
         "className": "imageObject",
-        "sprite": {
-          "id": 47,
-          "name": "sprite",
-          "imagePath": "assets/goalpost.png"
-        },
         "zIndex": 0,
         "position": {
           "x": 1250,
@@ -378,8 +308,8 @@
     "type": "partial"
   },
   "metadata": {
-    "timestamp": 1758120799030,
-    "delta": 0.018203340999999453,
+    "timestamp": 1758159499346,
+    "delta": 0.017536261000000195,
     "fps": 0
   }
 }

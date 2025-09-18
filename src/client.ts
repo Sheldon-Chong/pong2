@@ -123,15 +123,11 @@ const componentMap: Record<string, new (params: any) => any> = {
   // "gameObject": GameObject,
 };
 
-
-const classMap: Record<string, T_Constructor<any>> = {
-	"sprite": Sprite,
-	"glow": Glow,
-	"hitbox": HitBox
-};
-
-type T_Constructor<T> = new (...args: any[]) => T;
-
+const gameObjectMap: Record<string, new (params: any) => any> = {
+	"imageObject": ImageObject,
+  "label": Label,
+  "gameObject": GameObject,
+}
 
 function revive(obj: any): any {
   // -- handle arrays --
@@ -161,7 +157,6 @@ function revive(obj: any): any {
 				continue;
 			}
 			if (key === "scaleFactor") {
-				console.log("object type: ", obj.constructor.name);
 				obj.scaleFactor = new Vector2D(obj.scaleFactor.x, obj.scaleFactor.y);
 				continue;
 			}
@@ -195,16 +190,10 @@ function genericUpdate(
 			});
 		}
 
-
 		if (key === "cUpdate" && obj.onClientUpdateId !== value) {
 			obj.setOnClientUpdate(value);
 			continue;	
 		}
-
-		if (key === "sprite") {
-			console.log("sprite key");
-		}
-
 
 		// -- update nested object types -- 
 		else if (typeof value === "object" && value !== null) {
@@ -220,80 +209,97 @@ function genericUpdate(
 window.addEventListener("DOMContentLoaded", () => {
 
 	function loop() {
-		let client_objects = getObjects();
-		let components = getComponents();
 
-		for (const component of components) {
+		// -- retrieve json data from server --
+		const stateObjects = getObjects();
+		const stateComponents = getComponents();
 
-			if (componentRegistry.has(component.id)) {
-				Object.assign(componentRegistry.get(component.id), component);
+
+		// -- sync server components with current components
+		for (const stateComponent of stateComponents) {
+
+			const component = componentRegistry.get(stateComponent.id);
+
+			if (component !== undefined) {
+				const revived = revive(stateComponent);
+				Object.assign(component, revived);
 			}
 			else {
-				const componentConstructor = classMap[component.name];
-				if (componentConstructor) {
-					const instance = new componentConstructor();
-					componentRegistry.set(component.id, instance);
+				if (componentMap[stateComponent.name]) {
+					const instance = new componentMap[stateComponent.name]({});
+					componentRegistry.set(stateComponent.id, instance);
 				}
 			}
 		}
 
-for (const object of client_objects) {
-  const id = object["id"];
-  let clientObj = getObject(id);
+		for (const stateObject of stateObjects) {
+			const id = stateObject["id"];
+			let obj = getObject(id);
 
-  if (!clientObj) {
-    // hydrate only once
-    const revivedObject = revive(object);
-    clientObj = createNewInstance(revivedObject);
-  } else {
-    // update from raw JSON
-    genericUpdate(clientObj, object, clientObj.cache);
+			if (!obj) {
+				// hydrate only once
+				const revivedObject = revive(stateObject);
+				obj = createNewInstance(revivedObject);
+			}
 
-    // handle children, components, etc.
-    for (const [i, childId] of object.children?.entries() ?? []) {
-      const childObj = getObject(childId);
-      if (childObj) {
-        childObj.parent = clientObj;
-        clientObj.children[i] = childObj;
-      }
-    }
+			else {
+				// update from raw JSON
+				genericUpdate(obj, stateObject, obj.cache);
 
-    if (object.components) {
-      for (const componentId of object.components) {
-        if (!(componentId in clientObj.components)) {
-          const component = componentRegistry.get(componentId);
-          if (component) {
-            clientObj.addComponent(component);
-          }
-        }
-      }
-    }
+				// handle children, components
+				for (const [i, childId] of stateObject.children?.entries() ?? []) {
+					const childObj = getObject(childId);
+					if (childObj) {
+						childObj.parent = obj;
+						obj.children[i] = childObj;
+					}
+				}
 
-    clientObj.components.forEach((value, key) => {
-      if (value === null) {
-        const component = componentRegistry.get(key);
-        if (component) {
-          clientObj.addComponent(component);
-        }
-      }
-    });
+				if (stateObject.components) {
+					for (const componentId of stateObject.components) {
+						if (!(componentId in obj.components)) {
+							const component = componentRegistry.get(componentId);
+							if (component) {
+								obj.addComponent(component);
+							}
+						}
+					}
+				}
 
-    if (object.className === "camera") {
-      game.camera = clientObj;
-      viewport.camera = clientObj;
-    }
-  }
-}
+				if (stateObject.className === "camera") {
+					game.camera = obj;
+					viewport.camera = obj;
+				}
+			}
+		}
 
-		for (const [id, object] of gameObjectRegistry) {
+		for (const [id, object] of gameObjectRegistry)
 			if (typeof object.clientUpdate === 'function') {
 				object.clientUpdate();
 			}
-		}
+
 		draw();
 		requestAnimationFrame(loop);
 	}
 
+	function createNewInstance(object) {
+		let objectInstance;
+
+		if (gameObjectMap[object.className]) 
+			objectInstance = new gameObjectMap[object.className]({});
+		else 
+			objectInstance = new GameObject({ ...object, components: [] });
+		setObject(object["id"], objectInstance);
+
+		if (!object.components)
+			return objectInstance;
+
+		objectInstance.components = new Map<number, Component>();
+		for (const number of object.components) {
+			objectInstance.components.set(Number(number), null);
+		}
+		return objectInstance;
+	}
 
 	const game = new PongGame(null);
 	game.camera = null;
@@ -344,32 +350,7 @@ for (const object of client_objects) {
 		gameObjectRegistry.set(id, object);
 	}
 
-	function createNewInstance(object) {
-		let clientObj;
-		
-		if (object.className === "label") {
-			clientObj = new Label({ ...object, components: [] });
-		}
-		else if (object.className === "imageObject") {
-			console.log("image object created");
-			clientObj = new ImageObject({ ...object, components: [] });
-		}
-		else {
-			clientObj = new GameObject({ ...object, components: [] });
-		}
-		setObject(object["id"], clientObj);
 
-		if (!object.components)
-			return clientObj;
-
-
-		const new_components = new Map<number, Component>();
-		for (const number of object.components) {
-			new_components.set(Number(number), null);
-		}
-		clientObj.components = new_components; 
-		return clientObj;
-	}
 
 	const componentRegistry = new Map<number, Component>();
 

@@ -15,22 +15,13 @@ export declare class ImageObject extends GameObject {
     interpolate: Interpolate;
     private truePos;
     className: string;
+    clientUpdate(): void;
     constructor(params: Partial<ImageObject>);
     init(): void;
     export(exportStatic?: boolean): {
         id: number;
         className: string;
-        sprite: {
-            id: number;
-            name: string;
-            imagePath: string | HTMLImageElement;
-            STATIC_flippedHorizontal: boolean;
-            STATIC_crop: boolean;
-            STATIC_outline: import("./Sprite.js").Outline;
-            STATIC_opacity: number;
-            STATIC_blendMode: GlobalCompositeOperation;
-            STATIC_glow: import("./Glow.js").Glow;
-        };
+        components: any[];
         zIndex: number;
         position: {
             x: number;

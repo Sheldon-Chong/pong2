@@ -44,8 +44,8 @@ export class Sprite extends Component {
 	blendMode: GlobalCompositeOperation = "source-over";
 	glow: Glow | null = null;
 
-	width: number;
-	height: number;
+	width: number = -1;
+	height: number = -1;
 
 	onLoad: () => void;
 
@@ -65,7 +65,7 @@ export class Sprite extends Component {
 			STATIC_outline: this.outline,
 			STATIC_opacity: this.opacity,
 			STATIC_blendMode: this.blendMode,
-			STATIC_glow: this.glow
+			STATIC_glow: this.glow,
 		}, exportStatic);
 
 		return output;
@@ -76,6 +76,7 @@ export class Sprite extends Component {
 			name: "sprite",
 			renderable: true,
 		});
+		console.log("sprite created");
 		Object.assign(this, params);
 	}
 

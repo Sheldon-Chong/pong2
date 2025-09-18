@@ -221,6 +221,10 @@ export class GameObject {
 				continue;
 			}
 
+			// if (component.host.className === "imageObject") {
+			// 	continue;
+			// }
+
 			try {
 				if (component instanceof Sprite) 
 					(component as Sprite).draw(viewport);
@@ -230,6 +234,7 @@ export class GameObject {
 			catch (error: unknown) {
 				console.log("cannot draw: ", error);
 				console.log((component as Sprite).imagePath);
+				console.log((component as Sprite));
 			}
 		}
 

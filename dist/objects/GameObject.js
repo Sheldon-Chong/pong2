@@ -155,6 +155,9 @@ export class GameObject {
             if (component === null || component.host === null) {
                 continue;
             }
+            // if (component.host.className === "imageObject") {
+            // 	continue;
+            // }
             try {
                 if (component instanceof Sprite)
                     component.draw(viewport);
@@ -164,6 +167,7 @@ export class GameObject {
             catch (error) {
                 console.log("cannot draw: ", error);
                 console.log(component.imagePath);
+                console.log(component);
             }
         }
         // Recursively draw children
